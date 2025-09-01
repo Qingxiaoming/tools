@@ -1,0 +1,8 @@
+{
+  "name": "file-watcher",
+  "version": "1.0.0",
+  "main": "watcher.js",
+  "dependencies": {
+    "chokidar": "^4.0.3"
+  }
+}
