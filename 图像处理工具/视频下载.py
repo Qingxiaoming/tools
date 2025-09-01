@@ -10,7 +10,7 @@ from datetime import datetime
 class Colors:
     """ANSI颜色代码"""
     RESET = "\033[0m"
-    RED = "\033[91m"      # 错误
+    RED = "\033[91m"      # 错误 
     GREEN = "\033[92m"    # 成功
     YELLOW = "\033[93m"   # 警告
     BLUE = "\033[94m"     # 信息
