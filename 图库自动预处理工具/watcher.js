@@ -7,7 +7,7 @@ const chokidar = require('chokidar');
 const fs = require('fs');
 const path = require('path');
 
-const watchDir = 'D:\\Users\\Windows10\\Desktop\\0V0_燕小重的知识库\\图片\\未分类';
+const watchDir = 'D:\\Users\\Windows10\\Desktop\\0V0_燕小重的知识库\\图库\\未分类';
 const actionsDir = path.join(__dirname, 'actions');
 
 function runPlugins(file) {

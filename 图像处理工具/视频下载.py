@@ -5,6 +5,7 @@ import subprocess
 import os
 import sys
 from datetime import datetime
+import glob
 
 # 颜色常量定义
 class Colors:
@@ -158,6 +159,29 @@ def download_video(url):
         process.wait()
         
         if process.returncode == 0:
+            # 清理以 filename_template 为前缀的常见临时文件（不假设固定扩展名）
+            temp_patterns = [
+                f"{filename_template}*.part",
+                f"{filename_template}*.part*",
+                f"{filename_template}*.ytdl",
+                f"{filename_template}*.ytdl*",
+                f"{filename_template}*.aria2",
+                f"{filename_template}*.aria2*",
+                f"{filename_template}*.temp",
+                f"{filename_template}*.tmp",
+            ]
+            removed_any = False
+            for pattern in temp_patterns:
+                for temp_path in glob.glob(os.path.join(save_dir, pattern)):
+                    # 仅删除带有明显临时标记的文件，避免误删最终成品
+                    if any(suffix in temp_path for suffix in ('.part', '.ytdl', '.aria2', '.temp', '.tmp')):
+                        try:
+                            os.remove(temp_path)
+                            removed_any = True
+                        except Exception:
+                            pass
+            if removed_any:
+                print_colored("🧹 已清理临时文件", Colors.GREEN)
             print_colored("✅ 下载完成！", Colors.GREEN)
             print_colored("-" * 20, Colors.GRAY)
             return True
