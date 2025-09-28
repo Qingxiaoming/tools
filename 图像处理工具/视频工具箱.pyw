@@ -93,7 +93,7 @@ class VideoTools(tkdnd.Tk):
     def __init__(self):
         super().__init__()
         self.title("视频工具箱")
-        self.geometry("400x480+2532+880")
+        self.geometry("440x460+2532+880")
         
         # 视频段落截取相关变量
         self.video_path = ""
@@ -102,6 +102,11 @@ class VideoTools(tkdnd.Tk):
         # 视频画幅裁剪相关变量
         self.video_list = []
         self.roi = None
+        
+        # 视频合并相关变量
+        self.merge_video_list = []
+        self.merge_audio_file = ""
+        self.merge_audio_mode = "none"  # none, replace, mix
         
         self.create_widgets()
         self.drop_target_register(tkdnd.DND_FILES)
@@ -122,42 +127,120 @@ class VideoTools(tkdnd.Tk):
         self.notebook.add(self.crop_frame, text="画幅裁剪")
         self.create_crop_widgets()
         
+        # 视频合并选项卡
+        self.merge_frame = ttk.Frame(self.notebook)
+        self.notebook.add(self.merge_frame, text="视频合并")
+        self.create_merge_widgets()
+        
         # 统一的状态和日志区域
         self.create_common_widgets()
 
     # ---------- 视频段落截取界面 ----------
     def create_segment_widgets(self):
         self.segment_video_label = ttk.Label(self.segment_frame, text="请拖入一个视频文件", foreground="grey")
-        self.segment_video_label.pack(pady=6)
+        self.segment_video_label.pack(pady=3)
 
         # 多段输入
         ttk.Label(self.segment_frame, text="批量截取:").pack(anchor="w", padx=10)
-        self.segment_text = scrolledtext.ScrolledText(self.segment_frame, width=60, height=10, font=("Consolas", 9))
-        self.segment_text.pack(padx=10, pady=4)
+        self.segment_text = scrolledtext.ScrolledText(self.segment_frame, width=60, height=12, font=("Consolas", 9))
+        self.segment_text.pack(padx=10, pady=2)
         self.segment_text.insert("end", "00:00:01 01:00:02 test1\nclipA 00:00:03 00:00:08\n00:00:11 my clip 00:00:20\n")
 
         btn_frame = ttk.Frame(self.segment_frame)
-        btn_frame.pack(fill='x', padx=10, pady=6)
+        btn_frame.pack(fill='x', padx=10, pady=4)
         self.segment_run_btn = ttk.Button(btn_frame, text="开始截取", command=self.run_segment_batch)
         self.segment_run_btn.pack(side='right', padx=4)
 
     # ---------- 视频画幅裁剪界面 ----------
     def create_crop_widgets(self):
         self.crop_video_label = ttk.Label(self.crop_frame, text="请拖入一个或多个视频文件", foreground="grey")
-        self.crop_video_label.pack(pady=6)
+        self.crop_video_label.pack(pady=3)
 
         # 视频文件列表
         ttk.Label(self.crop_frame, text="视频文件列表:").pack(anchor="w", padx=10)
-        self.crop_text = scrolledtext.ScrolledText(self.crop_frame, width=60, height=10, font=("Consolas", 9))
-        self.crop_text.pack(padx=10, pady=4)
+        self.crop_text = scrolledtext.ScrolledText(self.crop_frame, width=60, height=12, font=("Consolas", 9))
+        self.crop_text.pack(padx=10, pady=2)
         self.crop_text.config(state="disabled")
 
         btn_frame = ttk.Frame(self.crop_frame)
-        btn_frame.pack(fill='x', padx=10, pady=6)
+        btn_frame.pack(fill='x', padx=10, pady=4)
         ttk.Button(btn_frame, text='选定画幅', command=self.select_roi).pack(side='left', padx=4)
         ttk.Button(btn_frame, text='清空列表', command=self.clear_crop_list).pack(side='left', padx=4)
         self.crop_run_btn = ttk.Button(btn_frame, text='开始裁剪', command=self.run_crop_batch)
         self.crop_run_btn.pack(side='right', padx=4)
+
+    # ---------- 视频合并界面 ----------
+    def create_merge_widgets(self):
+        self.merge_video_label = ttk.Label(self.merge_frame, text="请拖入多个视频文件", foreground="grey")
+        self.merge_video_label.pack(pady=3)
+
+        # 视频文件列表（支持拖拽排序）
+        ttk.Label(self.merge_frame, text="视频文件列表（可拖动排序）:").pack(anchor="w", padx=10)
+        
+        # 创建主容器（固定高度，不扩展）
+        main_frame = ttk.Frame(self.merge_frame)
+        main_frame.pack(fill='x', padx=10, pady=2)
+        
+        # 左侧：列表框和滚动条
+        list_frame = ttk.Frame(main_frame)
+        list_frame.pack(side="left", fill="x", expand=True)
+        
+        self.merge_listbox = tk.Listbox(list_frame, height=10, font=("Consolas", 9))
+        scrollbar = ttk.Scrollbar(list_frame, orient="vertical", command=self.merge_listbox.yview)
+        self.merge_listbox.configure(yscrollcommand=scrollbar.set)
+        
+        self.merge_listbox.pack(side="left", fill="both", expand=True)
+        scrollbar.pack(side="right", fill="y")
+        
+        # 绑定拖拽事件
+        self.merge_listbox.bind('<Button-1>', self.on_merge_listbox_click)
+        self.merge_listbox.bind('<B1-Motion>', self.on_merge_listbox_drag)
+        self.merge_listbox.bind('<ButtonRelease-1>', self.on_merge_listbox_release)
+        
+        # 右侧：垂直排列的按钮
+        btn_frame = ttk.Frame(main_frame)
+        btn_frame.pack(side="right", padx=(10, 0), fill="y")
+        
+        ttk.Button(btn_frame, text='清空列表', command=self.clear_merge_list).pack(fill='x', pady=2)
+        ttk.Button(btn_frame, text='删除选中', command=self.remove_selected_merge).pack(fill='x', pady=2)
+        ttk.Button(btn_frame, text='上移', command=self.move_up_merge).pack(fill='x', pady=2)
+        ttk.Button(btn_frame, text='下移', command=self.move_down_merge).pack(fill='x', pady=2)
+        
+        # 音频文件拖拽区域
+        audio_frame = ttk.Frame(self.merge_frame)
+        audio_frame.pack(fill='x', padx=10, pady=2)
+        
+        self.merge_audio_label = ttk.Label(audio_frame, text="拖入音频文件（可选）", foreground="grey")
+        self.merge_audio_label.pack(side='left')
+        
+        # 音频处理模式下拉框
+        ttk.Label(audio_frame, text="音频模式:").pack(side='left', padx=(20, 5))
+        self.audio_mode_var = tk.StringVar(value="保持原音频")
+        audio_combo = ttk.Combobox(audio_frame, textvariable=self.audio_mode_var, width=12, state="readonly")
+        audio_combo['values'] = ("保持原音频", "替换音频", "叠加音频")
+        audio_combo.pack(side='left', padx=5)
+        
+        # 输出设置区域（无框）
+        output_frame = ttk.Frame(self.merge_frame)
+        output_frame.pack(fill='x', padx=10, pady=1)
+        
+        ttk.Label(output_frame, text="输出文件名:").pack(side='left')
+        self.merge_output_name = tk.StringVar(value="合并视频")
+        output_entry = ttk.Entry(output_frame, textvariable=self.merge_output_name, width=15)
+        output_entry.pack(side='left', padx=10)
+        
+        ttk.Label(output_frame, text="倍速:").pack(side='left', padx=(20, 5))
+        self.merge_speed = tk.StringVar(value="1.0")
+        speed_entry = ttk.Entry(output_frame, textvariable=self.merge_speed, width=8)
+        speed_entry.pack(side='left', padx=5)
+        
+        # 开始合并按钮（移到输出设置行）
+        self.merge_run_btn = ttk.Button(output_frame, text='开始合并', command=self.run_merge_batch)
+        self.merge_run_btn.pack(side='right', padx=4)
+        
+        # 拖拽相关变量
+        self.merge_drag_start = None
+        self.merge_drag_item = None
 
     # ---------- 统一的状态和日志区域 ----------
     def create_common_widgets(self):
@@ -189,6 +272,14 @@ class VideoTools(tkdnd.Tk):
             self.drop_segment_video(files[0])
         elif current_tab == 1:  # 视频画幅裁剪
             self.drop_crop_videos(files)
+        elif current_tab == 2:  # 视频合并
+            # 检查是否拖拽到音频区域
+            if len(files) == 1:
+                ext = os.path.splitext(files[0])[-1].lower()
+                if ext in ('.mp3', '.wav', '.aac', '.flac', '.m4a', '.ogg'):
+                    self.drop_merge_audio(files[0])
+                    return
+            self.drop_merge_videos(files)
 
     def drop_segment_video(self, path):
         if not os.path.isfile(path): return
@@ -219,6 +310,36 @@ class VideoTools(tkdnd.Tk):
                 self.crop_text.insert("end", filename + "\n")
             self.crop_text.config(state="disabled")
             self.crop_video_label.config(text=f"已载入 {len(self.video_list)} 个视频文件", foreground="black")
+
+    def drop_merge_videos(self, files):
+        added_files = []
+        for f in files:
+            if not os.path.isfile(f):
+                continue
+            ext = os.path.splitext(f)[-1].lower()
+            if ext not in ('.mp4', '.mkv', '.mov', '.avi', '.flv', '.ts'):
+                continue
+            item = (f, os.path.basename(f))
+            if item not in self.merge_video_list:
+                self.merge_video_list.append(item)
+                added_files.append(item[1])
+        
+        if added_files:
+            self.update_merge_listbox()
+            self.merge_video_label.config(text=f"已载入 {len(self.merge_video_list)} 个视频文件", foreground="black")
+
+    def drop_merge_audio(self, path):
+        """拖入音频文件到合并功能"""
+        if not os.path.isfile(path):
+            return
+        ext = os.path.splitext(path)[-1].lower()
+        if ext not in ('.mp3', '.wav', '.aac', '.flac', '.m4a', '.ogg'):
+            self.status_label.config(text="不支持的音频格式", foreground="red")
+            return
+        
+        self.merge_audio_file = path
+        self.merge_audio_label.config(text=f"已载入音频: {os.path.basename(path)}", foreground="black")
+        self.status_label.config(text=f"已载入音频文件: {os.path.basename(path)}", foreground="blue")
 
     # ---------- 视频段落截取功能 ----------
     def run_segment_batch(self):
@@ -472,6 +593,250 @@ class VideoTools(tkdnd.Tk):
             self._log('失败列表：')
             for f in fail:
                 self._log('  ' + f)
+
+    # ---------- 视频合并功能 ----------
+    def update_merge_listbox(self):
+        """更新合并列表显示"""
+        self.merge_listbox.delete(0, tk.END)
+        for i, (path, name) in enumerate(self.merge_video_list):
+            self.merge_listbox.insert(tk.END, f"{i+1}. {name}")
+
+    def clear_merge_list(self):
+        """清空合并列表"""
+        self.merge_video_list.clear()
+        self.update_merge_listbox()
+        self.merge_video_label.config(text="请拖入多个视频文件", foreground="grey")
+        
+
+    def remove_selected_merge(self):
+        """删除选中的视频"""
+        selection = self.merge_listbox.curselection()
+        if not selection:
+            self.status_label.config(text="请先选择要删除的视频", foreground="red")
+            return
+        index = selection[0]
+        if 0 <= index < len(self.merge_video_list):
+            del self.merge_video_list[index]
+            self.update_merge_listbox()
+            self.merge_video_label.config(text=f"已载入 {len(self.merge_video_list)} 个视频文件", foreground="black")
+
+    def move_up_merge(self):
+        """上移选中的视频"""
+        selection = self.merge_listbox.curselection()
+        if not selection or selection[0] == 0:
+            return
+        index = selection[0]
+        if index > 0:
+            self.merge_video_list[index], self.merge_video_list[index-1] = self.merge_video_list[index-1], self.merge_video_list[index]
+            self.update_merge_listbox()
+            self.merge_listbox.selection_set(index-1)
+
+    def move_down_merge(self):
+        """下移选中的视频"""
+        selection = self.merge_listbox.curselection()
+        if not selection or selection[0] == len(self.merge_video_list) - 1:
+            return
+        index = selection[0]
+        if index < len(self.merge_video_list) - 1:
+            self.merge_video_list[index], self.merge_video_list[index+1] = self.merge_video_list[index+1], self.merge_video_list[index]
+            self.update_merge_listbox()
+            self.merge_listbox.selection_set(index+1)
+
+    def on_merge_listbox_click(self, event):
+        """列表框点击事件"""
+        self.merge_drag_start = event.y
+
+    def on_merge_listbox_drag(self, event):
+        """列表框拖拽事件"""
+        if self.merge_drag_start is None:
+            return
+        
+        # 获取当前鼠标位置对应的项目
+        current_index = self.merge_listbox.nearest(event.y)
+        if current_index != -1:
+            # 高亮显示拖拽目标位置
+            self.merge_listbox.selection_clear(0, tk.END)
+            self.merge_listbox.selection_set(current_index)
+
+    def on_merge_listbox_release(self, event):
+        """列表框释放事件"""
+        if self.merge_drag_start is None:
+            return
+        
+        # 获取拖拽起始和目标位置
+        start_index = self.merge_listbox.nearest(self.merge_drag_start)
+        end_index = self.merge_listbox.nearest(event.y)
+        
+        if start_index != end_index and 0 <= start_index < len(self.merge_video_list) and 0 <= end_index < len(self.merge_video_list):
+            # 移动项目
+            item = self.merge_video_list.pop(start_index)
+            self.merge_video_list.insert(end_index, item)
+            self.update_merge_listbox()
+            self.merge_listbox.selection_set(end_index)
+        
+        self.merge_drag_start = None
+
+    def run_merge_batch(self):
+        """开始合并视频"""
+        if not self.merge_video_list:
+            self.status_label.config(text="视频列表为空！", foreground="red")
+            return
+        
+        if len(self.merge_video_list) < 2:
+            self.status_label.config(text="至少需要2个视频文件才能合并！", foreground="red")
+            return
+        
+        # 检查音频模式设置
+        audio_mode_text = self.audio_mode_var.get()
+        audio_mode_map = {"保持原音频": "none", "替换音频": "replace", "叠加音频": "mix"}
+        audio_mode = audio_mode_map.get(audio_mode_text, "none")
+        
+        if audio_mode in ("replace", "mix") and not self.merge_audio_file:
+            self.status_label.config(text="选择了音频处理模式但未载入音频文件！", foreground="red")
+            return
+        
+        # 检查输出文件名
+        output_name = self.merge_output_name.get().strip()
+        if not output_name:
+            self.status_label.config(text="请输入输出文件名！", foreground="red")
+            return
+        
+        # 检查倍速设置
+        try:
+            speed = float(self.merge_speed.get().strip())
+            if speed <= 0:
+                self.status_label.config(text="倍速必须大于0！", foreground="red")
+                return
+        except ValueError:
+            self.status_label.config(text="倍速必须是数字！", foreground="red")
+            return
+        
+        self.merge_run_btn.config(state='disabled', text='合并中')
+        self.clear_log()
+        threading.Thread(target=self._merge_batch_thread, daemon=True).start()
+
+    def _merge_batch_thread(self):
+        """合并视频线程"""
+        try:
+            # 创建输出目录
+            output_dir = os.path.join(os.path.dirname(self.merge_video_list[0][0]), '合并输出')
+            os.makedirs(output_dir, exist_ok=True)
+            
+            # 获取输出文件名
+            base_name = self.merge_output_name.get().strip()
+            counter = 1
+            while True:
+                output_path = os.path.join(output_dir, f"{base_name}{'' if counter == 1 else f'({counter})'}.mp4")
+                if not os.path.exists(output_path):
+                    break
+                counter += 1
+            
+            # 创建文件列表
+            list_file = os.path.join(output_dir, "filelist.txt")
+            with open(list_file, 'w', encoding='utf-8') as f:
+                for path, _ in self.merge_video_list:
+                    f.write(f"file '{path.replace(os.sep, '/')}'\n")
+            
+            # 获取倍速设置
+            speed = float(self.merge_speed.get().strip())
+            
+            # 根据音频模式和倍速构建FFmpeg命令
+            audio_mode_text = self.audio_mode_var.get()
+            audio_mode_map = {"保持原音频": "none", "替换音频": "replace", "叠加音频": "mix"}
+            audio_mode = audio_mode_map.get(audio_mode_text, "none")
+            
+            cmd = ['ffmpeg', '-hide_banner', '-loglevel', 'info', '-stats']
+            
+            if audio_mode == "none":
+                # 保持原音频，应用倍速
+                if speed == 1.0:
+                    cmd.extend(['-f', 'concat', '-safe', '0', '-i', list_file, '-c', 'copy', '-y', output_path])
+                else:
+                    cmd.extend([
+                        '-f', 'concat', '-safe', '0', '-i', list_file,
+                        '-filter_complex', f'[0:v]setpts={1/speed}*PTS[v];[0:a]atempo={speed}[a]',
+                        '-map', '[v]', '-map', '[a]', '-c:v', 'libx264', '-c:a', 'aac', '-y', output_path
+                    ])
+            elif audio_mode == "replace":
+                # 替换音频：静音原视频，添加新音频，应用倍速
+                if speed == 1.0:
+                    cmd.extend([
+                        '-f', 'concat', '-safe', '0', '-i', list_file,
+                        '-i', self.merge_audio_file,
+                        '-c:v', 'copy', '-c:a', 'aac', '-map', '0:v:0', '-map', '1:a:0',
+                        '-shortest', '-y', output_path
+                    ])
+                else:
+                    cmd.extend([
+                        '-f', 'concat', '-safe', '0', '-i', list_file,
+                        '-i', self.merge_audio_file,
+                        '-filter_complex', f'[0:v]setpts={1/speed}*PTS[v];[1:a]atempo={speed}[a]',
+                        '-map', '[v]', '-map', '[a]', '-c:v', 'libx264', '-c:a', 'aac',
+                        '-shortest', '-y', output_path
+                    ])
+            elif audio_mode == "mix":
+                # 叠加音频：原音频+新音频，应用倍速
+                if speed == 1.0:
+                    cmd.extend([
+                        '-f', 'concat', '-safe', '0', '-i', list_file,
+                        '-i', self.merge_audio_file,
+                        '-filter_complex', '[0:a][1:a]amix=inputs=2:duration=first:dropout_transition=2[aout]',
+                        '-c:v', 'copy', '-map', '0:v:0', '-map', '[aout]', '-c:a', 'aac',
+                        '-y', output_path
+                    ])
+                else:
+                    cmd.extend([
+                        '-f', 'concat', '-safe', '0', '-i', list_file,
+                        '-i', self.merge_audio_file,
+                        '-filter_complex', f'[0:v]setpts={1/speed}*PTS[v];[0:a][1:a]amix=inputs=2:duration=first:dropout_transition=2[aout];[aout]atempo={speed}[a]',
+                        '-map', '[v]', '-map', '[a]', '-c:v', 'libx264', '-c:a', 'aac',
+                        '-y', output_path
+                    ])
+            
+            self.status_label.config(text=f'正在合并视频...', foreground="blue")
+            
+            proc = subprocess.Popen(
+                cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                bufsize=0, universal_newlines=True,
+                encoding='utf-8', errors='replace')
+            
+            for line in iter(proc.stdout.readline, ''):
+                self._log(line.rstrip())
+            
+            rc = proc.wait()
+            
+            # 清理临时文件
+            try:
+                os.remove(list_file)
+            except:
+                pass
+            
+            if rc == 0:
+                self.after(0, self._merge_batch_done, True, output_path)
+            else:
+                self.after(0, self._merge_batch_done, False, f"合并失败 (返回码 {rc})")
+                
+        except Exception as e:
+            self.after(0, self._merge_batch_done, False, str(e))
+
+    def _merge_batch_done(self, success, result):
+        """合并完成回调"""
+        self.merge_run_btn.config(state='normal', text='开始合并')
+        self.status_label.config(text='待机中', foreground="blue")
+        
+        if success:
+            msg = f"合并成功: {os.path.basename(result)}"
+            if NOTIFY:
+                notification.notify(
+                    title="视频合并",
+                    message=msg,
+                    timeout=4,
+                    app_name="VideoTools"
+                )
+            else:
+                self.status_label.config(text=msg)
+        else:
+            self.status_label.config(text=f"合并失败: {result}", foreground="red")
 
 if __name__ == "__main__":
     VideoTools().mainloop()
