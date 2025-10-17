@@ -6,7 +6,7 @@ tasklist /FI "IMAGENAME eq scrcpy.exe" 2>nul | find /I /C "scrcpy.exe" >nul
 if %errorlevel%==0 exit /b
 
 :: Redmi手机编号
-set SERIAL=ei49rsyd5hrot8xs
+set SERIAL=3030725483000E2
 ::使其显示在副屏右上角
 set /A X=2352
 set /A Y=0

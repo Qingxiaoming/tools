@@ -287,7 +287,7 @@ class VideoTools(tkdnd.Tk):
         if ext not in ('.mp4', '.mkv', '.mov', '.avi', '.flv', '.ts'):
             return
         self.video_path = path
-        self.output_dir = os.path.join(os.path.dirname(path), "剪辑")
+        self.output_dir = os.path.join(os.path.dirname(path), "多段截取")
         os.makedirs(self.output_dir, exist_ok=True)
         self.segment_video_label.config(text=f"已载入:  {os.path.basename(path)}", foreground="black")
 
@@ -534,7 +534,7 @@ class VideoTools(tkdnd.Tk):
         success, fail = [], []
         x, y, w, h = self.roi
         for vpath, vname in self.video_list:
-            out_dir = os.path.join(os.path.dirname(vpath), '裁剪输出')
+            out_dir = os.path.join(os.path.dirname(vpath), '画幅裁剪')
             os.makedirs(out_dir, exist_ok=True)
             base, ext = os.path.splitext(vname)
             out_path = os.path.join(out_dir, f'{base}{ext}')
