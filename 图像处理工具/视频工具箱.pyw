@@ -7,6 +7,8 @@ import tkinterdnd2 as tkdnd
 import threading
 import cv2
 from PIL import Image, ImageTk
+from datetime import datetime
+from pathlib import Path
 
 # ---------- 系统通知 ----------
 try:
@@ -14,6 +16,10 @@ try:
     NOTIFY = True
 except Exception:
     NOTIFY = False
+
+# ---------- 文档生成常量 ----------
+STANDARD_RE = re.compile(r'^[^\\/:*?"<>|\s]+\.mp4$')
+NATURE_LIST = ['突袭', '无解', '待压', '剧情', '他人记录', '剿灭', '沙盘', '普通']
 
 # ---------- ROI 选择窗口 ----------
 class ROISelector(tk.Toplevel):
@@ -108,6 +114,9 @@ class VideoTools(tkdnd.Tk):
         self.merge_audio_file = ""
         self.merge_audio_mode = "none"  # none, replace, mix
         
+        # 文档生成相关变量
+        self.doc_video_list = []
+        
         self.create_widgets()
         self.drop_target_register(tkdnd.DND_FILES)
         self.dnd_bind('<<Drop>>', self.drop_files)
@@ -131,6 +140,11 @@ class VideoTools(tkdnd.Tk):
         self.merge_frame = ttk.Frame(self.notebook)
         self.notebook.add(self.merge_frame, text="视频合并")
         self.create_merge_widgets()
+        
+        # 文档生成选项卡
+        self.doc_frame = ttk.Frame(self.notebook)
+        self.notebook.add(self.doc_frame, text="文档生成")
+        self.create_doc_widgets()
         
         # 统一的状态和日志区域
         self.create_common_widgets()
@@ -242,6 +256,37 @@ class VideoTools(tkdnd.Tk):
         self.merge_drag_start = None
         self.merge_drag_item = None
 
+    # ---------- 文档生成界面 ----------
+    def create_doc_widgets(self):
+        self.doc_video_label = ttk.Label(self.doc_frame, text="请拖入一个或多个视频文件", foreground="grey")
+        self.doc_video_label.pack(pady=3)
+
+        # 视频文件列表
+        ttk.Label(self.doc_frame, text="视频文件列表:").pack(anchor="w", padx=10)
+        self.doc_text = scrolledtext.ScrolledText(self.doc_frame, width=60, height=12, font=("Consolas", 9))
+        self.doc_text.pack(padx=10, pady=2)
+        self.doc_text.config(state="disabled")
+
+        # 输入设置区域
+        input_frame = ttk.Frame(self.doc_frame)
+        input_frame.pack(fill='x', padx=10, pady=2)
+        
+        ttk.Label(input_frame, text="属于活动:").pack(side='left')
+        self.doc_activity = tk.StringVar()
+        activity_entry = ttk.Entry(input_frame, textvariable=self.doc_activity, width=20)
+        activity_entry.pack(side='left', padx=10)
+        
+        ttk.Label(input_frame, text="BV号:").pack(side='left', padx=(20, 5))
+        self.doc_bv = tk.StringVar()
+        bv_entry = ttk.Entry(input_frame, textvariable=self.doc_bv, width=15)
+        bv_entry.pack(side='left', padx=5)
+
+        btn_frame = ttk.Frame(self.doc_frame)
+        btn_frame.pack(fill='x', padx=10, pady=4)
+        ttk.Button(btn_frame, text='清空列表', command=self.clear_doc_list).pack(side='left', padx=4)
+        self.doc_run_btn = ttk.Button(btn_frame, text='生成文档', command=self.run_doc_generation)
+        self.doc_run_btn.pack(side='right', padx=4)
+
     # ---------- 统一的状态和日志区域 ----------
     def create_common_widgets(self):
         # 分隔线
@@ -280,6 +325,8 @@ class VideoTools(tkdnd.Tk):
                     self.drop_merge_audio(files[0])
                     return
             self.drop_merge_videos(files)
+        elif current_tab == 3:  # 文档生成
+            self.drop_doc_videos(files)
 
     def drop_segment_video(self, path):
         if not os.path.isfile(path): return
@@ -340,6 +387,27 @@ class VideoTools(tkdnd.Tk):
         self.merge_audio_file = path
         self.merge_audio_label.config(text=f"已载入音频: {os.path.basename(path)}", foreground="black")
         self.status_label.config(text=f"已载入音频文件: {os.path.basename(path)}", foreground="blue")
+
+    def drop_doc_videos(self, files):
+        """拖入视频文件到文档生成功能"""
+        added_files = []
+        for f in files:
+            if not os.path.isfile(f):
+                continue
+            ext = os.path.splitext(f)[-1].lower()
+            if ext not in ('.mp4', '.mkv', '.mov', '.avi', '.flv', '.ts'):
+                continue
+            item = (f, os.path.basename(f))
+            if item not in self.doc_video_list:
+                self.doc_video_list.append(item)
+                added_files.append(item[1])
+        
+        if added_files:
+            self.doc_text.config(state="normal")
+            for filename in added_files:
+                self.doc_text.insert("end", filename + "\n")
+            self.doc_text.config(state="disabled")
+            self.doc_video_label.config(text=f"已载入 {len(self.doc_video_list)} 个视频文件", foreground="black")
 
     # ---------- 视频段落截取功能 ----------
     def run_segment_batch(self):
@@ -837,6 +905,129 @@ class VideoTools(tkdnd.Tk):
                 self.status_label.config(text=msg)
         else:
             self.status_label.config(text=f"合并失败: {result}", foreground="red")
+
+    # ---------- 文档生成功能 ----------
+    def clear_doc_list(self):
+        """清空文档生成列表"""
+        self.doc_video_list.clear()
+        self.doc_text.config(state="normal")
+        self.doc_text.delete("1.0", "end")
+        self.doc_text.config(state="disabled")
+        self.doc_video_label.config(text="请拖入一个或多个视频文件", foreground="grey")
+
+    def is_standard_video(self, name: str) -> bool:
+        """检查是否为标准视频文件名"""
+        if not STANDARD_RE.fullmatch(name):
+            return False
+        return any(n in name for n in NATURE_LIST)
+
+    def extract_operator_list(self, filename: str) -> list[str]:
+        """提取干员列表"""
+        base = os.path.splitext(filename)[0]
+        if '_' not in base:
+            return ['未知']
+        op_field = base.split('_')[-1]
+        return [op.strip() for op in op_field.split('+') if op.strip()]
+
+    def extract_nature(self, filename: str) -> str:
+        """提取视频性质"""
+        for n in NATURE_LIST:
+            if n in filename:
+                return n
+        return "普通"
+
+    def extract_stage_name(self, filename: str) -> str:
+        """提取关卡名称"""
+        base, _ = os.path.splitext(filename)
+        return next((base.split(k)[0].rstrip('_-') for k in NATURE_LIST if k in base), base.strip('_-'))
+
+    def run_doc_generation(self):
+        """开始生成文档"""
+        if not self.doc_video_list:
+            self.status_label.config(text="视频列表为空！", foreground="red")
+            return
+        
+        activity = self.doc_activity.get().strip()
+        bv = self.doc_bv.get().strip()
+        if not activity or not bv:
+            self.status_label.config(text="请填写活动名称和BV号！", foreground="red")
+            return
+        
+        self.doc_run_btn.config(state='disabled', text='生成中')
+        self.clear_log()
+        threading.Thread(target=self._doc_generation_thread, args=(activity, bv), daemon=True).start()
+
+    def _doc_generation_thread(self, activity: str, bv: str):
+        """文档生成线程"""
+        success, fail = [], []
+        
+        for video_path, video_name in self.doc_video_list:
+            try:
+                # 检查是否为标准视频
+                if not self.is_standard_video(video_name):
+                    fail.append(f"{video_name} (不符合标准格式)")
+                    continue
+                
+                # 提取信息
+                ops = self.extract_operator_list(video_name)
+                nature = self.extract_nature(video_name)
+                stage = self.extract_stage_name(video_name)
+                
+                # 生成md文件路径（在视频同目录）
+                video_dir = os.path.dirname(video_path)
+                md_path = os.path.join(video_dir, f"{stage}.md")
+                
+                # 生成md内容
+                ops_yaml = '\n'.join(f'  - {op}' for op in ops)
+                content = f"""---
+属于活动:
+  - {activity}
+是否完成: true
+bv号: {bv}
+性质:
+  - {nature}
+备注: 无
+参战干员:
+{ops_yaml}
+攻略者: 项泓小时候/
+创建时间: {datetime.today().strftime('%Y/%m/%d')}
+---
+# 本地视频
+![[{video_name}]]
+"""
+                
+                # 写入文件
+                with open(md_path, 'w', encoding='utf-8') as f:
+                    f.write(content)
+                
+                success.append(f"{video_name} -> {stage}.md")
+                self._log(f"已生成: {stage}.md")
+                
+            except Exception as e:
+                fail.append(f"{video_name} ({str(e)})")
+        
+        self.after(0, self._doc_generation_done, success, fail)
+
+    def _doc_generation_done(self, success, fail):
+        """文档生成完成回调"""
+        self.doc_run_btn.config(state='normal', text='生成文档')
+        self.status_label.config(text='待机中', foreground="blue")
+        
+        msg = f"成功生成 {len(success)} 个文档，失败 {len(fail)} 个"
+        if NOTIFY:
+            notification.notify(
+                title="文档生成",
+                message=msg,
+                timeout=4,
+                app_name="VideoTools"
+            )
+        else:
+            self.status_label.config(text=msg)
+        
+        if fail:
+            self._log('失败列表：')
+            for f in fail:
+                self._log('  ' + f)
 
 if __name__ == "__main__":
     VideoTools().mainloop()
