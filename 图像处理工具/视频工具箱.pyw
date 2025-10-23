@@ -189,7 +189,7 @@ class VideoTools(tkdnd.Tk):
         self.merge_video_label.pack(pady=3)
 
         # 视频文件列表（支持拖拽排序）
-        ttk.Label(self.merge_frame, text="视频文件列表（可拖动排序）:").pack(anchor="w", padx=10)
+        ttk.Label(self.merge_frame, text="视频文件列表:").pack(anchor="w", padx=10)
         
         # 创建主容器（固定高度，不扩展）
         main_frame = ttk.Frame(self.merge_frame)
@@ -263,7 +263,7 @@ class VideoTools(tkdnd.Tk):
 
         # 视频文件列表
         ttk.Label(self.doc_frame, text="视频文件列表:").pack(anchor="w", padx=10)
-        self.doc_text = scrolledtext.ScrolledText(self.doc_frame, width=60, height=12, font=("Consolas", 9))
+        self.doc_text = scrolledtext.ScrolledText(self.doc_frame, width=60, height=9, font=("Consolas", 9))
         self.doc_text.pack(padx=10, pady=2)
         self.doc_text.config(state="disabled")
 
@@ -273,7 +273,7 @@ class VideoTools(tkdnd.Tk):
         
         ttk.Label(input_frame, text="属于活动:").pack(side='left')
         self.doc_activity = tk.StringVar()
-        activity_entry = ttk.Entry(input_frame, textvariable=self.doc_activity, width=20)
+        activity_entry = ttk.Entry(input_frame, textvariable=self.doc_activity, width=15)
         activity_entry.pack(side='left', padx=10)
         
         ttk.Label(input_frame, text="BV号:").pack(side='left', padx=(20, 5))
@@ -301,7 +301,7 @@ class VideoTools(tkdnd.Tk):
         self.status_label.pack(side='left')
         
         # 日志区域
-        ttk.Label(self, text="FFmpeg 实时日志:").pack(anchor='w', padx=10, pady=(5, 0))
+        ttk.Label(self, text="实时日志:").pack(anchor='w', padx=10, pady=(5, 0))
         self.log = scrolledtext.ScrolledText(self, width=80, height=6, state='disabled', font=('Consolas', 8))
         self.log.pack(padx=10, pady=(0, 10), fill='both', expand=True)
 
