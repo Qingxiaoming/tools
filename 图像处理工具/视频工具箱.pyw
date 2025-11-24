@@ -99,7 +99,7 @@ class VideoTools(tkdnd.Tk):
     def __init__(self):
         super().__init__()
         self.title("视频工具箱")
-        self.geometry("440x460+2532+880")
+        self.geometry("420x460+2532+1050")
         
         # 视频段落截取相关变量
         self.video_path = ""
@@ -159,6 +159,15 @@ class VideoTools(tkdnd.Tk):
         self.segment_text = scrolledtext.ScrolledText(self.segment_frame, width=60, height=12, font=("Consolas", 9))
         self.segment_text.pack(padx=10, pady=2)
         self.segment_text.insert("end", "00:00:01 01:00:02 test1\nclipA 00:00:03 00:00:08\n00:00:11 my clip 00:00:20\n")
+
+        # 添加精确裁剪选项
+        options_frame = ttk.Frame(self.segment_frame)
+        options_frame.pack(fill='x', padx=10, pady=2)
+        
+        self.precise_crop_var = tk.BooleanVar(value=False)
+        precise_check = ttk.Checkbutton(options_frame, text="精确裁剪（解决前几秒静止问题，但处理速度较慢）", 
+                                      variable=self.precise_crop_var)
+        precise_check.pack(anchor='w')
 
         btn_frame = ttk.Frame(self.segment_frame)
         btn_frame.pack(fill='x', padx=10, pady=4)
@@ -449,12 +458,34 @@ class VideoTools(tkdnd.Tk):
             while True:
                 out_name = f"{base}{'' if counter == 1 else f'({counter})'}{ext}"
                 out_path = os.path.join(self.output_dir, out_name)
-                if not os.path.exists(out_path): break
+                if not os.path.exists(out_path):
+                    break
                 counter += 1
 
-            cmd = ["ffmpeg", "-hide_banner", "-loglevel", "info", "-stats",
-                   "-i", self.video_path, "-ss", start, "-to", end,
-                   "-c", "copy", "-y", out_path]
+            # 计算持续时长（秒级即可）
+            duration_sec = self._time_to_seconds(end) - self._time_to_seconds(start)
+
+            if self.precise_crop_var.get():
+                # 精确模式：两段式 seek + 重编码
+                cmd = [
+                    "ffmpeg", "-hide_banner", "-loglevel", "info", "-stats",
+                    "-ss", start,           # 输入 seek（关键帧）
+                    "-i", self.video_path,
+                    "-t", str(duration_sec),# 持续时长
+                    "-c:v", "libx264", "-c:a", "aac",
+                    "-avoid_negative_ts", "make_zero", "-y", out_path
+                ]
+            else:
+                # 快速模式：两段式 seek + copy
+                cmd = [
+                    "ffmpeg", "-hide_banner", "-loglevel", "info", "-stats",
+                    "-ss", start,           # 输入 seek
+                    "-i", self.video_path,
+                    "-ss", "0",             # 输出 seek（帧级）
+                    "-t", str(duration_sec),# 持续时长
+                    "-c", "copy",
+                    "-avoid_negative_ts", "make_zero", "-y", out_path
+                ]
 
             self.status_label.config(text=f"正在处理：{out_name}")
             try:
@@ -949,10 +980,6 @@ class VideoTools(tkdnd.Tk):
         
         activity = self.doc_activity.get().strip()
         bv = self.doc_bv.get().strip()
-        if not activity or not bv:
-            self.status_label.config(text="请填写活动名称和BV号！", foreground="red")
-            return
-        
         self.doc_run_btn.config(state='disabled', text='生成中')
         self.clear_log()
         threading.Thread(target=self._doc_generation_thread, args=(activity, bv), daemon=True).start()
@@ -965,7 +992,7 @@ class VideoTools(tkdnd.Tk):
             try:
                 # 检查是否为标准视频
                 if not self.is_standard_video(video_name):
-                    fail.append(f"{video_name} (不符合标准格式)")
+                    fail.append(f"{video_name}  不符合标准格式")
                     continue
                 
                 # 提取信息

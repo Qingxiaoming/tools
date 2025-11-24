@@ -13,6 +13,7 @@ set /A Y=0
 set /A W=648
 set /A H=1440
 
+
 :: 静默启动音频转发
 ::start "" /min "D:\scrcpy-win64-v3.3.1\sndcpy_auto.bat"
 
@@ -22,4 +23,5 @@ scrcpy.exe -s %SERIAL% -K ^
   --window-borderless ^
   --window-x %X% --window-y %Y% ^
   --window-width %W% --window-height %H% ^
-  --always-on-top
+  --always-on-top ^
+  %HID_ARGS%

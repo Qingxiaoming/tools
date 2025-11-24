@@ -8,7 +8,7 @@ class ImageConcatenator(tkdnd.Tk):
     def __init__(self):
         super().__init__()
         self.title("图片拼接工具")
-        self.geometry("300x360+2532+800")   # 窗口大小、位置
+        self.geometry("300x360+2632+1050")   # 窗口大小、位置
         self.image_paths = []
         self.output_path = ""
         self.create_widgets()
