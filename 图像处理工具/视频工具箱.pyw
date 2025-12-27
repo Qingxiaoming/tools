@@ -1179,10 +1179,12 @@ class VideoTools(tkdnd.Tk):
         return "普通"
 
     def extract_stage_name(self, filename: str) -> str:
-        """提取关卡名称"""
+        """关卡名 = 性质关键词左边 或 第一个'_'左边，去掉尾部'_-'"""
         base, _ = os.path.splitext(filename)
-        return next((base.split(k)[0].rstrip('_-') for k in NATURE_LIST if k in base), base.strip('_-'))
-
+        for k in NATURE_LIST:
+            if k in base:
+                return base.split(k)[0].rstrip('_-')
+        return base.split('_', 1)[0].rstrip('_-')
     def run_doc_generation(self):
         """开始生成文档"""
         if not self.doc_video_list:
@@ -1202,15 +1204,17 @@ class VideoTools(tkdnd.Tk):
         for video_path, video_name in self.doc_video_list:
             try:
                 # 检查是否为标准视频
-                if not self.is_standard_video(video_name):
-                    fail.append(f"{video_name}  不符合标准格式")
-                    continue
+
                 
                 # 提取信息
                 ops = self.extract_operator_list(video_name)
                 nature = self.extract_nature(video_name)
                 stage = self.extract_stage_name(video_name)
-                
+
+                if not ops or ops == ['未知'] or not nature or not stage:
+                    fail.append(f"{video_name}  缺少关键信息（干员/性质/关卡）")
+                    continue    
+
                 # 生成md文件路径（在视频同目录）
                 video_dir = os.path.dirname(video_path)
                 md_path = os.path.join(video_dir, f"{stage}.md")
@@ -1222,7 +1226,7 @@ class VideoTools(tkdnd.Tk):
   - {activity}
 是否完成: true
 bv号: {bv}
-性质:
+关卡难度:
   - {nature}
 备注: 无
 参战干员:
