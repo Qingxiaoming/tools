@@ -99,7 +99,11 @@ class VideoTools(tkdnd.Tk):
     def __init__(self):
         super().__init__()
         self.title("视频工具箱")
-        self.geometry("420x460")
+        self.geometry("440x460")          # 去掉偏移
+        self.update_idletasks()           # 让系统计算尺寸
+        x = (self.winfo_screenwidth() - 440) // 2
+        y = (self.winfo_screenheight() - 460) // 2
+        self.geometry("+%d+%d" % (x, y))
         
         # 视频段落截取相关变量
         self.video_path = ""
@@ -160,15 +164,6 @@ class VideoTools(tkdnd.Tk):
         self.segment_text.pack(padx=10, pady=2)
         self.segment_text.insert("end", "00:00:01 01:00:02 test1\nclipA 00:00:03 00:00:08\n00:00:11 my clip 00:00:20\n")
 
-        # 添加精确裁剪选项
-        options_frame = ttk.Frame(self.segment_frame)
-        options_frame.pack(fill='x', padx=10, pady=2)
-        
-        self.precise_crop_var = tk.BooleanVar(value=False)
-        precise_check = ttk.Checkbutton(options_frame, text="精确裁剪（解决前几秒静止问题，但处理速度较慢）", 
-                                      variable=self.precise_crop_var)
-        precise_check.pack(anchor='w')
-
         btn_frame = ttk.Frame(self.segment_frame)
         btn_frame.pack(fill='x', padx=10, pady=4)
         self.segment_run_btn = ttk.Button(btn_frame, text="开始截取", command=self.run_segment_batch)
@@ -181,61 +176,9 @@ class VideoTools(tkdnd.Tk):
 
         # 视频文件列表
         ttk.Label(self.crop_frame, text="视频文件列表:").pack(anchor="w", padx=10)
-        self.crop_text = scrolledtext.ScrolledText(self.crop_frame, width=60, height=10, font=("Consolas", 9))
+        self.crop_text = scrolledtext.ScrolledText(self.crop_frame, width=60, height=12, font=("Consolas", 9))
         self.crop_text.pack(padx=10, pady=2)
         self.crop_text.config(state="disabled")
-
-        # === 新增：1080p扩展选项 ===
-        options_frame = ttk.Frame(self.crop_frame)
-        options_frame.pack(fill='x', padx=10, pady=5)
-        
-        # 新增变量：是否扩展到1080p
-        self.upscale_var = tk.BooleanVar(value=True)  # 默认启用
-        upscale_check = ttk.Checkbutton(
-            options_frame, 
-            text="自动扩展到1080p（1920×1080，保持原始比例）", 
-            variable=self.upscale_var
-        )
-        upscale_check.pack(anchor='w')
-        
-        # === 新增：扩展模式选择 ===
-        mode_frame = ttk.Frame(self.crop_frame)
-        mode_frame.pack(fill='x', padx=10, pady=2)
-        
-        ttk.Label(mode_frame, text="扩展模式:").pack(side='left')
-        
-        # 新增变量：扩展模式
-        self.upscale_mode_var = tk.StringVar(value="等比缩放+填充")
-        mode_combo = ttk.Combobox(mode_frame, textvariable=self.upscale_mode_var, 
-                                 values=["等比缩放+填充", "强制拉伸", "裁剪到16:9"], 
-                                 width=15, state="readonly")
-        mode_combo.pack(side='left', padx=5)
-        
-        # === 新增：填充颜色选择 ===
-        color_frame = ttk.Frame(self.crop_frame)
-        color_frame.pack(fill='x', padx=10, pady=2)
-        
-        ttk.Label(color_frame, text="填充颜色:").pack(side='left')
-        
-        # 新增变量：填充颜色
-        self.fill_color_var = tk.StringVar(value="黑色")
-        color_combo = ttk.Combobox(color_frame, textvariable=self.fill_color_var, 
-                                  values=["黑色", "白色", "模糊背景"], 
-                                  width=10, state="readonly")
-        color_combo.pack(side='left', padx=5)
-        
-        # === 新增：编码质量设置 ===
-        quality_frame = ttk.Frame(self.crop_frame)
-        quality_frame.pack(fill='x', padx=10, pady=2)
-        
-        ttk.Label(quality_frame, text="输出质量:").pack(side='left')
-        
-        # 新增变量：输出质量
-        self.quality_var = tk.StringVar(value="高质量")
-        quality_combo = ttk.Combobox(quality_frame, textvariable=self.quality_var, 
-                                    values=["高质量（文件较大）", "中等质量", "压缩（文件较小）"], 
-                                    width=18, state="readonly")
-        quality_combo.pack(side='left', padx=5)
 
         btn_frame = ttk.Frame(self.crop_frame)
         btn_frame.pack(fill='x', padx=10, pady=4)
@@ -510,34 +453,12 @@ class VideoTools(tkdnd.Tk):
             while True:
                 out_name = f"{base}{'' if counter == 1 else f'({counter})'}{ext}"
                 out_path = os.path.join(self.output_dir, out_name)
-                if not os.path.exists(out_path):
-                    break
+                if not os.path.exists(out_path): break
                 counter += 1
 
-            # 计算持续时长（秒级即可）
-            duration_sec = self._time_to_seconds(end) - self._time_to_seconds(start)
-
-            if self.precise_crop_var.get():
-                # 精确模式：两段式 seek + 重编码
-                cmd = [
-                    "ffmpeg", "-hide_banner", "-loglevel", "info", "-stats",
-                    "-ss", start,           # 输入 seek（关键帧）
-                    "-i", self.video_path,
-                    "-t", str(duration_sec),# 持续时长
-                    "-c:v", "libx264", "-c:a", "aac",
-                    "-avoid_negative_ts", "make_zero", "-y", out_path
-                ]
-            else:
-                # 快速模式：两段式 seek + copy
-                cmd = [
-                    "ffmpeg", "-hide_banner", "-loglevel", "info", "-stats",
-                    "-ss", start,           # 输入 seek
-                    "-i", self.video_path,
-                    "-ss", "0",             # 输出 seek（帧级）
-                    "-t", str(duration_sec),# 持续时长
-                    "-c", "copy",
-                    "-avoid_negative_ts", "make_zero", "-y", out_path
-                ]
+            cmd = ["ffmpeg", "-hide_banner", "-loglevel", "info", "-stats",
+                   "-i", self.video_path, "-ss", start, "-to", end,
+                   "-c", "copy", "-y", out_path]
 
             self.status_label.config(text=f"正在处理：{out_name}")
             try:
@@ -649,7 +570,6 @@ class VideoTools(tkdnd.Tk):
         self.crop_text.delete("1.0", "end")
         self.crop_text.config(state="disabled")
         self.crop_video_label.config(text="请拖入一个或多个视频文件", foreground="grey")
-        self.roi = None
 
     def select_roi(self):
         if not self.video_list:
@@ -682,208 +602,50 @@ class VideoTools(tkdnd.Tk):
         self.clear_log()
         threading.Thread(target=self._crop_batch_thread, daemon=True).start()
 
-    # === 修改4：完全重写 _crop_batch_thread 方法，添加1080p扩展功能 ===
     def _crop_batch_thread(self):
-        """批量裁剪线程 - 修复版"""
         success, fail = [], []
         x, y, w, h = self.roi
-        
-        upscale_1080p = self.upscale_var.get()
-        upscale_mode = self.upscale_mode_var.get()
-        fill_color = self.fill_color_var.get()
-        quality = self.quality_var.get()
-        
         for vpath, vname in self.video_list:
+            out_dir = os.path.join(os.path.dirname(vpath), '画幅裁剪')
+            os.makedirs(out_dir, exist_ok=True)
+            base, ext = os.path.splitext(vname)
+            out_path = os.path.join(out_dir, f'{base}{ext}')
+
+            # 获取原分辨率
+            probe = subprocess.run(
+                ['ffprobe', '-v', 'error', '-select_streams', 'v:0',
+                 '-show_entries', 'stream=width,height', '-of', 'csv=p=0', vpath],
+                capture_output=True, text=True)
             try:
-                out_dir = os.path.join(os.path.dirname(vpath), '画幅裁剪_1080p' if upscale_1080p else '画幅裁剪')
-                os.makedirs(out_dir, exist_ok=True)
-                
-                base, ext = os.path.splitext(vname)
-                if upscale_1080p:
-                    out_name = f'{base}_1080p{ext}'
-                else:
-                    out_name = f'{base}{ext}'
-                out_path = os.path.join(out_dir, out_name)
+                orig_w, orig_h = map(int, probe.stdout.strip().split(','))
+            except Exception:
+                fail.append(f'{vname}  (无法获取分辨率)')
+                continue
 
-                # 获取原分辨率
-                probe = subprocess.run(
-                    ['ffprobe', '-v', 'error', '-select_streams', 'v:0',
-                    '-show_entries', 'stream=width,height', '-of', 'csv=p=0', vpath],
-                    capture_output=True, text=True)
-                try:
-                    orig_w, orig_h = map(int, probe.stdout.strip().split(','))
-                except Exception:
-                    fail.append(f'{vname}  (无法获取分辨率)')
-                    continue
+            # 滤镜：先裁剪 → 再 pad 回原尺寸居中
+            filter_complex = f'crop={w}:{h}:{x}:{y},pad={orig_w}:{orig_h}:' \
+                             f'({orig_w}-{w})/2:({orig_h}-{h})/2:black'
 
-                # 构建FFmpeg滤镜链
-                filter_parts = []
-                
-                # 1. 裁剪
-                filter_parts.append(f'crop={w}:{h}:{x}:{y}')
-                
-                # 2. 如果需要扩展到1080p
-                if upscale_1080p:
-                    target_width = 1920
-                    target_height = 1080
-                    
-                    # 计算裁剪后的宽高比
-                    crop_ratio = w / h
-                    target_ratio = target_width / target_height  # 16:9 = 1.777...
-                    
-                    self._log(f"裁剪区域: {w}x{h}, 比例: {crop_ratio:.3f}")
-                    self._log(f"目标: 1080p ({target_width}x{target_height}), 比例: {target_ratio:.3f}")
-                    
-                    if upscale_mode == "等比缩放+填充":
-                        # === 修复的缩放逻辑 ===
-                        # 计算保持比例的缩放尺寸
-                        if crop_ratio > target_ratio:
-                            # 宽图：先按高度缩放到1080，计算宽度
-                            scale_h = target_height
-                            scale_w = int(target_height * crop_ratio)
-                        else:
-                            # 高图：先按宽度缩放到1920，计算高度
-                            scale_w = target_width
-                            scale_h = int(target_width / crop_ratio)
-                        
-                        self._log(f"理论缩放尺寸: {scale_w}x{scale_h}")
-                        
-                        # 判断是填充还是裁剪
-                        if scale_w == target_width and scale_h == target_height:
-                            # 正好匹配，直接缩放
-                            filter_parts.append(f'scale={target_width}:{target_height}')
-                            self._log(f"完美匹配，直接缩放")
-                            
-                        elif scale_w > target_width or scale_h > target_height:
-                            # 缩放后大于目标，需要先裁剪
-                            self._log(f"需要裁剪: 缩放后({scale_w}x{scale_h}) > 目标({target_width}x{target_height})")
-                            
-                            if crop_ratio > target_ratio:
-                                # 宽图：裁剪左右
-                                # 先缩放到高度=1080
-                                filter_parts.append(f'scale={scale_w}:{scale_h}')
-                                # 裁剪宽度到1920（居中裁剪）
-                                crop_x = (scale_w - target_width) // 2
-                                filter_parts.append(f'crop={target_width}:{target_height}:{crop_x}:0')
-                                self._log(f"裁剪左右: x={crop_x}")
-                            else:
-                                # 高图：裁剪上下
-                                # 先缩放到宽度=1920
-                                filter_parts.append(f'scale={scale_w}:{scale_h}')
-                                # 裁剪高度到1080（居中裁剪）
-                                crop_y = (scale_h - target_height) // 2
-                                filter_parts.append(f'crop={target_width}:{target_height}:0:{crop_y}')
-                                self._log(f"裁剪上下: y={crop_y}")
-                        else:
-                            # 缩放后小于目标，需要填充
-                            self._log(f"需要填充: 缩放后({scale_w}x{scale_h}) < 目标({target_width}x{target_height})")
-                            
-                            # 先缩放
-                            filter_parts.append(f'scale={scale_w}:{scale_h}')
-                            
-                            # 填充颜色
-                            if fill_color == "黑色":
-                                color = "black"
-                            elif fill_color == "白色":
-                                color = "white"
-                            else:  # 模糊背景
-                                color = "black"
-                            
-                            # 填充到目标尺寸
-                            filter_parts.append(f'pad={target_width}:{target_height}:' \
-                                            f'({target_width}-iw)/2:({target_height}-ih)/2:{color}')
-                    
-                    elif upscale_mode == "强制拉伸":
-                        # 直接拉伸到1080p
-                        filter_parts.append(f'scale={target_width}:{target_height}')
-                        self._log(f"强制拉伸到 {target_width}x{target_height}")
-                        
-                    elif upscale_mode == "裁剪到16:9":
-                        # 先调整到16:9比例
-                        if abs(crop_ratio - target_ratio) > 0.01:
-                            if crop_ratio > target_ratio:
-                                # 太宽，裁剪左右
-                                new_width = int(h * target_ratio)
-                                crop_x = (w - new_width) // 2
-                                # 修改裁剪参数
-                                filter_parts[-1] = f'crop={new_width}:{h}:{x+crop_x}:{y}'
-                                self._log(f"裁剪到16:9: 新宽度 {new_width}, 裁剪x={crop_x}")
-                            else:
-                                # 太高，裁剪上下
-                                new_height = int(w / target_ratio)
-                                crop_y = (h - new_height) // 2
-                                # 修改裁剪参数
-                                filter_parts[-1] = f'crop={w}:{new_height}:{x}:{y+crop_y}'
-                                self._log(f"裁剪到16:9: 新高度 {new_height}, 裁剪y={crop_y}")
-                        # 缩放到1080p
-                        filter_parts.append(f'scale={target_width}:{target_height}')
-                
-                else:
-                    # 不扩展，保持裁剪后尺寸
-                    if w < orig_w or h < orig_h:
-                        filter_parts.append(f'pad={orig_w}:{orig_h}:' \
-                                        f'({orig_w}-{w})/2:({orig_h}-{h})/2:black')
+            cmd = ['ffmpeg', '-hide_banner', '-loglevel', 'info', '-stats',
+                   '-i', vpath, '-vf', filter_complex,
+                   '-c:a', 'copy', '-y', out_path]
 
-                filter_complex = ','.join(filter_parts)
-                
-                # 构建FFmpeg命令
-                cmd = ['ffmpeg', '-hide_banner', '-loglevel', 'info', '-stats',
-                    '-i', vpath, '-vf', filter_complex]
-                
-                if upscale_1080p:
-                    if quality == "高质量（文件较大）":
-                        cmd.extend(['-c:v', 'libx264', '-preset', 'slow', '-crf', '18'])
-                    elif quality == "中等质量":
-                        cmd.extend(['-c:v', 'libx264', '-preset', 'medium', '-crf', '23'])
-                    else:  # 压缩
-                        cmd.extend(['-c:v', 'libx264', '-preset', 'fast', '-crf', '28'])
-                    cmd.extend(['-c:a', 'aac', '-b:a', '128k'])  # 重新编码音频
-                else:
-                    cmd.extend(['-c:a', 'copy'])
-                
-                cmd.extend(['-y', out_path])
-
-                self.status_label.config(text=f'正在处理：{vname}', foreground="blue")
-                self._log(f'处理 {vname}: {orig_w}x{orig_h} -> 裁剪 {w}x{h}')
-                self._log(f'滤镜链: {filter_complex}')
-                
-                if upscale_1080p:
-                    self._log(f'扩展到1080p，模式: {upscale_mode}')
-                
-                # 执行FFmpeg命令
+            self.status_label.config(text=f'正在处理：{vname}',foreground="blue")
+            try:
                 proc = subprocess.Popen(
                     cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                     bufsize=0, universal_newlines=True,
                     encoding='utf-8', errors='replace')
-                
                 for line in iter(proc.stdout.readline, ''):
                     self._log(line.rstrip())
-                
                 rc = proc.wait()
                 if rc == 0:
                     success.append(vname)
-                    self._log(f'✓ 完成: {out_name}')
-                    
-                    # 验证输出
-                    if os.path.exists(out_path):
-                        info_cmd = [
-                            'ffprobe', '-v', 'error',
-                            '-select_streams', 'v:0',
-                            '-show_entries', 'stream=width,height',
-                            '-of', 'csv=p=0', out_path
-                        ]
-                        info = subprocess.run(info_cmd, capture_output=True, text=True)
-                        if info.stdout:
-                            out_w, out_h = map(int, info.stdout.strip().split(','))
-                            self._log(f'输出分辨率: {out_w}x{out_h} ({(out_w/out_h):.3f})')
                 else:
                     fail.append(f'{vname}  (返回码 {rc})')
-                    self._log(f'✗ FFmpeg失败，命令: {" ".join(cmd)}')
-                    
             except Exception as e:
                 fail.append(f'{vname}  ({e})')
-                self._log(f'✗ 异常: {vname} ({e})')
-        
+
         self.after(0, self._crop_batch_done, success, fail)
 
     def clear_log(self):
@@ -1191,6 +953,10 @@ class VideoTools(tkdnd.Tk):
         
         activity = self.doc_activity.get().strip()
         bv = self.doc_bv.get().strip()
+        if not activity or not bv:
+            self.status_label.config(text="请填写活动名称和BV号！", foreground="red")
+            return
+        
         self.doc_run_btn.config(state='disabled', text='生成中')
         self.clear_log()
         threading.Thread(target=self._doc_generation_thread, args=(activity, bv), daemon=True).start()
@@ -1203,7 +969,7 @@ class VideoTools(tkdnd.Tk):
             try:
                 # 检查是否为标准视频
                 if not self.is_standard_video(video_name):
-                    fail.append(f"{video_name}  不符合标准格式")
+                    fail.append(f"{video_name} (不符合标准格式)")
                     continue
                 
                 # 提取信息
