@@ -1,4 +1,4 @@
-# obsidian_trans.py  —— 全局热键调节窗口透明度
+# obsidian_trans.py  —— 全局热键：Ctrl+Alt+1 置顶/取消置顶，0/2~9 透明度
 # 依赖：pip install pywin32 pystray pillow
 import ctypes
 import ctypes.wintypes as wt
@@ -14,6 +14,12 @@ LWA_ALPHA = 0x2
 WM_HOTKEY = 0x0312
 MOD_CONTROL = 0x0002
 MOD_ALT = 0x0001
+HWND_TOPMOST = -1
+HWND_NOTOPMOST = -2
+SWP_NOMOVE = 0x0002
+SWP_NOSIZE = 0x0001
+SWP_FLAGS = SWP_NOMOVE | SWP_NOSIZE
+
 # 十档透明度（0-9）
 ALPHA_MAP = [255, 102, 117, 132, 147, 162, 178, 193, 208, 223, 238]
 
@@ -34,14 +40,18 @@ user32.SetWindowLongW.restype = ctypes.c_long
 user32.GetWindowLongW.argtypes = [wt.HWND, ctypes.c_int]
 user32.GetWindowLongW.restype = ctypes.c_long
 user32.SetLayeredWindowAttributes.argtypes = [wt.HWND, wt.COLORREF, ctypes.c_byte, wt.DWORD]
+user32.SetWindowPos.argtypes = [wt.HWND, wt.HWND, ctypes.c_int, ctypes.c_int, ctypes.c_int, ctypes.c_int, wt.UINT]
 user32.GetMessageW.argtypes = [ctypes.c_void_p, wt.HWND, wt.UINT, wt.UINT]
 user32.TranslateMessage.argtypes = [ctypes.c_void_p]
 user32.DispatchMessageW.argtypes = [ctypes.c_void_p]
 
 # ---------------- 逻辑 ----------------
 hwnd_last = None
+# 记录每个 hwnd 是否已置顶  {hwnd: bool}
+topmost_state = {}
 
 def set_trans(hwnd, alpha: int):
+    """设置透明度（保持原样）"""
     ex = user32.GetWindowLongW(hwnd, GWL_EXSTYLE)
     if not (ex & WS_EX_LAYERED):
         user32.SetWindowLongW(hwnd, GWL_EXSTYLE, ex | WS_EX_LAYERED)
@@ -52,13 +62,30 @@ def set_trans(hwnd, alpha: int):
     else:
         print(f'[SET] hwnd={hwnd:x}  alpha={alpha}')
 
+def toggle_topmost(hwnd):
+    """置顶/取消置顶切换"""
+    if hwnd in topmost_state and topmost_state[hwnd]:
+        # 当前已置顶，取消
+        user32.SetWindowPos(hwnd, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_FLAGS)
+        topmost_state[hwnd] = False
+        print(f'[TOP] hwnd={hwnd:x} 取消置顶')
+    else:
+        # 设为置顶
+        user32.SetWindowPos(hwnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_FLAGS)
+        topmost_state[hwnd] = True
+        print(f'[TOP] hwnd={hwnd:x} 置顶')
+
 def update(level: int):
-    if hwnd_last:
+    """热键回调：0/2~9 透明度，1 置顶切换"""
+    if not hwnd_last:
+        print('[HOT] no active window')
+        return
+    if level == 1:
+        toggle_topmost(hwnd_last)
+    else:
         alpha = ALPHA_MAP[level]
         print(f'[HOT] level={level}  alpha={alpha}  hwnd={hwnd_last:x}')
         set_trans(hwnd_last, alpha)
-    else:
-        print('[HOT] no active window')
 
 # 后台不断记录“前台窗口”
 def poll_active():
@@ -123,7 +150,7 @@ def quit_app(icon, item):
 def setup_tray():
     menu = pystray.Menu(pystray.MenuItem('Exit', quit_app))
     icon = pystray.Icon('ObsTrans', make_icon(), menu=menu,
-                        title='ObsidianTrans – Ctrl+Alt+0~9')
+                        title='ObsidianTrans – Ctrl+Alt+1 置顶')
     icon.run()
 
 # ---------------- main ----------------
