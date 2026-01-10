@@ -99,7 +99,7 @@ class VideoTools(tkdnd.Tk):
     def __init__(self):
         super().__init__()
         self.title("视频工具箱")
-        self.geometry("420x460")
+        self.geometry("420x460+2482+1050")
         
         # 视频段落截取相关变量
         self.video_path = ""
@@ -193,7 +193,7 @@ class VideoTools(tkdnd.Tk):
         self.upscale_var = tk.BooleanVar(value=True)  # 默认启用
         upscale_check = ttk.Checkbutton(
             options_frame, 
-            text="自动扩展到1080p（1920×1080，保持原始比例）", 
+            text="自动扩展到1080p", 
             variable=self.upscale_var
         )
         upscale_check.pack(anchor='w')
@@ -699,10 +699,7 @@ class VideoTools(tkdnd.Tk):
                 os.makedirs(out_dir, exist_ok=True)
                 
                 base, ext = os.path.splitext(vname)
-                if upscale_1080p:
-                    out_name = f'{base}_1080p{ext}'
-                else:
-                    out_name = f'{base}{ext}'
+                out_name = f'{base}{ext}'
                 out_path = os.path.join(out_dir, out_name)
 
                 # 获取原分辨率
