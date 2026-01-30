@@ -1075,9 +1075,14 @@ class VideoTools(tkdnd.Tk):
         return "普通"
 
     def extract_stage_name(self, filename: str) -> str:
-        """提取关卡名称"""
+        """提取关卡名称：取下划线之前的部分，并删去「普通」「突袭」等关卡特性文字"""
         base, _ = os.path.splitext(filename)
-        return next((base.split(k)[0].rstrip('_-') for k in NATURE_LIST if k in base), base.strip('_-'))
+        part = base.split('_')[0] if '_' in base else base
+        raw = part
+        for n in NATURE_LIST:
+            part = part.replace(n, '')
+        part = part.strip('_- ')
+        return part if part else raw
 
     def run_doc_generation(self):
         """开始生成文档"""
