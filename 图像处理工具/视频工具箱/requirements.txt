@@ -1,0 +1,5 @@
+# 视频工具箱依赖（打包前请先 pip install -r requirements.txt）
+tkinterdnd2>=0.3.0
+opencv-python>=4.5.0
+Pillow>=9.0.0
+plyer>=2.0.0
