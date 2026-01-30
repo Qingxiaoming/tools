@@ -93,4 +93,3 @@ class ROISelector(tk.Toplevel):
         """取消选择。"""
         self.roi = None
         self.destroy()
-

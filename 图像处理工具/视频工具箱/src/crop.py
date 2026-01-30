@@ -8,10 +8,10 @@ import tkinter as tk
 from tkinter import scrolledtext, ttk
 
 try:
-    from .config import CROP_OUTPUT_DIR, ENABLE_NOTIFICATION, notification
+    from .config import CROP_OUTPUT_DIR, ENABLE_NOTIFICATION, notification, SUBPROCESS_CREATE_NO_WINDOW
     from .roi_selector import ROISelector
 except ImportError:
-    from config import CROP_OUTPUT_DIR, ENABLE_NOTIFICATION, notification
+    from config import CROP_OUTPUT_DIR, ENABLE_NOTIFICATION, notification, SUBPROCESS_CREATE_NO_WINDOW
     from roi_selector import ROISelector
 
 
@@ -145,6 +145,7 @@ class CropMixin:
                 ],
                 capture_output=True,
                 text=True,
+                creationflags=SUBPROCESS_CREATE_NO_WINDOW,
             )
             try:
                 orig_w, orig_h = map(int, probe.stdout.strip().split(","))
@@ -201,6 +202,7 @@ class CropMixin:
                     universal_newlines=True,
                     encoding="utf-8",
                     errors="replace",
+                    creationflags=SUBPROCESS_CREATE_NO_WINDOW,
                 )
                 for line in iter(proc.stdout.readline, ""):
                     self._append_log_line(line.rstrip())
@@ -234,4 +236,3 @@ class CropMixin:
 
 
 __all__ = ["CropMixin"]
-

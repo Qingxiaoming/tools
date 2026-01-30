@@ -1,5 +1,10 @@
 import re
+import subprocess
+import sys
 from pathlib import Path
+
+# Windows 下隐藏 FFmpeg 子进程的黑框
+SUBPROCESS_CREATE_NO_WINDOW = subprocess.CREATE_NO_WINDOW if sys.platform == "win32" else 0
 
 # ------------------ 基础配置（可自行修改）------------------
 # 建议将这些目录改成你自己的磁盘路径，例如：
@@ -39,4 +44,3 @@ def ensure_dirs_exist() -> None:
     """确保所有输出目录存在。"""
     for path in (SEGMENT_OUTPUT_DIR, CROP_OUTPUT_DIR, MERGE_OUTPUT_DIR, DOC_OUTPUT_DIR):
         path.mkdir(parents=True, exist_ok=True)
-

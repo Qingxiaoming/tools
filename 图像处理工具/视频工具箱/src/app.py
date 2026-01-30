@@ -167,4 +167,3 @@ class VideoTools(tkdnd.Tk, SegmentMixin, CropMixin, MergeMixin, DocMixin):
 
 
 __all__ = ["VideoTools"]
-

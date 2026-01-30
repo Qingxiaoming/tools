@@ -5,9 +5,11 @@ import os
 if getattr(sys, "frozen", False):
     sys.path.insert(0, sys._MEIPASS)
 else:
-    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    root_dir = os.path.dirname(os.path.abspath(__file__))
+    sys.path.insert(0, root_dir)
+    sys.path.insert(0, os.path.join(root_dir, "src"))
 
-from app import VideoTools
+from src.app import VideoTools
 
 
 def main() -> None:
@@ -17,4 +19,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

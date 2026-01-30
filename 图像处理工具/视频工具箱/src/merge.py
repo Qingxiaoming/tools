@@ -7,9 +7,9 @@ import tkinter as tk
 from tkinter import ttk
 
 try:
-    from .config import MERGE_OUTPUT_DIR, ENABLE_NOTIFICATION, notification
+    from .config import MERGE_OUTPUT_DIR, ENABLE_NOTIFICATION, notification, SUBPROCESS_CREATE_NO_WINDOW
 except ImportError:
-    from config import MERGE_OUTPUT_DIR, ENABLE_NOTIFICATION, notification
+    from config import MERGE_OUTPUT_DIR, ENABLE_NOTIFICATION, notification, SUBPROCESS_CREATE_NO_WINDOW
 
 
 class MergeMixin:
@@ -62,7 +62,7 @@ class MergeMixin:
         ttk.Button(btn_frame, text="下移", command=self.move_down_merge).pack(
             fill="x", pady=2
         )
-        # 与原版一致：将“开始合并”按钮放在右侧竖排按钮的最下方
+        # 与原版一致：将"开始合并"按钮放在右侧竖排按钮的最下方
         self.merge_run_btn = ttk.Button(
             btn_frame, text="开始合并", command=self.run_merge_batch
         )
@@ -267,6 +267,7 @@ class MergeMixin:
             ],
             capture_output=True,
             text=True,
+            creationflags=SUBPROCESS_CREATE_NO_WINDOW,
         )
         try:
             return float(proc.stdout.strip())
@@ -331,6 +332,7 @@ class MergeMixin:
                     universal_newlines=True,
                     encoding="utf-8",
                     errors="replace",
+                    creationflags=SUBPROCESS_CREATE_NO_WINDOW,
                 )
                 for line in iter(proc.stdout.readline, ""):
                     self._append_log_line(line.rstrip())
@@ -359,6 +361,7 @@ class MergeMixin:
                     text="正在合并视频（第二步，到音乐放完）...", foreground="blue"
                 )
                 if audio_mode == "replace":
+                    # 视频加速以适配音乐时长，音乐保持原速
                     cmd = [
                         "ffmpeg",
                         "-hide_banner",
@@ -370,7 +373,7 @@ class MergeMixin:
                         "-i",
                         self.merge_audio_file,
                         "-filter_complex",
-                        f"[0:v]setpts={1/speed}*PTS[v];[1:a]atempo={speed}[a]",
+                        f"[0:v]setpts={1/speed}*PTS[v];[1:a]anull[a]",
                         "-map",
                         "[v]",
                         "-map",
@@ -384,20 +387,21 @@ class MergeMixin:
                         str(output_path),
                     ]
                 else:
+                    # 视频加速，视频原声也加速以同步，音乐保持原速后混合
                     cmd = [
                         "ffmpeg",
                         "-hide_banner",
                         "-loglevel",
                         "info",
-                        "stats",
+                        "-stats",
                         "-i",
                         str(temp_merged),
                         "-i",
                         self.merge_audio_file,
                         "-filter_complex",
                         f"[0:v]setpts={1/speed}*PTS[v];"
-                        "[0:a][1:a]amix=inputs=2:duration=first:dropout_transition=2[aout];"
-                        f"[aout]atempo={speed}[a]",
+                        f"[0:a]atempo={speed}[a0];"
+                        "[a0][1:a]amix=inputs=2:duration=first:dropout_transition=2[a]",
                         "-map",
                         "[v]",
                         "-map",
@@ -417,6 +421,7 @@ class MergeMixin:
                     universal_newlines=True,
                     encoding="utf-8",
                     errors="replace",
+                    creationflags=SUBPROCESS_CREATE_NO_WINDOW,
                 )
                 for line in iter(proc.stdout.readline, ""):
                     self._append_log_line(line.rstrip())
@@ -593,6 +598,7 @@ class MergeMixin:
                 universal_newlines=True,
                 encoding="utf-8",
                 errors="replace",
+                creationflags=SUBPROCESS_CREATE_NO_WINDOW,
             )
             for line in iter(proc.stdout.readline, ""):
                 self._append_log_line(line.rstrip())
@@ -636,4 +642,3 @@ class MergeMixin:
 
 
 __all__ = ["MergeMixin"]
-

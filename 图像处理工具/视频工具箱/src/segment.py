@@ -8,9 +8,9 @@ from tkinter import scrolledtext, ttk
 import tkinter as tk
 
 try:
-    from .config import SEGMENT_OUTPUT_DIR, ENABLE_NOTIFICATION, notification
+    from .config import SEGMENT_OUTPUT_DIR, ENABLE_NOTIFICATION, notification, SUBPROCESS_CREATE_NO_WINDOW
 except ImportError:
-    from config import SEGMENT_OUTPUT_DIR, ENABLE_NOTIFICATION, notification
+    from config import SEGMENT_OUTPUT_DIR, ENABLE_NOTIFICATION, notification, SUBPROCESS_CREATE_NO_WINDOW
 
 
 class SegmentMixin:
@@ -174,6 +174,8 @@ class SegmentMixin:
                 counter += 1
 
             duration_sec = self._time_to_seconds(end) - self._time_to_seconds(start)  # type: ignore[arg-type]
+            # FFmpeg 只接受 ASCII 冒号，需将全角冒号（：）转为半角（:）
+            start_normalized = start.replace("\uFF1A", ":")
 
             if self.precise_crop_var.get():
                 cmd = [
@@ -183,7 +185,7 @@ class SegmentMixin:
                     "info",
                     "-stats",
                     "-ss",
-                    start,
+                    start_normalized,
                     "-i",
                     self.video_path,
                     "-t",
@@ -205,7 +207,7 @@ class SegmentMixin:
                     "info",
                     "-stats",
                     "-ss",
-                    start,
+                    start_normalized,
                     "-i",
                     self.video_path,
                     "-ss",
@@ -230,6 +232,7 @@ class SegmentMixin:
                     universal_newlines=True,
                     encoding="utf-8",
                     errors="replace",
+                    creationflags=SUBPROCESS_CREATE_NO_WINDOW,
                 )
                 for line in iter(proc.stdout.readline, ""):
                     self._append_log_line(line.rstrip("\n"))
@@ -259,4 +262,3 @@ class SegmentMixin:
 
 
 __all__ = ["SegmentMixin"]
-
