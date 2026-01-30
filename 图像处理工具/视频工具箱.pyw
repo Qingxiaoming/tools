@@ -254,8 +254,9 @@ class VideoTools(tkdnd.Tk):
         
         ttk.Label(output_frame, text="倍速:").pack(side='left', padx=(20, 5))
         self.merge_speed = tk.StringVar(value="1.0")
-        speed_entry = ttk.Entry(output_frame, textvariable=self.merge_speed, width=8)
-        speed_entry.pack(side='left', padx=5)
+        speed_combo = ttk.Combobox(output_frame, textvariable=self.merge_speed, width=12)
+        speed_combo['values'] = ("1.0", "0.5", "0.25", "2.0", "到音乐放完")
+        speed_combo.pack(side='left', padx=5)
         
         # 开始合并按钮（移到输出设置行）
         self.merge_run_btn = ttk.Button(output_frame, text='开始合并', command=self.run_merge_batch)
@@ -531,40 +532,50 @@ class VideoTools(tkdnd.Tk):
             self.status_label.config(text=msg)
 
     def _parse_line_auto(self, line):
-        # 匹配时间：H:MM:SS 或 HH:MM:SS，可带小数秒，如 00:01:02.123
-        time_pattern = r"\b\d{1,2}:\d{2}:\d{2}(?:\.\d{1,3})?\b"
-        matches = list(re.finditer(time_pattern, line))
-        if len(matches) == 0:
-            return False, "未检测到时间（格式示例：00:01:02 或 00:01:02.123）"
-        if len(matches) == 1:
+        # 匹配时间：H:MM:SS 或 HH:MM:SS（可带小数秒），支持英文冒号与中文冒号；或 6 位 HHMMSS
+        time_pattern_colon = r"\b\d{1,2}[:\uFF1A]\d{2}[:\uFF1A]\d{2}(?:\.\d{1,3})?\b"
+        time_pattern_6 = r"\b\d{6}\b"
+        matches_colon = list(re.finditer(time_pattern_colon, line))
+        matches_6 = list(re.finditer(time_pattern_6, line))
+        # 合并并按位置排序：6 位与冒号格式不重叠则都加入（记录 start, end, 归一化时间）
+        def norm_6(m):
+            g = m.group(0)
+            return g[:2] + ":" + g[2:4] + ":" + g[4:6]
+        all_matches = []  # (start, end, norm_time)
+        for m in matches_colon:
+            all_matches.append((m.start(), m.end(), m.group(0)))
+        for m in matches_6:
+            if not any(m.start() < e and m.end() > s for s, e, _ in all_matches):
+                all_matches.append((m.start(), m.end(), norm_6(m)))
+        all_matches.sort(key=lambda x: x[0])
+        if len(all_matches) == 0:
+            return False, "未检测到时间（格式示例：00:01:02 或 010205、005959）"
+        if len(all_matches) == 1:
             return False, "仅检测到一个时间，需提供开始与结束两个时间"
-        if len(matches) > 2:
+        if len(all_matches) > 2:
             return False, "检测到超过两个时间，其中一个疑似作为文件名，文件名不能是时间格式"
 
-        # 提取两个时间字符串
-        t1 = matches[0].group(0)
-        t2 = matches[1].group(0)
+        t1 = all_matches[0][2]
+        t2 = all_matches[1][2]
 
-        # 解析为秒判断先后
         s1 = self._time_to_seconds(t1)
         s2 = self._time_to_seconds(t2)
         if s1 is None or s2 is None:
-            return False, "时间格式不合法（应为 H:MM:SS[.ms]）"
+            return False, "时间格式不合法（应为 H:MM:SS[.ms] 或 HHMMSS）"
         if s1 == s2:
             return False, "开始与结束时间不能相同"
         start, end = (t1, t2) if s1 < s2 else (t2, t1)
 
-        # 去除行中的两个时间，剩余即为文件名（可在两端或中间，允许包含空格）
-        spans = sorted([m.span() for m in matches], key=lambda x: x[0])
-        a0, a1 = spans[0]
-        b0, b1 = spans[1]
+        # 去除行中的两个时间，剩余即为文件名
+        a0, a1 = all_matches[0][0], all_matches[0][1]
+        b0, b1 = all_matches[1][0], all_matches[1][1]
         name = (line[:a0] + line[a1:b0] + line[b1:]).strip()
         if (name.startswith('"') and name.endswith('"')) or (name.startswith("'") and name.endswith("'")):
             name = name[1:-1].strip()
         if not name:
             return False, "缺少文件名"
 
-        if re.fullmatch(time_pattern, name):
+        if re.fullmatch(time_pattern_colon, name) or re.fullmatch(time_pattern_6, name):
             return False, "文件名不能是时间格式"
 
         lower = name.lower()
@@ -575,6 +586,11 @@ class VideoTools(tkdnd.Tk):
 
     def _time_to_seconds(self, t):
         try:
+            # 支持 6 位 HHMMSS 格式如 010205、005959
+            if len(t) == 6 and t.isdigit():
+                t = t[:2] + ":" + t[2:4] + ":" + t[4:6]
+            # 支持中文冒号，统一为英文冒号再解析
+            t = t.replace("\uFF1A", ":")
             if "." in t:
                 hhmmss, ms = t.split(".", 1)
                 ms_val = float("0." + ms)
@@ -649,9 +665,22 @@ class VideoTools(tkdnd.Tk):
                 fail.append(f'{vname}  (无法获取分辨率)')
                 continue
 
-            # 滤镜：先裁剪 → 再 pad 回原尺寸居中
-            filter_complex = f'crop={w}:{h}:{x}:{y},pad={orig_w}:{orig_h}:' \
-                             f'({orig_w}-{w})/2:({orig_h}-{h})/2:black'
+            # 裁剪后高度与裁剪前不一致时拉伸到高度一致；若拉伸后宽度超过原宽则改为宽度=原宽、锁定比例、垂直居中
+            if h != orig_h:
+                new_h = orig_h
+                new_w = int(round(w * orig_h / h))
+                if new_w > orig_w:
+                    # 宽度拉伸为原宽度、锁定比例、垂直居中
+                    new_w2 = orig_w
+                    new_h2 = int(round(h * orig_w / w))
+                    filter_complex = f'crop={w}:{h}:{x}:{y},scale={new_w2}:{new_h2},pad={orig_w}:{orig_h}:0:(oh-ih)/2:black'
+                else:
+                    # 裁剪 → 拉伸到 (new_w, orig_h) → 水平居中 pad 到原尺寸
+                    filter_complex = f'crop={w}:{h}:{x}:{y},scale={new_w}:{new_h},pad={orig_w}:{orig_h}:(ow-iw)/2:0:black'
+            else:
+                # 滤镜：先裁剪 → 再 pad 回原尺寸居中
+                filter_complex = f'crop={w}:{h}:{x}:{y},pad={orig_w}:{orig_h}:' \
+                                 f'({orig_w}-{w})/2:({orig_h}-{h})/2:black'
 
             cmd = ['ffmpeg', '-hide_banner', '-loglevel', 'info', '-stats',
                    '-i', vpath, '-vf', filter_complex,
@@ -780,11 +809,7 @@ class VideoTools(tkdnd.Tk):
         if not self.merge_video_list:
             self.status_label.config(text="视频列表为空！", foreground="red")
             return
-        
-        if len(self.merge_video_list) < 2:
-            self.status_label.config(text="至少需要2个视频文件才能合并！", foreground="red")
-            return
-        
+
         # 检查音频模式设置
         audio_mode_text = self.audio_mode_var.get()
         audio_mode_map = {"保持原音频": "none", "替换音频": "replace", "叠加音频": "mix"}
@@ -800,16 +825,18 @@ class VideoTools(tkdnd.Tk):
             self.status_label.config(text="请输入输出文件名！", foreground="red")
             return
         
-        # 检查倍速设置
-        try:
-            speed = float(self.merge_speed.get().strip())
-            if speed <= 0:
-                self.status_label.config(text="倍速必须大于0！", foreground="red")
+        # 检查倍速设置（"到音乐放完" 为特殊选项，不校验为数字）
+        speed_str = self.merge_speed.get().strip()
+        if speed_str != "到音乐放完":
+            try:
+                speed = float(speed_str)
+                if speed <= 0:
+                    self.status_label.config(text="倍速必须大于0！", foreground="red")
+                    return
+            except ValueError:
+                self.status_label.config(text="倍速必须是数字或选择「到音乐放完」！", foreground="red")
                 return
-        except ValueError:
-            self.status_label.config(text="倍速必须是数字！", foreground="red")
-            return
-        
+
         self.merge_run_btn.config(state='disabled', text='合并中')
         self.clear_log()
         threading.Thread(target=self._merge_batch_thread, daemon=True).start()
@@ -820,7 +847,7 @@ class VideoTools(tkdnd.Tk):
             # 创建输出目录
             output_dir = os.path.join(os.path.dirname(self.merge_video_list[0][0]), '合并输出')
             os.makedirs(output_dir, exist_ok=True)
-            
+
             # 获取输出文件名
             base_name = self.merge_output_name.get().strip()
             counter = 1
@@ -829,23 +856,92 @@ class VideoTools(tkdnd.Tk):
                 if not os.path.exists(output_path):
                     break
                 counter += 1
-            
+
             # 创建文件列表
             list_file = os.path.join(output_dir, "filelist.txt")
             with open(list_file, 'w', encoding='utf-8') as f:
                 for path, _ in self.merge_video_list:
                     f.write(f"file '{path.replace(os.sep, '/')}'\n")
-            
-            # 获取倍速设置
-            speed = float(self.merge_speed.get().strip())
-            
-            # 根据音频模式和倍速构建FFmpeg命令
+
+            speed_str = self.merge_speed.get().strip()
             audio_mode_text = self.audio_mode_var.get()
             audio_mode_map = {"保持原音频": "none", "替换音频": "replace", "叠加音频": "mix"}
             audio_mode = audio_mode_map.get(audio_mode_text, "none")
-            
+
+            # 「到音乐放完」：仅当已拖入音频且模式为替换/叠加时生效，否则按 1 倍速
+            use_music_finish = (
+                speed_str == "到音乐放完"
+                and audio_mode in ("replace", "mix")
+                and self.merge_audio_file
+            )
+            if use_music_finish:
+                # 第一步：先合并视频到临时文件（1 倍速，copy）
+                temp_merged = os.path.join(output_dir, "temp_merge_for_music.mp4")
+                cmd_concat = ['ffmpeg', '-hide_banner', '-loglevel', 'info', '-stats',
+                              '-f', 'concat', '-safe', '0', '-i', list_file, '-c', 'copy', '-y', temp_merged]
+                self.status_label.config(text='正在合并视频（第一步）...', foreground="blue")
+                proc = subprocess.Popen(
+                    cmd_concat, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                    bufsize=0, universal_newlines=True,
+                    encoding='utf-8', errors='replace')
+                for line in iter(proc.stdout.readline, ''):
+                    self._log(line.rstrip())
+                rc = proc.wait()
+                try:
+                    os.remove(list_file)
+                except Exception:
+                    pass
+                if rc != 0:
+                    self.after(0, self._merge_batch_done, False, "合并临时视频失败")
+                    return
+                video_dur = self._get_media_duration(temp_merged)
+                audio_dur = self._get_media_duration(self.merge_audio_file)
+                if video_dur is None or audio_dur is None or audio_dur <= 0:
+                    speed = 1.0
+                    self._log("无法获取合并视频或音频时长，按 1 倍速输出。")
+                else:
+                    speed = video_dur / audio_dur
+                    if speed > 5 or speed < 1:
+                        self._log(f"警告：到音乐放完倍速为 {speed:.2f}，超出建议范围 [1, 5]，仍继续处理。")
+                # 第二步：对临时视频加倍速并应用音频（替换/叠加），输出到最终文件
+                self.status_label.config(text='正在合并视频（第二步，到音乐放完）...', foreground="blue")
+                if audio_mode == "replace":
+                    cmd = [
+                        'ffmpeg', '-hide_banner', '-loglevel', 'info', '-stats',
+                        '-i', temp_merged, '-i', self.merge_audio_file,
+                        '-filter_complex', f'[0:v]setpts={1/speed}*PTS[v];[1:a]atempo={speed}[a]',
+                        '-map', '[v]', '-map', '[a]', '-c:v', 'libx264', '-c:a', 'aac',
+                        '-shortest', '-y', output_path
+                    ]
+                else:
+                    cmd = [
+                        'ffmpeg', '-hide_banner', '-loglevel', 'info', '-stats',
+                        '-i', temp_merged, '-i', self.merge_audio_file,
+                        '-filter_complex', f'[0:v]setpts={1/speed}*PTS[v];[0:a][1:a]amix=inputs=2:duration=first:dropout_transition=2[aout];[aout]atempo={speed}[a]',
+                        '-map', '[v]', '-map', '[a]', '-c:v', 'libx264', '-c:a', 'aac',
+                        '-y', output_path
+                    ]
+                proc = subprocess.Popen(
+                    cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                    bufsize=0, universal_newlines=True,
+                    encoding='utf-8', errors='replace')
+                for line in iter(proc.stdout.readline, ''):
+                    self._log(line.rstrip())
+                rc = proc.wait()
+                try:
+                    os.remove(temp_merged)
+                except Exception:
+                    pass
+                if rc == 0:
+                    self.after(0, self._merge_batch_done, True, output_path)
+                else:
+                    self.after(0, self._merge_batch_done, False, f"合并失败 (返回码 {rc})")
+                return
+            # 非「到音乐放完」或未满足条件时按原逻辑
+            speed = float(speed_str) if speed_str != "到音乐放完" else 1.0
+
             cmd = ['ffmpeg', '-hide_banner', '-loglevel', 'info', '-stats']
-            
+
             if audio_mode == "none":
                 # 保持原音频，应用倍速
                 if speed == 1.0:
@@ -891,32 +987,43 @@ class VideoTools(tkdnd.Tk):
                         '-map', '[v]', '-map', '[a]', '-c:v', 'libx264', '-c:a', 'aac',
                         '-y', output_path
                     ])
-            
+
             self.status_label.config(text=f'正在合并视频...', foreground="blue")
-            
+
             proc = subprocess.Popen(
                 cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                 bufsize=0, universal_newlines=True,
                 encoding='utf-8', errors='replace')
-            
+
             for line in iter(proc.stdout.readline, ''):
                 self._log(line.rstrip())
-            
+
             rc = proc.wait()
-            
+
             # 清理临时文件
             try:
                 os.remove(list_file)
-            except:
+            except Exception:
                 pass
-            
+
             if rc == 0:
                 self.after(0, self._merge_batch_done, True, output_path)
             else:
                 self.after(0, self._merge_batch_done, False, f"合并失败 (返回码 {rc})")
-                
+
         except Exception as e:
             self.after(0, self._merge_batch_done, False, str(e))
+
+    def _get_media_duration(self, path):
+        """用 ffprobe 获取媒体时长（秒），失败返回 None"""
+        proc = subprocess.run(
+            ['ffprobe', '-v', 'error', '-show_entries', 'format=duration',
+             '-of', 'default=noprint_wrappers=1:nokey=1', path],
+            capture_output=True, text=True)
+        try:
+            return float(proc.stdout.strip())
+        except Exception:
+            return None
 
     def _merge_batch_done(self, success, result):
         """合并完成回调"""
@@ -949,7 +1056,7 @@ class VideoTools(tkdnd.Tk):
     def is_standard_video(self, name: str) -> bool:
         """检查是否为标准视频文件名"""
         if not STANDARD_RE.fullmatch(name):
-            return False
+            return True
         return any(n in name for n in NATURE_LIST)
 
     def extract_operator_list(self, filename: str) -> list[str]:
@@ -991,9 +1098,9 @@ class VideoTools(tkdnd.Tk):
         for video_path, video_name in self.doc_video_list:
             try:
                 # 检查是否为标准视频
-                if not self.is_standard_video(video_name):
-                    fail.append(f"{video_name}  不符合标准格式")
-                    continue
+                # if not self.is_standard_video(video_name):
+                #     fail.append(f"{video_name}  不符合标准格式")
+                #     continue
                 
                 # 提取信息
                 ops = self.extract_operator_list(video_name)
@@ -1011,7 +1118,7 @@ class VideoTools(tkdnd.Tk):
   - {activity}
 是否完成: true
 bv号: {bv}
-性质:
+关卡难度:
   - {nature}
 备注: 无
 参战干员:
