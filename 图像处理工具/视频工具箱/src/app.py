@@ -1,24 +1,42 @@
 import os
+import sys
+import subprocess
 
 import tkinter as tk
 import tkinterdnd2 as tkdnd
 from tkinter import scrolledtext, ttk
 
 try:  # 作为包导入时
-    from .config import ensure_dirs_exist
+    from .config import (
+        ensure_dirs_exist,
+        SEGMENT_OUTPUT_DIR,
+        CROP_OUTPUT_DIR,
+        MERGE_OUTPUT_DIR,
+        DOC_OUTPUT_DIR,
+        WEEKLY_OUTPUT_DIR,
+    )
     from .segment import SegmentMixin
     from .crop import CropMixin
     from .merge import MergeMixin
     from .doc import DocMixin
+    from .weekly import WeeklyMixin
 except ImportError:  # 直接在目录中运行 main.pyw 时
-    from config import ensure_dirs_exist
+    from config import (
+        ensure_dirs_exist,
+        SEGMENT_OUTPUT_DIR,
+        CROP_OUTPUT_DIR,
+        MERGE_OUTPUT_DIR,
+        DOC_OUTPUT_DIR,
+        WEEKLY_OUTPUT_DIR,
+    )
     from segment import SegmentMixin
     from crop import CropMixin
     from merge import MergeMixin
     from doc import DocMixin
+    from weekly import WeeklyMixin
 
 
-class VideoTools(tkdnd.Tk, SegmentMixin, CropMixin, MergeMixin, DocMixin):
+class VideoTools(tkdnd.Tk, SegmentMixin, CropMixin, MergeMixin, DocMixin, WeeklyMixin):
     """视频工具箱主程序。
 
     功能模块：
@@ -50,6 +68,9 @@ class VideoTools(tkdnd.Tk, SegmentMixin, CropMixin, MergeMixin, DocMixin):
         # 文档生成相关
         self.doc_video_list: list[tuple[str, str]] = []
 
+        # 录屏整理相关
+        self.weekly_video_files: list[str] = []
+
         self._create_widgets()
         self.drop_target_register(tkdnd.DND_FILES)
         self.dnd_bind("<<Drop>>", self.drop_files)
@@ -80,6 +101,11 @@ class VideoTools(tkdnd.Tk, SegmentMixin, CropMixin, MergeMixin, DocMixin):
         self.notebook.add(self.doc_frame, text="文档生成")
         self._create_doc_widgets()
 
+        # 录屏整理
+        self.weekly_frame = ttk.Frame(self.notebook)
+        self.notebook.add(self.weekly_frame, text="录屏整理")
+        self._create_weekly_widgets()
+
         # 公共状态栏与日志
         self._create_common_widgets()
 
@@ -94,7 +120,15 @@ class VideoTools(tkdnd.Tk, SegmentMixin, CropMixin, MergeMixin, DocMixin):
         self.status_label = ttk.Label(status_frame, text="待机中", foreground="blue")
         self.status_label.pack(side="left")
 
-        ttk.Label(self, text="实时日志:").pack(anchor="w", padx=10, pady=(5, 0))
+        # 打开当前标签页对应输出目录的按钮，放在状态栏右侧
+        open_btn = ttk.Button(
+            status_frame,
+            text="📂",
+            width=3,
+            command=self._open_current_tab_folder,
+        )
+        open_btn.pack(side="right")
+
         self.log = scrolledtext.ScrolledText(
             self, width=80, height=6, state="disabled", font=("Consolas", 8)
         )
@@ -141,6 +175,47 @@ class VideoTools(tkdnd.Tk, SegmentMixin, CropMixin, MergeMixin, DocMixin):
         self.log.delete("1.0", "end")
         self.log.config(state="disabled")
 
+    def _open_folder(self, path: str) -> None:
+        """在文件资源管理器中打开指定目录。"""
+        if not os.path.isdir(path):
+            self.status_label.config(text="目标文件夹不存在或不可用", foreground="red")
+            return
+
+        try:
+            if sys.platform == "win32":
+                subprocess.Popen(["explorer", path])
+            elif sys.platform == "darwin":
+                subprocess.Popen(["open", path])
+            else:
+                subprocess.Popen(["xdg-open", path])
+        except Exception as e:
+            self.status_label.config(text=f"打开文件夹失败: {e}", foreground="red")
+
+    def _open_current_tab_folder(self) -> None:
+        """根据当前标签页，打开对应的目标输出文件夹。"""
+        current_tab = self.notebook.index(self.notebook.select())
+
+        if current_tab == 0:
+            # 多段截取输出目录
+            path = str(SEGMENT_OUTPUT_DIR)
+        elif current_tab == 1:
+            # 画幅裁剪输出目录
+            path = str(CROP_OUTPUT_DIR)
+        elif current_tab == 2:
+            # 视频合并输出目录
+            path = str(MERGE_OUTPUT_DIR)
+        elif current_tab == 3:
+            # 文档生成输出目录
+            path = str(DOC_OUTPUT_DIR)
+        elif current_tab == 4:
+            # 录屏整理输出目录
+            path = str(WEEKLY_OUTPUT_DIR)
+        else:
+            self.status_label.config(text="当前标签不支持打开目标文件夹", foreground="red")
+            return
+
+        self._open_folder(path)
+
     # ------------------------- 拖拽入口 -------------------------
     def drop_files(self, event) -> None:
         """处理拖拽进入窗口的文件。"""
@@ -164,6 +239,8 @@ class VideoTools(tkdnd.Tk, SegmentMixin, CropMixin, MergeMixin, DocMixin):
             self._handle_drop_merge_videos(files)
         elif current_tab == 3:
             self._handle_drop_doc(files)
+        elif current_tab == 4:
+            self._handle_drop_weekly(files)
 
 
 __all__ = ["VideoTools"]

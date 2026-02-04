@@ -1,15 +1,32 @@
 import os
+import re
+import shutil
 import threading
 from datetime import datetime
+from pathlib import Path
 from typing import List, Tuple
 
 import tkinter as tk
 from tkinter import scrolledtext, ttk
 
 try:
-    from .config import DOC_OUTPUT_DIR, VIDEO_NATURE_LIST, ENABLE_NOTIFICATION, notification
+    from .config import (
+        DOC_OUTPUT_DIR,
+        DOC_TRANSFER_DOC_DIR,
+        DOC_TRANSFER_MEDIA_DIR,
+        VIDEO_NATURE_LIST,
+        ENABLE_NOTIFICATION,
+        notification,
+    )
 except ImportError:
-    from config import DOC_OUTPUT_DIR, VIDEO_NATURE_LIST, ENABLE_NOTIFICATION, notification
+    from config import (  # type: ignore
+        DOC_OUTPUT_DIR,
+        DOC_TRANSFER_DOC_DIR,
+        DOC_TRANSFER_MEDIA_DIR,
+        VIDEO_NATURE_LIST,
+        ENABLE_NOTIFICATION,
+        notification,
+    )
 
 
 class DocMixin:
@@ -57,6 +74,11 @@ class DocMixin:
             btn_frame, text="生成文档", command=self.run_doc_generation
         )
         self.doc_run_btn.pack(side="right", padx=4)
+
+        self.doc_transfer_btn = ttk.Button(
+            btn_frame, text="转运", command=self.run_doc_transfer
+        )
+        self.doc_transfer_btn.pack(side="right", padx=4)
 
     def _handle_drop_doc(self, files: List[str]) -> None:
         added_files: List[str] = []
@@ -186,6 +208,153 @@ bv号: {bv}
             self._append_log_line("失败列表：")
             for f in fail:
                 self._append_log_line("  " + f)
+
+    # ------------------------- 文档与视频转运 -------------------------
+    def run_doc_transfer(self) -> None:
+        """将 DOC_OUTPUT_DIR 中的文档及其引用的视频剪切到 config 指定目录。"""
+        md_files = list(Path(DOC_OUTPUT_DIR).glob("*.md"))
+        if not md_files:
+            self.status_label.config(text="文档输出目录中没有可转运的 md 文件", foreground="red")
+            return
+
+        self.doc_transfer_btn.config(state="disabled", text="转运中")
+        self._clear_log()
+        threading.Thread(
+            target=self._doc_transfer_thread, args=(md_files,), daemon=True
+        ).start()
+
+    def _doc_transfer_thread(self, md_files: List[Path]) -> None:
+        DOC_TRANSFER_DOC_DIR.mkdir(parents=True, exist_ok=True)
+        DOC_TRANSFER_MEDIA_DIR.mkdir(parents=True, exist_ok=True)
+
+        moved_docs = 0
+        moved_videos = 0
+        skipped = 0
+
+        for md_path in md_files:
+            try:
+                text = md_path.read_text(encoding="utf-8")
+            except Exception as e:
+                skipped += 1
+                self._append_log_line(f"{md_path.name}  (读取失败: {e})")
+                continue
+
+            # 提取所有 ![[...]] 引用，允许多个
+            refs = list({m.group(1).strip() for m in re.finditer(r"!\[\[(.+?)\]\]", text)})
+
+            doc_target = DOC_TRANSFER_DOC_DIR / md_path.name
+
+            # 若目标文档目录已存在同名 md，则整组跳过
+            if doc_target.exists():
+                skipped += 1
+                self._append_log_line(
+                    f"{md_path.name}  (目标文档目录已存在同名文件，已跳过文档及其视频)"
+                )
+                continue
+
+            # 没有任何视频引用：仅转运 md
+            if not refs:
+                try:
+                    shutil.move(str(md_path), str(doc_target))
+                    moved_docs += 1
+                    self._append_log_line(f"已转运文档: {md_path.name}")
+                except Exception as e:
+                    skipped += 1
+                    self._append_log_line(f"{md_path.name}  (转运文档失败: {e})")
+                continue
+
+            missing_refs: List[str] = []
+            conflict_refs: List[str] = []
+
+            for ref in refs:
+                src = DOC_OUTPUT_DIR / ref
+                if not src.is_file():
+                    missing_refs.append(ref)
+                    continue
+                target = DOC_TRANSFER_MEDIA_DIR / ref
+                if target.exists():
+                    conflict_refs.append(ref)
+
+            # 若有缺失或同名冲突：视频和 md 都不剪切，仅记录日志
+            if missing_refs or conflict_refs:
+                skipped += 1
+                if missing_refs:
+                    self._append_log_line(
+                        f"{md_path.name}  (引用视频缺失: {', '.join(missing_refs)})"
+                    )
+                if conflict_refs:
+                    self._append_log_line(
+                        f"{md_path.name}  (目标视频目录已存在同名文件: {', '.join(conflict_refs)})"
+                    )
+                continue
+
+            # 可以安全转运：将同组的文档和所有引用视频作为一个事务处理
+            moves_done: List[tuple[Path, Path]] = []
+            group_failed = False
+
+            # 先移动 md
+            try:
+                shutil.move(str(md_path), str(doc_target))
+                moves_done.append((doc_target, md_path))  # 记录为 (当前路径, 回滚目标)
+                self._append_log_line(f"已转运文档: {md_path.name}")
+            except Exception as e:
+                skipped += 1
+                self._append_log_line(f"{md_path.name}  (转运文档失败: {e})")
+                group_failed = True
+
+            # 再移动所有引用的视频
+            if not group_failed:
+                for ref in refs:
+                    src = DOC_OUTPUT_DIR / ref
+                    target = DOC_TRANSFER_MEDIA_DIR / ref
+                    try:
+                        shutil.move(str(src), str(target))
+                        moves_done.append((target, src))  # 记录为 (当前路径, 回滚目标)
+                        self._append_log_line(f"已转运视频: {ref}")
+                    except Exception as e:
+                        self._append_log_line(f"{ref}  (转运视频失败: {e})")
+                        group_failed = True
+                        break
+
+            # 如有任何一步失败，回滚本组已移动的所有文件
+            if group_failed:
+                for current, original in reversed(moves_done):
+                    try:
+                        if current.exists():
+                            shutil.move(str(current), str(original))
+                    except Exception as e:
+                        self._append_log_line(
+                            f"{current.name}  (回滚失败，请手动检查位置: {e})"
+                        )
+                skipped += 1
+            else:
+                moved_docs += 1
+                moved_videos += len(refs)
+
+        self.after(0, self._on_doc_transfer_done, moved_docs, moved_videos, skipped)
+
+    def _on_doc_transfer_done(
+        self, moved_docs: int, moved_videos: int, skipped: int
+    ) -> None:
+        self.doc_transfer_btn.config(state="normal", text="转运")
+        self.status_label.config(text="待机中", foreground="blue")
+
+        msg = (
+            f"转运完成：文档 {moved_docs} 个，视频 {moved_videos} 个，"
+            f"跳过 {skipped} 个文档"
+        )
+        if ENABLE_NOTIFICATION and notification:
+            try:
+                notification.notify(
+                    title="文档转运",
+                    message=msg,
+                    timeout=4,
+                    app_name="VideoTools",
+                )
+            except Exception:
+                self.status_label.config(text=msg)
+        else:
+            self.status_label.config(text=msg)
 
 
 __all__ = ["DocMixin"]
