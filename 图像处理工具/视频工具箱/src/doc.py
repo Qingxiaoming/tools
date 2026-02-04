@@ -75,8 +75,10 @@ class DocMixin:
         )
         self.doc_run_btn.pack(side="right", padx=4)
 
+        transfer_frame = ttk.Frame(self.doc_frame)
+        transfer_frame.pack(fill="x", padx=10, pady=(0, 4))
         self.doc_transfer_btn = ttk.Button(
-            btn_frame, text="转运", command=self.run_doc_transfer
+            transfer_frame, text="转运", command=self.run_doc_transfer
         )
         self.doc_transfer_btn.pack(side="right", padx=4)
 
