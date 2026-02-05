@@ -229,6 +229,11 @@ bv号: {bv}
         DOC_TRANSFER_DOC_DIR.mkdir(parents=True, exist_ok=True)
         DOC_TRANSFER_MEDIA_DIR.mkdir(parents=True, exist_ok=True)
 
+        # 载入视频列表：按文件名可反查完整路径（转运时若输出目录没有该视频则从这里取）
+        video_path_by_name = {
+            name: Path(path) for path, name in getattr(self, "doc_video_list", [])
+        }
+
         moved_docs = 0
         moved_videos = 0
         skipped = 0
@@ -267,12 +272,17 @@ bv号: {bv}
 
             missing_refs: List[str] = []
             conflict_refs: List[str] = []
+            # 每个引用的解析结果：(引用名, 源文件路径)。源优先在文档输出目录，否则从载入视频列表按文件名取
+            ref_src_list: List[Tuple[str, Path]] = []
 
             for ref in refs:
                 src = DOC_OUTPUT_DIR / ref
                 if not src.is_file():
-                    missing_refs.append(ref)
-                    continue
+                    src = video_path_by_name.get(ref)
+                    if src is None or not src.is_file():
+                        missing_refs.append(ref)
+                        continue
+                ref_src_list.append((ref, Path(src)))
                 target = DOC_TRANSFER_MEDIA_DIR / ref
                 if target.exists():
                     conflict_refs.append(ref)
@@ -304,10 +314,9 @@ bv号: {bv}
                 self._append_log_line(f"{md_path.name}  (转运文档失败: {e})")
                 group_failed = True
 
-            # 再移动所有引用的视频
+            # 再移动所有引用的视频（使用已解析的源路径：输出目录或载入列表）
             if not group_failed:
-                for ref in refs:
-                    src = DOC_OUTPUT_DIR / ref
+                for ref, src in ref_src_list:
                     target = DOC_TRANSFER_MEDIA_DIR / ref
                     try:
                         shutil.move(str(src), str(target))
@@ -331,7 +340,7 @@ bv号: {bv}
                 skipped += 1
             else:
                 moved_docs += 1
-                moved_videos += len(refs)
+                moved_videos += len(ref_src_list)
 
         self.after(0, self._on_doc_transfer_done, moved_docs, moved_videos, skipped)
 
