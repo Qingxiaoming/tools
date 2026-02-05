@@ -62,6 +62,12 @@ WEEKLY_SUBDIR_NAME: str = f"{WEEKLY_YEAR}_{WEEKLY_WEEK:02d}"
 WEEKLY_OUTPUT_DIR: Path = WEEKLY_OUTPUT_ROOT / WEEKLY_SUBDIR_NAME
 
 
+# 跨标签视频传递模式：
+# - "overwrite": 右箭头传递时覆盖目标页签现有输入列表（默认）
+# - "append": 右箭头传递时在目标页签原有列表后追加
+CROSS_TAB_TRANSFER_MODE: str = "overwrite"
+
+
 # ------------------ 系统通知 ------------------
 try:
     from plyer import notification  # type: ignore

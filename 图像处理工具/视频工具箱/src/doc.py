@@ -75,12 +75,8 @@ class DocMixin:
         )
         self.doc_run_btn.pack(side="right", padx=4)
 
-        transfer_frame = ttk.Frame(self.doc_frame)
-        transfer_frame.pack(fill="x", padx=10, pady=(0, 4))
-        self.doc_transfer_btn = ttk.Button(
-            transfer_frame, text="转运", command=self.run_doc_transfer
-        )
-        self.doc_transfer_btn.pack(side="right", padx=4)
+        # 记录“本次文档生成”产生的 md 文件名集合，用于限制转运范围
+        self.doc_generated_md_names: set[str] = set()
 
     def _handle_drop_doc(self, files: List[str]) -> None:
         added_files: List[str] = []
@@ -113,6 +109,30 @@ class DocMixin:
             text="请拖入一个或多个视频文件", foreground="grey"
         )
 
+    # 供主程序通过右箭头传递视频列表时调用
+    def _set_doc_videos_from_paths(self, files: List[str], overwrite: bool = True) -> None:
+        """根据给定路径列表更新文档生成输入列表。"""
+        if overwrite:
+            self.doc_video_list.clear()
+            self.doc_text.config(state="normal")
+            self.doc_text.delete("1.0", "end")
+        added_files: List[str] = []
+        for f in files:
+            if not os.path.isfile(f):
+                continue
+            item = (f, os.path.basename(f))
+            if item not in self.doc_video_list:
+                self.doc_video_list.append(item)
+                added_files.append(item[1])
+        if added_files:
+            self.doc_text.config(state="normal")
+            for filename in added_files:
+                self.doc_text.insert("end", filename + "\n")
+            self.doc_text.config(state="disabled")
+            self.doc_video_label.config(
+                text=f"已载入 {len(self.doc_video_list)} 个视频文件", foreground="black"
+            )
+
     def _extract_operator_list(self, filename: str) -> List[str]:
         base = os.path.splitext(filename)[0]
         if "_" not in base:
@@ -144,6 +164,11 @@ class DocMixin:
         bv = self.doc_bv.get().strip()
         self.doc_run_btn.config(state="disabled", text="生成中")
         self._clear_log()
+        # 开始新一轮文档生成前，清空“本次生成”的文档记录
+        self.doc_generated_md_names.clear()
+        # 文档生成期间禁用右箭头
+        if hasattr(self, "_set_jump_enabled"):
+            self._set_jump_enabled(False)  # type: ignore[call-arg]
         threading.Thread(
             target=self._doc_generation_thread, args=(activity, bv), daemon=True
         ).start()
@@ -183,6 +208,13 @@ bv号: {bv}
                 with open(md_path, "w", encoding="utf-8") as f:
                     f.write(content)
 
+                # 记录本次生成的 md 文件名，用于后续“转运”过滤
+                try:
+                    self.doc_generated_md_names.add(md_path.name)
+                except Exception:
+                    # 若属性不存在或类型异常，不影响主流程
+                    pass
+
                 success.append(f"{video_name} -> {stage}.md")
                 self._append_log_line(f"已生成: {stage}.md")
 
@@ -194,6 +226,9 @@ bv号: {bv}
     def _on_doc_generation_done(self, success: List[str], fail: List[str]) -> None:
         self.doc_run_btn.config(state="normal", text="生成文档")
         self.status_label.config(text="待机中", foreground="blue")
+        # 文档生成结束后恢复右箭头
+        if hasattr(self, "_set_jump_enabled"):
+            self._set_jump_enabled(True)  # type: ignore[call-arg]
 
         msg = f"成功生成 {len(success)} 个文档，失败 {len(fail)} 个"
         if ENABLE_NOTIFICATION and notification:
@@ -215,11 +250,27 @@ bv号: {bv}
     def run_doc_transfer(self) -> None:
         """将 DOC_OUTPUT_DIR 中的文档及其引用的视频剪切到 config 指定目录。"""
         md_files = list(Path(DOC_OUTPUT_DIR).glob("*.md"))
+        # 只允许转运“本次文档生成”产生的文档，避免误操作历史文件
+        generated_names = getattr(self, "doc_generated_md_names", set())
+        if generated_names:
+            md_files = [p for p in md_files if p.name in generated_names]
+            # 若记录的文档与实际文件不一致，则报错并终止本次转运
+            missing_docs = [name for name in generated_names if not (DOC_OUTPUT_DIR / name).is_file()]
+            if missing_docs:
+                self.status_label.config(
+                    text=f"本轮生成的文档缺失，无法转运: {', '.join(missing_docs)}",
+                    foreground="red",
+                )
+                return
         if not md_files:
-            self.status_label.config(text="文档输出目录中没有可转运的 md 文件", foreground="red")
+            self.status_label.config(
+                text="当前没有本次生成的可转运文档", foreground="red"
+            )
             return
 
-        self.doc_transfer_btn.config(state="disabled", text="转运中")
+        # 转运期间禁用右箭头
+        if hasattr(self, "_set_jump_enabled"):
+            self._set_jump_enabled(False)  # type: ignore[call-arg]
         self._clear_log()
         threading.Thread(
             target=self._doc_transfer_thread, args=(md_files,), daemon=True
@@ -347,8 +398,10 @@ bv号: {bv}
     def _on_doc_transfer_done(
         self, moved_docs: int, moved_videos: int, skipped: int
     ) -> None:
-        self.doc_transfer_btn.config(state="normal", text="转运")
         self.status_label.config(text="待机中", foreground="blue")
+        # 转运结束后恢复右箭头
+        if hasattr(self, "_set_jump_enabled"):
+            self._set_jump_enabled(True)  # type: ignore[call-arg]
 
         msg = (
             f"转运完成：文档 {moved_docs} 个，视频 {moved_videos} 个，"

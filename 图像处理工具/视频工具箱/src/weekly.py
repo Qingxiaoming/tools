@@ -211,6 +211,9 @@ class WeeklyMixin:
         WEEKLY_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
         self.weekly_run_btn.config(state="disabled", text="处理中")
+        # 录屏整理处理中也禁用右箭头
+        if hasattr(self, "_set_jump_enabled"):
+            self._set_jump_enabled(False)  # type: ignore[call-arg]
         self._clear_log()
 
         thread = threading.Thread(
@@ -519,6 +522,9 @@ class WeeklyMixin:
     def _on_weekly_done(self, success: List[str], fail: List[str]) -> None:
         self.weekly_run_btn.config(state="normal", text="开始整理")
         self.status_label.config(text="待机中", foreground="blue")
+        # 录屏整理结束后恢复右箭头
+        if hasattr(self, "_set_jump_enabled"):
+            self._set_jump_enabled(True)  # type: ignore[call-arg]
 
         msg = f"已完成：成功 {len(success)} 段，失败 {len(fail)} 段"
         if ENABLE_NOTIFICATION and notification:

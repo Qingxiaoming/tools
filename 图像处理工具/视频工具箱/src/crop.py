@@ -81,6 +81,30 @@ class CropMixin:
             text="请拖入一个或多个视频文件", foreground="grey"
         )
 
+    # 供主程序通过右箭头传递视频列表时调用
+    def _set_crop_videos_from_paths(self, files: List[str], overwrite: bool = True) -> None:
+        """根据给定路径列表更新裁剪输入列表。"""
+        if overwrite:
+            self.video_list.clear()
+            self.crop_text.config(state="normal")
+            self.crop_text.delete("1.0", "end")
+        added_files: List[str] = []
+        for f in files:
+            if not os.path.isfile(f):
+                continue
+            item = (f, os.path.basename(f))
+            if item not in self.video_list:
+                self.video_list.append(item)
+                added_files.append(item[1])
+        if added_files:
+            self.crop_text.config(state="normal")
+            for filename in added_files:
+                self.crop_text.insert("end", filename + "\n")
+            self.crop_text.config(state="disabled")
+            self.crop_video_label.config(
+                text=f"已载入 {len(self.video_list)} 个视频文件", foreground="black"
+            )
+
     def select_roi(self) -> None:
         """弹出 ROI 选择窗口，从第一段视频读取首帧。"""
         if not self.video_list:
@@ -116,6 +140,9 @@ class CropMixin:
             )
             return
         self.crop_run_btn.config(state="disabled", text="处理中")
+        # 处理中期间禁用右箭头
+        if hasattr(self, "_set_jump_enabled"):
+            self._set_jump_enabled(False)  # type: ignore[call-arg]
         self._clear_log()
         threading.Thread(target=self._crop_batch_thread, daemon=True).start()
 
@@ -125,6 +152,9 @@ class CropMixin:
         x, y, w, h = self.roi  # type: ignore[misc]
 
         CROP_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+        # 记录本次裁剪产生的输出文件路径，供跨页签传递使用
+        produced_paths: List[str] = []
 
         for vpath, vname in self.video_list:
             base, ext = os.path.splitext(vname)
@@ -209,16 +239,26 @@ class CropMixin:
                 rc = proc.wait()
                 if rc == 0:
                     success.append(vname)
+                    produced_paths.append(str(out_path))
                 else:
                     fail.append(f"{vname}  (返回码 {rc})")
             except Exception as e:
                 fail.append(f"{vname}  ({e})")
+
+        # 记录到主实例属性中，供右箭头使用
+        try:
+            self.crop_last_output_files = produced_paths
+        except Exception:
+            pass
 
         self.after(0, self._on_crop_batch_done, success, fail)
 
     def _on_crop_batch_done(self, success: List[str], fail: List[str]) -> None:
         self.crop_run_btn.config(state="normal", text="开始裁剪")
         self.status_label.config(text="待机中", foreground="blue")
+        # 恢复右箭头
+        if hasattr(self, "_set_jump_enabled"):
+            self._set_jump_enabled(True)  # type: ignore[call-arg]
         msg = f"成功 {len(success)} 个，失败 {len(fail)} 个"
         if ENABLE_NOTIFICATION and notification:
             notification.notify(

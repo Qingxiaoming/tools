@@ -147,6 +147,23 @@ class MergeMixin:
         self._update_merge_listbox()
         self.merge_video_label.config(text="请拖入多个视频文件", foreground="grey")
 
+    # 供主程序通过右箭头传递视频列表时调用
+    def _set_merge_videos_from_paths(self, files: List[str], overwrite: bool = True) -> None:
+        """根据给定路径列表更新合并输入列表。"""
+        if overwrite:
+            self.merge_video_list.clear()
+        for f in files:
+            if not os.path.isfile(f):
+                continue
+            item = (f, os.path.basename(f))
+            if item not in self.merge_video_list:
+                self.merge_video_list.append(item)
+        self._update_merge_listbox()
+        if self.merge_video_list:
+            self.merge_video_label.config(
+                text=f"已载入 {len(self.merge_video_list)} 个视频文件", foreground="black"
+            )
+
     def remove_selected_merge(self) -> None:
         selection = self.merge_listbox.curselection()
         if not selection:
@@ -250,6 +267,9 @@ class MergeMixin:
                 return
 
         self.merge_run_btn.config(state="disabled", text="合并中")
+        # 合并处理中禁用右箭头
+        if hasattr(self, "_set_jump_enabled"):
+            self._set_jump_enabled(False)  # type: ignore[call-arg]
         self._clear_log()
         threading.Thread(target=self._merge_batch_thread, daemon=True).start()
 
@@ -625,6 +645,9 @@ class MergeMixin:
     def _on_merge_batch_done(self, success: bool, result: str) -> None:
         self.merge_run_btn.config(state="normal", text="开始合并")
         self.status_label.config(text="待机中", foreground="blue")
+        # 恢复右箭头
+        if hasattr(self, "_set_jump_enabled"):
+            self._set_jump_enabled(True)  # type: ignore[call-arg]
 
         if success:
             msg = f"合并成功: {os.path.basename(result)}"

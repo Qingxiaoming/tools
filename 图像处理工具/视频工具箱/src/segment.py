@@ -97,6 +97,9 @@ class SegmentMixin:
             return
 
         self.segment_run_btn.config(state="disabled", text="处理中")
+        # 处理中期间禁用右箭头，避免中途跳转
+        if hasattr(self, "_set_jump_enabled"):
+            self._set_jump_enabled(False)  # type: ignore[call-arg]
         self._clear_log()
         threading.Thread(
             target=self._segment_batch_thread, args=(tasks,), daemon=True
@@ -162,6 +165,9 @@ class SegmentMixin:
         fail: List[str] = []
 
         SEGMENT_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+        # 记录本次截取产生的输出文件完整路径，供跨页签传递使用
+        produced_paths: List[str] = []
 
         for start, end, name in tasks:
             base, ext = os.path.splitext(name)
@@ -239,16 +245,26 @@ class SegmentMixin:
                 proc.wait()
                 if proc.returncode == 0:
                     success.append(out_name)
+                    produced_paths.append(str(out_path))
                 else:
                     fail.append(f"{out_name}  (返回码 {proc.returncode})")
             except Exception as e:
                 fail.append(f"{out_name}  ({e})")
+
+        # 将成功产生的输出记录到主实例属性中，便于右箭头传递
+        try:
+            self.segment_last_output_files = [os.path.basename(p) for p in produced_paths]
+        except Exception:
+            pass
 
         self.after(0, self._on_segment_batch_done, success, fail)
 
     def _on_segment_batch_done(self, success: List[str], fail: List[str]) -> None:
         self.segment_run_btn.config(state="normal", text="开始截取")
         self.status_label.config(text="待机中", foreground="blue")
+        # 处理结束后恢复右箭头
+        if hasattr(self, "_set_jump_enabled"):
+            self._set_jump_enabled(True)  # type: ignore[call-arg]
         msg = f"成功 {len(success)} 段，失败 {len(fail)} 段"
         if ENABLE_NOTIFICATION and notification:
             notification.notify(

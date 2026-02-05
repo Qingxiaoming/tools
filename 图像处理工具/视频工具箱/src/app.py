@@ -14,6 +14,7 @@ try:  # 作为包导入时
         MERGE_OUTPUT_DIR,
         DOC_OUTPUT_DIR,
         WEEKLY_OUTPUT_DIR,
+        CROSS_TAB_TRANSFER_MODE,
     )
     from .segment import SegmentMixin
     from .crop import CropMixin
@@ -28,6 +29,7 @@ except ImportError:  # 直接在目录中运行 main.pyw 时
         MERGE_OUTPUT_DIR,
         DOC_OUTPUT_DIR,
         WEEKLY_OUTPUT_DIR,
+        CROSS_TAB_TRANSFER_MODE,
     )
     from segment import SegmentMixin
     from crop import CropMixin
@@ -119,6 +121,15 @@ class VideoTools(tkdnd.Tk, SegmentMixin, CropMixin, MergeMixin, DocMixin, Weekly
 
         self.status_label = ttk.Label(status_frame, text="待机中", foreground="blue")
         self.status_label.pack(side="left")
+
+        # 右箭头：跨标签页传递输入 / 输出
+        self.jump_btn = ttk.Button(
+            status_frame,
+            text="➡",
+            width=3,
+            command=self._jump_next_step,
+        )
+        self.jump_btn.pack(side="right")
 
         # 打开当前标签页对应输出目录的按钮，放在状态栏右侧
         open_btn = ttk.Button(
@@ -215,6 +226,128 @@ class VideoTools(tkdnd.Tk, SegmentMixin, CropMixin, MergeMixin, DocMixin, Weekly
             return
 
         self._open_folder(path)
+
+    def _set_jump_enabled(self, enabled: bool) -> None:
+        """供各功能模块在处理期间禁用/启用右箭头按钮。"""
+        btn = getattr(self, "jump_btn", None)
+        if btn is None:
+            return
+        state = "normal" if enabled else "disabled"
+        try:
+            btn.config(state=state)
+        except Exception:
+            pass
+
+    # ------------------------- 跨标签页跳转 -------------------------
+    def _jump_next_step(self) -> None:
+        """根据当前标签页，将输入/输出传递给下一步，并切换标签页。"""
+        try:
+            current_tab = self.notebook.index(self.notebook.select())
+        except Exception:
+            return
+
+        try:
+            if current_tab == 0:
+                self._jump_segment_to_crop()
+            elif current_tab == 1:
+                self._jump_crop_to_merge_and_doc()
+            elif current_tab == 2:
+                # 视频合并只切换到文档生成标签页
+                self.notebook.select(self.doc_frame)
+                self.status_label.config(text="已切换到文档生成", foreground="blue")
+            elif current_tab == 3:
+                # 文档生成标签页：右箭头等价于触发转运逻辑
+                try:
+                    self.run_doc_transfer()
+                except Exception as e:
+                    self.status_label.config(
+                        text=f"转运失败: {e}", foreground="red"
+                    )
+            else:
+                self.status_label.config(text="当前标签不支持跳转操作", foreground="red")
+        except Exception as e:
+            self.status_label.config(text=f"跳转失败: {e}", foreground="red")
+
+    def _jump_segment_to_crop(self) -> None:
+        """多段截取 -> 画幅裁剪."""
+        # 若当前没有输入视频，直接报错
+        if not getattr(self, "video_path", ""):
+            self.status_label.config(text="当前没有可传递的视频输入", foreground="red")
+            return
+
+        # 优先尝试使用多段截取输出列表（由 SegmentMixin 在完成时更新）
+        output_names = getattr(self, "segment_last_output_files", None)
+        candidate_paths: list[str] = []
+
+        if output_names:
+            candidate_paths = [
+                os.path.join(str(SEGMENT_OUTPUT_DIR), name) for name in output_names
+            ]
+            # 校验所有输出文件是否都仍然存在
+            missing = [p for p in candidate_paths if not os.path.isfile(p)]
+            if missing:
+                self.status_label.config(
+                    text="多段截取输出文件缺失，无法传递，请检查输出目录",
+                    foreground="red",
+                )
+                return
+        else:
+            # 未执行“开始截取”：直接传递当前输入视频
+            if not os.path.isfile(self.video_path):
+                self.status_label.config(
+                    text="多段截取输入视频已不存在，无法传递", foreground="red"
+                )
+                return
+            candidate_paths = [self.video_path]
+
+        # 根据配置决定覆盖或追加
+        overwrite = CROSS_TAB_TRANSFER_MODE != "append"
+        try:
+            self._set_crop_videos_from_paths(candidate_paths, overwrite=overwrite)
+            self.notebook.select(self.crop_frame)
+            self.status_label.config(text="已将视频传递到画幅裁剪", foreground="blue")
+        except Exception as e:
+            self.status_label.config(text=f"传递到画幅裁剪失败: {e}", foreground="red")
+
+    def _jump_crop_to_merge_and_doc(self) -> None:
+        """画幅裁剪 -> 视频合并 & 文档生成."""
+        # 若当前没有任何输入，直接报错
+        if not getattr(self, "video_list", []):
+            self.status_label.config(text="当前没有可传递的视频列表", foreground="red")
+            return
+
+        # 优先尝试使用画幅裁剪输出（由 CropMixin 在完成时更新）
+        crop_outputs = getattr(self, "crop_last_output_files", None)
+        candidate_paths: list[str] = []
+
+        if crop_outputs:
+            candidate_paths = [p for p in crop_outputs]
+            missing = [p for p in candidate_paths if not os.path.isfile(p)]
+            if missing:
+                self.status_label.config(
+                    text="画幅裁剪输出文件缺失，无法传递，请检查输出目录",
+                    foreground="red",
+                )
+                return
+        else:
+            # 未执行“开始裁剪”：使用当前输入列表
+            candidate_paths = [path for path, _ in self.video_list]
+            missing = [p for p in candidate_paths if not os.path.isfile(p)]
+            if missing:
+                self.status_label.config(
+                    text="画幅裁剪输入视频已不存在，无法传递", foreground="red"
+                )
+                return
+
+        overwrite = CROSS_TAB_TRANSFER_MODE != "append"
+        try:
+            self._set_merge_videos_from_paths(candidate_paths, overwrite=overwrite)
+            self._set_doc_videos_from_paths(candidate_paths, overwrite=overwrite)
+            # 默认切换到视频合并标签页
+            self.notebook.select(self.merge_frame)
+            self.status_label.config(text="已将视频传递到合并与文档生成", foreground="blue")
+        except Exception as e:
+            self.status_label.config(text=f"传递到后续步骤失败: {e}", foreground="red")
 
     # ------------------------- 拖拽入口 -------------------------
     def drop_files(self, event) -> None:
