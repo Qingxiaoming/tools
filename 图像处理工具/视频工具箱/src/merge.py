@@ -13,12 +13,7 @@ except ImportError:
 
 
 class MergeMixin:
-    """视频合并相关 UI 与业务逻辑。"""
-
-    # 依赖主类提供：
-    # - self.merge_frame, self.status_label, self.log
-    # - self.merge_video_list, self.merge_audio_file
-    # - self._append_log_line, self._clear_log
+    """视频合并模块。"""
 
     def _create_merge_widgets(self) -> None:
         self.merge_video_label = ttk.Label(

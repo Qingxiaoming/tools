@@ -28,23 +28,7 @@ except ImportError:  # 兼容直接运行 src 下脚本的情况
 
 
 class WeeklyMixin:
-    """录屏整理相关 UI 与业务逻辑。
-
-    功能（按整体时间轴 24 小时切分）：
-    - 在该页签中拖入多个视频文件（顺序可调整）
-    - 将所有视频视为一条连续时间轴，整体按 24 小时为一段进行划分
-    - 对每个 24 小时段：
-        * 生成完整音频（拼接各源视频对应片段的音频）
-        * 生成 60 倍速、无音频的视频（由各源视频对应片段加速后拼接）
-    - 输出目录由 config 中的 WEEKLY_OUTPUT_DIR 指定
-
-    依赖主类提供：
-    - self.weekly_frame
-    - self.status_label, self.log
-    - self._append_log_line(msg: str), self._clear_log()
-    - self.after(...)
-    - self.weekly_video_list: list[tuple[str, str]]
-    """
+    """录屏整理模块（按时间轴分段导出）。"""
 
     SEGMENT_SECONDS: int = 24 * 3600
 

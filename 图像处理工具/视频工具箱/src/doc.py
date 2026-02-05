@@ -30,12 +30,7 @@ except ImportError:
 
 
 class DocMixin:
-    """文档生成相关 UI 与业务逻辑。"""
-
-    # 依赖主类提供：
-    # - self.doc_frame, self.status_label, self.log
-    # - self.doc_video_list
-    # - self._append_log_line, self._clear_log
+    """文档生成与转运模块。"""
 
     def _create_doc_widgets(self) -> None:
         self.doc_video_label = ttk.Label(

@@ -16,12 +16,7 @@ except ImportError:
 
 
 class CropMixin:
-    """画幅裁剪相关 UI 与业务逻辑。"""
-
-    # 依赖主类提供：
-    # - self.crop_frame, self.status_label, self.log
-    # - self.video_list, self.roi, self.crop_run_btn
-    # - self._append_log_line, self._clear_log
+    """画幅裁剪模块。"""
 
     def _create_crop_widgets(self) -> None:
         self.crop_video_label = ttk.Label(
@@ -72,7 +67,6 @@ class CropMixin:
             )
 
     def clear_crop_list(self) -> None:
-        """清空裁剪视频列表。"""
         self.video_list.clear()
         self.crop_text.config(state="normal")
         self.crop_text.delete("1.0", "end")

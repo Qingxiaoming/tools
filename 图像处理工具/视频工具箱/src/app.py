@@ -39,14 +39,7 @@ except ImportError:  # 直接在目录中运行 main.pyw 时
 
 
 class VideoTools(tkdnd.Tk, SegmentMixin, CropMixin, MergeMixin, DocMixin, WeeklyMixin):
-    """视频工具箱主程序。
-
-    功能模块：
-    - 多段截取
-    - 画幅裁剪
-    - 视频合并
-    - 文档生成
-    """
+    """视频工具箱主窗体。"""
 
     def __init__(self) -> None:
         super().__init__()
@@ -77,9 +70,8 @@ class VideoTools(tkdnd.Tk, SegmentMixin, CropMixin, MergeMixin, DocMixin, Weekly
         self.drop_target_register(tkdnd.DND_FILES)
         self.dnd_bind("<<Drop>>", self.drop_files)
 
-    # ------------------------- UI 构建 -------------------------
     def _create_widgets(self) -> None:
-        """创建主界面和各个功能页签。"""
+        """创建主界面与各页签。"""
         self.notebook = ttk.Notebook(self)
         self.notebook.pack(fill="both", expand=True, padx=10, pady=(10, 0))
 
@@ -112,7 +104,6 @@ class VideoTools(tkdnd.Tk, SegmentMixin, CropMixin, MergeMixin, DocMixin, Weekly
         self._create_common_widgets()
 
     def _create_common_widgets(self) -> None:
-        """底部状态栏与实时日志区域。"""
         separator = ttk.Separator(self, orient="horizontal")
         separator.pack(fill="x", padx=10, pady=(5, 0))
 

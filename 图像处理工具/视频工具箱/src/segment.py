@@ -14,12 +14,7 @@ except ImportError:
 
 
 class SegmentMixin:
-    """多段截取相关 UI 与业务逻辑。"""
-
-    # 这些属性与方法在主类 VideoTools 中定义 / 提供：
-    # - self.segment_frame
-    # - self.status_label, self.log, self._time_to_seconds, self._append_log_line, self._clear_log
-    # - self.video_path, self.segment_run_btn, self.precise_crop_var
+    """多段截取模块。"""
 
     def _create_segment_widgets(self) -> None:
         self.segment_video_label = ttk.Label(
@@ -55,7 +50,6 @@ class SegmentMixin:
         self.segment_run_btn.pack(side="right", padx=4)
 
     def _handle_drop_segment(self, path: str) -> None:
-        """拖入单个视频用于多段截取。"""
         if not os.path.isfile(path):
             return
         ext = os.path.splitext(path)[-1].lower()
