@@ -23,7 +23,7 @@ DOC_TRANSFER_MEDIA_DIR: Path = Path(
 )
 
 # 录屏整理根目录（每周一个子文件夹）
-WEEKLY_OUTPUT_ROOT: Path = Path(r"E:\录屏整理")
+WEEKLY_OUTPUT_ROOT: Path = Path(r"I:\录屏")
 
 
 STANDARD_VIDEO_PATTERN = re.compile(r'^[^\\/:*?"<>|\s]+\.mp4$')

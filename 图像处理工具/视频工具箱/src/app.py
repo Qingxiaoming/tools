@@ -63,8 +63,8 @@ class VideoTools(tkdnd.Tk, SegmentMixin, CropMixin, MergeMixin, DocMixin, Weekly
         # 文档生成相关
         self.doc_video_list: list[tuple[str, str]] = []
 
-        # 录屏整理相关
-        self.weekly_video_files: list[str] = []
+        # 录屏整理相关 (path, basename) 与 weekly.py 中 _handle_drop_weekly 一致
+        self.weekly_video_list: list[tuple[str, str]] = []
 
         self._create_widgets()
         self.drop_target_register(tkdnd.DND_FILES)
