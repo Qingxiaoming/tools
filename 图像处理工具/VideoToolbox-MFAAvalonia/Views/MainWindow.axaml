@@ -1,0 +1,337 @@
+<Window
+    x:Class="VideoToolbox.Views.MainWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:VideoToolbox.ViewModels"
+    x:DataType="vm:MainWindowViewModel"
+    Title="视频工具箱 - MFAAvalonia 重构版"
+    Width="760"
+    Height="820"
+    MinWidth="680"
+    MinHeight="520"
+    WindowStartupLocation="Manual"
+    SystemDecorations="None"
+    ExtendClientAreaToDecorationsHint="True"
+    ExtendClientAreaChromeHints="NoChrome"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <GridLength x:Key="MainMiddleColumnWidth">*</GridLength>
+        <GridLength x:Key="MainRightColumnWidth">132</GridLength>
+    </Window.Resources>
+
+    <Grid>
+        <Grid RowDefinitions="Auto,*,Auto" Margin="12">
+        <Border x:Name="TitleBar" Grid.Row="0" Classes="card" Padding="12" Margin="0,0,0,10">
+            <Grid ColumnDefinitions="*,Auto">
+                <StackPanel>
+                    <TextBlock x:Name="HeaderTitleText" FontSize="20" FontWeight="SemiBold" Text="VideoToolbox" />
+                    <TextBlock Classes="caption" Text="MFA 风格重构版 - 多段截取 / 裁剪 / 合并 / 文档 / 录屏整理" />
+                </StackPanel>
+                <Border Grid.Column="1" Classes="panel" Padding="10,6" VerticalAlignment="Center">
+                    <TextBlock Classes="caption" Text="{Binding StatusText}" />
+                </Border>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="1" Classes="card" Padding="8" Margin="0,0,0,10">
+            <Grid x:Name="NavContentGrid">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="175" />
+                    <ColumnDefinition Width="4" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <ListBox Grid.Column="0" x:Name="NavListBox"
+                         SelectedIndex="{Binding SelectedTabIndex}"
+                         Background="Transparent" BorderThickness="0"
+                         Margin="0,0,6,0">
+                    <ListBoxItem Content="多段截取" />
+                    <ListBoxItem Content="画幅裁剪" />
+                    <ListBoxItem Content="视频合并" />
+                    <ListBoxItem Content="文档生成" />
+                    <ListBoxItem Content="录屏整理" />
+                </ListBox>
+
+                <Border Grid.Column="1"
+                        Classes="resize-splitter"
+                        PointerPressed="OnLeftSplitterPointerPressed"
+                        PointerMoved="OnLeftSplitterPointerMoved"
+                        PointerReleased="OnLeftSplitterPointerReleased" />
+
+                <TabControl Grid.Column="2" x:Name="MainTabs" SelectedIndex="{Binding SelectedTabIndex}">
+                    <TabControl.Styles>
+                        <Style Selector="TabControl /template/ ItemsPresenter">
+                            <Setter Property="IsVisible" Value="False" />
+                        </Style>
+                    </TabControl.Styles>
+
+                    <TabItem Header="多段截取">
+                        <ScrollViewer>
+                            <Grid x:Name="SegmentLayoutGrid" Margin="8,8,0,8" ColumnSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="{DynamicResource MainMiddleColumnWidth}" />
+                                    <ColumnDefinition Width="4" />
+                                    <ColumnDefinition Width="{DynamicResource MainRightColumnWidth}" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Spacing="10">
+                                    <Border Classes="section" Padding="10">
+                                        <StackPanel Spacing="6">
+                                            <Border Classes="panel" Padding="10,8">
+                                                <TextBlock Text="{Binding SegmentVideoPath}" TextTrimming="CharacterEllipsis" MaxLines="1" />
+                                            </Border>
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Classes="section" Padding="10">
+                                        <StackPanel Spacing="6">
+                                            <TextBlock Text="批量截取规则（每行：起止时间+文件名）" />
+                                            <TextBox Text="{Binding SegmentBatchText}" AcceptsReturn="True" Height="220" />
+                                            <CheckBox IsChecked="{Binding SegmentPreciseCrop}" Content="精确裁剪（慢但更准确）" />
+                                        </StackPanel>
+                                    </Border>
+                                </StackPanel>
+                                <Border Grid.Column="1"
+                                        Classes="resize-splitter"
+                                        PointerPressed="OnRightSplitterPointerPressed"
+                                        PointerMoved="OnRightSplitterPointerMoved"
+                                        PointerReleased="OnRightSplitterPointerReleased" />
+                                <Border Grid.Column="2" Classes="section" Padding="4">
+                                    <StackPanel Classes="action-panel" Spacing="8">
+                                        <Button Classes="primary" Content="开始截取" Command="{Binding RunSegmentCommand}" IsEnabled="{Binding CanOperate}" />
+                                        <Button Content="打开输出文件夹" Command="{Binding OpenCurrentOutputFolderCommand}" IsEnabled="{Binding CanOperate}" />
+                                        <Button Content="下一步" Command="{Binding JumpNextStepCommand}" IsEnabled="{Binding CanOperate}" />
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </ScrollViewer>
+                    </TabItem>
+
+                    <TabItem Header="画幅裁剪">
+                        <ScrollViewer>
+                            <Grid x:Name="CropLayoutGrid" Margin="8,8,0,8" ColumnSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="{DynamicResource MainMiddleColumnWidth}" />
+                                    <ColumnDefinition Width="4" />
+                                    <ColumnDefinition Width="{DynamicResource MainRightColumnWidth}" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Spacing="10">
+                                    <Border Classes="section" Padding="10">
+                                        <StackPanel Spacing="6">
+                                            <TextBlock Text="输入视频路径（拖拽导入）" />
+                                            <ListBox Height="150"
+                                                     ItemsSource="{Binding CropVideoFiles}"
+                                                     SelectedIndex="{Binding CropSelectedIndex}" />
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Classes="section" Padding="10">
+                                        <StackPanel Spacing="6">
+                                            <TextBlock Text="ROI（x,y,w,h）" />
+                                            <TextBox Text="{Binding CropRoiText}" Watermark="例如: 120,20,1680,960" />
+                                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                                <Button Content="可视化框选ROI" Command="{Binding SelectCropRoiVisualCommand}" IsEnabled="{Binding CanOperate}" />
+                                                <Button Content="清空列表" Command="{Binding ClearCropListCommand}" IsEnabled="{Binding CanOperate}" />
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Border>
+                                </StackPanel>
+                                <Border Grid.Column="1"
+                                        Classes="resize-splitter"
+                                        PointerPressed="OnRightSplitterPointerPressed"
+                                        PointerMoved="OnRightSplitterPointerMoved"
+                                        PointerReleased="OnRightSplitterPointerReleased" />
+                                <Border Grid.Column="2" Classes="section" Padding="4">
+                                    <StackPanel Classes="action-panel" Spacing="8">
+                                        <Button Classes="primary" Content="开始裁剪" Command="{Binding RunCropCommand}" IsEnabled="{Binding CanOperate}" />
+                                        <Button Content="打开输出文件夹" Command="{Binding OpenCurrentOutputFolderCommand}" IsEnabled="{Binding CanOperate}" />
+                                        <Button Content="下一步" Command="{Binding JumpNextStepCommand}" IsEnabled="{Binding CanOperate}" />
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </ScrollViewer>
+                    </TabItem>
+
+                    <TabItem Header="视频合并">
+                        <ScrollViewer>
+                            <Grid x:Name="MergeLayoutGrid" Margin="8,8,0,8" ColumnSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="{DynamicResource MainMiddleColumnWidth}" />
+                                    <ColumnDefinition Width="4" />
+                                    <ColumnDefinition Width="{DynamicResource MainRightColumnWidth}" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Spacing="10">
+                                    <Border Classes="section" Padding="10">
+                                        <StackPanel Spacing="6">
+                                            <TextBlock Text="视频文件列表（可拖拽导入）" />
+                                            <Grid ColumnDefinitions="*,120" ColumnSpacing="8">
+                                                <ListBox Grid.Column="0" Height="180"
+                                                         ItemsSource="{Binding MergeVideoFiles}"
+                                                         SelectedIndex="{Binding MergeSelectedIndex}" />
+                                                <StackPanel Grid.Column="1" Spacing="6">
+                                                    <Button Content="清空列表" Command="{Binding ClearMergeListCommand}" IsEnabled="{Binding CanOperate}" />
+                                                    <Button Content="删除选中" Command="{Binding RemoveSelectedMergeCommand}" IsEnabled="{Binding CanOperate}" />
+                                                    <Button Content="上移" Command="{Binding MoveUpMergeCommand}" IsEnabled="{Binding CanOperate}" />
+                                                    <Button Content="下移" Command="{Binding MoveDownMergeCommand}" IsEnabled="{Binding CanOperate}" />
+                                                </StackPanel>
+                                            </Grid>
+                                            <TextBlock Text="音频文件（可选）" />
+                                            <TextBox Text="{Binding MergeAudioPath}" Watermark="在本页签拖入一个音频文件可自动填入" />
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Classes="section" Padding="10">
+                                        <StackPanel Spacing="6">
+                                            <Grid ColumnDefinitions="*,*,*" RowDefinitions="Auto,Auto" ColumnSpacing="8" RowSpacing="8">
+                                                <StackPanel Grid.Column="0" Spacing="4">
+                                                    <TextBlock Text="音频模式" />
+                                                    <ComboBox ItemsSource="{Binding AudioModeOptions}" SelectedItem="{Binding MergeAudioMode}" />
+                                                </StackPanel>
+                                                <StackPanel Grid.Column="1" Spacing="4">
+                                                    <TextBlock Text="输出文件名" />
+                                                    <TextBox Text="{Binding MergeOutputName}" />
+                                                </StackPanel>
+                                                <StackPanel Grid.Column="2" Spacing="4">
+                                                    <TextBlock Text="倍速" />
+                                                    <ComboBox ItemsSource="{Binding SpeedOptions}" SelectedItem="{Binding MergeSpeed}" IsEditable="True" />
+                                                </StackPanel>
+                                            </Grid>
+                                        </StackPanel>
+                                    </Border>
+                                </StackPanel>
+                                <Border Grid.Column="1"
+                                        Classes="resize-splitter"
+                                        PointerPressed="OnRightSplitterPointerPressed"
+                                        PointerMoved="OnRightSplitterPointerMoved"
+                                        PointerReleased="OnRightSplitterPointerReleased" />
+                                <Border Grid.Column="2" Classes="section" Padding="4">
+                                    <StackPanel Classes="action-panel" Spacing="8">
+                                        <Button Classes="primary" Content="开始合并" Command="{Binding RunMergeCommand}" IsEnabled="{Binding CanOperate}" />
+                                        <Button Content="打开输出文件夹" Command="{Binding OpenCurrentOutputFolderCommand}" IsEnabled="{Binding CanOperate}" />
+                                        <Button Content="下一步" Command="{Binding JumpNextStepCommand}" IsEnabled="{Binding CanOperate}" />
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </ScrollViewer>
+                    </TabItem>
+
+                    <TabItem Header="文档生成">
+                        <ScrollViewer>
+                            <Grid x:Name="DocLayoutGrid" Margin="8,8,0,8" ColumnSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="{DynamicResource MainMiddleColumnWidth}" />
+                                    <ColumnDefinition Width="4" />
+                                    <ColumnDefinition Width="{DynamicResource MainRightColumnWidth}" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Spacing="10">
+                                    <Border Classes="section" Padding="10">
+                                        <StackPanel Spacing="6">
+                                            <TextBlock Text="视频列表（拖拽导入）" />
+                                            <ListBox Height="130"
+                                                     ItemsSource="{Binding DocVideoFiles}"
+                                                     SelectedIndex="{Binding DocSelectedIndex}" />
+                                            <Button Content="清空列表" Command="{Binding ClearDocListCommand}" IsEnabled="{Binding CanOperate}" />
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Classes="section" Padding="10">
+                                        <StackPanel Spacing="6">
+                                            <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                                                <StackPanel Grid.Column="0" Spacing="4">
+                                                    <TextBlock Text="属于活动" />
+                                                    <TextBox Text="{Binding DocActivity}" />
+                                                </StackPanel>
+                                                <StackPanel Grid.Column="1" Spacing="4">
+                                                    <TextBlock Text="BV号" />
+                                                    <TextBox Text="{Binding DocBv}" />
+                                                </StackPanel>
+                                            </Grid>
+                                        </StackPanel>
+                                    </Border>
+                                </StackPanel>
+                                <Border Grid.Column="1"
+                                        Classes="resize-splitter"
+                                        PointerPressed="OnRightSplitterPointerPressed"
+                                        PointerMoved="OnRightSplitterPointerMoved"
+                                        PointerReleased="OnRightSplitterPointerReleased" />
+                                <Border Grid.Column="2" Classes="section" Padding="4">
+                                    <StackPanel Classes="action-panel" Spacing="8">
+                                        <Button Classes="primary" Content="生成文档" Command="{Binding RunDocGenerationCommand}" IsEnabled="{Binding CanOperate}" />
+                                        <Button Classes="primary" Content="转运文档与视频" Command="{Binding RunDocTransferCommand}" IsEnabled="{Binding CanOperate}" />
+                                        <Button Content="打开输出文件夹" Command="{Binding OpenCurrentOutputFolderCommand}" IsEnabled="{Binding CanOperate}" />
+                                        <Button Content="下一步" Command="{Binding JumpNextStepCommand}" IsEnabled="{Binding CanOperate}" />
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </ScrollViewer>
+                    </TabItem>
+
+                    <TabItem Header="录屏整理">
+                        <ScrollViewer>
+                            <Grid x:Name="WeeklyLayoutGrid" Margin="8,8,0,8" ColumnSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="{DynamicResource MainMiddleColumnWidth}" />
+                                    <ColumnDefinition Width="4" />
+                                    <ColumnDefinition Width="{DynamicResource MainRightColumnWidth}" />
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Classes="section" Padding="10">
+                                    <StackPanel Spacing="6">
+                                        <TextBlock Text="时间轴视频列表（按顺序）" />
+                                        <Grid ColumnDefinitions="*,120" ColumnSpacing="8">
+                                            <ListBox Grid.Column="0" Height="220"
+                                                     ItemsSource="{Binding WeeklyVideoFiles}"
+                                                     SelectedIndex="{Binding WeeklySelectedIndex}" />
+                                            <StackPanel Grid.Column="1" Spacing="6">
+                                                <Button Content="清空列表" Command="{Binding ClearWeeklyListCommand}" IsEnabled="{Binding CanOperate}" />
+                                                <Button Content="删除选中" Command="{Binding RemoveSelectedWeeklyCommand}" IsEnabled="{Binding CanOperate}" />
+                                                <Button Content="上移" Command="{Binding MoveUpWeeklyCommand}" IsEnabled="{Binding CanOperate}" />
+                                                <Button Content="下移" Command="{Binding MoveDownWeeklyCommand}" IsEnabled="{Binding CanOperate}" />
+                                            </StackPanel>
+                                        </Grid>
+                                    </StackPanel>
+                                </Border>
+                                <Border Grid.Column="1"
+                                        Classes="resize-splitter"
+                                        PointerPressed="OnRightSplitterPointerPressed"
+                                        PointerMoved="OnRightSplitterPointerMoved"
+                                        PointerReleased="OnRightSplitterPointerReleased" />
+                                <Border Grid.Column="2" Classes="section" Padding="4">
+                                    <StackPanel Classes="action-panel" Spacing="8">
+                                        <Button Classes="primary" Content="开始整理（24小时分段 + 60倍速视频）" Command="{Binding RunWeeklyCommand}" IsEnabled="{Binding CanOperate}" />
+                                        <Button Content="打开输出文件夹" Command="{Binding OpenCurrentOutputFolderCommand}" IsEnabled="{Binding CanOperate}" />
+                                        <Button Content="下一步" Command="{Binding JumpNextStepCommand}" IsEnabled="{Binding CanOperate}" />
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </ScrollViewer>
+                    </TabItem>
+                </TabControl>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="2" Classes="card" Padding="10,8">
+            <Grid ColumnDefinitions="Auto,*">
+                <TextBlock Grid.Column="0" VerticalAlignment="Center" FontWeight="SemiBold"
+                           Text="{Binding StatusText}" />
+                <TextBlock Grid.Column="1" VerticalAlignment="Center" Classes="caption" Margin="12,0,0,0"
+                           Text="{Binding CurrentLastLogLine}" TextTrimming="CharacterEllipsis" MaxLines="1" />
+            </Grid>
+        </Border>
+        </Grid>
+
+        <!-- Window resize edges (active only in config mode) -->
+        <Border Classes="resize-edge" Height="6" VerticalAlignment="Top" HorizontalAlignment="Stretch"
+                Cursor="SizeNorthSouth" Tag="N" PointerPressed="OnEdgePointerPressed" />
+        <Border Classes="resize-edge" Height="6" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"
+                Cursor="SizeNorthSouth" Tag="S" PointerPressed="OnEdgePointerPressed" />
+        <Border Classes="resize-edge" Width="6" HorizontalAlignment="Left" VerticalAlignment="Stretch"
+                Cursor="SizeWestEast" Tag="W" PointerPressed="OnEdgePointerPressed" />
+        <Border Classes="resize-edge" Width="6" HorizontalAlignment="Right" VerticalAlignment="Stretch"
+                Cursor="SizeWestEast" Tag="E" PointerPressed="OnEdgePointerPressed" />
+        <Border Classes="resize-edge" Width="12" Height="12" VerticalAlignment="Top" HorizontalAlignment="Left"
+                Cursor="TopLeftCorner" Tag="NW" PointerPressed="OnEdgePointerPressed" />
+        <Border Classes="resize-edge" Width="12" Height="12" VerticalAlignment="Top" HorizontalAlignment="Right"
+                Cursor="TopRightCorner" Tag="NE" PointerPressed="OnEdgePointerPressed" />
+        <Border Classes="resize-edge" Width="12" Height="12" VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                Cursor="BottomLeftCorner" Tag="SW" PointerPressed="OnEdgePointerPressed" />
+        <Border Classes="resize-edge" Width="12" Height="12" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                Cursor="BottomRightCorner" Tag="SE" PointerPressed="OnEdgePointerPressed" />
+    </Grid>
+</Window>

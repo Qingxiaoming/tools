@@ -1,0 +1,1340 @@
+[2026-02-16 16:40:53] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 17:02:57] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 17:03:18] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 17:07:48] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 17:09:58] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 17:10:34] [INFO] Exec: ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0 "D:\Users\Windows10\Desktop\0V0_燕小重的知识库\影城\未分类\ep-5_凛3n+棘3d.mp4"
+[2026-02-16 17:10:34] [INFO] Exec: ffmpeg -hide_banner -loglevel error -ss 1 -i "D:\Users\Windows10\Desktop\0V0_燕小重的知识库\影城\未分类\ep-5_凛3n+棘3d.mp4" -frames:v 1 -y "D:\Users\Windows10\Desktop\零时有用\命令行小工具~\图像处理工具\VideoToolbox-MFAAvalonia\bin\Debug\net8.0\logs\roi-preview-3597982fd47c4c5e97f3377d52e2d0bd.jpg"
+[2026-02-16 17:47:07] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 17:47:48] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 17:59:36] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 18:04:11] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 18:08:19] [INFO] Exec: ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0 "D:\Users\Windows10\Desktop\0V0_燕小重的知识库\影城\未分类\ep-5_凛3n+棘3d.mp4"
+[2026-02-16 18:08:19] [INFO] Exec: ffmpeg -hide_banner -loglevel error -ss 1 -i "D:\Users\Windows10\Desktop\0V0_燕小重的知识库\影城\未分类\ep-5_凛3n+棘3d.mp4" -frames:v 1 -y "D:\Users\Windows10\Desktop\零时有用\命令行小工具~\图像处理工具\VideoToolbox-MFAAvalonia\bin\Debug\net8.0\logs\roi-preview-cb5b91a370b34f4c81bd420920c148c6.jpg"
+[2026-02-16 18:09:09] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 18:15:05] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 18:17:39] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 18:18:34] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 18:18:54] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 18:19:07] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 18:22:31] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 18:26:37] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 18:27:07] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 18:30:39] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 18:33:30] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 18:34:26] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 18:39:23] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 18:39:36] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 18:46:30] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 18:57:10] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 18:58:00] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 18:58:11] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 19:03:30] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 19:12:15] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 19:24:27] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 19:40:41] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 19:40:51] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 19:43:19] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 19:44:35] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 19:47:47] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 19:49:28] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 19:50:15] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 19:52:56] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 19:57:34] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 20:05:08] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 20:05:48] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 20:05:56] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 20:05:58] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 20:06:24] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 20:06:27] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 20:06:46] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 20:06:48] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 20:10:25] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 20:15:48] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 20:18:16] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 20:21:24] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 20:23:21] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 20:27:24] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 20:33:03] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 20:35:02] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 20:42:47] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 20:46:29] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 20:59:55] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 21:03:01] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 21:05:27] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 21:06:53] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 21:08:28] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 21:14:23] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 21:17:45] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 21:20:10] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 21:23:07] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 21:24:11] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 21:24:29] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 21:25:16] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 21:28:50] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 21:30:06] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 21:33:53] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 21:46:06] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 21:46:56] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 21:47:47] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 22:05:58] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 22:06:50] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 22:15:04] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 22:19:17] [INFO] Exec: ffmpeg -hide_banner -loglevel info -stats -ss 00:00:01 -i "D:\Users\Windows10\Desktop\0V0_燕小重的知识库\影城\未分类\ep-6_银3x+棘3d.mp4" -ss 0 -t 3601 -c copy -avoid_negative_ts make_zero -y "E:\toolbox输出\多段截取\test1.mp4"
+[2026-02-16 22:19:17] [INFO] Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'D:\Users\Windows10\Desktop\0V0_燕小重的知识库\影城\未分类\ep-6_银3x+棘3d.mp4':
+[2026-02-16 22:19:17] [INFO]   Metadata:
+[2026-02-16 22:19:17] [INFO]     major_brand     : isom
+[2026-02-16 22:19:17] [INFO]     minor_version   : 512
+[2026-02-16 22:19:17] [INFO]     compatible_brands: isomiso2avc1mp41
+[2026-02-16 22:19:17] [INFO]     encoder         : Lavf62.1.103
+[2026-02-16 22:19:17] [INFO]   Duration: 00:02:18.03, start: 0.000000, bitrate: 2364 kb/s
+[2026-02-16 22:19:17] [INFO]   Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], 2226 kb/s, 30 fps, 30 tbr, 15360 tbn, start 0.066016 (default)
+[2026-02-16 22:19:17] [INFO]     Metadata:
+[2026-02-16 22:19:17] [INFO]       handler_name    : VideoHandler
+[2026-02-16 22:19:17] [INFO]       vendor_id       : [0][0][0][0]
+[2026-02-16 22:19:17] [INFO]       encoder         : Lavc62.8.100 libx264
+[2026-02-16 22:19:17] [INFO]   Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 130 kb/s (default)
+[2026-02-16 22:19:17] [INFO]     Metadata:
+[2026-02-16 22:19:17] [INFO]       handler_name    : SoundHandler
+[2026-02-16 22:19:17] [INFO]       vendor_id       : [0][0][0][0]
+[2026-02-16 22:19:17] [INFO] Stream mapping:
+[2026-02-16 22:19:17] [INFO]   Stream #0:0 -> #0:0 (copy)
+[2026-02-16 22:19:17] [INFO]   Stream #0:1 -> #0:1 (copy)
+[2026-02-16 22:19:17] [INFO] Output #0, mp4, to 'E:\toolbox输出\多段截取\test1.mp4':
+[2026-02-16 22:19:17] [INFO]   Metadata:
+[2026-02-16 22:19:17] [INFO]     major_brand     : isom
+[2026-02-16 22:19:17] [INFO]     minor_version   : 512
+[2026-02-16 22:19:17] [INFO]     compatible_brands: isomiso2avc1mp41
+[2026-02-16 22:19:17] [INFO]     encoder         : Lavf62.1.103
+[2026-02-16 22:19:17] [INFO]   Stream #0:0(und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], q=2-31, 2226 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+[2026-02-16 22:19:17] [INFO]     Metadata:
+[2026-02-16 22:19:17] [INFO]       handler_name    : VideoHandler
+[2026-02-16 22:19:17] [INFO]       vendor_id       : [0][0][0][0]
+[2026-02-16 22:19:17] [INFO]       encoder         : Lavc62.8.100 libx264
+[2026-02-16 22:19:17] [INFO]   Stream #0:1(und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 130 kb/s (default)
+[2026-02-16 22:19:17] [INFO]     Metadata:
+[2026-02-16 22:19:17] [INFO]       handler_name    : SoundHandler
+[2026-02-16 22:19:17] [INFO]       vendor_id       : [0][0][0][0]
+[2026-02-16 22:19:17] [INFO] Press [q] to stop, [?] for help
+[2026-02-16 22:19:17] [INFO] frame= 3598 fps=0.0 q=-1.0 size=   35072KiB time=00:02:07.36 bitrate=2255.8kbits/s speed= 253x elapsed=0:00:00.50    
+[2026-02-16 22:19:17] [INFO] [out#0/mp4 @ 0000026124e8f1c0] video:36228KiB audio:2178KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.368172%
+[2026-02-16 22:19:17] [INFO] frame= 3889 fps=0.0 q=-1.0 Lsize=   38548KiB time=00:02:16.96 bitrate=2305.6kbits/s speed= 263x elapsed=0:00:00.52    
+[2026-02-16 22:19:17] [INFO] Exec: ffmpeg -hide_banner -loglevel info -stats -ss 00:00:03 -i "D:\Users\Windows10\Desktop\0V0_燕小重的知识库\影城\未分类\ep-6_银3x+棘3d.mp4" -ss 0 -t 5 -c copy -avoid_negative_ts make_zero -y "E:\toolbox输出\多段截取\clipA.mp4"
+[2026-02-16 22:19:18] [INFO] Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'D:\Users\Windows10\Desktop\0V0_燕小重的知识库\影城\未分类\ep-6_银3x+棘3d.mp4':
+[2026-02-16 22:19:18] [INFO]   Metadata:
+[2026-02-16 22:19:18] [INFO]     major_brand     : isom
+[2026-02-16 22:19:18] [INFO]     minor_version   : 512
+[2026-02-16 22:19:18] [INFO]     compatible_brands: isomiso2avc1mp41
+[2026-02-16 22:19:18] [INFO]     encoder         : Lavf62.1.103
+[2026-02-16 22:19:18] [INFO]   Duration: 00:02:18.03, start: 0.000000, bitrate: 2364 kb/s
+[2026-02-16 22:19:18] [INFO]   Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], 2226 kb/s, 30 fps, 30 tbr, 15360 tbn, start 0.066016 (default)
+[2026-02-16 22:19:18] [INFO]     Metadata:
+[2026-02-16 22:19:18] [INFO]       handler_name    : VideoHandler
+[2026-02-16 22:19:18] [INFO]       vendor_id       : [0][0][0][0]
+[2026-02-16 22:19:18] [INFO]       encoder         : Lavc62.8.100 libx264
+[2026-02-16 22:19:18] [INFO]   Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 130 kb/s (default)
+[2026-02-16 22:19:18] [INFO]     Metadata:
+[2026-02-16 22:19:18] [INFO]       handler_name    : SoundHandler
+[2026-02-16 22:19:18] [INFO]       vendor_id       : [0][0][0][0]
+[2026-02-16 22:19:18] [INFO] Stream mapping:
+[2026-02-16 22:19:18] [INFO]   Stream #0:0 -> #0:0 (copy)
+[2026-02-16 22:19:18] [INFO]   Stream #0:1 -> #0:1 (copy)
+[2026-02-16 22:19:18] [INFO] Output #0, mp4, to 'E:\toolbox输出\多段截取\clipA.mp4':
+[2026-02-16 22:19:18] [INFO]   Metadata:
+[2026-02-16 22:19:18] [INFO]     major_brand     : isom
+[2026-02-16 22:19:18] [INFO]     minor_version   : 512
+[2026-02-16 22:19:18] [INFO]     compatible_brands: isomiso2avc1mp41
+[2026-02-16 22:19:18] [INFO]     encoder         : Lavf62.1.103
+[2026-02-16 22:19:18] [INFO]   Stream #0:0(und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], q=2-31, 2226 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+[2026-02-16 22:19:18] [INFO]     Metadata:
+[2026-02-16 22:19:18] [INFO]       handler_name    : VideoHandler
+[2026-02-16 22:19:18] [INFO]       vendor_id       : [0][0][0][0]
+[2026-02-16 22:19:18] [INFO]       encoder         : Lavc62.8.100 libx264
+[2026-02-16 22:19:18] [INFO]   Stream #0:1(und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 130 kb/s (default)
+[2026-02-16 22:19:18] [INFO]     Metadata:
+[2026-02-16 22:19:18] [INFO]       handler_name    : SoundHandler
+[2026-02-16 22:19:18] [INFO]       vendor_id       : [0][0][0][0]
+[2026-02-16 22:19:18] [INFO] Press [q] to stop, [?] for help
+[2026-02-16 22:19:18] [INFO] [out#0/mp4 @ 0000021da782f1c0] video:0KiB audio:78KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 2.196923%
+[2026-02-16 22:19:18] [INFO] frame=    0 fps=0.0 q=-1.0 Lsize=      80KiB time=00:00:05.06 bitrate= 129.2kbits/s speed=1.47e+03x elapsed=0:00:00.00    
+[2026-02-16 22:19:18] [INFO] Exec: ffmpeg -hide_banner -loglevel info -stats -ss 00:00:11 -i "D:\Users\Windows10\Desktop\0V0_燕小重的知识库\影城\未分类\ep-6_银3x+棘3d.mp4" -ss 0 -t 9 -c copy -avoid_negative_ts make_zero -y "E:\toolbox输出\多段截取\my clip.mp4"
+[2026-02-16 22:19:18] [INFO] Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'D:\Users\Windows10\Desktop\0V0_燕小重的知识库\影城\未分类\ep-6_银3x+棘3d.mp4':
+[2026-02-16 22:19:18] [INFO]   Metadata:
+[2026-02-16 22:19:18] [INFO]     major_brand     : isom
+[2026-02-16 22:19:18] [INFO]     minor_version   : 512
+[2026-02-16 22:19:18] [INFO]     compatible_brands: isomiso2avc1mp41
+[2026-02-16 22:19:18] [INFO]     encoder         : Lavf62.1.103
+[2026-02-16 22:19:18] [INFO]   Duration: 00:02:18.03, start: 0.000000, bitrate: 2364 kb/s
+[2026-02-16 22:19:18] [INFO]   Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], 2226 kb/s, 30 fps, 30 tbr, 15360 tbn, start 0.066016 (default)
+[2026-02-16 22:19:18] [INFO]     Metadata:
+[2026-02-16 22:19:18] [INFO]       handler_name    : VideoHandler
+[2026-02-16 22:19:18] [INFO]       vendor_id       : [0][0][0][0]
+[2026-02-16 22:19:18] [INFO]       encoder         : Lavc62.8.100 libx264
+[2026-02-16 22:19:18] [INFO]   Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 130 kb/s (default)
+[2026-02-16 22:19:18] [INFO]     Metadata:
+[2026-02-16 22:19:18] [INFO]       handler_name    : SoundHandler
+[2026-02-16 22:19:18] [INFO]       vendor_id       : [0][0][0][0]
+[2026-02-16 22:19:18] [INFO] Stream mapping:
+[2026-02-16 22:19:18] [INFO]   Stream #0:0 -> #0:0 (copy)
+[2026-02-16 22:19:18] [INFO]   Stream #0:1 -> #0:1 (copy)
+[2026-02-16 22:19:18] [INFO] Output #0, mp4, to 'E:\toolbox输出\多段截取\my clip.mp4':
+[2026-02-16 22:19:18] [INFO]   Metadata:
+[2026-02-16 22:19:18] [INFO]     major_brand     : isom
+[2026-02-16 22:19:18] [INFO]     minor_version   : 512
+[2026-02-16 22:19:18] [INFO]     compatible_brands: isomiso2avc1mp41
+[2026-02-16 22:19:18] [INFO]     encoder         : Lavf62.1.103
+[2026-02-16 22:19:18] [INFO]   Stream #0:0(und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], q=2-31, 2226 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+[2026-02-16 22:19:18] [INFO]     Metadata:
+[2026-02-16 22:19:18] [INFO]       handler_name    : VideoHandler
+[2026-02-16 22:19:18] [INFO]       vendor_id       : [0][0][0][0]
+[2026-02-16 22:19:18] [INFO]       encoder         : Lavc62.8.100 libx264
+[2026-02-16 22:19:18] [INFO]   Stream #0:1(und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 130 kb/s (default)
+[2026-02-16 22:19:18] [INFO]     Metadata:
+[2026-02-16 22:19:18] [INFO]       handler_name    : SoundHandler
+[2026-02-16 22:19:18] [INFO]       vendor_id       : [0][0][0][0]
+[2026-02-16 22:19:18] [INFO] Press [q] to stop, [?] for help
+[2026-02-16 22:19:18] [INFO] [out#0/mp4 @ 000002ab3e4df1c0] video:1209KiB audio:142KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.471288%
+[2026-02-16 22:19:18] [INFO] frame=  113 fps=0.0 q=-1.0 Lsize=    1358KiB time=00:00:09.09 bitrate=1222.6kbits/s speed= 778x elapsed=0:00:00.01    
+[2026-02-16 22:32:15] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 22:40:24] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 22:44:09] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 22:45:24] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 22:50:29] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 22:51:14] [INFO] VideoToolbox-MFAAvalonia 启动
+[2026-02-16 22:51:35] [INFO] Exec: ffmpeg -hide_banner -loglevel info -stats -ss 00:00:01 -i "D:\Users\Windows10\Desktop\0V0_燕小重的知识库\影城\未分类\ep-5_凛3n+棘3d.mp4" -ss 0 -t 3601 -c copy -avoid_negative_ts make_zero -y "E:\toolbox输出\多段截取\test1(2).mp4"
+[2026-02-16 22:51:35] [INFO] Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'D:\Users\Windows10\Desktop\0V0_燕小重的知识库\影城\未分类\ep-5_凛3n+棘3d.mp4':
+[2026-02-16 22:51:35] [INFO]   Metadata:
+[2026-02-16 22:51:35] [INFO]     major_brand     : isom
+[2026-02-16 22:51:35] [INFO]     minor_version   : 512
+[2026-02-16 22:51:35] [INFO]     compatible_brands: isomiso2avc1mp41
+[2026-02-16 22:51:35] [INFO]     encoder         : Lavf62.1.103
+[2026-02-16 22:51:35] [INFO]   Duration: 00:02:32.03, start: 0.000000, bitrate: 1826 kb/s
+[2026-02-16 22:51:35] [INFO]   Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], 1689 kb/s, 30 fps, 30 tbr, 15360 tbn, start 0.066016 (default)
+[2026-02-16 22:51:35] [INFO]     Metadata:
+[2026-02-16 22:51:35] [INFO]       handler_name    : VideoHandler
+[2026-02-16 22:51:35] [INFO]       vendor_id       : [0][0][0][0]
+[2026-02-16 22:51:35] [INFO]       encoder         : Lavc62.8.100 libx264
+[2026-02-16 22:51:35] [INFO]   Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 128 kb/s (default)
+[2026-02-16 22:51:35] [INFO]     Metadata:
+[2026-02-16 22:51:35] [INFO]       handler_name    : SoundHandler
+[2026-02-16 22:51:35] [INFO]       vendor_id       : [0][0][0][0]
+[2026-02-16 22:51:35] [INFO] Stream mapping:
+[2026-02-16 22:51:35] [INFO]   Stream #0:0 -> #0:0 (copy)
+[2026-02-16 22:51:35] [INFO]   Stream #0:1 -> #0:1 (copy)
+[2026-02-16 22:51:35] [INFO] Output #0, mp4, to 'E:\toolbox输出\多段截取\test1(2).mp4':
+[2026-02-16 22:51:35] [INFO]   Metadata:
+[2026-02-16 22:51:35] [INFO]     major_brand     : isom
+[2026-02-16 22:51:35] [INFO]     minor_version   : 512
+[2026-02-16 22:51:35] [INFO]     compatible_brands: isomiso2avc1mp41
+[2026-02-16 22:51:36] [INFO]     encoder         : Lavf62.1.103
+[2026-02-16 22:51:36] [INFO]   Stream #0:0(und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], q=2-31, 1689 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+[2026-02-16 22:51:36] [INFO]     Metadata:
+[2026-02-16 22:51:36] [INFO]       handler_name    : VideoHandler
+[2026-02-16 22:51:36] [INFO]       vendor_id       : [0][0][0][0]
+[2026-02-16 22:51:36] [INFO]       encoder         : Lavc62.8.100 libx264
+[2026-02-16 22:51:36] [INFO]   Stream #0:1(und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 128 kb/s (default)
+[2026-02-16 22:51:36] [INFO]     Metadata:
+[2026-02-16 22:51:36] [INFO]       handler_name    : SoundHandler
+[2026-02-16 22:51:36] [INFO]       vendor_id       : [0][0][0][0]
+[2026-02-16 22:51:36] [INFO] Press [q] to stop, [?] for help
+[2026-02-16 22:51:36] [INFO] [out#0/mp4 @ 00000148955a0200] video:30309KiB audio:2378KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.482485%
+[2026-02-16 22:51:36] [INFO] frame= 4338 fps=0.0 q=-1.0 Lsize=   32845KiB time=00:02:30.96 bitrate=1782.3kbits/s speed= 383x elapsed=0:00:00.39    
+[2026-02-16 22:51:36] [INFO] Exec: ffmpeg -hide_banner -loglevel info -stats -ss 00:00:03 -i "D:\Users\Windows10\Desktop\0V0_燕小重的知识库\影城\未分类\ep-5_凛3n+棘3d.mp4" -ss 0 -t 5 -c copy -avoid_negative_ts make_zero -y "E:\toolbox输出\多段截取\clipA(2).mp4"
+[2026-02-16 22:51:36] [INFO] Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'D:\Users\Windows10\Desktop\0V0_燕小重的知识库\影城\未分类\ep-5_凛3n+棘3d.mp4':
+[2026-02-16 22:51:36] [INFO]   Metadata:
+[2026-02-16 22:51:36] [INFO]     major_brand     : isom
+[2026-02-16 22:51:36] [INFO]     minor_version   : 512
+[2026-02-16 22:51:36] [INFO]     compatible_brands: isomiso2avc1mp41
+[2026-02-16 22:51:36] [INFO]     encoder         : Lavf62.1.103
+[2026-02-16 22:51:36] [INFO]   Duration: 00:02:32.03, start: 0.000000, bitrate: 1826 kb/s
+[2026-02-16 22:51:36] [INFO]   Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], 1689 kb/s, 30 fps, 30 tbr, 15360 tbn, start 0.066016 (default)
+[2026-02-16 22:51:36] [INFO]     Metadata:
+[2026-02-16 22:51:36] [INFO]       handler_name    : VideoHandler
+[2026-02-16 22:51:36] [INFO]       vendor_id       : [0][0][0][0]
+[2026-02-16 22:51:36] [INFO]       encoder         : Lavc62.8.100 libx264
+[2026-02-16 22:51:36] [INFO]   Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 128 kb/s (default)
+[2026-02-16 22:51:36] [INFO]     Metadata:
+[2026-02-16 22:51:36] [INFO]       handler_name    : SoundHandler
+[2026-02-16 22:51:36] [INFO]       vendor_id       : [0][0][0][0]
+[2026-02-16 22:51:36] [INFO] Stream mapping:
+[2026-02-16 22:51:36] [INFO]   Stream #0:0 -> #0:0 (copy)
+[2026-02-16 22:51:36] [INFO]   Stream #0:1 -> #0:1 (copy)
+[2026-02-16 22:51:36] [INFO] Output #0, mp4, to 'E:\toolbox输出\多段截取\clipA(2).mp4':
+[2026-02-16 22:51:36] [INFO]   Metadata:
+[2026-02-16 22:51:36] [INFO]     major_brand     : isom
+[2026-02-16 22:51:36] [INFO]     minor_version   : 512
+[2026-02-16 22:51:36] [INFO]     compatible_brands: isomiso2avc1mp41
+[2026-02-16 22:51:36] [INFO]     encoder         : Lavf62.1.103
+[2026-02-16 22:51:36] [INFO]   Stream #0:0(und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], q=2-31, 1689 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+[2026-02-16 22:51:36] [INFO]     Metadata:
+[2026-02-16 22:51:36] [INFO]       handler_name    : VideoHandler
+[2026-02-16 22:51:36] [INFO]       vendor_id       : [0][0][0][0]
+[2026-02-16 22:51:36] [INFO]       encoder         : Lavc62.8.100 libx264
+[2026-02-16 22:51:36] [INFO]   Stream #0:1(und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 128 kb/s (default)
+[2026-02-16 22:51:36] [INFO]     Metadata:
+[2026-02-16 22:51:36] [INFO]       handler_name    : SoundHandler
+[2026-02-16 22:51:36] [INFO]       vendor_id       : [0][0][0][0]
+[2026-02-16 22:51:36] [INFO] Press [q] to stop, [?] for help
+[2026-02-16 22:51:36] [INFO] [out#0/mp4 @ 0000023048980200] video:488KiB audio:78KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.511059%
+[2026-02-16 22:51:36] [INFO] frame=   20 fps=0.0 q=-1.0 Lsize=     569KiB time=00:00:05.06 bitrate= 920.2kbits/s speed= 101x elapsed=0:00:00.05    
+[2026-02-16 22:51:36] [INFO] Exec: ffmpeg -hide_banner -loglevel info -stats -ss 00:00:11 -i "D:\Users\Windows10\Desktop\0V0_燕小重的知识库\影城\未分类\ep-5_凛3n+棘3d.mp4" -ss 0 -t 9 -c copy -avoid_negative_ts make_zero -y "E:\toolbox输出\多段截取\my clip(2).mp4"
+[2026-02-16 22:51:36] [INFO] Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'D:\Users\Windows10\Desktop\0V0_燕小重的知识库\影城\未分类\ep-5_凛3n+棘3d.mp4':
+[2026-02-16 22:51:36] [INFO]   Metadata:
+[2026-02-16 22:51:36] [INFO]     major_brand     : isom
+[2026-02-16 22:51:36] [INFO]     minor_version   : 512
+[2026-02-16 22:51:36] [INFO]     compatible_brands: isomiso2avc1mp41
+[2026-02-16 22:51:36] [INFO]     encoder         : Lavf62.1.103
+[2026-02-16 22:51:36] [INFO]   Duration: 00:02:32.03, start: 0.000000, bitrate: 1826 kb/s
+[2026-02-16 22:51:36] [INFO]   Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], 1689 kb/s, 30 fps, 30 tbr, 15360 tbn, start 0.066016 (default)
+[2026-02-16 22:51:36] [INFO]     Metadata:
+[2026-02-16 22:51:36] [INFO]       handler_name    : VideoHandler
+[2026-02-16 22:51:36] [INFO]       vendor_id       : [0][0][0][0]
+[2026-02-16 22:51:36] [INFO]       encoder         : Lavc62.8.100 libx264
+[2026-02-16 22:51:36] [INFO]   Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 128 kb/s (default)
+[2026-02-16 22:51:36] [INFO]     Metadata:
+[2026-02-16 22:51:36] [INFO]       handler_name    : SoundHandler
+[2026-02-16 22:51:36] [INFO]       vendor_id       : [0][0][0][0]
+[2026-02-16 22:51:36] [INFO] Stream mapping:
+[2026-02-16 22:51:36] [INFO]   Stream #0:0 -> #0:0 (copy)
+[2026-02-16 22:51:36] [INFO]   Stream #0:1 -> #0:1 (copy)
+[2026-02-16 22:51:36] [INFO] Output #0, mp4, to 'E:\toolbox输出\多段截取\my clip(2).mp4':
+[2026-02-16 22:51:36] [INFO]   Metadata:
+[2026-02-16 22:51:36] [INFO]     major_brand     : isom
+[2026-02-16 22:51:36] [INFO]     minor_version   : 512
+[2026-02-16 22:51:36] [INFO]     compatible_brands: isomiso2avc1mp41
+[2026-02-16 22:51:36] [INFO]     encoder         : Lavf62.1.103
+[2026-02-16 22:51:36] [INFO]   Stream #0:0(und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], q=2-31, 1689 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+[2026-02-16 22:51:36] [INFO]     Metadata:
+[2026-02-16 22:51:36] [INFO]       handler_name    : VideoHandler
+[2026-02-16 22:51:36] [INFO]       vendor_id       : [0][0][0][0]
+[2026-02-16 22:51:36] [INFO]       encoder         : Lavc62.8.100 libx264
+[2026-02-16 22:51:36] [INFO]   Stream #0:1(und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 128 kb/s (default)
+[2026-02-16 22:51:36] [INFO]     Metadata:
+[2026-02-16 22:51:36] [INFO]       handler_name    : SoundHandler
+[2026-02-16 22:51:36] [INFO]       vendor_id       : [0][0][0][0]
+[2026-02-16 22:51:36] [INFO] Press [q] to stop, [?] for help
+[2026-02-16 22:51:36] [INFO] [out#0/mp4 @ 000001cc39fa0200] video:1386KiB audio:141KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.448372%
+[2026-02-16 22:51:36] [INFO] frame=  130 fps=0.0 q=-1.0 Lsize=    1534KiB time=00:00:09.05 bitrate=1387.9kbits/s speed= 808x elapsed=0:00:00.01    
+[2026-02-16 22:54:51] [INFO] Exec: ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0 "D:\Users\Windows10\Desktop\0V0_燕小重的知识库\影城\未分类\ep-5_凛3n+棘3d.mp4"
+[2026-02-16 22:54:51] [INFO] Exec: ffmpeg -hide_banner -loglevel error -ss 1 -i "D:\Users\Windows10\Desktop\0V0_燕小重的知识库\影城\未分类\ep-5_凛3n+棘3d.mp4" -frames:v 1 -y "D:\Users\Windows10\Desktop\零时有用\命令行小工具~\图像处理工具\VideoToolbox-MFAAvalonia\bin\Debug\net8.0\logs\roi-preview-e09e8de28f844d28bdeb5c784e7befa7.jpg"
+[2026-02-16 22:55:02] [INFO] Exec: ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0 "D:\Users\Windows10\Desktop\0V0_燕小重的知识库\影城\未分类\me-ex1突袭_棘3x+星2x.mp4"
+[2026-02-16 22:55:02] [INFO] Exec: ffmpeg -hide_banner -loglevel error -ss 1 -i "D:\Users\Windows10\Desktop\0V0_燕小重的知识库\影城\未分类\me-ex1突袭_棘3x+星2x.mp4" -frames:v 1 -y "D:\Users\Windows10\Desktop\零时有用\命令行小工具~\图像处理工具\VideoToolbox-MFAAvalonia\bin\Debug\net8.0\logs\roi-preview-8350e4bf1d02400fa490bf15e163773e.jpg"
+[2026-02-16 22:55:18] [INFO] Exec: ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0 "D:\Users\Windows10\Desktop\0V0_燕小重的知识库\影城\未分类\me-ex1突袭_棘3x+星2x.mp4"
+[2026-02-16 22:55:19] [INFO] Exec: ffmpeg -hide_banner -loglevel error -ss 1 -i "D:\Users\Windows10\Desktop\0V0_燕小重的知识库\影城\未分类\me-ex1突袭_棘3x+星2x.mp4" -frames:v 1 -y "D:\Users\Windows10\Desktop\零时有用\命令行小工具~\图像处理工具\VideoToolbox-MFAAvalonia\bin\Debug\net8.0\logs\roi-preview-9a208e3977364e5ab5da3359c1ada770.jpg"
+[2026-02-20 08:02:07] [INFO] Exec: ffmpeg -hide_banner -loglevel info -stats -ss 12:18:56 -i "E:\obs录屏\2026-02-12 12-45-01.mkv" -ss 0 -t 207 -c copy -avoid_negative_ts make_zero -y "E:\toolbox输出\多段截取\ta-8_安1y+星2x.mp4"
+[2026-02-20 08:02:08] [INFO] Input #0, matroska,webm, from 'E:\obs录屏\2026-02-12 12-45-01.mkv':
+[2026-02-20 08:02:08] [INFO]   Metadata:
+[2026-02-20 08:02:08] [INFO]     ENCODER         : Lavf61.7.100
+[2026-02-20 08:02:08] [INFO]   Duration: 14:48:39.52, start: 0.000000, bitrate: 2666 kb/s
+[2026-02-20 08:02:08] [INFO]   Stream #0:0: Video: h264 (High), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], 30 fps, 30 tbr, 1k tbn, start 0.021000
+[2026-02-20 08:02:08] [INFO]     Metadata:
+[2026-02-20 08:02:08] [INFO]       DURATION        : 14:48:39.521000000
+[2026-02-20 08:02:08] [INFO]   Stream #0:1: Audio: aac (LC), 48000 Hz, stereo, fltp
+[2026-02-20 08:02:08] [INFO]     Metadata:
+[2026-02-20 08:02:08] [INFO]       title           : simple_aac
+[2026-02-20 08:02:08] [INFO]       DURATION        : 14:48:39.359000000
+[2026-02-20 08:02:08] [INFO] Stream mapping:
+[2026-02-20 08:02:08] [INFO]   Stream #0:0 -> #0:0 (copy)
+[2026-02-20 08:02:08] [INFO]   Stream #0:1 -> #0:1 (copy)
+[2026-02-20 08:02:08] [INFO] Output #0, mp4, to 'E:\toolbox输出\多段截取\ta-8_安1y+星2x.mp4':
+[2026-02-20 08:02:08] [INFO]   Metadata:
+[2026-02-20 08:02:08] [INFO]     encoder         : Lavf62.1.103
+[2026-02-20 08:02:08] [INFO]   Stream #0:0: Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], q=2-31, 30 fps, 30 tbr, 16k tbn
+[2026-02-20 08:02:08] [INFO]     Metadata:
+[2026-02-20 08:02:08] [INFO]       DURATION        : 14:48:39.521000000
+[2026-02-20 08:02:08] [INFO]   Stream #0:1: Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp
+[2026-02-20 08:02:08] [INFO]     Metadata:
+[2026-02-20 08:02:08] [INFO]       title           : simple_aac
+[2026-02-20 08:02:08] [INFO]       DURATION        : 14:48:39.359000000
+[2026-02-20 08:02:08] [INFO] Press [q] to stop, [?] for help
+[2026-02-20 08:02:08] [INFO] frame= 4117 fps=0.0 q=-1.0 size=   44544KiB time=00:02:22.93 bitrate=2553.0kbits/s speed= 282x elapsed=0:00:00.50    
+[2026-02-20 08:02:09] [INFO] [out#0/mp4 @ 000001c84176e6c0] video:61663KiB audio:4054KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.373759%
+[2026-02-20 08:02:09] [INFO] frame= 6042 fps=0.0 q=-1.0 Lsize=   65962KiB time=00:03:27.06 bitrate=2609.7kbits/s speed= 228x elapsed=0:00:00.90    
+[2026-02-20 08:02:09] [INFO] Exec: ffmpeg -hide_banner -loglevel info -stats -ss 12:53:04 -i "E:\obs录屏\2026-02-12 12-45-01.mkv" -ss 0 -t 151 -c copy -avoid_negative_ts make_zero -y "E:\toolbox输出\多段截取\ta-9_乌2x.mp4"
+[2026-02-20 08:02:09] [INFO] Input #0, matroska,webm, from 'E:\obs录屏\2026-02-12 12-45-01.mkv':
+[2026-02-20 08:02:09] [INFO]   Metadata:
+[2026-02-20 08:02:09] [INFO]     ENCODER         : Lavf61.7.100
+[2026-02-20 08:02:09] [INFO]   Duration: 14:48:39.52, start: 0.000000, bitrate: 2666 kb/s
+[2026-02-20 08:02:09] [INFO]   Stream #0:0: Video: h264 (High), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], 30 fps, 30 tbr, 1k tbn, start 0.021000
+[2026-02-20 08:02:09] [INFO]     Metadata:
+[2026-02-20 08:02:09] [INFO]       DURATION        : 14:48:39.521000000
+[2026-02-20 08:02:09] [INFO]   Stream #0:1: Audio: aac (LC), 48000 Hz, stereo, fltp
+[2026-02-20 08:02:09] [INFO]     Metadata:
+[2026-02-20 08:02:09] [INFO]       title           : simple_aac
+[2026-02-20 08:02:09] [INFO]       DURATION        : 14:48:39.359000000
+[2026-02-20 08:02:09] [INFO] Stream mapping:
+[2026-02-20 08:02:09] [INFO]   Stream #0:0 -> #0:0 (copy)
+[2026-02-20 08:02:09] [INFO]   Stream #0:1 -> #0:1 (copy)
+[2026-02-20 08:02:09] [INFO] Output #0, mp4, to 'E:\toolbox输出\多段截取\ta-9_乌2x.mp4':
+[2026-02-20 08:02:09] [INFO]   Metadata:
+[2026-02-20 08:02:09] [INFO]     encoder         : Lavf62.1.103
+[2026-02-20 08:02:09] [INFO]   Stream #0:0: Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], q=2-31, 30 fps, 30 tbr, 16k tbn
+[2026-02-20 08:02:09] [INFO]     Metadata:
+[2026-02-20 08:02:09] [INFO]       DURATION        : 14:48:39.521000000
+[2026-02-20 08:02:09] [INFO]   Stream #0:1: Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp
+[2026-02-20 08:02:09] [INFO]     Metadata:
+[2026-02-20 08:02:09] [INFO]       title           : simple_aac
+[2026-02-20 08:02:09] [INFO]       DURATION        : 14:48:39.359000000
+[2026-02-20 08:02:09] [INFO] Press [q] to stop, [?] for help
+[2026-02-20 08:02:09] [INFO] [out#0/mp4 @ 00000271d90de580] video:43974KiB audio:2961KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.374656%
+[2026-02-20 08:02:09] [INFO] frame= 4302 fps=0.0 q=-1.0 Lsize=   47111KiB time=00:02:31.06 bitrate=2554.8kbits/s speed= 374x elapsed=0:00:00.40    
+[2026-02-20 08:02:53] [INFO] Exec: ffmpeg -hide_banner -loglevel info -stats -ss 12:18:56 -i "E:\obs录屏\2026-02-12 12-45-01.mkv" -t 207 -c:v libx264 -c:a aac -avoid_negative_ts make_zero -y "E:\toolbox输出\多段截取\ta-8_安1y+星2x(2).mp4"
+[2026-02-20 08:02:53] [INFO] Input #0, matroska,webm, from 'E:\obs录屏\2026-02-12 12-45-01.mkv':
+[2026-02-20 08:02:53] [INFO]   Metadata:
+[2026-02-20 08:02:53] [INFO]     ENCODER         : Lavf61.7.100
+[2026-02-20 08:02:53] [INFO]   Duration: 14:48:39.52, start: 0.000000, bitrate: 2666 kb/s
+[2026-02-20 08:02:53] [INFO]   Stream #0:0: Video: h264 (High), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], 30 fps, 30 tbr, 1k tbn, start 0.021000
+[2026-02-20 08:02:53] [INFO]     Metadata:
+[2026-02-20 08:02:53] [INFO]       DURATION        : 14:48:39.521000000
+[2026-02-20 08:02:53] [INFO]   Stream #0:1: Audio: aac (LC), 48000 Hz, stereo, fltp
+[2026-02-20 08:02:53] [INFO]     Metadata:
+[2026-02-20 08:02:53] [INFO]       title           : simple_aac
+[2026-02-20 08:02:53] [INFO]       DURATION        : 14:48:39.359000000
+[2026-02-20 08:02:53] [INFO] Stream mapping:
+[2026-02-20 08:02:53] [INFO]   Stream #0:0 -> #0:0 (h264 (native) -> h264 (libx264))
+[2026-02-20 08:02:53] [INFO]   Stream #0:1 -> #0:1 (aac (native) -> aac (native))
+[2026-02-20 08:02:53] [INFO] Press [q] to stop, [?] for help
+[2026-02-20 08:02:53] [INFO] [libx264 @ 000001a99f5d5180] using SAR=1/1
+[2026-02-20 08:02:53] [INFO] [libx264 @ 000001a99f5d5180] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512
+[2026-02-20 08:02:53] [INFO] [libx264 @ 000001a99f5d5180] profile High, level 4.0, 4:2:0, 8-bit
+[2026-02-20 08:02:53] [INFO] [libx264 @ 000001a99f5d5180] 264 - core 165 r3222 b35605a - H.264/MPEG-4 AVC codec - Copyleft 2003-2025 - http://www.videolan.org/x264.html - options: cabac=1 ref=3 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=7 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=1 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=18 lookahead_threads=3 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=40 rc=crf mbtree=1 crf=23.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
+[2026-02-20 08:02:53] [INFO] Output #0, mp4, to 'E:\toolbox输出\多段截取\ta-8_安1y+星2x(2).mp4':
+[2026-02-20 08:02:53] [INFO]   Metadata:
+[2026-02-20 08:02:53] [INFO]     encoder         : Lavf62.1.103
+[2026-02-20 08:02:53] [INFO]   Stream #0:0: Video: h264 (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], q=2-31, 30 fps, 15360 tbn
+[2026-02-20 08:02:53] [INFO]     Metadata:
+[2026-02-20 08:02:53] [INFO]       encoder         : Lavc62.8.100 libx264
+[2026-02-20 08:02:53] [INFO]       DURATION        : 14:48:39.521000000
+[2026-02-20 08:02:53] [INFO]     Side data:
+[2026-02-20 08:02:53] [INFO]       cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
+[2026-02-20 08:02:53] [INFO]   Stream #0:1: Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 128 kb/s
+[2026-02-20 08:02:53] [INFO]     Metadata:
+[2026-02-20 08:02:53] [INFO]       encoder         : Lavc62.8.100 aac
+[2026-02-20 08:02:53] [INFO]       title           : simple_aac
+[2026-02-20 08:02:53] [INFO]       DURATION        : 14:48:39.359000000
+[2026-02-20 08:02:54] [INFO] frame=   47 fps=0.0 q=29.0 size=     256KiB time=00:00:01.53 bitrate=1368.0kbits/s speed=3.03x elapsed=0:00:00.50    
+[2026-02-20 08:02:54] [INFO] frame=  138 fps=136 q=29.0 size=     768KiB time=00:00:04.56 bitrate=1377.8kbits/s speed=4.49x elapsed=0:00:01.01    
+[2026-02-20 08:02:55] [INFO] frame=  233 fps=152 q=29.0 size=    1280KiB time=00:00:07.73 bitrate=1356.0kbits/s speed=5.04x elapsed=0:00:01.53    
+[2026-02-20 08:02:55] [INFO] frame=  324 fps=158 q=29.0 size=    1792KiB time=00:00:10.76 bitrate=1363.5kbits/s speed=5.24x elapsed=0:00:02.05    
+[2026-02-20 08:02:56] [INFO] frame=  401 fps=156 q=29.0 size=    2816KiB time=00:00:13.26 bitrate=1738.9kbits/s speed=5.17x elapsed=0:00:02.56    
+[2026-02-20 08:02:56] [INFO] frame=  473 fps=154 q=29.0 size=    3584KiB time=00:00:15.73 bitrate=1866.1kbits/s speed=5.11x elapsed=0:00:03.08    
+[2026-02-20 08:02:57] [INFO] frame=  547 fps=152 q=29.0 size=    4608KiB time=00:00:18.20 bitrate=2074.1kbits/s speed=5.06x elapsed=0:00:03.59    
+[2026-02-20 08:02:57] [INFO] frame=  649 fps=158 q=29.0 size=    5376KiB time=00:00:21.60 bitrate=2038.9kbits/s speed=5.25x elapsed=0:00:04.11    
+[2026-02-20 08:02:58] [INFO] frame=  710 fps=153 q=29.0 size=    5888KiB time=00:00:23.63 bitrate=2041.0kbits/s speed=5.11x elapsed=0:00:04.62    
+[2026-02-20 08:02:58] [INFO] frame=  780 fps=152 q=29.0 size=    6656KiB time=00:00:25.96 bitrate=2099.9kbits/s speed=5.05x elapsed=0:00:05.14    
+[2026-02-20 08:02:59] [INFO] frame=  861 fps=152 q=29.0 size=    7168KiB time=00:00:28.73 bitrate=2043.6kbits/s speed=5.08x elapsed=0:00:05.65    
+[2026-02-20 08:02:59] [INFO] frame=  928 fps=150 q=29.0 size=    7936KiB time=00:00:30.90 bitrate=2104.0kbits/s speed=   5x elapsed=0:00:06.17    
+[2026-02-20 08:03:00] [INFO] frame= 1003 fps=150 q=29.0 size=    9216KiB time=00:00:33.40 bitrate=2260.4kbits/s speed=4.99x elapsed=0:00:06.68    
+[2026-02-20 08:03:00] [INFO] frame= 1071 fps=149 q=29.0 size=    9728KiB time=00:00:35.70 bitrate=2232.3kbits/s speed=4.95x elapsed=0:00:07.20    
+[2026-02-20 08:03:01] [INFO] frame= 1128 fps=146 q=29.0 size=   10496KiB time=00:00:37.73 bitrate=2278.7kbits/s speed=4.89x elapsed=0:00:07.72    
+[2026-02-20 08:03:02] [INFO] frame= 1193 fps=145 q=29.0 size=   11520KiB time=00:00:39.73 bitrate=2375.1kbits/s speed=4.82x elapsed=0:00:08.23    
+[2026-02-20 08:03:02] [INFO] frame= 1260 fps=144 q=29.0 size=   12544KiB time=00:00:41.96 bitrate=2448.6kbits/s speed=4.79x elapsed=0:00:08.75    
+[2026-02-20 08:03:03] [INFO] frame= 1346 fps=145 q=29.0 size=   13568KiB time=00:00:44.80 bitrate=2481.0kbits/s speed=4.82x elapsed=0:00:09.28    
+[2026-02-20 08:03:03] [INFO] frame= 1427 fps=146 q=29.0 size=   14336KiB time=00:00:47.53 bitrate=2470.7kbits/s speed=4.85x elapsed=0:00:09.80    
+[2026-02-20 08:03:04] [INFO] frame= 1518 fps=147 q=29.0 size=   15104KiB time=00:00:50.56 bitrate=2446.9kbits/s speed= 4.9x elapsed=0:00:10.31    
+[2026-02-20 08:03:04] [INFO] frame= 1589 fps=147 q=29.0 size=   16128KiB time=00:00:52.93 bitrate=2496.0kbits/s speed=4.88x elapsed=0:00:10.83    
+[2026-02-20 08:03:05] [INFO] frame= 1669 fps=147 q=29.0 size=   16640KiB time=00:00:55.60 bitrate=2451.7kbits/s speed= 4.9x elapsed=0:00:11.34    
+[2026-02-20 08:03:05] [INFO] frame= 1749 fps=147 q=29.0 size=   17152KiB time=00:00:58.26 bitrate=2411.5kbits/s speed=4.91x elapsed=0:00:11.86    
+[2026-02-20 08:03:06] [INFO] frame= 1832 fps=148 q=29.0 size=   18176KiB time=00:01:01.03 bitrate=2439.6kbits/s speed=4.93x elapsed=0:00:12.38    
+[2026-02-20 08:03:06] [INFO] frame= 1924 fps=149 q=29.0 size=   18688KiB time=00:01:04.10 bitrate=2388.3kbits/s speed=4.97x elapsed=0:00:12.89    
+[2026-02-20 08:03:07] [INFO] frame= 1988 fps=148 q=29.0 size=   19712KiB time=00:01:06.13 bitrate=2441.8kbits/s speed=4.93x elapsed=0:00:13.40    
+[2026-02-20 08:03:07] [INFO] frame= 2048 fps=147 q=29.0 size=   20736KiB time=00:01:08.23 bitrate=2489.5kbits/s speed= 4.9x elapsed=0:00:13.92    
+[2026-02-20 08:03:08] [INFO] frame= 2116 fps=147 q=29.0 size=   21760KiB time=00:01:10.36 bitrate=2533.3kbits/s speed=4.87x elapsed=0:00:14.44    
+[2026-02-20 08:03:08] [INFO] frame= 2170 fps=145 q=29.0 size=   22528KiB time=00:01:12.30 bitrate=2552.6kbits/s speed=4.83x elapsed=0:00:14.97    
+[2026-02-20 08:03:09] [INFO] frame= 2243 fps=145 q=29.0 size=   23296KiB time=00:01:14.73 bitrate=2553.6kbits/s speed=4.83x elapsed=0:00:15.48    
+[2026-02-20 08:03:09] [INFO] frame= 2331 fps=146 q=29.0 size=   24320KiB time=00:01:17.56 bitrate=2568.5kbits/s speed=4.85x elapsed=0:00:16.00    
+[2026-02-20 08:03:10] [INFO] frame= 2413 fps=146 q=29.0 size=   25088KiB time=00:01:20.40 bitrate=2556.2kbits/s speed=4.86x elapsed=0:00:16.55    
+[2026-02-20 08:03:10] [INFO] frame= 2463 fps=144 q=29.0 size=   25856KiB time=00:01:22.06 bitrate=2581.0kbits/s speed=4.81x elapsed=0:00:17.06    
+[2026-02-20 08:03:11] [INFO] frame= 2540 fps=144 q=29.0 size=   26880KiB time=00:01:24.50 bitrate=2605.9kbits/s speed=4.81x elapsed=0:00:17.57    
+[2026-02-20 08:03:11] [INFO] frame= 2616 fps=144 q=29.0 size=   27392KiB time=00:01:27.16 bitrate=2574.3kbits/s speed=4.81x elapsed=0:00:18.11    
+[2026-02-20 08:03:12] [INFO] frame= 2670 fps=143 q=29.0 size=   28160KiB time=00:01:28.96 bitrate=2593.0kbits/s speed=4.78x elapsed=0:00:18.62    
+[2026-02-20 08:03:12] [INFO] frame= 2750 fps=144 q=29.0 size=   29184KiB time=00:01:31.63 bitrate=2609.0kbits/s speed=4.79x elapsed=0:00:19.14    
+[2026-02-20 08:03:13] [INFO] frame= 2813 fps=143 q=29.0 size=   29952KiB time=00:01:33.73 bitrate=2617.7kbits/s speed=4.77x elapsed=0:00:19.66    
+[2026-02-20 08:03:13] [INFO] frame= 2888 fps=143 q=29.0 size=   30976KiB time=00:01:36.23 bitrate=2636.9kbits/s speed=4.77x elapsed=0:00:20.17    
+[2026-02-20 08:03:14] [INFO] frame= 2959 fps=143 q=29.0 size=   31744KiB time=00:01:38.56 bitrate=2638.3kbits/s speed=4.76x elapsed=0:00:20.70    
+[2026-02-20 08:03:14] [INFO] frame= 3027 fps=143 q=29.0 size=   32768KiB time=00:01:40.86 bitrate=2661.3kbits/s speed=4.75x elapsed=0:00:21.21    
+[2026-02-20 08:03:15] [INFO] frame= 3093 fps=142 q=29.0 size=   33792KiB time=00:01:43.06 bitrate=2685.9kbits/s speed=4.74x elapsed=0:00:21.74    
+[2026-02-20 08:03:16] [INFO] frame= 3170 fps=142 q=29.0 size=   34560KiB time=00:01:45.63 bitrate=2680.2kbits/s speed=4.75x elapsed=0:00:22.25    
+[2026-02-20 08:03:16] [INFO] frame= 3246 fps=143 q=29.0 size=   35328KiB time=00:01:48.16 bitrate=2675.6kbits/s speed=4.75x elapsed=0:00:22.76    
+[2026-02-20 08:03:17] [INFO] frame= 3329 fps=143 q=29.0 size=   36352KiB time=00:01:50.93 bitrate=2684.5kbits/s speed=4.76x elapsed=0:00:23.28    
+[2026-02-20 08:03:17] [INFO] frame= 3418 fps=144 q=29.0 size=   37120KiB time=00:01:53.90 bitrate=2669.8kbits/s speed=4.79x elapsed=0:00:23.79    
+[2026-02-20 08:03:18] [INFO] frame= 3495 fps=144 q=29.0 size=   37632KiB time=00:01:56.46 bitrate=2647.0kbits/s speed=4.79x elapsed=0:00:24.31    
+[2026-02-20 08:03:18] [INFO] frame= 3549 fps=143 q=29.0 size=   38656KiB time=00:01:58.23 bitrate=2678.4kbits/s speed=4.76x elapsed=0:00:24.83    
+[2026-02-20 08:03:19] [INFO] frame= 3614 fps=143 q=29.0 size=   39680KiB time=00:02:00.43 bitrate=2699.1kbits/s speed=4.75x elapsed=0:00:25.34    
+[2026-02-20 08:03:19] [INFO] frame= 3688 fps=143 q=29.0 size=   40704KiB time=00:02:02.90 bitrate=2713.2kbits/s speed=4.75x elapsed=0:00:25.86    
+[2026-02-20 08:03:20] [INFO] frame= 3759 fps=143 q=29.0 size=   41984KiB time=00:02:05.26 bitrate=2745.6kbits/s speed=4.75x elapsed=0:00:26.37    
+[2026-02-20 08:03:20] [INFO] frame= 3831 fps=142 q=29.0 size=   43008KiB time=00:02:07.66 bitrate=2759.7kbits/s speed=4.75x elapsed=0:00:26.89    
+[2026-02-20 08:03:21] [INFO] frame= 3914 fps=143 q=29.0 size=   43776KiB time=00:02:10.43 bitrate=2749.4kbits/s speed=4.76x elapsed=0:00:27.40    
+[2026-02-20 08:03:21] [INFO] frame= 3977 fps=142 q=29.0 size=   44544KiB time=00:02:12.53 bitrate=2753.3kbits/s speed=4.75x elapsed=0:00:27.92    
+[2026-02-20 08:03:22] [INFO] frame= 4051 fps=142 q=29.0 size=   45824KiB time=00:02:15.00 bitrate=2780.7kbits/s speed=4.75x elapsed=0:00:28.44    
+[2026-02-20 08:03:22] [INFO] frame= 4130 fps=143 q=29.0 size=   46336KiB time=00:02:17.63 bitrate=2757.9kbits/s speed=4.75x elapsed=0:00:28.95    
+[2026-02-20 08:03:23] [INFO] frame= 4200 fps=143 q=29.0 size=   47104KiB time=00:02:19.93 bitrate=2757.6kbits/s speed=4.75x elapsed=0:00:29.47    
+[2026-02-20 08:03:23] [INFO] frame= 4275 fps=143 q=29.0 size=   47872KiB time=00:02:22.46 bitrate=2752.7kbits/s speed=4.75x elapsed=0:00:29.98    
+[2026-02-20 08:03:24] [INFO] frame= 4373 fps=143 q=29.0 size=   48640KiB time=00:02:25.73 bitrate=2734.2kbits/s speed=4.78x elapsed=0:00:30.51    
+[2026-02-20 08:03:24] [INFO] frame= 4462 fps=144 q=29.0 size=   49152KiB time=00:02:28.63 bitrate=2709.0kbits/s speed=4.79x elapsed=0:00:31.02    
+[2026-02-20 08:03:25] [INFO] frame= 4549 fps=144 q=29.0 size=   50176KiB time=00:02:31.60 bitrate=2711.4kbits/s speed=4.81x elapsed=0:00:31.53    
+[2026-02-20 08:03:25] [INFO] frame= 4631 fps=144 q=29.0 size=   50944KiB time=00:02:34.33 bitrate=2704.1kbits/s speed=4.82x elapsed=0:00:32.04    
+[2026-02-20 08:03:26] [INFO] frame= 4700 fps=144 q=29.0 size=   51968KiB time=00:02:36.63 bitrate=2718.0kbits/s speed=4.81x elapsed=0:00:32.56    
+[2026-02-20 08:03:26] [INFO] frame= 4776 fps=144 q=29.0 size=   52736KiB time=00:02:39.16 bitrate=2714.2kbits/s speed=4.81x elapsed=0:00:33.07    
+[2026-02-20 08:03:27] [INFO] frame= 4864 fps=145 q=29.0 size=   53760KiB time=00:02:42.10 bitrate=2716.9kbits/s speed=4.83x elapsed=0:00:33.59    
+[2026-02-20 08:03:27] [INFO] frame= 4957 fps=145 q=29.0 size=   54528KiB time=00:02:45.20 bitrate=2704.0kbits/s speed=4.84x elapsed=0:00:34.11    
+[2026-02-20 08:03:28] [INFO] frame= 5051 fps=146 q=29.0 size=   55552KiB time=00:02:48.33 bitrate=2703.5kbits/s speed=4.86x elapsed=0:00:34.62    
+[2026-02-20 08:03:28] [INFO] frame= 5147 fps=146 q=29.0 size=   56320KiB time=00:02:51.53 bitrate=2689.7kbits/s speed=4.88x elapsed=0:00:35.14    
+[2026-02-20 08:03:29] [INFO] frame= 5217 fps=146 q=29.0 size=   57088KiB time=00:02:53.83 bitrate=2690.3kbits/s speed=4.87x elapsed=0:00:35.65    
+[2026-02-20 08:03:29] [INFO] frame= 5295 fps=146 q=29.0 size=   58368KiB time=00:02:56.46 bitrate=2709.6kbits/s speed=4.88x elapsed=0:00:36.19    
+[2026-02-20 08:03:30] [INFO] frame= 5390 fps=147 q=29.0 size=   59136KiB time=00:02:59.63 bitrate=2696.8kbits/s speed=4.89x elapsed=0:00:36.70    
+[2026-02-20 08:03:30] [INFO] frame= 5474 fps=147 q=29.0 size=   59648KiB time=00:03:02.43 bitrate=2678.4kbits/s speed= 4.9x elapsed=0:00:37.22    
+[2026-02-20 08:03:31] [INFO] frame= 5571 fps=148 q=29.0 size=   60928KiB time=00:03:05.66 bitrate=2688.3kbits/s speed=4.92x elapsed=0:00:37.73    
+[2026-02-20 08:03:32] [INFO] frame= 5670 fps=148 q=29.0 size=   61440KiB time=00:03:08.96 bitrate=2663.5kbits/s speed=4.94x elapsed=0:00:38.25    
+[2026-02-20 08:03:32] [INFO] frame= 5766 fps=149 q=29.0 size=   62720KiB time=00:03:12.16 bitrate=2673.7kbits/s speed=4.96x elapsed=0:00:38.76    
+[2026-02-20 08:03:33] [INFO] frame= 5843 fps=149 q=29.0 size=   63488KiB time=00:03:14.73 bitrate=2670.8kbits/s speed=4.96x elapsed=0:00:39.29    
+[2026-02-20 08:03:33] [INFO] frame= 5925 fps=149 q=29.0 size=   64256KiB time=00:03:17.46 bitrate=2665.7kbits/s speed=4.96x elapsed=0:00:39.80    
+[2026-02-20 08:03:34] [INFO] frame= 6000 fps=149 q=29.0 size=   65024KiB time=00:03:19.96 bitrate=2663.8kbits/s speed=4.96x elapsed=0:00:40.31    
+[2026-02-20 08:03:34] [INFO] frame= 6093 fps=149 q=29.0 size=   66048KiB time=00:03:23.06 bitrate=2664.5kbits/s speed=4.97x elapsed=0:00:40.82    
+[2026-02-20 08:03:35] [INFO] frame= 6174 fps=149 q=29.0 size=   66816KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:41.34    
+[2026-02-20 08:03:35] [INFO] [out#0/mp4 @ 000001a99f1aa040] video:63922KiB audio:3269KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.321828%
+[2026-02-20 08:03:35] [INFO] frame= 6209 fps=150 q=-1.0 Lsize=   67408KiB time=00:03:26.93 bitrate=2668.5kbits/s speed=4.99x elapsed=0:00:41.42    
+[2026-02-20 08:03:35] [INFO] [libx264 @ 000001a99f5d5180] frame I:25    Avg QP:18.15  size:280288
+[2026-02-20 08:03:35] [INFO] [libx264 @ 000001a99f5d5180] frame P:2255  Avg QP:22.16  size: 20462
+[2026-02-20 08:03:35] [INFO] [libx264 @ 000001a99f5d5180] frame B:3929  Avg QP:30.86  size:  3132
+[2026-02-20 08:03:35] [INFO] [libx264 @ 000001a99f5d5180] consecutive B-frames:  7.2% 10.1% 45.8% 36.9%
+[2026-02-20 08:03:35] [INFO] [libx264 @ 000001a99f5d5180] mb I  I16..4: 14.2% 24.9% 60.9%
+[2026-02-20 08:03:35] [INFO] [libx264 @ 000001a99f5d5180] mb P  I16..4:  1.2%  1.3%  1.9%  P16..4: 13.1%  4.5%  2.4%  0.0%  0.0%    skip:75.6%
+[2026-02-20 08:03:35] [INFO] [libx264 @ 000001a99f5d5180] mb B  I16..4:  0.2%  0.1%  0.2%  B16..8:  8.5%  1.4%  0.2%  direct: 0.6%  skip:88.8%  L0:35.3% L1:56.5% BI: 8.2%
+[2026-02-20 08:03:35] [INFO] [libx264 @ 000001a99f5d5180] 8x8 transform intra:28.1% inter:34.6%
+[2026-02-20 08:03:35] [INFO] [libx264 @ 000001a99f5d5180] coded y,uvDC,uvAC intra: 60.2% 48.6% 26.8% inter: 3.9% 2.8% 0.9%
+[2026-02-20 08:03:35] [INFO] [libx264 @ 000001a99f5d5180] i16 v,h,dc,p: 12% 74%  5% 10%
+[2026-02-20 08:03:35] [INFO] [libx264 @ 000001a99f5d5180] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 23% 29% 20%  5%  4%  5%  4%  5%  6%
+[2026-02-20 08:03:35] [INFO] [libx264 @ 000001a99f5d5180] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 23% 33% 12%  5%  6%  7%  5%  5%  5%
+[2026-02-20 08:03:35] [INFO] [libx264 @ 000001a99f5d5180] i8c dc,h,v,p: 43% 35% 16%  5%
+[2026-02-20 08:03:35] [INFO] [libx264 @ 000001a99f5d5180] Weighted P-Frames: Y:0.0% UV:0.0%
+[2026-02-20 08:03:35] [INFO] [libx264 @ 000001a99f5d5180] ref P L0: 76.2% 10.0% 10.9%  2.9%  0.0%
+[2026-02-20 08:03:35] [INFO] [libx264 @ 000001a99f5d5180] ref B L0: 88.5%  9.8%  1.7%
+[2026-02-20 08:03:35] [INFO] [libx264 @ 000001a99f5d5180] ref B L1: 97.0%  3.0%
+[2026-02-20 08:03:35] [INFO] [libx264 @ 000001a99f5d5180] kb/s:2530.09
+[2026-02-20 08:03:35] [INFO] [aac @ 000001a99f48b640] Qavg: 818.793
+[2026-02-20 08:03:35] [INFO] Exec: ffmpeg -hide_banner -loglevel info -stats -ss 12:53:04 -i "E:\obs录屏\2026-02-12 12-45-01.mkv" -t 151 -c:v libx264 -c:a aac -avoid_negative_ts make_zero -y "E:\toolbox输出\多段截取\ta-9_乌2x.mp4"
+[2026-02-20 08:03:35] [INFO] Input #0, matroska,webm, from 'E:\obs录屏\2026-02-12 12-45-01.mkv':
+[2026-02-20 08:03:35] [INFO]   Metadata:
+[2026-02-20 08:03:35] [INFO]     ENCODER         : Lavf61.7.100
+[2026-02-20 08:03:35] [INFO]   Duration: 14:48:39.52, start: 0.000000, bitrate: 2666 kb/s
+[2026-02-20 08:03:35] [INFO]   Stream #0:0: Video: h264 (High), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], 30 fps, 30 tbr, 1k tbn, start 0.021000
+[2026-02-20 08:03:35] [INFO]     Metadata:
+[2026-02-20 08:03:35] [INFO]       DURATION        : 14:48:39.521000000
+[2026-02-20 08:03:35] [INFO]   Stream #0:1: Audio: aac (LC), 48000 Hz, stereo, fltp
+[2026-02-20 08:03:35] [INFO]     Metadata:
+[2026-02-20 08:03:35] [INFO]       title           : simple_aac
+[2026-02-20 08:03:35] [INFO]       DURATION        : 14:48:39.359000000
+[2026-02-20 08:03:35] [INFO] Stream mapping:
+[2026-02-20 08:03:35] [INFO]   Stream #0:0 -> #0:0 (h264 (native) -> h264 (libx264))
+[2026-02-20 08:03:35] [INFO]   Stream #0:1 -> #0:1 (aac (native) -> aac (native))
+[2026-02-20 08:03:35] [INFO] Press [q] to stop, [?] for help
+[2026-02-20 08:03:35] [INFO] [libx264 @ 0000021485b65180] using SAR=1/1
+[2026-02-20 08:03:35] [INFO] [libx264 @ 0000021485b65180] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512
+[2026-02-20 08:03:35] [INFO] [libx264 @ 0000021485b65180] profile High, level 4.0, 4:2:0, 8-bit
+[2026-02-20 08:03:35] [INFO] [libx264 @ 0000021485b65180] 264 - core 165 r3222 b35605a - H.264/MPEG-4 AVC codec - Copyleft 2003-2025 - http://www.videolan.org/x264.html - options: cabac=1 ref=3 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=7 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=1 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=18 lookahead_threads=3 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=40 rc=crf mbtree=1 crf=23.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
+[2026-02-20 08:03:35] [INFO] Output #0, mp4, to 'E:\toolbox输出\多段截取\ta-9_乌2x.mp4':
+[2026-02-20 08:03:35] [INFO]   Metadata:
+[2026-02-20 08:03:35] [INFO]     encoder         : Lavf62.1.103
+[2026-02-20 08:03:35] [INFO]   Stream #0:0: Video: h264 (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], q=2-31, 30 fps, 15360 tbn
+[2026-02-20 08:03:35] [INFO]     Metadata:
+[2026-02-20 08:03:35] [INFO]       encoder         : Lavc62.8.100 libx264
+[2026-02-20 08:03:35] [INFO]       DURATION        : 14:48:39.521000000
+[2026-02-20 08:03:35] [INFO]     Side data:
+[2026-02-20 08:03:35] [INFO]       cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
+[2026-02-20 08:03:35] [INFO]   Stream #0:1: Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 128 kb/s
+[2026-02-20 08:03:35] [INFO]     Metadata:
+[2026-02-20 08:03:35] [INFO]       encoder         : Lavc62.8.100 aac
+[2026-02-20 08:03:35] [INFO]       title           : simple_aac
+[2026-02-20 08:03:35] [INFO]       DURATION        : 14:48:39.359000000
+[2026-02-20 08:03:35] [INFO] frame=   57 fps=0.0 q=29.0 size=     256KiB time=00:00:01.86 bitrate=1123.7kbits/s speed=3.66x elapsed=0:00:00.50    
+[2026-02-20 08:03:36] [INFO] frame=  157 fps=153 q=29.0 size=     512KiB time=00:00:05.16 bitrate= 811.9kbits/s speed=5.04x elapsed=0:00:01.02    
+[2026-02-20 08:03:36] [INFO] frame=  243 fps=157 q=29.0 size=    1024KiB time=00:00:08.06 bitrate=1040.0kbits/s speed=5.23x elapsed=0:00:01.54    
+[2026-02-20 08:03:37] [INFO] frame=  331 fps=161 q=29.0 size=    2048KiB time=00:00:11.00 bitrate=1525.2kbits/s speed=5.35x elapsed=0:00:02.05    
+[2026-02-20 08:03:37] [INFO] frame=  421 fps=164 q=29.0 size=    2304KiB time=00:00:14.00 bitrate=1348.2kbits/s speed=5.44x elapsed=0:00:02.57    
+[2026-02-20 08:03:38] [INFO] frame=  480 fps=156 q=29.0 size=    3072KiB time=00:00:15.96 bitrate=1576.2kbits/s speed=5.17x elapsed=0:00:03.08    
+[2026-02-20 08:03:38] [INFO] frame=  539 fps=150 q=29.0 size=    4096KiB time=00:00:17.93 bitrate=1871.1kbits/s speed=4.98x elapsed=0:00:03.60    
+[2026-02-20 08:03:39] [INFO] frame=  598 fps=145 q=29.0 size=    4864KiB time=00:00:19.90 bitrate=2002.3kbits/s speed=4.83x elapsed=0:00:04.11    
+[2026-02-20 08:03:39] [INFO] frame=  674 fps=145 q=29.0 size=    5888KiB time=00:00:22.36 bitrate=2156.6kbits/s speed=4.82x elapsed=0:00:04.63    
+[2026-02-20 08:03:40] [INFO] frame=  738 fps=143 q=29.0 size=    6400KiB time=00:00:24.56 bitrate=2134.2kbits/s speed=4.77x elapsed=0:00:05.15    
+[2026-02-20 08:03:41] [INFO] frame=  824 fps=145 q=29.0 size=    7680KiB time=00:00:27.43 bitrate=2293.4kbits/s speed=4.81x elapsed=0:00:05.69    
+[2026-02-20 08:03:41] [INFO] frame=  904 fps=145 q=29.0 size=    8192KiB time=00:00:29.90 bitrate=2244.5kbits/s speed=4.81x elapsed=0:00:06.21    
+[2026-02-20 08:03:42] [INFO] frame=  980 fps=145 q=29.0 size=    8960KiB time=00:00:32.63 bitrate=2249.3kbits/s speed=4.84x elapsed=0:00:06.74    
+[2026-02-20 08:03:42] [INFO] frame= 1050 fps=145 q=29.0 size=    9728KiB time=00:00:34.96 bitrate=2279.1kbits/s speed=4.82x elapsed=0:00:07.25    
+[2026-02-20 08:03:43] [INFO] frame= 1129 fps=145 q=29.0 size=   11008KiB time=00:00:37.50 bitrate=2404.7kbits/s speed=4.82x elapsed=0:00:07.78    
+[2026-02-20 08:03:43] [INFO] frame= 1206 fps=145 q=29.0 size=   11520KiB time=00:00:40.16 bitrate=2349.5kbits/s speed=4.84x elapsed=0:00:08.30    
+[2026-02-20 08:03:44] [INFO] frame= 1269 fps=144 q=29.0 size=   12544KiB time=00:00:42.26 bitrate=2431.2kbits/s speed=4.79x elapsed=0:00:08.82    
+[2026-02-20 08:03:44] [INFO] frame= 1350 fps=145 q=29.0 size=   13312KiB time=00:00:44.96 bitrate=2425.2kbits/s speed=4.82x elapsed=0:00:09.33    
+[2026-02-20 08:03:45] [INFO] frame= 1422 fps=144 q=29.0 size=   14080KiB time=00:00:47.36 bitrate=2435.1kbits/s speed=4.81x elapsed=0:00:09.85    
+[2026-02-20 08:03:45] [INFO] frame= 1497 fps=144 q=29.0 size=   14848KiB time=00:00:49.76 bitrate=2444.1kbits/s speed= 4.8x elapsed=0:00:10.36    
+[2026-02-20 08:03:46] [INFO] frame= 1559 fps=143 q=29.0 size=   15616KiB time=00:00:51.93 bitrate=2463.3kbits/s speed=4.77x elapsed=0:00:10.88    
+[2026-02-20 08:03:46] [INFO] frame= 1621 fps=142 q=29.0 size=   16384KiB time=00:00:54.00 bitrate=2485.5kbits/s speed=4.74x elapsed=0:00:11.40    
+[2026-02-20 08:03:47] [INFO] frame= 1684 fps=141 q=29.0 size=   17408KiB time=00:00:56.10 bitrate=2542.0kbits/s speed=4.71x elapsed=0:00:11.91    
+[2026-02-20 08:03:47] [INFO] frame= 1750 fps=141 q=29.0 size=   18432KiB time=00:00:58.30 bitrate=2590.0kbits/s speed=4.69x elapsed=0:00:12.43    
+[2026-02-20 08:03:48] [INFO] frame= 1840 fps=142 q=29.0 size=   19456KiB time=00:01:01.30 bitrate=2600.1kbits/s speed=4.73x elapsed=0:00:12.96    
+[2026-02-20 08:03:48] [INFO] frame= 1921 fps=142 q=29.0 size=   20224KiB time=00:01:03.93 bitrate=2591.4kbits/s speed=4.74x elapsed=0:00:13.48    
+[2026-02-20 08:03:49] [INFO] frame= 1994 fps=143 q=29.0 size=   20992KiB time=00:01:06.43 bitrate=2588.6kbits/s speed=4.75x elapsed=0:00:13.99    
+[2026-02-20 08:03:49] [INFO] frame= 2060 fps=142 q=29.0 size=   22016KiB time=00:01:08.63 bitrate=2627.8kbits/s speed=4.73x elapsed=0:00:14.50    
+[2026-02-20 08:03:50] [INFO] frame= 2131 fps=142 q=29.0 size=   23040KiB time=00:01:11.00 bitrate=2658.4kbits/s speed=4.72x elapsed=0:00:15.02    
+[2026-02-20 08:03:50] [INFO] frame= 2197 fps=141 q=29.0 size=   23808KiB time=00:01:13.20 bitrate=2664.4kbits/s speed=4.71x elapsed=0:00:15.54    
+[2026-02-20 08:03:51] [INFO] frame= 2250 fps=140 q=29.0 size=   24576KiB time=00:01:14.96 bitrate=2685.6kbits/s speed=4.67x elapsed=0:00:16.05    
+[2026-02-20 08:03:51] [INFO] frame= 2325 fps=140 q=29.0 size=   25600KiB time=00:01:17.46 bitrate=2707.2kbits/s speed=4.67x elapsed=0:00:16.57    
+[2026-02-20 08:03:52] [INFO] frame= 2409 fps=141 q=29.0 size=   26368KiB time=00:01:20.23 bitrate=2692.2kbits/s speed= 4.7x elapsed=0:00:17.08    
+[2026-02-20 08:03:52] [INFO] frame= 2471 fps=140 q=29.0 size=   27392KiB time=00:01:22.33 bitrate=2725.5kbits/s speed=4.68x elapsed=0:00:17.60    
+[2026-02-20 08:03:53] [INFO] frame= 2540 fps=140 q=29.0 size=   28416KiB time=00:01:24.63 bitrate=2750.5kbits/s speed=4.67x elapsed=0:00:18.11    
+[2026-02-20 08:03:53] [INFO] frame= 2608 fps=140 q=29.0 size=   29440KiB time=00:01:26.90 bitrate=2775.3kbits/s speed=4.66x elapsed=0:00:18.63    
+[2026-02-20 08:03:54] [INFO] frame= 2659 fps=139 q=29.0 size=   30208KiB time=00:01:28.60 bitrate=2793.1kbits/s speed=4.63x elapsed=0:00:19.15    
+[2026-02-20 08:03:55] [INFO] frame= 2724 fps=138 q=29.0 size=   30976KiB time=00:01:30.76 bitrate=2795.7kbits/s speed=4.61x elapsed=0:00:19.66    
+[2026-02-20 08:03:55] [INFO] frame= 2779 fps=138 q=29.0 size=   32000KiB time=00:01:32.60 bitrate=2830.9kbits/s speed=4.59x elapsed=0:00:20.18    
+[2026-02-20 08:03:56] [INFO] frame= 2829 fps=137 q=29.0 size=   32768KiB time=00:01:34.26 bitrate=2847.6kbits/s speed=4.55x elapsed=0:00:20.69    
+[2026-02-20 08:03:56] [INFO] frame= 2894 fps=136 q=29.0 size=   33792KiB time=00:01:36.43 bitrate=2870.6kbits/s speed=4.55x elapsed=0:00:21.21    
+[2026-02-20 08:03:57] [INFO] frame= 2963 fps=136 q=29.0 size=   34560KiB time=00:01:38.73 bitrate=2867.5kbits/s speed=4.54x elapsed=0:00:21.72    
+[2026-02-20 08:03:57] [INFO] frame= 3015 fps=136 q=29.0 size=   35840KiB time=00:01:40.46 bitrate=2922.4kbits/s speed=4.52x elapsed=0:00:22.24    
+[2026-02-20 08:03:58] [INFO] frame= 3094 fps=136 q=29.0 size=   36608KiB time=00:01:43.10 bitrate=2908.8kbits/s speed=4.53x elapsed=0:00:22.78    
+[2026-02-20 08:03:58] [INFO] frame= 3152 fps=135 q=29.0 size=   37376KiB time=00:01:45.03 bitrate=2915.1kbits/s speed=4.51x elapsed=0:00:23.29    
+[2026-02-20 08:03:59] [INFO] frame= 3216 fps=135 q=29.0 size=   38400KiB time=00:01:47.06 bitrate=2938.1kbits/s speed= 4.5x elapsed=0:00:23.80    
+[2026-02-20 08:03:59] [INFO] frame= 3268 fps=134 q=29.0 size=   39424KiB time=00:01:48.90 bitrate=2965.7kbits/s speed=4.48x elapsed=0:00:24.32    
+[2026-02-20 08:04:00] [INFO] frame= 3331 fps=134 q=29.0 size=   40448KiB time=00:01:51.00 bitrate=2985.1kbits/s speed=4.47x elapsed=0:00:24.83    
+[2026-02-20 08:04:00] [INFO] frame= 3406 fps=134 q=29.0 size=   41216KiB time=00:01:53.46 bitrate=2975.7kbits/s speed=4.47x elapsed=0:00:25.35    
+[2026-02-20 08:04:01] [INFO] frame= 3471 fps=134 q=29.0 size=   41984KiB time=00:01:55.66 bitrate=2973.5kbits/s speed=4.47x elapsed=0:00:25.86    
+[2026-02-20 08:04:01] [INFO] frame= 3537 fps=134 q=29.0 size=   43264KiB time=00:01:57.86 bitrate=3006.9kbits/s speed=4.47x elapsed=0:00:26.38    
+[2026-02-20 08:04:02] [INFO] frame= 3610 fps=134 q=29.0 size=   43776KiB time=00:02:00.30 bitrate=2981.0kbits/s speed=4.47x elapsed=0:00:26.89    
+[2026-02-20 08:04:02] [INFO] frame= 3675 fps=134 q=29.0 size=   44800KiB time=00:02:02.36 bitrate=2999.2kbits/s speed=4.46x elapsed=0:00:27.41    
+[2026-02-20 08:04:03] [INFO] frame= 3749 fps=134 q=29.0 size=   45568KiB time=00:02:04.93 bitrate=2987.9kbits/s speed=4.47x elapsed=0:00:27.93    
+[2026-02-20 08:04:03] [INFO] frame= 3810 fps=134 q=29.0 size=   46592KiB time=00:02:06.86 bitrate=3008.5kbits/s speed=4.46x elapsed=0:00:28.46    
+[2026-02-20 08:04:04] [INFO] frame= 3870 fps=133 q=29.0 size=   47616KiB time=00:02:08.96 bitrate=3024.6kbits/s speed=4.45x elapsed=0:00:28.99    
+[2026-02-20 08:04:04] [INFO] frame= 3951 fps=134 q=29.0 size=   48640KiB time=00:02:11.66 bitrate=3026.3kbits/s speed=4.46x elapsed=0:00:29.50    
+[2026-02-20 08:04:05] [INFO] frame= 4006 fps=133 q=29.0 size=   49408KiB time=00:02:13.50 bitrate=3031.8kbits/s speed=4.45x elapsed=0:00:30.02    
+[2026-02-20 08:04:05] [INFO] frame= 4081 fps=134 q=29.0 size=   50432KiB time=00:02:16.00 bitrate=3037.8kbits/s speed=4.45x elapsed=0:00:30.54    
+[2026-02-20 08:04:06] [INFO] frame= 4150 fps=134 q=29.0 size=   50944KiB time=00:02:18.30 bitrate=3017.6kbits/s speed=4.45x elapsed=0:00:31.05    
+[2026-02-20 08:04:06] [INFO] frame= 4218 fps=134 q=29.0 size=   51968KiB time=00:02:20.53 bitrate=3029.3kbits/s speed=4.45x elapsed=0:00:31.57    
+[2026-02-20 08:04:07] [INFO] frame= 4280 fps=133 q=29.0 size=   52736KiB time=00:02:22.60 bitrate=3029.5kbits/s speed=4.44x elapsed=0:00:32.08    
+[2026-02-20 08:04:07] [INFO] frame= 4356 fps=134 q=29.0 size=   53504KiB time=00:02:25.16 bitrate=3019.3kbits/s speed=4.45x elapsed=0:00:32.61    
+[2026-02-20 08:04:08] [INFO] frame= 4448 fps=134 q=29.0 size=   54272KiB time=00:02:28.23 bitrate=2999.3kbits/s speed=4.48x elapsed=0:00:33.12    
+[2026-02-20 08:04:08] [INFO] [out#0/mp4 @ 000002148573a040] video:52957KiB audio:2382KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.285461%
+[2026-02-20 08:04:08] [INFO] frame= 4529 fps=135 q=-1.0 Lsize=   55497KiB time=00:02:30.93 bitrate=3012.1kbits/s speed= 4.5x elapsed=0:00:33.54    
+[2026-02-20 08:04:08] [INFO] [libx264 @ 0000021485b65180] frame I:19    Avg QP:18.56  size:264967
+[2026-02-20 08:04:08] [INFO] [libx264 @ 0000021485b65180] frame P:1573  Avg QP:22.31  size: 24542
+[2026-02-20 08:04:08] [INFO] [libx264 @ 0000021485b65180] frame B:2937  Avg QP:30.83  size:  3605
+[2026-02-20 08:04:08] [INFO] [libx264 @ 0000021485b65180] consecutive B-frames:  5.9%  6.7% 48.8% 38.6%
+[2026-02-20 08:04:08] [INFO] [libx264 @ 0000021485b65180] mb I  I16..4: 12.5% 27.2% 60.3%
+[2026-02-20 08:04:08] [INFO] [libx264 @ 0000021485b65180] mb P  I16..4:  1.2%  1.7%  2.1%  P16..4: 17.6%  6.5%  3.0%  0.0%  0.0%    skip:68.0%
+[2026-02-20 08:04:08] [INFO] [libx264 @ 0000021485b65180] mb B  I16..4:  0.2%  0.2%  0.2%  B16..8: 10.0%  1.5%  0.2%  direct: 0.6%  skip:87.0%  L0:32.9% L1:59.8% BI: 7.4%
+[2026-02-20 08:04:08] [INFO] [libx264 @ 0000021485b65180] 8x8 transform intra:32.6% inter:42.0%
+[2026-02-20 08:04:08] [INFO] [libx264 @ 0000021485b65180] coded y,uvDC,uvAC intra: 65.0% 63.6% 37.7% inter: 5.1% 4.6% 1.0%
+[2026-02-20 08:04:08] [INFO] [libx264 @ 0000021485b65180] i16 v,h,dc,p: 14% 69%  4% 13%
+[2026-02-20 08:04:08] [INFO] [libx264 @ 0000021485b65180] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 22% 22% 17%  5%  6%  7%  6%  7%  8%
+[2026-02-20 08:04:08] [INFO] [libx264 @ 0000021485b65180] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 22% 29% 11%  6%  7%  7%  6%  6%  6%
+[2026-02-20 08:04:08] [INFO] [libx264 @ 0000021485b65180] i8c dc,h,v,p: 38% 34% 18% 11%
+[2026-02-20 08:04:08] [INFO] [libx264 @ 0000021485b65180] Weighted P-Frames: Y:0.1% UV:0.1%
+[2026-02-20 08:04:08] [INFO] [libx264 @ 0000021485b65180] ref P L0: 74.6% 13.7%  9.6%  2.1%  0.0%
+[2026-02-20 08:04:08] [INFO] [libx264 @ 0000021485b65180] ref B L0: 89.4%  9.1%  1.5%
+[2026-02-20 08:04:08] [INFO] [libx264 @ 0000021485b65180] ref B L1: 97.1%  2.9%
+[2026-02-20 08:04:08] [INFO] [libx264 @ 0000021485b65180] kb/s:2873.58
+[2026-02-20 08:04:08] [INFO] [aac @ 00000214851ba340] Qavg: 835.196
+[2026-02-20 08:18:52] [INFO] Exec: ffmpeg -hide_banner -loglevel info -stats -ss 22:50:05 -i "E:\obs录屏\2026-02-10 00-02-40.mkv" -t 77 -c:v libx264 -c:a aac -avoid_negative_ts make_zero -y "E:\toolbox输出\多段截取\ta-1_星2x.mp4"
+[2026-02-20 08:18:52] [INFO] Input #0, matroska,webm, from 'E:\obs录屏\2026-02-10 00-02-40.mkv':
+[2026-02-20 08:18:52] [INFO]   Metadata:
+[2026-02-20 08:18:52] [INFO]     ENCODER         : Lavf61.7.100
+[2026-02-20 08:18:52] [INFO]   Duration: 60:42:20.19, start: 0.000000, bitrate: 2666 kb/s
+[2026-02-20 08:18:52] [INFO]   Stream #0:0: Video: h264 (High), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], 30 fps, 30 tbr, 1k tbn, start 0.021000
+[2026-02-20 08:18:52] [INFO]     Metadata:
+[2026-02-20 08:18:52] [INFO]       DURATION        : 60:42:20.187000000
+[2026-02-20 08:18:52] [INFO]   Stream #0:1: Audio: aac (LC), 48000 Hz, stereo, fltp
+[2026-02-20 08:18:52] [INFO]     Metadata:
+[2026-02-20 08:18:52] [INFO]       title           : simple_aac
+[2026-02-20 08:18:52] [INFO]       DURATION        : 60:42:20.074000000
+[2026-02-20 08:18:52] [INFO] Stream mapping:
+[2026-02-20 08:18:52] [INFO]   Stream #0:0 -> #0:0 (h264 (native) -> h264 (libx264))
+[2026-02-20 08:18:52] [INFO]   Stream #0:1 -> #0:1 (aac (native) -> aac (native))
+[2026-02-20 08:18:52] [INFO] Press [q] to stop, [?] for help
+[2026-02-20 08:18:52] [INFO] [libx264 @ 0000021388be6ec0] using SAR=1/1
+[2026-02-20 08:18:52] [INFO] [libx264 @ 0000021388be6ec0] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512
+[2026-02-20 08:18:52] [INFO] [libx264 @ 0000021388be6ec0] profile High, level 4.0, 4:2:0, 8-bit
+[2026-02-20 08:18:52] [INFO] [libx264 @ 0000021388be6ec0] 264 - core 165 r3222 b35605a - H.264/MPEG-4 AVC codec - Copyleft 2003-2025 - http://www.videolan.org/x264.html - options: cabac=1 ref=3 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=7 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=1 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=18 lookahead_threads=3 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=40 rc=crf mbtree=1 crf=23.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
+[2026-02-20 08:18:52] [INFO] Output #0, mp4, to 'E:\toolbox输出\多段截取\ta-1_星2x.mp4':
+[2026-02-20 08:18:52] [INFO]   Metadata:
+[2026-02-20 08:18:52] [INFO]     encoder         : Lavf62.1.103
+[2026-02-20 08:18:52] [INFO]   Stream #0:0: Video: h264 (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], q=2-31, 30 fps, 15360 tbn
+[2026-02-20 08:18:52] [INFO]     Metadata:
+[2026-02-20 08:18:52] [INFO]       encoder         : Lavc62.8.100 libx264
+[2026-02-20 08:18:52] [INFO]       DURATION        : 60:42:20.187000000
+[2026-02-20 08:18:52] [INFO]     Side data:
+[2026-02-20 08:18:52] [INFO]       cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
+[2026-02-20 08:18:52] [INFO]   Stream #0:1: Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 128 kb/s
+[2026-02-20 08:18:52] [INFO]     Metadata:
+[2026-02-20 08:18:52] [INFO]       encoder         : Lavc62.8.100 aac
+[2026-02-20 08:18:52] [INFO]       title           : simple_aac
+[2026-02-20 08:18:52] [INFO]       DURATION        : 60:42:20.074000000
+[2026-02-20 08:18:53] [INFO] frame=   38 fps=0.0 q=29.0 size=       0KiB time=00:00:01.23 bitrate=   0.3kbits/s speed= 2.4x elapsed=0:00:00.51    
+[2026-02-20 08:18:53] [INFO] frame=  113 fps=109 q=29.0 size=     512KiB time=00:00:03.73 bitrate=1123.6kbits/s speed= 3.6x elapsed=0:00:01.03    
+[2026-02-20 08:18:54] [INFO] frame=  202 fps=130 q=29.0 size=    1280KiB time=00:00:06.70 bitrate=1565.1kbits/s speed=4.31x elapsed=0:00:01.55    
+[2026-02-20 08:18:54] [INFO] frame=  279 fps=135 q=29.0 size=    2048KiB time=00:00:09.26 bitrate=1810.5kbits/s speed= 4.5x elapsed=0:00:02.05    
+[2026-02-20 08:18:55] [INFO] frame=  345 fps=134 q=29.0 size=    2560KiB time=00:00:11.46 bitrate=1828.9kbits/s speed=4.45x elapsed=0:00:02.57    
+[2026-02-20 08:18:55] [INFO] frame=  411 fps=133 q=29.0 size=    3072KiB time=00:00:13.66 bitrate=1841.4kbits/s speed=4.42x elapsed=0:00:03.09    
+[2026-02-20 08:18:56] [INFO] frame=  493 fps=137 q=29.0 size=    3840KiB time=00:00:16.40 bitrate=1918.2kbits/s speed=4.55x elapsed=0:00:03.60    
+[2026-02-20 08:18:56] [INFO] frame=  569 fps=138 q=29.0 size=    4608KiB time=00:00:18.93 bitrate=1993.8kbits/s speed=4.58x elapsed=0:00:04.13    
+[2026-02-20 08:18:57] [INFO] frame=  641 fps=138 q=29.0 size=    5376KiB time=00:00:21.26 bitrate=2070.9kbits/s speed=4.58x elapsed=0:00:04.64    
+[2026-02-20 08:18:57] [INFO] frame=  701 fps=136 q=29.0 size=    6144KiB time=00:00:23.33 bitrate=2157.1kbits/s speed=4.52x elapsed=0:00:05.15    
+[2026-02-20 08:18:58] [INFO] frame=  775 fps=137 q=29.0 size=    6912KiB time=00:00:25.80 bitrate=2194.7kbits/s speed=4.55x elapsed=0:00:05.66    
+[2026-02-20 08:18:58] [INFO] frame=  850 fps=137 q=29.0 size=    7424KiB time=00:00:28.33 bitrate=2146.5kbits/s speed=4.58x elapsed=0:00:06.18    
+[2026-02-20 08:18:59] [INFO] frame=  939 fps=140 q=29.0 size=    8704KiB time=00:00:31.26 bitrate=2280.5kbits/s speed=4.66x elapsed=0:00:06.70    
+[2026-02-20 08:18:59] [INFO] frame= 1028 fps=142 q=29.0 size=    9472KiB time=00:00:34.23 bitrate=2266.7kbits/s speed=4.74x elapsed=0:00:07.21    
+[2026-02-20 08:19:00] [INFO] frame= 1115 fps=144 q=29.0 size=   10240KiB time=00:00:37.13 bitrate=2259.1kbits/s speed= 4.8x elapsed=0:00:07.73    
+[2026-02-20 08:19:00] [INFO] frame= 1201 fps=146 q=29.0 size=   10752KiB time=00:00:40.00 bitrate=2202.0kbits/s speed=4.85x elapsed=0:00:08.25    
+[2026-02-20 08:19:01] [INFO] frame= 1288 fps=147 q=29.0 size=   11520KiB time=00:00:42.90 bitrate=2199.8kbits/s speed= 4.9x elapsed=0:00:08.76    
+[2026-02-20 08:19:01] [INFO] frame= 1344 fps=145 q=29.0 size=   12032KiB time=00:00:44.76 bitrate=2201.8kbits/s speed=4.82x elapsed=0:00:09.27    
+[2026-02-20 08:19:02] [INFO] frame= 1415 fps=144 q=29.0 size=   13312KiB time=00:00:47.13 bitrate=2313.7kbits/s speed=4.81x elapsed=0:00:09.79    
+[2026-02-20 08:19:03] [INFO] frame= 1500 fps=145 q=29.0 size=   13824KiB time=00:00:49.96 bitrate=2266.4kbits/s speed=4.85x elapsed=0:00:10.30    
+[2026-02-20 08:19:03] [INFO] frame= 1577 fps=146 q=29.0 size=   14592KiB time=00:00:52.53 bitrate=2275.5kbits/s speed=4.85x elapsed=0:00:10.82    
+[2026-02-20 08:19:04] [INFO] frame= 1644 fps=145 q=29.0 size=   15360KiB time=00:00:54.76 bitrate=2297.6kbits/s speed=4.83x elapsed=0:00:11.34    
+[2026-02-20 08:19:04] [INFO] frame= 1707 fps=144 q=29.0 size=   16384KiB time=00:00:56.86 bitrate=2360.2kbits/s speed=4.79x elapsed=0:00:11.86    
+[2026-02-20 08:19:05] [INFO] frame= 1785 fps=144 q=29.0 size=   17152KiB time=00:00:59.46 bitrate=2362.8kbits/s speed=4.81x elapsed=0:00:12.37    
+[2026-02-20 08:19:05] [INFO] frame= 1873 fps=145 q=29.0 size=   17920KiB time=00:01:02.20 bitrate=2360.1kbits/s speed=4.83x elapsed=0:00:12.89    
+[2026-02-20 08:19:06] [INFO] frame= 1960 fps=146 q=29.0 size=   18432KiB time=00:01:05.30 bitrate=2312.3kbits/s speed=4.87x elapsed=0:00:13.42    
+[2026-02-20 08:19:06] [INFO] frame= 2028 fps=146 q=29.0 size=   19456KiB time=00:01:07.56 bitrate=2358.9kbits/s speed=4.85x elapsed=0:00:13.93    
+[2026-02-20 08:19:07] [INFO] frame= 2100 fps=145 q=29.0 size=   20224KiB time=00:01:09.96 bitrate=2367.9kbits/s speed=4.84x elapsed=0:00:14.45    
+[2026-02-20 08:19:07] [INFO] frame= 2182 fps=146 q=29.0 size=   20992KiB time=00:01:12.63 bitrate=2367.6kbits/s speed=4.85x elapsed=0:00:14.98    
+[2026-02-20 08:19:08] [INFO] frame= 2250 fps=145 q=29.0 size=   22016KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:15.49    
+[2026-02-20 08:19:08] [INFO] [out#0/mp4 @ 0000021388c1e380] video:21590KiB audio:1221KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.358706%
+[2026-02-20 08:19:08] [INFO] frame= 2309 fps=147 q=-1.0 Lsize=   22893KiB time=00:01:16.93 bitrate=2437.7kbits/s speed=4.89x elapsed=0:00:15.73    
+[2026-02-20 08:19:08] [INFO] [libx264 @ 0000021388be6ec0] frame I:10    Avg QP:17.60  size:243295
+[2026-02-20 08:19:08] [INFO] [libx264 @ 0000021388be6ec0] frame P:764   Avg QP:21.68  size: 19778
+[2026-02-20 08:19:08] [INFO] [libx264 @ 0000021388be6ec0] frame B:1535  Avg QP:30.76  size:  2973
+[2026-02-20 08:19:08] [INFO] [libx264 @ 0000021388be6ec0] consecutive B-frames:  4.8%  6.6% 39.2% 49.4%
+[2026-02-20 08:19:08] [INFO] [libx264 @ 0000021388be6ec0] mb I  I16..4: 15.6% 28.6% 55.7%
+[2026-02-20 08:19:08] [INFO] [libx264 @ 0000021388be6ec0] mb P  I16..4:  1.6%  1.5%  2.0%  P16..4: 13.5%  4.6%  2.5%  0.0%  0.0%    skip:74.2%
+[2026-02-20 08:19:08] [INFO] [libx264 @ 0000021388be6ec0] mb B  I16..4:  0.2%  0.2%  0.2%  B16..8:  8.9%  1.3%  0.2%  direct: 0.5%  skip:88.4%  L0:34.0% L1:58.6% BI: 7.3%
+[2026-02-20 08:19:08] [INFO] [libx264 @ 0000021388be6ec0] 8x8 transform intra:29.5% inter:38.6%
+[2026-02-20 08:19:08] [INFO] [libx264 @ 0000021388be6ec0] coded y,uvDC,uvAC intra: 55.5% 39.5% 18.9% inter: 3.4% 2.2% 0.5%
+[2026-02-20 08:19:08] [INFO] [libx264 @ 0000021388be6ec0] i16 v,h,dc,p: 14% 66%  6% 14%
+[2026-02-20 08:19:08] [INFO] [libx264 @ 0000021388be6ec0] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 23% 31% 21%  4%  4%  4%  4%  4%  5%
+[2026-02-20 08:19:08] [INFO] [libx264 @ 0000021388be6ec0] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 25% 34% 11%  5%  5%  6%  5%  5%  5%
+[2026-02-20 08:19:08] [INFO] [libx264 @ 0000021388be6ec0] i8c dc,h,v,p: 47% 33% 16%  4%
+[2026-02-20 08:19:08] [INFO] [libx264 @ 0000021388be6ec0] Weighted P-Frames: Y:0.0% UV:0.0%
+[2026-02-20 08:19:08] [INFO] [libx264 @ 0000021388be6ec0] ref P L0: 75.9%  8.7% 12.1%  3.4%
+[2026-02-20 08:19:08] [INFO] [libx264 @ 0000021388be6ec0] ref B L0: 87.3% 10.6%  2.1%
+[2026-02-20 08:19:08] [INFO] [libx264 @ 0000021388be6ec0] ref B L1: 95.7%  4.3%
+[2026-02-20 08:19:08] [INFO] [libx264 @ 0000021388be6ec0] kb/s:2297.92
+[2026-02-20 08:19:08] [INFO] [aac @ 0000021388f01c00] Qavg: 858.457
+[2026-02-20 08:19:08] [INFO] Exec: ffmpeg -hide_banner -loglevel info -stats -ss 22:54:44 -i "E:\obs录屏\2026-02-10 00-02-40.mkv" -t 123 -c:v libx264 -c:a aac -avoid_negative_ts make_zero -y "E:\toolbox输出\多段截取\ta-2_星2x.mp4"
+[2026-02-20 08:19:08] [INFO] Input #0, matroska,webm, from 'E:\obs录屏\2026-02-10 00-02-40.mkv':
+[2026-02-20 08:19:08] [INFO]   Metadata:
+[2026-02-20 08:19:08] [INFO]     ENCODER         : Lavf61.7.100
+[2026-02-20 08:19:08] [INFO]   Duration: 60:42:20.19, start: 0.000000, bitrate: 2666 kb/s
+[2026-02-20 08:19:08] [INFO]   Stream #0:0: Video: h264 (High), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], 30 fps, 30 tbr, 1k tbn, start 0.021000
+[2026-02-20 08:19:08] [INFO]     Metadata:
+[2026-02-20 08:19:08] [INFO]       DURATION        : 60:42:20.187000000
+[2026-02-20 08:19:08] [INFO]   Stream #0:1: Audio: aac (LC), 48000 Hz, stereo, fltp
+[2026-02-20 08:19:08] [INFO]     Metadata:
+[2026-02-20 08:19:08] [INFO]       title           : simple_aac
+[2026-02-20 08:19:08] [INFO]       DURATION        : 60:42:20.074000000
+[2026-02-20 08:19:08] [INFO] Stream mapping:
+[2026-02-20 08:19:08] [INFO]   Stream #0:0 -> #0:0 (h264 (native) -> h264 (libx264))
+[2026-02-20 08:19:08] [INFO]   Stream #0:1 -> #0:1 (aac (native) -> aac (native))
+[2026-02-20 08:19:08] [INFO] Press [q] to stop, [?] for help
+[2026-02-20 08:19:08] [INFO] [libx264 @ 0000026e63ed6ec0] using SAR=1/1
+[2026-02-20 08:19:08] [INFO] [libx264 @ 0000026e63ed6ec0] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512
+[2026-02-20 08:19:08] [INFO] [libx264 @ 0000026e63ed6ec0] profile High, level 4.0, 4:2:0, 8-bit
+[2026-02-20 08:19:08] [INFO] [libx264 @ 0000026e63ed6ec0] 264 - core 165 r3222 b35605a - H.264/MPEG-4 AVC codec - Copyleft 2003-2025 - http://www.videolan.org/x264.html - options: cabac=1 ref=3 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=7 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=1 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=18 lookahead_threads=3 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=40 rc=crf mbtree=1 crf=23.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
+[2026-02-20 08:19:08] [INFO] Output #0, mp4, to 'E:\toolbox输出\多段截取\ta-2_星2x.mp4':
+[2026-02-20 08:19:08] [INFO]   Metadata:
+[2026-02-20 08:19:08] [INFO]     encoder         : Lavf62.1.103
+[2026-02-20 08:19:08] [INFO]   Stream #0:0: Video: h264 (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], q=2-31, 30 fps, 15360 tbn
+[2026-02-20 08:19:08] [INFO]     Metadata:
+[2026-02-20 08:19:08] [INFO]       encoder         : Lavc62.8.100 libx264
+[2026-02-20 08:19:08] [INFO]       DURATION        : 60:42:20.187000000
+[2026-02-20 08:19:08] [INFO]     Side data:
+[2026-02-20 08:19:08] [INFO]       cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
+[2026-02-20 08:19:08] [INFO]   Stream #0:1: Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 128 kb/s
+[2026-02-20 08:19:08] [INFO]     Metadata:
+[2026-02-20 08:19:08] [INFO]       encoder         : Lavc62.8.100 aac
+[2026-02-20 08:19:08] [INFO]       title           : simple_aac
+[2026-02-20 08:19:08] [INFO]       DURATION        : 60:42:20.074000000
+[2026-02-20 08:19:09] [INFO] frame=   30 fps=0.0 q=29.0 size=     256KiB time=00:00:00.83 bitrate=2517.0kbits/s speed=1.61x elapsed=0:00:00.51    
+[2026-02-20 08:19:09] [INFO] frame=  104 fps=101 q=29.0 size=     768KiB time=00:00:03.43 bitrate=1832.6kbits/s speed=3.33x elapsed=0:00:01.03    
+[2026-02-20 08:19:10] [INFO] frame=  189 fps=122 q=29.0 size=    1280KiB time=00:00:06.26 bitrate=1673.3kbits/s speed=4.06x elapsed=0:00:01.54    
+[2026-02-20 08:19:10] [INFO] frame=  259 fps=126 q=29.0 size=    2048KiB time=00:00:08.60 bitrate=1950.9kbits/s speed=4.17x elapsed=0:00:02.06    
+[2026-02-20 08:19:11] [INFO] frame=  334 fps=130 q=29.0 size=    2816KiB time=00:00:11.10 bitrate=2078.3kbits/s speed=4.31x elapsed=0:00:02.57    
+[2026-02-20 08:19:11] [INFO] frame=  414 fps=134 q=29.0 size=    3584KiB time=00:00:13.76 bitrate=2132.7kbits/s speed=4.45x elapsed=0:00:03.09    
+[2026-02-20 08:19:12] [INFO] frame=  478 fps=133 q=29.0 size=    4352KiB time=00:00:15.90 bitrate=2242.3kbits/s speed=4.41x elapsed=0:00:03.60    
+[2026-02-20 08:19:12] [INFO] frame=  556 fps=135 q=29.0 size=    5376KiB time=00:00:18.50 bitrate=2380.6kbits/s speed=4.49x elapsed=0:00:04.12    
+[2026-02-20 08:19:13] [INFO] frame=  619 fps=133 q=29.0 size=    6400KiB time=00:00:20.60 bitrate=2545.1kbits/s speed=4.43x elapsed=0:00:04.64    
+[2026-02-20 08:19:13] [INFO] frame=  674 fps=131 q=29.0 size=    6912KiB time=00:00:22.46 bitrate=2520.3kbits/s speed=4.36x elapsed=0:00:05.15    
+[2026-02-20 08:19:14] [INFO] frame=  741 fps=131 q=29.0 size=    7936KiB time=00:00:24.66 bitrate=2635.6kbits/s speed=4.35x elapsed=0:00:05.66    
+[2026-02-20 08:19:14] [INFO] frame=  797 fps=129 q=29.0 size=    8704KiB time=00:00:26.53 bitrate=2687.3kbits/s speed=4.29x elapsed=0:00:06.18    
+[2026-02-20 08:19:15] [INFO] frame=  879 fps=131 q=29.0 size=    9728KiB time=00:00:29.26 bitrate=2723.0kbits/s speed=4.37x elapsed=0:00:06.70    
+[2026-02-20 08:19:15] [INFO] frame=  956 fps=132 q=29.0 size=   10496KiB time=00:00:31.76 bitrate=2706.7kbits/s speed= 4.4x elapsed=0:00:07.22    
+[2026-02-20 08:19:16] [INFO] frame= 1033 fps=133 q=29.0 size=   11520KiB time=00:00:34.30 bitrate=2751.4kbits/s speed=4.43x elapsed=0:00:07.74    
+[2026-02-20 08:19:16] [INFO] frame= 1112 fps=134 q=29.0 size=   12288KiB time=00:00:37.03 bitrate=2718.2kbits/s speed=4.48x elapsed=0:00:08.27    
+[2026-02-20 08:19:17] [INFO] frame= 1175 fps=133 q=29.0 size=   13056KiB time=00:00:39.13 bitrate=2733.1kbits/s speed=4.44x elapsed=0:00:08.80    
+[2026-02-20 08:19:17] [INFO] frame= 1250 fps=134 q=29.0 size=   13824KiB time=00:00:41.63 bitrate=2720.1kbits/s speed=4.47x elapsed=0:00:09.31    
+[2026-02-20 08:19:18] [INFO] frame= 1331 fps=135 q=29.0 size=   14848KiB time=00:00:44.33 bitrate=2743.7kbits/s speed=4.51x elapsed=0:00:09.83    
+[2026-02-20 08:19:18] [INFO] frame= 1412 fps=136 q=29.0 size=   15616KiB time=00:00:47.03 bitrate=2719.9kbits/s speed=4.54x elapsed=0:00:10.36    
+[2026-02-20 08:19:19] [INFO] frame= 1475 fps=136 q=29.0 size=   16384KiB time=00:00:49.13 bitrate=2731.7kbits/s speed=4.52x elapsed=0:00:10.87    
+[2026-02-20 08:19:20] [INFO] frame= 1551 fps=136 q=29.0 size=   17664KiB time=00:00:51.66 bitrate=2800.7kbits/s speed=4.53x elapsed=0:00:11.40    
+[2026-02-20 08:19:20] [INFO] frame= 1636 fps=137 q=29.0 size=   18432KiB time=00:00:54.36 bitrate=2777.4kbits/s speed=4.56x elapsed=0:00:11.93    
+[2026-02-20 08:19:21] [INFO] frame= 1710 fps=137 q=29.0 size=   18944KiB time=00:00:56.90 bitrate=2727.4kbits/s speed=4.56x elapsed=0:00:12.47    
+[2026-02-20 08:19:21] [INFO] frame= 1785 fps=137 q=29.0 size=   19968KiB time=00:00:59.46 bitrate=2750.8kbits/s speed=4.57x elapsed=0:00:12.99    
+[2026-02-20 08:19:22] [INFO] frame= 1870 fps=138 q=29.0 size=   20736KiB time=00:01:02.30 bitrate=2726.6kbits/s speed= 4.6x elapsed=0:00:13.52    
+[2026-02-20 08:19:22] [INFO] frame= 1949 fps=139 q=29.0 size=   21504KiB time=00:01:04.93 bitrate=2713.0kbits/s speed=4.62x elapsed=0:00:14.05    
+[2026-02-20 08:19:23] [INFO] frame= 2017 fps=138 q=29.0 size=   22272KiB time=00:01:07.20 bitrate=2715.1kbits/s speed=4.61x elapsed=0:00:14.57    
+[2026-02-20 08:19:23] [INFO] frame= 2081 fps=138 q=29.0 size=   23040KiB time=00:01:09.33 bitrate=2722.3kbits/s speed=4.59x elapsed=0:00:15.09    
+[2026-02-20 08:19:24] [INFO] frame= 2157 fps=138 q=29.0 size=   23808KiB time=00:01:11.96 bitrate=2710.1kbits/s speed=4.61x elapsed=0:00:15.61    
+[2026-02-20 08:19:24] [INFO] frame= 2230 fps=138 q=29.0 size=   24576KiB time=00:01:14.30 bitrate=2709.6kbits/s speed= 4.6x elapsed=0:00:16.13    
+[2026-02-20 08:19:25] [INFO] frame= 2311 fps=139 q=29.0 size=   25600KiB time=00:01:17.00 bitrate=2723.6kbits/s speed=4.62x elapsed=0:00:16.65    
+[2026-02-20 08:19:25] [INFO] frame= 2391 fps=139 q=29.0 size=   26368KiB time=00:01:19.66 bitrate=2711.4kbits/s speed=4.64x elapsed=0:00:17.16    
+[2026-02-20 08:19:26] [INFO] frame= 2462 fps=139 q=29.0 size=   26880KiB time=00:01:22.03 bitrate=2684.3kbits/s speed=4.64x elapsed=0:00:17.68    
+[2026-02-20 08:19:26] [INFO] frame= 2521 fps=139 q=29.0 size=   28160KiB time=00:01:24.00 bitrate=2746.3kbits/s speed=4.62x elapsed=0:00:18.20    
+[2026-02-20 08:19:27] [INFO] frame= 2592 fps=138 q=29.0 size=   28928KiB time=00:01:26.36 bitrate=2743.9kbits/s speed=4.61x elapsed=0:00:18.71    
+[2026-02-20 08:19:27] [INFO] frame= 2665 fps=139 q=29.0 size=   29696KiB time=00:01:28.80 bitrate=2739.5kbits/s speed=4.62x elapsed=0:00:19.23    
+[2026-02-20 08:19:28] [INFO] frame= 2735 fps=138 q=29.0 size=   30208KiB time=00:01:31.13 bitrate=2715.4kbits/s speed=4.61x elapsed=0:00:19.74    
+[2026-02-20 08:19:28] [INFO] frame= 2800 fps=138 q=29.0 size=   31488KiB time=00:01:33.30 bitrate=2764.7kbits/s speed= 4.6x elapsed=0:00:20.26    
+[2026-02-20 08:19:29] [INFO] frame= 2864 fps=138 q=29.0 size=   32256KiB time=00:01:35.43 bitrate=2768.9kbits/s speed=4.59x elapsed=0:00:20.77    
+[2026-02-20 08:19:29] [INFO] frame= 2936 fps=138 q=29.0 size=   33024KiB time=00:01:37.83 bitrate=2765.2kbits/s speed=4.59x elapsed=0:00:21.29    
+[2026-02-20 08:19:30] [INFO] frame= 3000 fps=138 q=29.0 size=   33536KiB time=00:01:39.96 bitrate=2748.2kbits/s speed=4.58x elapsed=0:00:21.80    
+[2026-02-20 08:19:30] [INFO] frame= 3085 fps=138 q=29.0 size=   34560KiB time=00:01:42.80 bitrate=2754.0kbits/s speed= 4.6x elapsed=0:00:22.33    
+[2026-02-20 08:19:31] [INFO] frame= 3166 fps=139 q=29.0 size=   35328KiB time=00:01:45.46 bitrate=2744.1kbits/s speed=4.62x elapsed=0:00:22.84    
+[2026-02-20 08:19:31] [INFO] frame= 3230 fps=138 q=29.0 size=   35840KiB time=00:01:47.63 bitrate=2727.8kbits/s speed=4.61x elapsed=0:00:23.35    
+[2026-02-20 08:19:32] [INFO] frame= 3299 fps=138 q=29.0 size=   36608KiB time=00:01:50.13 bitrate=2723.0kbits/s speed=4.61x elapsed=0:00:23.87    
+[2026-02-20 08:19:33] [INFO] frame= 3368 fps=138 q=29.0 size=   37632KiB time=00:01:52.13 bitrate=2749.2kbits/s speed=4.59x elapsed=0:00:24.41    
+[2026-02-20 08:19:33] [INFO] frame= 3427 fps=137 q=29.0 size=   38656KiB time=00:01:54.10 bitrate=2775.4kbits/s speed=4.57x elapsed=0:00:24.94    
+[2026-02-20 08:19:34] [INFO] frame= 3492 fps=137 q=29.0 size=   39424KiB time=00:01:56.33 bitrate=2776.2kbits/s speed=4.56x elapsed=0:00:25.48    
+[2026-02-20 08:19:34] [INFO] frame= 3564 fps=137 q=29.0 size=   40448KiB time=00:01:58.76 bitrate=2789.9kbits/s speed=4.57x elapsed=0:00:25.99    
+[2026-02-20 08:19:35] [INFO] frame= 3652 fps=138 q=29.0 size=   41216KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:26.51    
+[2026-02-20 08:19:35] [INFO] [out#0/mp4 @ 0000026e63f0e380] video:39774KiB audio:1933KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.310208%
+[2026-02-20 08:19:35] [INFO] frame= 3689 fps=138 q=-1.0 Lsize=   41836KiB time=00:02:02.93 bitrate=2787.8kbits/s speed=4.61x elapsed=0:00:26.66    
+[2026-02-20 08:19:35] [INFO] [libx264 @ 0000026e63ed6ec0] frame I:15    Avg QP:18.74  size:278880
+[2026-02-20 08:19:35] [INFO] [libx264 @ 0000026e63ed6ec0] frame P:1531  Avg QP:22.25  size: 20200
+[2026-02-20 08:19:35] [INFO] [libx264 @ 0000026e63ed6ec0] frame B:2143  Avg QP:30.60  size:  2622
+[2026-02-20 08:19:35] [INFO] [libx264 @ 0000026e63ed6ec0] consecutive B-frames: 11.7% 18.4% 42.7% 27.2%
+[2026-02-20 08:19:35] [INFO] [libx264 @ 0000026e63ed6ec0] mb I  I16..4: 10.7% 26.1% 63.2%
+[2026-02-20 08:19:35] [INFO] [libx264 @ 0000026e63ed6ec0] mb P  I16..4:  0.9%  1.2%  1.4%  P16..4: 17.2%  5.5%  2.8%  0.0%  0.0%    skip:71.1%
+[2026-02-20 08:19:35] [INFO] [libx264 @ 0000026e63ed6ec0] mb B  I16..4:  0.2%  0.1%  0.1%  B16..8:  9.4%  1.1%  0.2%  direct: 0.5%  skip:88.4%  L0:29.1% L1:64.8% BI: 6.0%
+[2026-02-20 08:19:35] [INFO] [libx264 @ 0000026e63ed6ec0] 8x8 transform intra:32.5% inter:44.3%
+[2026-02-20 08:19:35] [INFO] [libx264 @ 0000026e63ed6ec0] coded y,uvDC,uvAC intra: 63.1% 61.6% 37.6% inter: 5.2% 5.1% 0.9%
+[2026-02-20 08:19:35] [INFO] [libx264 @ 0000026e63ed6ec0] i16 v,h,dc,p: 14% 71%  4% 11%
+[2026-02-20 08:19:35] [INFO] [libx264 @ 0000026e63ed6ec0] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 22% 21% 19%  5%  6%  7%  7%  6%  8%
+[2026-02-20 08:19:35] [INFO] [libx264 @ 0000026e63ed6ec0] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 22% 31% 10%  5%  7%  7%  6%  6%  6%
+[2026-02-20 08:19:35] [INFO] [libx264 @ 0000026e63ed6ec0] i8c dc,h,v,p: 39% 34% 17%  9%
+[2026-02-20 08:19:35] [INFO] [libx264 @ 0000026e63ed6ec0] Weighted P-Frames: Y:0.0% UV:0.0%
+[2026-02-20 08:19:35] [INFO] [libx264 @ 0000026e63ed6ec0] ref P L0: 76.3% 13.0%  8.8%  1.9%
+[2026-02-20 08:19:35] [INFO] [libx264 @ 0000026e63ed6ec0] ref B L0: 89.4%  9.2%  1.3%
+[2026-02-20 08:19:35] [INFO] [libx264 @ 0000026e63ed6ec0] ref B L1: 97.7%  2.3%
+[2026-02-20 08:19:35] [INFO] [libx264 @ 0000026e63ed6ec0] kb/s:2649.67
+[2026-02-20 08:19:35] [INFO] [aac @ 0000026e641f1c00] Qavg: 853.193
+[2026-02-20 08:19:35] [INFO] Exec: ffmpeg -hide_banner -loglevel info -stats -ss 22:57:41 -i "E:\obs录屏\2026-02-10 00-02-40.mkv" -t 126 -c:v libx264 -c:a aac -avoid_negative_ts make_zero -y "E:\toolbox输出\多段截取\ta-3_棘3d.mp4"
+[2026-02-20 08:19:35] [INFO] Input #0, matroska,webm, from 'E:\obs录屏\2026-02-10 00-02-40.mkv':
+[2026-02-20 08:19:35] [INFO]   Metadata:
+[2026-02-20 08:19:35] [INFO]     ENCODER         : Lavf61.7.100
+[2026-02-20 08:19:35] [INFO]   Duration: 60:42:20.19, start: 0.000000, bitrate: 2666 kb/s
+[2026-02-20 08:19:35] [INFO]   Stream #0:0: Video: h264 (High), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], 30 fps, 30 tbr, 1k tbn, start 0.021000
+[2026-02-20 08:19:35] [INFO]     Metadata:
+[2026-02-20 08:19:35] [INFO]       DURATION        : 60:42:20.187000000
+[2026-02-20 08:19:35] [INFO]   Stream #0:1: Audio: aac (LC), 48000 Hz, stereo, fltp
+[2026-02-20 08:19:35] [INFO]     Metadata:
+[2026-02-20 08:19:35] [INFO]       title           : simple_aac
+[2026-02-20 08:19:35] [INFO]       DURATION        : 60:42:20.074000000
+[2026-02-20 08:19:35] [INFO] Stream mapping:
+[2026-02-20 08:19:35] [INFO]   Stream #0:0 -> #0:0 (h264 (native) -> h264 (libx264))
+[2026-02-20 08:19:35] [INFO]   Stream #0:1 -> #0:1 (aac (native) -> aac (native))
+[2026-02-20 08:19:35] [INFO] Press [q] to stop, [?] for help
+[2026-02-20 08:19:35] [INFO] [libx264 @ 00000278685e6ec0] using SAR=1/1
+[2026-02-20 08:19:35] [INFO] [libx264 @ 00000278685e6ec0] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512
+[2026-02-20 08:19:35] [INFO] [libx264 @ 00000278685e6ec0] profile High, level 4.0, 4:2:0, 8-bit
+[2026-02-20 08:19:35] [INFO] [libx264 @ 00000278685e6ec0] 264 - core 165 r3222 b35605a - H.264/MPEG-4 AVC codec - Copyleft 2003-2025 - http://www.videolan.org/x264.html - options: cabac=1 ref=3 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=7 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=1 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=18 lookahead_threads=3 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=40 rc=crf mbtree=1 crf=23.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
+[2026-02-20 08:19:35] [INFO] Output #0, mp4, to 'E:\toolbox输出\多段截取\ta-3_棘3d.mp4':
+[2026-02-20 08:19:35] [INFO]   Metadata:
+[2026-02-20 08:19:35] [INFO]     encoder         : Lavf62.1.103
+[2026-02-20 08:19:35] [INFO]   Stream #0:0: Video: h264 (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], q=2-31, 30 fps, 15360 tbn
+[2026-02-20 08:19:35] [INFO]     Metadata:
+[2026-02-20 08:19:35] [INFO]       encoder         : Lavc62.8.100 libx264
+[2026-02-20 08:19:35] [INFO]       DURATION        : 60:42:20.187000000
+[2026-02-20 08:19:35] [INFO]     Side data:
+[2026-02-20 08:19:35] [INFO]       cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
+[2026-02-20 08:19:35] [INFO]   Stream #0:1: Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 128 kb/s
+[2026-02-20 08:19:35] [INFO]     Metadata:
+[2026-02-20 08:19:35] [INFO]       encoder         : Lavc62.8.100 aac
+[2026-02-20 08:19:35] [INFO]       title           : simple_aac
+[2026-02-20 08:19:35] [INFO]       DURATION        : 60:42:20.074000000
+[2026-02-20 08:19:35] [INFO] frame=   40 fps=0.0 q=29.0 size=       0KiB time=00:00:01.33 bitrate=   0.3kbits/s speed=2.59x elapsed=0:00:00.51    
+[2026-02-20 08:19:36] [INFO] frame=  114 fps=111 q=29.0 size=     512KiB time=00:00:03.76 bitrate=1113.6kbits/s speed=3.66x elapsed=0:00:01.02    
+[2026-02-20 08:19:36] [INFO] frame=  202 fps=130 q=29.0 size=    1280KiB time=00:00:06.70 bitrate=1565.1kbits/s speed= 4.3x elapsed=0:00:01.55    
+[2026-02-20 08:19:37] [INFO] frame=  273 fps=131 q=29.0 size=    2048KiB time=00:00:09.06 bitrate=1850.5kbits/s speed=4.36x elapsed=0:00:02.07    
+[2026-02-20 08:19:38] [INFO] frame=  355 fps=137 q=29.0 size=    2560KiB time=00:00:11.80 bitrate=1777.3kbits/s speed=4.55x elapsed=0:00:02.59    
+[2026-02-20 08:19:38] [INFO] frame=  445 fps=143 q=29.0 size=    3328KiB time=00:00:14.76 bitrate=1846.3kbits/s speed=4.75x elapsed=0:00:03.10    
+[2026-02-20 08:19:39] [INFO] frame=  543 fps=150 q=29.0 size=    3840KiB time=00:00:17.93 bitrate=1754.1kbits/s speed=4.95x elapsed=0:00:03.62    
+[2026-02-20 08:19:39] [INFO] frame=  620 fps=150 q=29.0 size=    4608KiB time=00:00:20.63 bitrate=1829.5kbits/s speed=4.98x elapsed=0:00:04.14    
+[2026-02-20 08:19:40] [INFO] frame=  676 fps=145 q=29.0 size=    5632KiB time=00:00:22.50 bitrate=2050.6kbits/s speed=4.83x elapsed=0:00:04.65    
+[2026-02-20 08:19:40] [INFO] frame=  751 fps=145 q=29.0 size=    6144KiB time=00:00:25.23 bitrate=1994.7kbits/s speed=4.88x elapsed=0:00:05.17    
+[2026-02-20 08:19:41] [INFO] frame=  840 fps=148 q=29.0 size=    7168KiB time=00:00:28.06 bitrate=2092.2kbits/s speed=4.93x elapsed=0:00:05.68    
+[2026-02-20 08:19:41] [INFO] frame=  920 fps=148 q=29.0 size=    7936KiB time=00:00:30.63 bitrate=2122.3kbits/s speed=4.94x elapsed=0:00:06.20    
+[2026-02-20 08:19:42] [INFO] frame= 1001 fps=149 q=29.0 size=    8448KiB time=00:00:33.56 bitrate=2061.8kbits/s speed=4.99x elapsed=0:00:06.73    
+[2026-02-20 08:19:42] [INFO] frame= 1112 fps=153 q=29.0 size=    9472KiB time=00:00:37.03 bitrate=2095.3kbits/s speed=5.11x elapsed=0:00:07.25    
+[2026-02-20 08:19:43] [INFO] frame= 1178 fps=152 q=29.0 size=   10496KiB time=00:00:39.23 bitrate=2191.6kbits/s speed=5.05x elapsed=0:00:07.76    
+[2026-02-20 08:19:43] [INFO] frame= 1266 fps=153 q=29.0 size=   11264KiB time=00:00:42.16 bitrate=2188.3kbits/s speed=5.09x elapsed=0:00:08.27    
+[2026-02-20 08:19:44] [INFO] frame= 1376 fps=156 q=29.0 size=   11776KiB time=00:00:45.83 bitrate=2104.8kbits/s speed=5.21x elapsed=0:00:08.79    
+[2026-02-20 08:19:44] [INFO] frame= 1431 fps=154 q=29.0 size=   12288KiB time=00:00:47.66 bitrate=2111.8kbits/s speed=5.12x elapsed=0:00:09.31    
+[2026-02-20 08:19:45] [INFO] frame= 1533 fps=156 q=29.0 size=   13056KiB time=00:00:51.06 bitrate=2094.4kbits/s speed= 5.2x elapsed=0:00:09.82    
+[2026-02-20 08:19:45] [INFO] frame= 1611 fps=156 q=29.0 size=   14080KiB time=00:00:53.66 bitrate=2149.3kbits/s speed=5.19x elapsed=0:00:10.34    
+[2026-02-20 08:19:46] [INFO] frame= 1692 fps=156 q=29.0 size=   14848KiB time=00:00:56.36 bitrate=2157.9kbits/s speed=5.19x elapsed=0:00:10.85    
+[2026-02-20 08:19:46] [INFO] frame= 1792 fps=157 q=29.0 size=   15616KiB time=00:00:59.60 bitrate=2146.4kbits/s speed=5.24x elapsed=0:00:11.37    
+[2026-02-20 08:19:47] [INFO] frame= 1878 fps=158 q=29.0 size=   16128KiB time=00:01:02.56 bitrate=2111.7kbits/s speed=5.26x elapsed=0:00:11.90    
+[2026-02-20 08:19:47] [INFO] frame= 1959 fps=158 q=29.0 size=   16896KiB time=00:01:05.26 bitrate=2120.7kbits/s speed=5.25x elapsed=0:00:12.42    
+[2026-02-20 08:19:48] [INFO] frame= 2047 fps=158 q=29.0 size=   17920KiB time=00:01:08.20 bitrate=2152.5kbits/s speed=5.27x elapsed=0:00:12.93    
+[2026-02-20 08:19:48] [INFO] frame= 2150 fps=160 q=29.0 size=   18688KiB time=00:01:11.63 bitrate=2137.2kbits/s speed=5.32x elapsed=0:00:13.45    
+[2026-02-20 08:19:49] [INFO] frame= 2245 fps=161 q=29.0 size=   19200KiB time=00:01:14.66 bitrate=2106.5kbits/s speed=5.35x elapsed=0:00:13.96    
+[2026-02-20 08:19:49] [INFO] frame= 2320 fps=160 q=29.0 size=   19968KiB time=00:01:17.30 bitrate=2116.1kbits/s speed=5.34x elapsed=0:00:14.48    
+[2026-02-20 08:19:50] [INFO] frame= 2420 fps=161 q=29.0 size=   20736KiB time=00:01:20.63 bitrate=2106.7kbits/s speed=5.38x elapsed=0:00:15.00    
+[2026-02-20 08:19:50] [INFO] frame= 2500 fps=161 q=29.0 size=   21248KiB time=00:01:23.30 bitrate=2089.6kbits/s speed=5.37x elapsed=0:00:15.51    
+[2026-02-20 08:19:51] [INFO] frame= 2599 fps=162 q=29.0 size=   22272KiB time=00:01:26.60 bitrate=2106.8kbits/s speed= 5.4x elapsed=0:00:16.04    
+[2026-02-20 08:19:51] [INFO] frame= 2672 fps=161 q=29.0 size=   22784KiB time=00:01:29.03 bitrate=2096.4kbits/s speed=5.38x elapsed=0:00:16.56    
+[2026-02-20 08:19:52] [INFO] frame= 2761 fps=162 q=29.0 size=   23808KiB time=00:01:31.86 bitrate=2123.0kbits/s speed=5.38x elapsed=0:00:17.06    
+[2026-02-20 08:19:53] [INFO] frame= 2847 fps=162 q=29.0 size=   24576KiB time=00:01:34.73 bitrate=2125.2kbits/s speed=5.38x elapsed=0:00:17.61    
+[2026-02-20 08:19:53] [INFO] frame= 2920 fps=161 q=29.0 size=   24832KiB time=00:01:37.30 bitrate=2090.7kbits/s speed=5.36x elapsed=0:00:18.14    
+[2026-02-20 08:19:54] [INFO] frame= 3011 fps=161 q=29.0 size=   25856KiB time=00:01:40.33 bitrate=2111.1kbits/s speed=5.38x elapsed=0:00:18.65    
+[2026-02-20 08:19:54] [INFO] frame= 3097 fps=162 q=29.0 size=   26368KiB time=00:01:43.20 bitrate=2093.1kbits/s speed=5.38x elapsed=0:00:19.17    
+[2026-02-20 08:19:55] [INFO] frame= 3175 fps=161 q=29.0 size=   27136KiB time=00:01:45.80 bitrate=2101.1kbits/s speed=5.37x elapsed=0:00:19.69    
+[2026-02-20 08:19:55] [INFO] frame= 3260 fps=161 q=29.0 size=   27904KiB time=00:01:48.63 bitrate=2104.2kbits/s speed=5.37x elapsed=0:00:20.21    
+[2026-02-20 08:19:56] [INFO] frame= 3345 fps=161 q=29.0 size=   28672KiB time=00:01:51.46 bitrate=2107.2kbits/s speed=5.37x elapsed=0:00:20.74    
+[2026-02-20 08:19:56] [INFO] frame= 3438 fps=162 q=29.0 size=   29440KiB time=00:01:54.36 bitrate=2108.8kbits/s speed=5.38x elapsed=0:00:21.26    
+[2026-02-20 08:19:57] [INFO] frame= 3519 fps=161 q=29.0 size=   30208KiB time=00:01:57.26 bitrate=2110.3kbits/s speed=5.38x elapsed=0:00:21.80    
+[2026-02-20 08:19:57] [INFO] frame= 3615 fps=162 q=29.0 size=   30976KiB time=00:02:00.46 bitrate=2106.4kbits/s speed= 5.4x elapsed=0:00:22.31    
+[2026-02-20 08:19:58] [INFO] frame= 3696 fps=162 q=29.0 size=   31488KiB time=00:02:03.16 bitrate=2094.3kbits/s speed=5.39x elapsed=0:00:22.83    
+[2026-02-20 08:19:58] [INFO] [out#0/mp4 @ 000002786861e380] video:30441KiB audio:1980KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.411770%
+[2026-02-20 08:19:58] [INFO] frame= 3779 fps=163 q=-1.0 Lsize=   32554KiB time=00:02:05.93 bitrate=2117.6kbits/s speed=5.43x elapsed=0:00:23.20    
+[2026-02-20 08:19:58] [INFO] [libx264 @ 00000278685e6ec0] frame I:16    Avg QP:17.34  size:272512
+[2026-02-20 08:19:58] [INFO] [libx264 @ 00000278685e6ec0] frame P:1173  Avg QP:21.85  size: 16602
+[2026-02-20 08:19:58] [INFO] [libx264 @ 00000278685e6ec0] frame B:2590  Avg QP:30.79  size:  2832
+[2026-02-20 08:19:58] [INFO] [libx264 @ 00000278685e6ec0] consecutive B-frames:  3.0%  5.1% 35.5% 56.4%
+[2026-02-20 08:19:58] [INFO] [libx264 @ 00000278685e6ec0] mb I  I16..4: 15.0% 23.7% 61.2%
+[2026-02-20 08:19:58] [INFO] [libx264 @ 00000278685e6ec0] mb P  I16..4:  1.2%  0.9%  1.3%  P16..4: 11.3%  4.1%  2.3%  0.0%  0.0%    skip:78.9%
+[2026-02-20 08:19:58] [INFO] [libx264 @ 00000278685e6ec0] mb B  I16..4:  0.1%  0.1%  0.2%  B16..8:  7.8%  1.2%  0.2%  direct: 0.5%  skip:89.9%  L0:36.4% L1:56.1% BI: 7.5%
+[2026-02-20 08:19:58] [INFO] [libx264 @ 00000278685e6ec0] 8x8 transform intra:26.0% inter:39.0%
+[2026-02-20 08:19:58] [INFO] [libx264 @ 00000278685e6ec0] coded y,uvDC,uvAC intra: 56.6% 50.4% 31.8% inter: 2.8% 2.0% 0.6%
+[2026-02-20 08:19:58] [INFO] [libx264 @ 00000278685e6ec0] i16 v,h,dc,p: 12% 73%  5% 10%
+[2026-02-20 08:19:58] [INFO] [libx264 @ 00000278685e6ec0] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 22% 28% 25%  4%  4%  4%  4%  5%  5%
+[2026-02-20 08:19:58] [INFO] [libx264 @ 00000278685e6ec0] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 24% 32% 12%  5%  6%  7%  5%  6%  5%
+[2026-02-20 08:19:58] [INFO] [libx264 @ 00000278685e6ec0] i8c dc,h,v,p: 44% 35% 15%  5%
+[2026-02-20 08:19:58] [INFO] [libx264 @ 00000278685e6ec0] Weighted P-Frames: Y:0.0% UV:0.0%
+[2026-02-20 08:19:58] [INFO] [libx264 @ 00000278685e6ec0] ref P L0: 72.7%  9.0% 13.7%  4.6%
+[2026-02-20 08:19:58] [INFO] [libx264 @ 00000278685e6ec0] ref B L0: 85.9% 11.5%  2.6%
+[2026-02-20 08:19:58] [INFO] [libx264 @ 00000278685e6ec0] ref B L1: 94.9%  5.1%
+[2026-02-20 08:19:58] [INFO] [libx264 @ 00000278685e6ec0] kb/s:1979.61
+[2026-02-20 08:19:58] [INFO] [aac @ 00000278689010c0] Qavg: 919.358
+[2026-02-20 08:19:58] [INFO] Exec: ffmpeg -hide_banner -loglevel info -stats -ss 23:03:59 -i "E:\obs录屏\2026-02-10 00-02-40.mkv" -t 171 -c:v libx264 -c:a aac -avoid_negative_ts make_zero -y "E:\toolbox输出\多段截取\ta-4_乌2x.mp4"
+[2026-02-20 08:19:58] [INFO] Input #0, matroska,webm, from 'E:\obs录屏\2026-02-10 00-02-40.mkv':
+[2026-02-20 08:19:58] [INFO]   Metadata:
+[2026-02-20 08:19:58] [INFO]     ENCODER         : Lavf61.7.100
+[2026-02-20 08:19:58] [INFO]   Duration: 60:42:20.19, start: 0.000000, bitrate: 2666 kb/s
+[2026-02-20 08:19:58] [INFO]   Stream #0:0: Video: h264 (High), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], 30 fps, 30 tbr, 1k tbn, start 0.021000
+[2026-02-20 08:19:58] [INFO]     Metadata:
+[2026-02-20 08:19:58] [INFO]       DURATION        : 60:42:20.187000000
+[2026-02-20 08:19:58] [INFO]   Stream #0:1: Audio: aac (LC), 48000 Hz, stereo, fltp
+[2026-02-20 08:19:58] [INFO]     Metadata:
+[2026-02-20 08:19:58] [INFO]       title           : simple_aac
+[2026-02-20 08:19:58] [INFO]       DURATION        : 60:42:20.074000000
+[2026-02-20 08:19:58] [INFO] Stream mapping:
+[2026-02-20 08:19:58] [INFO]   Stream #0:0 -> #0:0 (h264 (native) -> h264 (libx264))
+[2026-02-20 08:19:58] [INFO]   Stream #0:1 -> #0:1 (aac (native) -> aac (native))
+[2026-02-20 08:19:58] [INFO] Press [q] to stop, [?] for help
+[2026-02-20 08:19:58] [INFO] [libx264 @ 000002c731396ec0] using SAR=1/1
+[2026-02-20 08:19:58] [INFO] [libx264 @ 000002c731396ec0] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512
+[2026-02-20 08:19:58] [INFO] [libx264 @ 000002c731396ec0] profile High, level 4.0, 4:2:0, 8-bit
+[2026-02-20 08:19:58] [INFO] [libx264 @ 000002c731396ec0] 264 - core 165 r3222 b35605a - H.264/MPEG-4 AVC codec - Copyleft 2003-2025 - http://www.videolan.org/x264.html - options: cabac=1 ref=3 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=7 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=1 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=18 lookahead_threads=3 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=40 rc=crf mbtree=1 crf=23.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
+[2026-02-20 08:19:58] [INFO] Output #0, mp4, to 'E:\toolbox输出\多段截取\ta-4_乌2x.mp4':
+[2026-02-20 08:19:58] [INFO]   Metadata:
+[2026-02-20 08:19:58] [INFO]     encoder         : Lavf62.1.103
+[2026-02-20 08:19:58] [INFO]   Stream #0:0: Video: h264 (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], q=2-31, 30 fps, 15360 tbn
+[2026-02-20 08:19:58] [INFO]     Metadata:
+[2026-02-20 08:19:58] [INFO]       encoder         : Lavc62.8.100 libx264
+[2026-02-20 08:19:58] [INFO]       DURATION        : 60:42:20.187000000
+[2026-02-20 08:19:58] [INFO]     Side data:
+[2026-02-20 08:19:58] [INFO]       cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
+[2026-02-20 08:19:58] [INFO]   Stream #0:1: Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 128 kb/s
+[2026-02-20 08:19:58] [INFO]     Metadata:
+[2026-02-20 08:19:58] [INFO]       encoder         : Lavc62.8.100 aac
+[2026-02-20 08:19:58] [INFO]       title           : simple_aac
+[2026-02-20 08:19:58] [INFO]       DURATION        : 60:42:20.074000000
+[2026-02-20 08:19:59] [INFO] frame=   27 fps=0.0 q=29.0 size=       0KiB time=00:00:00.86 bitrate=   0.4kbits/s speed= 1.7x elapsed=0:00:00.50    
+[2026-02-20 08:19:59] [INFO] frame=   88 fps= 85 q=29.0 size=     512KiB time=00:00:02.90 bitrate=1446.4kbits/s speed=2.82x elapsed=0:00:01.02    
+[2026-02-20 08:20:00] [INFO] frame=  166 fps=108 q=29.0 size=    1024KiB time=00:00:05.50 bitrate=1525.3kbits/s speed=3.58x elapsed=0:00:01.53    
+[2026-02-20 08:20:00] [INFO] frame=  245 fps=119 q=29.0 size=    1536KiB time=00:00:08.13 bitrate=1547.1kbits/s speed=3.97x elapsed=0:00:02.05    
+[2026-02-20 08:20:01] [INFO] frame=  315 fps=123 q=29.0 size=    2560KiB time=00:00:10.46 bitrate=2003.7kbits/s speed=4.08x elapsed=0:00:02.56    
+[2026-02-20 08:20:01] [INFO] frame=  393 fps=127 q=29.0 size=    3328KiB time=00:00:13.03 bitrate=2091.8kbits/s speed=4.23x elapsed=0:00:03.08    
+[2026-02-20 08:20:02] [INFO] frame=  464 fps=129 q=29.0 size=    4096KiB time=00:00:15.43 bitrate=2174.2kbits/s speed=4.29x elapsed=0:00:03.59    
+[2026-02-20 08:20:02] [INFO] frame=  543 fps=132 q=29.0 size=    5120KiB time=00:00:18.06 bitrate=2321.6kbits/s speed=4.39x elapsed=0:00:04.11    
+[2026-02-20 08:20:03] [INFO] frame=  619 fps=134 q=29.0 size=    5888KiB time=00:00:20.60 bitrate=2341.5kbits/s speed=4.45x elapsed=0:00:04.62    
+[2026-02-20 08:20:03] [INFO] frame=  685 fps=133 q=29.0 size=    6912KiB time=00:00:22.76 bitrate=2487.1kbits/s speed=4.42x elapsed=0:00:05.14    
+[2026-02-20 08:20:04] [INFO] frame=  749 fps=132 q=29.0 size=    7424KiB time=00:00:24.93 bitrate=2439.2kbits/s speed=4.39x elapsed=0:00:05.67    
+[2026-02-20 08:20:04] [INFO] frame=  819 fps=132 q=29.0 size=    8448KiB time=00:00:27.26 bitrate=2538.1kbits/s speed= 4.4x elapsed=0:00:06.19    
+[2026-02-20 08:20:05] [INFO] frame=  884 fps=131 q=29.0 size=    9216KiB time=00:00:29.40 bitrate=2568.0kbits/s speed=4.37x elapsed=0:00:06.72    
+[2026-02-20 08:20:06] [INFO] frame=  954 fps=132 q=29.0 size=    9984KiB time=00:00:31.73 bitrate=2577.4kbits/s speed=4.38x elapsed=0:00:07.23    
+[2026-02-20 08:20:06] [INFO] frame= 1029 fps=133 q=29.0 size=   11264KiB time=00:00:34.26 bitrate=2692.9kbits/s speed=4.42x elapsed=0:00:07.75    
+[2026-02-20 08:20:07] [INFO] frame= 1100 fps=133 q=29.0 size=   11776KiB time=00:00:36.63 bitrate=2633.4kbits/s speed=4.43x elapsed=0:00:08.27    
+[2026-02-20 08:20:07] [INFO] frame= 1172 fps=133 q=29.0 size=   12800KiB time=00:00:39.03 bitrate=2686.4kbits/s speed=4.44x elapsed=0:00:08.78    
+[2026-02-20 08:20:08] [INFO] frame= 1241 fps=133 q=29.0 size=   13312KiB time=00:00:41.33 bitrate=2638.4kbits/s speed=4.44x elapsed=0:00:09.30    
+[2026-02-20 08:20:08] [INFO] frame= 1323 fps=135 q=29.0 size=   14592KiB time=00:00:44.03 bitrate=2714.7kbits/s speed=4.48x elapsed=0:00:09.82    
+[2026-02-20 08:20:09] [INFO] frame= 1392 fps=135 q=29.0 size=   15360KiB time=00:00:46.36 bitrate=2713.8kbits/s speed=4.49x elapsed=0:00:10.33    
+[2026-02-20 08:20:09] [INFO] frame= 1473 fps=136 q=29.0 size=   16128KiB time=00:00:49.06 bitrate=2692.7kbits/s speed=4.52x elapsed=0:00:10.84    
+[2026-02-20 08:20:10] [INFO] frame= 1556 fps=137 q=29.0 size=   17152KiB time=00:00:51.80 bitrate=2712.5kbits/s speed=4.55x elapsed=0:00:11.37    
+[2026-02-20 08:20:10] [INFO] frame= 1632 fps=137 q=29.0 size=   17920KiB time=00:00:54.36 bitrate=2700.2kbits/s speed=4.57x elapsed=0:00:11.89    
+[2026-02-20 08:20:11] [INFO] frame= 1717 fps=138 q=29.0 size=   18688KiB time=00:00:57.20 bitrate=2676.4kbits/s speed=4.61x elapsed=0:00:12.41    
+[2026-02-20 08:20:11] [INFO] frame= 1806 fps=140 q=29.0 size=   19712KiB time=00:01:00.16 bitrate=2683.9kbits/s speed=4.65x elapsed=0:00:12.94    
+[2026-02-20 08:20:12] [INFO] frame= 1890 fps=140 q=29.0 size=   20480KiB time=00:01:02.96 bitrate=2664.5kbits/s speed=4.68x elapsed=0:00:13.46    
+[2026-02-20 08:20:12] [INFO] frame= 1967 fps=141 q=29.0 size=   21504KiB time=00:01:05.50 bitrate=2689.5kbits/s speed=4.69x elapsed=0:00:13.97    
+[2026-02-20 08:20:13] [INFO] frame= 2041 fps=141 q=29.0 size=   22528KiB time=00:01:08.00 bitrate=2714.0kbits/s speed=4.69x elapsed=0:00:14.48    
+[2026-02-20 08:20:13] [INFO] frame= 2099 fps=140 q=29.0 size=   23040KiB time=00:01:09.93 bitrate=2698.9kbits/s speed=4.66x elapsed=0:00:15.01    
+[2026-02-20 08:20:14] [INFO] frame= 2171 fps=140 q=29.0 size=   23808KiB time=00:01:12.33 bitrate=2696.3kbits/s speed=4.66x elapsed=0:00:15.53    
+[2026-02-20 08:20:14] [INFO] frame= 2240 fps=139 q=29.0 size=   24320KiB time=00:01:14.63 bitrate=2669.4kbits/s speed=4.65x elapsed=0:00:16.05    
+[2026-02-20 08:20:15] [INFO] frame= 2309 fps=139 q=29.0 size=   25344KiB time=00:01:16.93 bitrate=2698.7kbits/s speed=4.64x elapsed=0:00:16.57    
+[2026-02-20 08:20:15] [INFO] frame= 2373 fps=139 q=29.0 size=   26112KiB time=00:01:19.06 bitrate=2705.4kbits/s speed=4.63x elapsed=0:00:17.08    
+[2026-02-20 08:20:16] [INFO] frame= 2443 fps=139 q=29.0 size=   26624KiB time=00:01:21.33 bitrate=2681.6kbits/s speed=4.62x elapsed=0:00:17.60    
+[2026-02-20 08:20:16] [INFO] frame= 2500 fps=138 q=29.0 size=   27392KiB time=00:01:23.30 bitrate=2693.8kbits/s speed=4.59x elapsed=0:00:18.14    
+[2026-02-20 08:20:17] [INFO] frame= 2572 fps=138 q=29.0 size=   28416KiB time=00:01:25.70 bitrate=2716.3kbits/s speed=4.59x elapsed=0:00:18.66    
+[2026-02-20 08:20:17] [INFO] frame= 2648 fps=138 q=29.0 size=   29184KiB time=00:01:28.23 bitrate=2709.6kbits/s speed= 4.6x elapsed=0:00:19.18    
+[2026-02-20 08:20:18] [INFO] frame= 2711 fps=138 q=29.0 size=   29696KiB time=00:01:30.33 bitrate=2693.0kbits/s speed=4.59x elapsed=0:00:19.69    
+[2026-02-20 08:20:18] [INFO] frame= 2788 fps=138 q=29.0 size=   30976KiB time=00:01:32.90 bitrate=2731.5kbits/s speed= 4.6x elapsed=0:00:20.20    
+[2026-02-20 08:20:19] [INFO] frame= 2859 fps=138 q=29.0 size=   31488KiB time=00:01:35.26 bitrate=2707.7kbits/s speed= 4.6x elapsed=0:00:20.72    
+[2026-02-20 08:20:20] [INFO] frame= 2935 fps=138 q=29.0 size=   32256KiB time=00:01:37.76 bitrate=2702.8kbits/s speed= 4.6x elapsed=0:00:21.24    
+[2026-02-20 08:20:20] [INFO] frame= 3000 fps=138 q=29.0 size=   33024KiB time=00:01:39.96 bitrate=2706.2kbits/s speed= 4.6x elapsed=0:00:21.75    
+[2026-02-20 08:20:21] [INFO] frame= 3080 fps=138 q=29.0 size=   34048KiB time=00:01:42.63 bitrate=2717.7kbits/s speed=4.61x elapsed=0:00:22.27    
+[2026-02-20 08:20:21] [INFO] frame= 3156 fps=139 q=29.0 size=   34816KiB time=00:01:45.16 bitrate=2712.0kbits/s speed=4.62x elapsed=0:00:22.78    
+[2026-02-20 08:20:22] [INFO] frame= 3229 fps=139 q=29.0 size=   35584KiB time=00:01:47.60 bitrate=2709.1kbits/s speed=4.62x elapsed=0:00:23.30    
+[2026-02-20 08:20:22] [INFO] frame= 3310 fps=139 q=29.0 size=   36608KiB time=00:01:50.30 bitrate=2718.9kbits/s speed=4.63x elapsed=0:00:23.82    
+[2026-02-20 08:20:23] [INFO] frame= 3381 fps=139 q=29.0 size=   37376KiB time=00:01:52.66 bitrate=2717.6kbits/s speed=4.63x elapsed=0:00:24.33    
+[2026-02-20 08:20:23] [INFO] frame= 3456 fps=139 q=29.0 size=   38144KiB time=00:01:55.16 bitrate=2713.3kbits/s speed=4.63x elapsed=0:00:24.84    
+[2026-02-20 08:20:24] [INFO] frame= 3530 fps=139 q=29.0 size=   39168KiB time=00:01:57.63 bitrate=2727.7kbits/s speed=4.64x elapsed=0:00:25.36    
+[2026-02-20 08:20:24] [INFO] frame= 3608 fps=139 q=29.0 size=   40192KiB time=00:02:00.16 bitrate=2740.0kbits/s speed=4.64x elapsed=0:00:25.89    
+[2026-02-20 08:20:25] [INFO] frame= 3684 fps=139 q=29.0 size=   40960KiB time=00:02:02.76 bitrate=2733.2kbits/s speed=4.65x elapsed=0:00:26.40    
+[2026-02-20 08:20:25] [INFO] frame= 3750 fps=139 q=29.0 size=   41728KiB time=00:02:04.96 bitrate=2735.4kbits/s speed=4.64x elapsed=0:00:26.92    
+[2026-02-20 08:20:26] [INFO] frame= 3830 fps=140 q=29.0 size=   42752KiB time=00:02:07.63 bitrate=2744.0kbits/s speed=4.65x elapsed=0:00:27.44    
+[2026-02-20 08:20:26] [INFO] frame= 3900 fps=139 q=29.0 size=   43776KiB time=00:02:09.96 bitrate=2759.3kbits/s speed=4.65x elapsed=0:00:27.95    
+[2026-02-20 08:20:27] [INFO] frame= 3988 fps=140 q=29.0 size=   44544KiB time=00:02:12.90 bitrate=2745.7kbits/s speed=4.67x elapsed=0:00:28.47    
+[2026-02-20 08:20:27] [INFO] frame= 4067 fps=140 q=29.0 size=   45568KiB time=00:02:15.53 bitrate=2754.3kbits/s speed=4.68x elapsed=0:00:28.99    
+[2026-02-20 08:20:28] [INFO] frame= 4132 fps=140 q=29.0 size=   46336KiB time=00:02:17.70 bitrate=2756.6kbits/s speed=4.67x elapsed=0:00:29.50    
+[2026-02-20 08:20:28] [INFO] frame= 4215 fps=140 q=29.0 size=   47104KiB time=00:02:20.46 bitrate=2747.1kbits/s speed=4.68x elapsed=0:00:30.01    
+[2026-02-20 08:20:29] [INFO] frame= 4294 fps=141 q=29.0 size=   48128KiB time=00:02:23.10 bitrate=2755.2kbits/s speed=4.69x elapsed=0:00:30.53    
+[2026-02-20 08:20:29] [INFO] frame= 4373 fps=141 q=29.0 size=   48896KiB time=00:02:25.73 bitrate=2748.6kbits/s speed=4.69x elapsed=0:00:31.05    
+[2026-02-20 08:20:30] [INFO] frame= 4452 fps=141 q=29.0 size=   49664KiB time=00:02:28.36 bitrate=2742.2kbits/s speed= 4.7x elapsed=0:00:31.57    
+[2026-02-20 08:20:30] [INFO] frame= 4536 fps=141 q=29.0 size=   50944KiB time=00:02:31.16 bitrate=2760.8kbits/s speed=4.71x elapsed=0:00:32.08    
+[2026-02-20 08:20:31] [INFO] frame= 4616 fps=142 q=29.0 size=   51712KiB time=00:02:33.80 bitrate=2754.4kbits/s speed=4.72x elapsed=0:00:32.60    
+[2026-02-20 08:20:31] [INFO] frame= 4693 fps=142 q=29.0 size=   52480KiB time=00:02:36.40 bitrate=2748.8kbits/s speed=4.72x elapsed=0:00:33.11    
+[2026-02-20 08:20:32] [INFO] frame= 4776 fps=142 q=29.0 size=   53504KiB time=00:02:39.16 bitrate=2753.7kbits/s speed=4.73x elapsed=0:00:33.63    
+[2026-02-20 08:20:32] [INFO] frame= 4860 fps=142 q=29.0 size=   54272KiB time=00:02:41.86 bitrate=2746.7kbits/s speed=4.74x elapsed=0:00:34.14    
+[2026-02-20 08:20:33] [INFO] frame= 4940 fps=143 q=29.0 size=   55040KiB time=00:02:44.63 bitrate=2738.7kbits/s speed=4.75x elapsed=0:00:34.66    
+[2026-02-20 08:20:33] [INFO] frame= 5021 fps=143 q=29.0 size=   56320KiB time=00:02:47.33 bitrate=2757.2kbits/s speed=4.76x elapsed=0:00:35.18    
+[2026-02-20 08:20:34] [INFO] frame= 5098 fps=143 q=29.0 size=   57088KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:35.69    
+[2026-02-20 08:20:34] [INFO] [out#0/mp4 @ 000002c7313ce380] video:54885KiB audio:2682KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.308982%
+[2026-02-20 08:20:34] [INFO] frame= 5129 fps=143 q=-1.0 Lsize=   57744KiB time=00:02:50.93 bitrate=2767.4kbits/s speed=4.77x elapsed=0:00:35.82    
+[2026-02-20 08:20:34] [INFO] [libx264 @ 000002c731396ec0] frame I:21    Avg QP:18.61  size:300500
+[2026-02-20 08:20:34] [INFO] [libx264 @ 000002c731396ec0] frame P:1923  Avg QP:22.46  size: 20946
+[2026-02-20 08:20:34] [INFO] [libx264 @ 000002c731396ec0] frame B:3185  Avg QP:31.13  size:  3018
+[2026-02-20 08:20:34] [INFO] [libx264 @ 000002c731396ec0] consecutive B-frames:  7.9% 10.3% 53.1% 28.8%
+[2026-02-20 08:20:34] [INFO] [libx264 @ 000002c731396ec0] mb I  I16..4: 10.9% 26.5% 62.5%
+[2026-02-20 08:20:34] [INFO] [libx264 @ 000002c731396ec0] mb P  I16..4:  0.9%  0.8%  1.2%  P16..4: 15.8%  6.5%  2.9%  0.0%  0.0%    skip:71.9%
+[2026-02-20 08:20:34] [INFO] [libx264 @ 000002c731396ec0] mb B  I16..4:  0.1%  0.1%  0.1%  B16..8:  8.9%  1.4%  0.2%  direct: 0.6%  skip:88.6%  L0:33.7% L1:56.7% BI: 9.7%
+[2026-02-20 08:20:34] [INFO] [libx264 @ 000002c731396ec0] 8x8 transform intra:26.5% inter:41.5%
+[2026-02-20 08:20:34] [INFO] [libx264 @ 000002c731396ec0] coded y,uvDC,uvAC intra: 60.3% 60.4% 39.6% inter: 4.9% 4.2% 0.8%
+[2026-02-20 08:20:34] [INFO] [libx264 @ 000002c731396ec0] i16 v,h,dc,p: 14% 75%  4%  7%
+[2026-02-20 08:20:34] [INFO] [libx264 @ 000002c731396ec0] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 22% 20% 22%  4%  6%  7%  6%  6%  7%
+[2026-02-20 08:20:34] [INFO] [libx264 @ 000002c731396ec0] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 22% 29% 11%  6%  7%  7%  6%  6%  6%
+[2026-02-20 08:20:34] [INFO] [libx264 @ 000002c731396ec0] i8c dc,h,v,p: 41% 33% 17%  9%
+[2026-02-20 08:20:34] [INFO] [libx264 @ 000002c731396ec0] Weighted P-Frames: Y:0.1% UV:0.1%
+[2026-02-20 08:20:34] [INFO] [libx264 @ 000002c731396ec0] ref P L0: 75.2% 13.7%  9.1%  2.0%  0.0%
+[2026-02-20 08:20:34] [INFO] [libx264 @ 000002c731396ec0] ref B L0: 91.0%  7.8%  1.2%
+[2026-02-20 08:20:34] [INFO] [libx264 @ 000002c731396ec0] ref B L1: 97.9%  2.1%
+[2026-02-20 08:20:34] [INFO] [libx264 @ 000002c731396ec0] kb/s:2629.81
+[2026-02-20 08:20:34] [INFO] [aac @ 000002c731af1840] Qavg: 932.457
+[2026-02-20 08:20:34] [INFO] Exec: ffmpeg -hide_banner -loglevel info -stats -ss 23:07:53 -i "E:\obs录屏\2026-02-10 00-02-40.mkv" -t 227 -c:v libx264 -c:a aac -avoid_negative_ts make_zero -y "E:\toolbox输出\多段截取\ta-5_星2x.mp4"
+[2026-02-20 08:20:34] [INFO] Input #0, matroska,webm, from 'E:\obs录屏\2026-02-10 00-02-40.mkv':
+[2026-02-20 08:20:34] [INFO]   Metadata:
+[2026-02-20 08:20:34] [INFO]     ENCODER         : Lavf61.7.100
+[2026-02-20 08:20:34] [INFO]   Duration: 60:42:20.19, start: 0.000000, bitrate: 2666 kb/s
+[2026-02-20 08:20:34] [INFO]   Stream #0:0: Video: h264 (High), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], 30 fps, 30 tbr, 1k tbn, start 0.021000
+[2026-02-20 08:20:34] [INFO]     Metadata:
+[2026-02-20 08:20:34] [INFO]       DURATION        : 60:42:20.187000000
+[2026-02-20 08:20:34] [INFO]   Stream #0:1: Audio: aac (LC), 48000 Hz, stereo, fltp
+[2026-02-20 08:20:34] [INFO]     Metadata:
+[2026-02-20 08:20:34] [INFO]       title           : simple_aac
+[2026-02-20 08:20:34] [INFO]       DURATION        : 60:42:20.074000000
+[2026-02-20 08:20:34] [INFO] Stream mapping:
+[2026-02-20 08:20:34] [INFO]   Stream #0:0 -> #0:0 (h264 (native) -> h264 (libx264))
+[2026-02-20 08:20:34] [INFO]   Stream #0:1 -> #0:1 (aac (native) -> aac (native))
+[2026-02-20 08:20:34] [INFO] Press [q] to stop, [?] for help
+[2026-02-20 08:20:34] [INFO] [libx264 @ 0000027096d16ec0] using SAR=1/1
+[2026-02-20 08:20:34] [INFO] [libx264 @ 0000027096d16ec0] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512
+[2026-02-20 08:20:34] [INFO] [libx264 @ 0000027096d16ec0] profile High, level 4.0, 4:2:0, 8-bit
+[2026-02-20 08:20:34] [INFO] [libx264 @ 0000027096d16ec0] 264 - core 165 r3222 b35605a - H.264/MPEG-4 AVC codec - Copyleft 2003-2025 - http://www.videolan.org/x264.html - options: cabac=1 ref=3 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=7 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=1 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=18 lookahead_threads=3 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=40 rc=crf mbtree=1 crf=23.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
+[2026-02-20 08:20:34] [INFO] Output #0, mp4, to 'E:\toolbox输出\多段截取\ta-5_星2x.mp4':
+[2026-02-20 08:20:34] [INFO]   Metadata:
+[2026-02-20 08:20:34] [INFO]     encoder         : Lavf62.1.103
+[2026-02-20 08:20:34] [INFO]   Stream #0:0: Video: h264 (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], q=2-31, 30 fps, 15360 tbn
+[2026-02-20 08:20:34] [INFO]     Metadata:
+[2026-02-20 08:20:34] [INFO]       encoder         : Lavc62.8.100 libx264
+[2026-02-20 08:20:34] [INFO]       DURATION        : 60:42:20.187000000
+[2026-02-20 08:20:34] [INFO]     Side data:
+[2026-02-20 08:20:34] [INFO]       cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
+[2026-02-20 08:20:34] [INFO]   Stream #0:1: Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 128 kb/s
+[2026-02-20 08:20:34] [INFO]     Metadata:
+[2026-02-20 08:20:34] [INFO]       encoder         : Lavc62.8.100 aac
+[2026-02-20 08:20:34] [INFO]       title           : simple_aac
+[2026-02-20 08:20:34] [INFO]       DURATION        : 60:42:20.074000000
+[2026-02-20 08:20:35] [INFO] frame=   34 fps=0.0 q=29.0 size=       0KiB time=00:00:01.10 bitrate=   0.3kbits/s speed=2.15x elapsed=0:00:00.51    
+[2026-02-20 08:20:35] [INFO] frame=  116 fps=113 q=29.0 size=     768KiB time=00:00:03.83 bitrate=1641.3kbits/s speed=3.74x elapsed=0:00:01.02    
+[2026-02-20 08:20:36] [INFO] frame=  209 fps=136 q=29.0 size=    1280KiB time=00:00:06.86 bitrate=1527.1kbits/s speed=4.45x elapsed=0:00:01.54    
+[2026-02-20 08:20:36] [INFO] frame=  274 fps=133 q=29.0 size=    1792KiB time=00:00:09.10 bitrate=1613.2kbits/s speed=4.42x elapsed=0:00:02.05    
+[2026-02-20 08:20:37] [INFO] frame=  333 fps=129 q=29.0 size=    2816KiB time=00:00:11.06 bitrate=2084.6kbits/s speed=4.29x elapsed=0:00:02.57    
+[2026-02-20 08:20:37] [INFO] frame=  395 fps=128 q=29.0 size=    3328KiB time=00:00:13.13 bitrate=2075.9kbits/s speed=4.25x elapsed=0:00:03.09    
+[2026-02-20 08:20:38] [INFO] frame=  445 fps=123 q=29.0 size=    3840KiB time=00:00:14.76 bitrate=2130.3kbits/s speed= 4.1x elapsed=0:00:03.60    
+[2026-02-20 08:20:38] [INFO] frame=  489 fps=119 q=29.0 size=    4352KiB time=00:00:16.26 bitrate=2191.7kbits/s speed=3.94x elapsed=0:00:04.12    
+[2026-02-20 08:20:39] [INFO] frame=  564 fps=121 q=29.0 size=    5120KiB time=00:00:18.66 bitrate=2247.0kbits/s speed=4.02x elapsed=0:00:04.64    
+[2026-02-20 08:20:39] [INFO] frame=  631 fps=122 q=29.0 size=    5888KiB time=00:00:21.00 bitrate=2296.9kbits/s speed=4.06x elapsed=0:00:05.17    
+[2026-02-20 08:20:40] [INFO] frame=  682 fps=120 q=29.0 size=    6400KiB time=00:00:22.70 bitrate=2309.7kbits/s speed=3.99x elapsed=0:00:05.68    
+[2026-02-20 08:20:40] [INFO] frame=  724 fps=116 q=29.0 size=    6656KiB time=00:00:24.10 bitrate=2262.5kbits/s speed=3.87x elapsed=0:00:06.22    
+[2026-02-20 08:20:41] [INFO] frame=  778 fps=115 q=29.0 size=    7680KiB time=00:00:25.86 bitrate=2432.3kbits/s speed=3.82x elapsed=0:00:06.76    
+[2026-02-20 08:20:42] [INFO] frame=  832 fps=114 q=29.0 size=    8192KiB time=00:00:27.70 bitrate=2422.7kbits/s speed=3.79x elapsed=0:00:07.30    
+[2026-02-20 08:20:42] [INFO] frame=  868 fps=111 q=29.0 size=    8704KiB time=00:00:28.90 bitrate=2467.3kbits/s speed=3.69x elapsed=0:00:07.82    
+[2026-02-20 08:20:43] [INFO] frame=  913 fps=109 q=29.0 size=    8960KiB time=00:00:30.40 bitrate=2414.5kbits/s speed=3.65x elapsed=0:00:08.33    
+[2026-02-20 08:20:43] [INFO] frame=  967 fps=109 q=29.0 size=    9216KiB time=00:00:32.20 bitrate=2344.7kbits/s speed=3.64x elapsed=0:00:08.85    
+[2026-02-20 08:20:44] [INFO] frame= 1031 fps=110 q=29.0 size=   10496KiB time=00:00:34.33 bitrate=2504.4kbits/s speed=3.66x elapsed=0:00:09.37    
+[2026-02-20 08:20:44] [INFO] frame= 1067 fps=108 q=29.0 size=   10752KiB time=00:00:35.53 bitrate=2478.8kbits/s speed=3.59x elapsed=0:00:09.88    
+[2026-02-20 08:20:45] [INFO] frame= 1134 fps=109 q=29.0 size=   11520KiB time=00:00:37.76 bitrate=2498.8kbits/s speed=3.62x elapsed=0:00:10.43    
+[2026-02-20 08:20:45] [INFO] frame= 1203 fps=109 q=29.0 size=   12288KiB time=00:00:40.06 bitrate=2512.4kbits/s speed=3.65x elapsed=0:00:10.98    
+[2026-02-20 08:20:46] [INFO] frame= 1266 fps=110 q=29.0 size=   13056KiB time=00:00:41.93 bitrate=2550.6kbits/s speed=3.64x elapsed=0:00:11.52    
+[2026-02-20 08:20:46] [INFO] frame= 1318 fps=109 q=29.0 size=   13568KiB time=00:00:43.80 bitrate=2537.7kbits/s speed=3.63x elapsed=0:00:12.07    
+[2026-02-20 08:20:47] [INFO] frame= 1395 fps=111 q=29.0 size=   14080KiB time=00:00:46.46 bitrate=2482.3kbits/s speed=3.69x elapsed=0:00:12.60    
+[2026-02-20 08:20:47] [INFO] frame= 1465 fps=112 q=29.0 size=   14592KiB time=00:00:48.80 bitrate=2449.6kbits/s speed=3.72x elapsed=0:00:13.12    
+[2026-02-20 08:20:48] [INFO] frame= 1531 fps=112 q=29.0 size=   15616KiB time=00:00:51.00 bitrate=2508.4kbits/s speed=3.73x elapsed=0:00:13.66    
+[2026-02-20 08:20:48] [INFO] frame= 1594 fps=112 q=29.0 size=   16128KiB time=00:00:53.10 bitrate=2488.2kbits/s speed=3.74x elapsed=0:00:14.18    
+[2026-02-20 08:20:49] [INFO] frame= 1666 fps=113 q=29.0 size=   16640KiB time=00:00:55.50 bitrate=2456.1kbits/s speed=3.77x elapsed=0:00:14.70    
+[2026-02-20 08:20:49] [INFO] frame= 1721 fps=113 q=29.0 size=   17152KiB time=00:00:57.33 bitrate=2450.7kbits/s speed=3.77x elapsed=0:00:15.21    
+[2026-02-20 08:20:50] [INFO] frame= 1783 fps=113 q=29.0 size=   18432KiB time=00:00:59.33 bitrate=2544.9kbits/s speed=3.77x elapsed=0:00:15.73    
+[2026-02-20 08:20:51] [INFO] frame= 1847 fps=113 q=29.0 size=   19200KiB time=00:01:01.53 bitrate=2556.1kbits/s speed=3.78x elapsed=0:00:16.28    
+[2026-02-20 08:20:51] [INFO] frame= 1913 fps=114 q=29.0 size=   19968KiB time=00:01:03.73 bitrate=2566.6kbits/s speed=3.79x elapsed=0:00:16.79    
+[2026-02-20 08:20:52] [INFO] frame= 1976 fps=114 q=29.0 size=   20480KiB time=00:01:05.83 bitrate=2548.4kbits/s speed= 3.8x elapsed=0:00:17.30    
+[2026-02-20 08:20:52] [INFO] frame= 2031 fps=114 q=29.0 size=   21760KiB time=00:01:07.56 bitrate=2638.3kbits/s speed=3.79x elapsed=0:00:17.82    
+[2026-02-20 08:20:53] [INFO] frame= 2086 fps=114 q=29.0 size=   22528KiB time=00:01:09.50 bitrate=2655.4kbits/s speed=3.79x elapsed=0:00:18.35    
+[2026-02-20 08:20:53] [INFO] frame= 2146 fps=114 q=29.0 size=   23040KiB time=00:01:11.50 bitrate=2639.8kbits/s speed=3.79x elapsed=0:00:18.87    
+[2026-02-20 08:20:54] [INFO] frame= 2199 fps=113 q=29.0 size=   23552KiB time=00:01:13.26 bitrate=2633.4kbits/s speed=3.78x elapsed=0:00:19.38    
+[2026-02-20 08:20:54] [INFO] frame= 2247 fps=113 q=29.0 size=   24064KiB time=00:01:14.86 bitrate=2633.1kbits/s speed=3.75x elapsed=0:00:19.94    
+[2026-02-20 08:20:55] [INFO] frame= 2296 fps=112 q=29.0 size=   25088KiB time=00:01:16.46 bitrate=2687.7kbits/s speed=3.73x elapsed=0:00:20.48    
+[2026-02-20 08:20:55] [INFO] frame= 2337 fps=111 q=29.0 size=   25600KiB time=00:01:17.63 bitrate=2701.4kbits/s speed=3.69x elapsed=0:00:21.02    
+[2026-02-20 08:20:56] [INFO] frame= 2377 fps=110 q=29.0 size=   26112KiB time=00:01:19.20 bitrate=2700.9kbits/s speed=3.67x elapsed=0:00:21.57    
+[2026-02-20 08:20:56] [INFO] frame= 2430 fps=110 q=29.0 size=   26880KiB time=00:01:20.90 bitrate=2721.9kbits/s speed=3.66x elapsed=0:00:22.09    
+[2026-02-20 08:20:57] [INFO] frame= 2492 fps=110 q=29.0 size=   27648KiB time=00:01:22.93 bitrate=2731.0kbits/s speed=3.66x elapsed=0:00:22.62    
+[2026-02-20 08:20:57] [INFO] frame= 2550 fps=110 q=29.0 size=   28672KiB time=00:01:24.93 bitrate=2765.5kbits/s speed=3.67x elapsed=0:00:23.15    
+[2026-02-20 08:20:58] [INFO] frame= 2604 fps=110 q=29.0 size=   29184KiB time=00:01:26.76 bitrate=2755.4kbits/s speed=3.66x elapsed=0:00:23.67    
+[2026-02-20 08:20:58] [INFO] frame= 2661 fps=110 q=29.0 size=   29952KiB time=00:01:28.66 bitrate=2767.3kbits/s speed=3.67x elapsed=0:00:24.18    
+[2026-02-20 08:20:59] [INFO] frame= 2705 fps=110 q=29.0 size=   30720KiB time=00:01:30.13 bitrate=2792.1kbits/s speed=3.65x elapsed=0:00:24.69    
+[2026-02-20 08:20:59] [INFO] frame= 2763 fps=110 q=29.0 size=   31744KiB time=00:01:32.06 bitrate=2824.6kbits/s speed=3.65x elapsed=0:00:25.21    
+[2026-02-20 08:21:00] [INFO] frame= 2810 fps=109 q=29.0 size=   32000KiB time=00:01:33.63 bitrate=2799.7kbits/s speed=3.64x elapsed=0:00:25.73    
+[2026-02-20 08:21:01] [INFO] frame= 2868 fps=109 q=29.0 size=   33024KiB time=00:01:35.46 bitrate=2833.8kbits/s speed=3.63x elapsed=0:00:26.26    
+[2026-02-20 08:21:01] [INFO] frame= 2932 fps=109 q=29.0 size=   33792KiB time=00:01:37.70 bitrate=2833.4kbits/s speed=3.64x elapsed=0:00:26.81    
+[2026-02-20 08:21:02] [INFO] frame= 3002 fps=110 q=29.0 size=   34560KiB time=00:01:40.03 bitrate=2830.2kbits/s speed=3.66x elapsed=0:00:27.32    
+[2026-02-20 08:21:02] [INFO] frame= 3060 fps=110 q=29.0 size=   35328KiB time=00:01:41.96 bitrate=2838.3kbits/s speed=3.66x elapsed=0:00:27.84    
+[2026-02-20 08:21:03] [INFO] frame= 3126 fps=110 q=29.0 size=   36096KiB time=00:01:44.10 bitrate=2840.5kbits/s speed=3.67x elapsed=0:00:28.36    
+[2026-02-20 08:21:03] [INFO] frame= 3192 fps=111 q=29.0 size=   36864KiB time=00:01:46.36 bitrate=2839.1kbits/s speed=3.68x elapsed=0:00:28.88    
+[2026-02-20 08:21:04] [INFO] frame= 3239 fps=110 q=29.0 size=   37632KiB time=00:01:47.93 bitrate=2856.2kbits/s speed=3.67x elapsed=0:00:29.43    
+[2026-02-20 08:21:04] [INFO] frame= 3307 fps=110 q=29.0 size=   38400KiB time=00:01:50.20 bitrate=2854.6kbits/s speed=3.68x elapsed=0:00:29.94    
+[2026-02-20 08:21:05] [INFO] frame= 3359 fps=110 q=29.0 size=   39168KiB time=00:01:51.93 bitrate=2866.6kbits/s speed=3.67x elapsed=0:00:30.47    
+[2026-02-20 08:21:05] [INFO] frame= 3410 fps=110 q=29.0 size=   39680KiB time=00:01:53.63 bitrate=2860.6kbits/s speed=3.67x elapsed=0:00:30.98    
+[2026-02-20 08:21:06] [INFO] frame= 3470 fps=110 q=29.0 size=   40448KiB time=00:01:55.63 bitrate=2865.5kbits/s speed=3.67x elapsed=0:00:31.49    
+[2026-02-20 08:21:06] [INFO] frame= 3525 fps=110 q=29.0 size=   41472KiB time=00:01:57.33 bitrate=2895.5kbits/s speed=3.67x elapsed=0:00:32.01    
+[2026-02-20 08:21:07] [INFO] frame= 3579 fps=110 q=29.0 size=   41984KiB time=00:01:59.26 bitrate=2883.7kbits/s speed=3.66x elapsed=0:00:32.55    
+[2026-02-20 08:21:07] [INFO] frame= 3639 fps=110 q=29.0 size=   42752KiB time=00:02:01.26 bitrate=2888.1kbits/s speed=3.67x elapsed=0:00:33.07    
+[2026-02-20 08:21:08] [INFO] frame= 3689 fps=110 q=29.0 size=   43520KiB time=00:02:02.93 bitrate=2900.1kbits/s speed=3.66x elapsed=0:00:33.60    
+[2026-02-20 08:21:08] [INFO] frame= 3758 fps=110 q=29.0 size=   44544KiB time=00:02:05.13 bitrate=2916.1kbits/s speed=3.67x elapsed=0:00:34.13    
+[2026-02-20 08:21:09] [INFO] frame= 3810 fps=110 q=29.0 size=   44800KiB time=00:02:06.96 bitrate=2890.5kbits/s speed=3.66x elapsed=0:00:34.65    
+[2026-02-20 08:21:09] [INFO] frame= 3853 fps=110 q=29.0 size=   45824KiB time=00:02:08.40 bitrate=2923.6kbits/s speed=3.65x elapsed=0:00:35.16    
+[2026-02-20 08:21:10] [INFO] frame= 3898 fps=109 q=29.0 size=   46336KiB time=00:02:09.90 bitrate=2922.1kbits/s speed=3.64x elapsed=0:00:35.68    
+[2026-02-20 08:21:10] [INFO] frame= 3959 fps=109 q=29.0 size=   47360KiB time=00:02:11.93 bitrate=2940.7kbits/s speed=3.64x elapsed=0:00:36.19    
+[2026-02-20 08:21:11] [INFO] frame= 4019 fps=109 q=29.0 size=   48384KiB time=00:02:13.93 bitrate=2959.4kbits/s speed=3.65x elapsed=0:00:36.72    
+[2026-02-20 08:21:12] [INFO] frame= 4079 fps=110 q=29.0 size=   48896KiB time=00:02:15.93 bitrate=2946.7kbits/s speed=3.65x elapsed=0:00:37.24    
+[2026-02-20 08:21:12] [INFO] frame= 4147 fps=110 q=29.0 size=   49664KiB time=00:02:18.20 bitrate=2943.9kbits/s speed=3.66x elapsed=0:00:37.75    
+[2026-02-20 08:21:13] [INFO] frame= 4207 fps=110 q=29.0 size=   50432KiB time=00:02:20.20 bitrate=2946.8kbits/s speed=3.66x elapsed=0:00:38.27    
+[2026-02-20 08:21:13] [INFO] frame= 4287 fps=111 q=29.0 size=   51200KiB time=00:02:22.86 bitrate=2935.8kbits/s speed=3.68x elapsed=0:00:38.78    
+[2026-02-20 08:21:14] [INFO] frame= 4342 fps=110 q=29.0 size=   51712KiB time=00:02:24.60 bitrate=2929.6kbits/s speed=3.68x elapsed=0:00:39.30    
+[2026-02-20 08:21:14] [INFO] frame= 4393 fps=110 q=29.0 size=   52480KiB time=00:02:26.40 bitrate=2936.6kbits/s speed=3.68x elapsed=0:00:39.82    
+[2026-02-20 08:21:15] [INFO] frame= 4453 fps=110 q=29.0 size=   53248KiB time=00:02:28.33 bitrate=2940.7kbits/s speed=3.67x elapsed=0:00:40.38    
+[2026-02-20 08:21:15] [INFO] frame= 4519 fps=110 q=29.0 size=   54016KiB time=00:02:30.60 bitrate=2938.2kbits/s speed=3.68x elapsed=0:00:40.90    
+[2026-02-20 08:21:16] [INFO] frame= 4560 fps=110 q=29.0 size=   54784KiB time=00:02:31.96 bitrate=2953.2kbits/s speed=3.67x elapsed=0:00:41.41    
+[2026-02-20 08:21:16] [INFO] frame= 4603 fps=110 q=29.0 size=   55296KiB time=00:02:33.40 bitrate=2953.0kbits/s speed=3.66x elapsed=0:00:41.93    
+[2026-02-20 08:21:17] [INFO] frame= 4655 fps=110 q=29.0 size=   56320KiB time=00:02:34.96 bitrate=2977.2kbits/s speed=3.65x elapsed=0:00:42.47    
+[2026-02-20 08:21:17] [INFO] frame= 4709 fps=109 q=29.0 size=   57088KiB time=00:02:36.93 bitrate=2980.0kbits/s speed=3.65x elapsed=0:00:43.01    
+[2026-02-20 08:21:18] [INFO] frame= 4743 fps=109 q=29.0 size=   57600KiB time=00:02:38.06 bitrate=2985.2kbits/s speed=3.63x elapsed=0:00:43.52    
+[2026-02-20 08:21:18] [INFO] frame= 4810 fps=109 q=29.0 size=   58624KiB time=00:02:40.30 bitrate=2995.9kbits/s speed=3.64x elapsed=0:00:44.04    
+[2026-02-20 08:21:19] [INFO] frame= 4880 fps=110 q=29.0 size=   59392KiB time=00:02:42.56 bitrate=2992.9kbits/s speed=3.65x elapsed=0:00:44.56    
+[2026-02-20 08:21:19] [INFO] frame= 4947 fps=110 q=29.0 size=   59904KiB time=00:02:44.86 bitrate=2976.6kbits/s speed=3.66x elapsed=0:00:45.08    
+[2026-02-20 08:21:20] [INFO] frame= 5000 fps=110 q=29.0 size=   60672KiB time=00:02:46.63 bitrate=2982.7kbits/s speed=3.65x elapsed=0:00:45.60    
+[2026-02-20 08:21:20] [INFO] frame= 5054 fps=110 q=29.0 size=   61440KiB time=00:02:48.43 bitrate=2988.2kbits/s speed=3.65x elapsed=0:00:46.12    
+[2026-02-20 08:21:21] [INFO] frame= 5097 fps=109 q=29.0 size=   62208KiB time=00:02:49.83 bitrate=3000.6kbits/s speed=3.64x elapsed=0:00:46.64    
+[2026-02-20 08:21:21] [INFO] frame= 5134 fps=109 q=29.0 size=   62720KiB time=00:02:51.10 bitrate=3002.9kbits/s speed=3.63x elapsed=0:00:47.15    
+[2026-02-20 08:21:22] [INFO] frame= 5175 fps=109 q=29.0 size=   63232KiB time=00:02:52.46 bitrate=3003.5kbits/s speed=3.62x elapsed=0:00:47.66    
+[2026-02-20 08:21:22] [INFO] frame= 5242 fps=109 q=29.0 size=   64256KiB time=00:02:54.56 bitrate=3015.4kbits/s speed=3.62x elapsed=0:00:48.18    
+[2026-02-20 08:21:23] [INFO] frame= 5310 fps=109 q=29.0 size=   65024KiB time=00:02:56.96 bitrate=3010.0kbits/s speed=3.63x elapsed=0:00:48.69    
+[2026-02-20 08:21:24] [INFO] frame= 5370 fps=109 q=29.0 size=   65792KiB time=00:02:58.73 bitrate=3015.5kbits/s speed=3.63x elapsed=0:00:49.26    
+[2026-02-20 08:21:24] [INFO] frame= 5435 fps=109 q=29.0 size=   66304KiB time=00:03:01.13 bitrate=2998.7kbits/s speed=3.64x elapsed=0:00:49.81    
+[2026-02-20 08:21:25] [INFO] frame= 5500 fps=109 q=29.0 size=   67072KiB time=00:03:03.30 bitrate=2997.6kbits/s speed=3.64x elapsed=0:00:50.32    
+[2026-02-20 08:21:25] [INFO] frame= 5577 fps=110 q=29.0 size=   68096KiB time=00:03:05.76 bitrate=3002.9kbits/s speed=3.65x elapsed=0:00:50.85    
+[2026-02-20 08:21:26] [INFO] frame= 5645 fps=110 q=29.0 size=   68608KiB time=00:03:08.13 bitrate=2987.4kbits/s speed=3.66x elapsed=0:00:51.39    
+[2026-02-20 08:21:26] [INFO] frame= 5724 fps=110 q=29.0 size=   69120KiB time=00:03:10.73 bitrate=2968.7kbits/s speed=3.67x elapsed=0:00:51.92    
+[2026-02-20 08:21:27] [INFO] frame= 5799 fps=111 q=29.0 size=   70144KiB time=00:03:13.20 bitrate=2974.2kbits/s speed=3.68x elapsed=0:00:52.47    
+[2026-02-20 08:21:27] [INFO] frame= 5863 fps=111 q=29.0 size=   70656KiB time=00:03:15.26 bitrate=2964.2kbits/s speed=3.68x elapsed=0:00:53.01    
+[2026-02-20 08:21:28] [INFO] frame= 5930 fps=111 q=29.0 size=   71168KiB time=00:03:17.60 bitrate=2950.4kbits/s speed=3.69x elapsed=0:00:53.54    
+[2026-02-20 08:21:28] [INFO] frame= 6000 fps=111 q=29.0 size=   71680KiB time=00:03:19.96 bitrate=2936.5kbits/s speed= 3.7x elapsed=0:00:54.05    
+[2026-02-20 08:21:29] [INFO] frame= 6077 fps=111 q=29.0 size=   72704KiB time=00:03:22.53 bitrate=2940.7kbits/s speed=3.71x elapsed=0:00:54.57    
+[2026-02-20 08:21:29] [INFO] frame= 6152 fps=112 q=29.0 size=   73472KiB time=00:03:24.93 bitrate=2937.0kbits/s speed=3.72x elapsed=0:00:55.09    
+[2026-02-20 08:21:30] [INFO] frame= 6233 fps=112 q=29.0 size=   73984KiB time=00:03:27.73 bitrate=2917.6kbits/s speed=3.73x elapsed=0:00:55.62    
+[2026-02-20 08:21:30] [INFO] frame= 6292 fps=112 q=29.0 size=   75008KiB time=00:03:29.66 bitrate=2930.7kbits/s speed=3.73x elapsed=0:00:56.13    
+[2026-02-20 08:21:31] [INFO] frame= 6359 fps=112 q=29.0 size=   75776KiB time=00:03:31.80 bitrate=2930.9kbits/s speed=3.74x elapsed=0:00:56.69    
+[2026-02-20 08:21:32] [INFO] frame= 6418 fps=112 q=29.0 size=   76544KiB time=00:03:33.50 bitrate=2937.0kbits/s speed=3.73x elapsed=0:00:57.22    
+[2026-02-20 08:21:32] [INFO] frame= 6479 fps=112 q=29.0 size=   77056KiB time=00:03:35.93 bitrate=2923.3kbits/s speed=3.74x elapsed=0:00:57.80    
+[2026-02-20 08:21:33] [INFO] frame= 6527 fps=112 q=29.0 size=   78336KiB time=00:03:37.43 bitrate=2951.4kbits/s speed=3.73x elapsed=0:00:58.33    
+[2026-02-20 08:21:33] [INFO] frame= 6578 fps=112 q=29.0 size=   78848KiB time=00:03:39.23 bitrate=2946.3kbits/s speed=3.72x elapsed=0:00:58.85    
+[2026-02-20 08:21:34] [INFO] frame= 6639 fps=112 q=29.0 size=   79616KiB time=00:03:41.26 bitrate=2947.6kbits/s speed=3.73x elapsed=0:00:59.37    
+[2026-02-20 08:21:34] [INFO] frame= 6682 fps=112 q=29.0 size=   80384KiB time=00:03:42.70 bitrate=2956.9kbits/s speed=3.72x elapsed=0:00:59.88    
+[2026-02-20 08:21:35] [INFO] frame= 6748 fps=112 q=29.0 size=   80896KiB time=N/A bitrate=N/A speed=N/A elapsed=0:01:00.40    
+[2026-02-20 08:21:35] [INFO] [out#0/mp4 @ 0000027096d4e380] video:78331KiB audio:3583KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.287823%
+[2026-02-20 08:21:35] [INFO] frame= 6809 fps=112 q=-1.0 Lsize=   82150KiB time=00:03:46.93 bitrate=2965.5kbits/s speed=3.73x elapsed=0:01:00.78    
+[2026-02-20 08:21:35] [INFO] [libx264 @ 0000027096d16ec0] frame I:28    Avg QP:18.93  size:292383
+[2026-02-20 08:21:35] [INFO] [libx264 @ 0000027096d16ec0] frame P:2602  Avg QP:22.27  size: 23409
+[2026-02-20 08:21:35] [INFO] [libx264 @ 0000027096d16ec0] frame B:4179  Avg QP:30.80  size:  2659
+[2026-02-20 08:21:35] [INFO] [libx264 @ 0000027096d16ec0] consecutive B-frames:  7.8% 12.8% 54.4% 24.9%
+[2026-02-20 08:21:35] [INFO] [libx264 @ 0000027096d16ec0] mb I  I16..4: 11.8% 30.5% 57.8%
+[2026-02-20 08:21:35] [INFO] [libx264 @ 0000027096d16ec0] mb P  I16..4:  1.1%  1.5%  1.8%  P16..4: 18.3%  5.7%  3.0%  0.0%  0.0%    skip:68.7%
+[2026-02-20 08:21:35] [INFO] [libx264 @ 0000027096d16ec0] mb B  I16..4:  0.2%  0.2%  0.1%  B16..8:  9.7%  1.2%  0.2%  direct: 0.5%  skip:88.0%  L0:28.4% L1:64.4% BI: 7.3%
+[2026-02-20 08:21:35] [INFO] [libx264 @ 0000027096d16ec0] 8x8 transform intra:33.1% inter:39.7%
+[2026-02-20 08:21:35] [INFO] [libx264 @ 0000027096d16ec0] coded y,uvDC,uvAC intra: 62.7% 60.8% 35.0% inter: 5.1% 4.5% 1.0%
+[2026-02-20 08:21:35] [INFO] [libx264 @ 0000027096d16ec0] i16 v,h,dc,p: 14% 71%  4% 11%
+[2026-02-20 08:21:35] [INFO] [libx264 @ 0000027096d16ec0] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 21% 22% 19%  5%  6%  7%  6%  6%  8%
+[2026-02-20 08:21:35] [INFO] [libx264 @ 0000027096d16ec0] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 22% 31% 11%  5%  7%  7%  6%  6%  6%
+[2026-02-20 08:21:35] [INFO] [libx264 @ 0000027096d16ec0] i8c dc,h,v,p: 38% 35% 17%  9%
+[2026-02-20 08:21:35] [INFO] [libx264 @ 0000027096d16ec0] Weighted P-Frames: Y:0.4% UV:0.4%
+[2026-02-20 08:21:35] [INFO] [libx264 @ 0000027096d16ec0] ref P L0: 76.7% 11.9%  9.7%  1.7%  0.0%
+[2026-02-20 08:21:35] [INFO] [libx264 @ 0000027096d16ec0] ref B L0: 89.8%  8.9%  1.3%
+[2026-02-20 08:21:35] [INFO] [libx264 @ 0000027096d16ec0] ref B L1: 97.9%  2.1%
+[2026-02-20 08:21:35] [INFO] [libx264 @ 0000027096d16ec0] kb/s:2827.21
+[2026-02-20 08:21:35] [INFO] [aac @ 0000027097030d40] Qavg: 759.905
+[2026-02-20 08:21:35] [INFO] Exec: ffmpeg -hide_banner -loglevel info -stats -ss 23:20:04 -i "E:\obs录屏\2026-02-10 00-02-40.mkv" -t 157 -c:v libx264 -c:a aac -avoid_negative_ts make_zero -y "E:\toolbox输出\多段截取\ta-6_棘3d+凛3x.mp4"
+[2026-02-20 08:21:35] [INFO] Input #0, matroska,webm, from 'E:\obs录屏\2026-02-10 00-02-40.mkv':
+[2026-02-20 08:21:35] [INFO]   Metadata:
+[2026-02-20 08:21:35] [INFO]     ENCODER         : Lavf61.7.100
+[2026-02-20 08:21:35] [INFO]   Duration: 60:42:20.19, start: 0.000000, bitrate: 2666 kb/s
+[2026-02-20 08:21:35] [INFO]   Stream #0:0: Video: h264 (High), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], 30 fps, 30 tbr, 1k tbn, start 0.021000
+[2026-02-20 08:21:35] [INFO]     Metadata:
+[2026-02-20 08:21:35] [INFO]       DURATION        : 60:42:20.187000000
+[2026-02-20 08:21:35] [INFO]   Stream #0:1: Audio: aac (LC), 48000 Hz, stereo, fltp
+[2026-02-20 08:21:35] [INFO]     Metadata:
+[2026-02-20 08:21:35] [INFO]       title           : simple_aac
+[2026-02-20 08:21:35] [INFO]       DURATION        : 60:42:20.074000000
+[2026-02-20 08:21:35] [INFO] Stream mapping:
+[2026-02-20 08:21:35] [INFO]   Stream #0:0 -> #0:0 (h264 (native) -> h264 (libx264))
+[2026-02-20 08:21:35] [INFO]   Stream #0:1 -> #0:1 (aac (native) -> aac (native))
+[2026-02-20 08:21:35] [INFO] Press [q] to stop, [?] for help
+[2026-02-20 08:21:35] [INFO] [libx264 @ 000001c5d54c7000] using SAR=1/1
+[2026-02-20 08:21:35] [INFO] [libx264 @ 000001c5d54c7000] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512
+[2026-02-20 08:21:35] [INFO] [libx264 @ 000001c5d54c7000] profile High, level 4.0, 4:2:0, 8-bit
+[2026-02-20 08:21:35] [INFO] [libx264 @ 000001c5d54c7000] 264 - core 165 r3222 b35605a - H.264/MPEG-4 AVC codec - Copyleft 2003-2025 - http://www.videolan.org/x264.html - options: cabac=1 ref=3 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=7 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=1 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=18 lookahead_threads=3 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=40 rc=crf mbtree=1 crf=23.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
+[2026-02-20 08:21:35] [INFO] Output #0, mp4, to 'E:\toolbox输出\多段截取\ta-6_棘3d+凛3x.mp4':
+[2026-02-20 08:21:35] [INFO]   Metadata:
+[2026-02-20 08:21:35] [INFO]     encoder         : Lavf62.1.103
+[2026-02-20 08:21:35] [INFO]   Stream #0:0: Video: h264 (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], q=2-31, 30 fps, 15360 tbn
+[2026-02-20 08:21:35] [INFO]     Metadata:
+[2026-02-20 08:21:35] [INFO]       encoder         : Lavc62.8.100 libx264
+[2026-02-20 08:21:35] [INFO]       DURATION        : 60:42:20.187000000
+[2026-02-20 08:21:35] [INFO]     Side data:
+[2026-02-20 08:21:35] [INFO]       cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
+[2026-02-20 08:21:35] [INFO]   Stream #0:1: Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 128 kb/s
+[2026-02-20 08:21:35] [INFO]     Metadata:
+[2026-02-20 08:21:35] [INFO]       encoder         : Lavc62.8.100 aac
+[2026-02-20 08:21:35] [INFO]       title           : simple_aac
+[2026-02-20 08:21:35] [INFO]       DURATION        : 60:42:20.074000000
+[2026-02-20 08:21:36] [INFO] frame=    8 fps=0.0 q=29.0 size=       0KiB time=00:00:00.13 bitrate=   2.9kbits/s speed=0.263x elapsed=0:00:00.50    
+[2026-02-20 08:21:36] [INFO] frame=   83 fps= 80 q=29.0 size=     512KiB time=00:00:02.73 bitrate=1534.6kbits/s speed=2.63x elapsed=0:00:01.03    
+[2026-02-20 08:21:37] [INFO] frame=  153 fps= 98 q=29.0 size=    1024KiB time=00:00:05.06 bitrate=1655.7kbits/s speed=3.25x elapsed=0:00:01.55    
+[2026-02-20 08:21:37] [INFO] frame=  233 fps=113 q=29.0 size=    1280KiB time=00:00:07.73 bitrate=1356.0kbits/s speed=3.74x elapsed=0:00:02.06    
+[2026-02-20 08:21:38] [INFO] frame=  300 fps=116 q=29.0 size=    2304KiB time=00:00:09.96 bitrate=1893.8kbits/s speed=3.85x elapsed=0:00:02.59    
+[2026-02-20 08:21:38] [INFO] frame=  371 fps=120 q=29.0 size=    2816KiB time=00:00:12.33 bitrate=1870.5kbits/s speed=3.98x elapsed=0:00:03.10    
+[2026-02-20 08:21:39] [INFO] frame=  445 fps=123 q=29.0 size=    3328KiB time=00:00:14.80 bitrate=1842.1kbits/s speed=4.09x elapsed=0:00:03.61    
+[2026-02-20 08:21:39] [INFO] frame=  523 fps=126 q=29.0 size=    4096KiB time=00:00:17.40 bitrate=1928.4kbits/s speed= 4.2x elapsed=0:00:04.13    
+[2026-02-20 08:21:40] [INFO] frame=  599 fps=129 q=29.0 size=    4608KiB time=00:00:19.93 bitrate=1893.8kbits/s speed=4.29x elapsed=0:00:04.65    
+[2026-02-20 08:21:40] [INFO] frame=  648 fps=126 q=29.0 size=    5376KiB time=00:00:21.56 bitrate=2042.1kbits/s speed=4.18x elapsed=0:00:05.16    
+[2026-02-20 08:21:41] [INFO] frame=  717 fps=126 q=29.0 size=    5888KiB time=00:00:23.86 bitrate=2021.0kbits/s speed= 4.2x elapsed=0:00:05.68    
+[2026-02-20 08:21:42] [INFO] frame=  797 fps=129 q=29.0 size=    6656KiB time=00:00:26.40 bitrate=2065.4kbits/s speed=4.26x elapsed=0:00:06.19    
+[2026-02-20 08:21:42] [INFO] frame=  879 fps=130 q=29.0 size=    7424KiB time=00:00:29.26 bitrate=2078.1kbits/s speed=4.34x elapsed=0:00:06.74    
+[2026-02-20 08:21:43] [INFO] frame=  958 fps=132 q=29.0 size=    7936KiB time=00:00:31.80 bitrate=2044.4kbits/s speed=4.38x elapsed=0:00:07.25    
+[2026-02-20 08:21:43] [INFO] frame= 1029 fps=132 q=29.0 size=    8704KiB time=00:00:34.26 bitrate=2080.8kbits/s speed=4.41x elapsed=0:00:07.77    
+[2026-02-20 08:21:44] [INFO] frame= 1092 fps=132 q=29.0 size=    9216KiB time=00:00:36.36 bitrate=2076.0kbits/s speed=4.39x elapsed=0:00:08.28    
+[2026-02-20 08:21:44] [INFO] frame= 1154 fps=131 q=29.0 size=    9984KiB time=00:00:38.30 bitrate=2135.5kbits/s speed=4.34x elapsed=0:00:08.82    
+[2026-02-20 08:21:45] [INFO] frame= 1207 fps=129 q=29.0 size=   10752KiB time=00:00:40.20 bitrate=2191.1kbits/s speed= 4.3x elapsed=0:00:09.35    
+[2026-02-20 08:21:45] [INFO] frame= 1263 fps=128 q=29.0 size=   11776KiB time=00:00:42.06 bitrate=2293.2kbits/s speed=4.26x elapsed=0:00:09.86    
+[2026-02-20 08:21:46] [INFO] frame= 1332 fps=128 q=29.0 size=   12288KiB time=00:00:44.36 bitrate=2268.9kbits/s speed=4.27x elapsed=0:00:10.38    
+[2026-02-20 08:21:46] [INFO] frame= 1400 fps=128 q=29.0 size=   13056KiB time=00:00:46.63 bitrate=2293.5kbits/s speed=4.27x elapsed=0:00:10.91    
+[2026-02-20 08:21:47] [INFO] frame= 1475 fps=129 q=29.0 size=   13568KiB time=00:00:49.13 bitrate=2262.2kbits/s speed= 4.3x elapsed=0:00:11.42    
+[2026-02-20 08:21:47] [INFO] frame= 1556 fps=130 q=29.0 size=   14336KiB time=00:00:51.83 bitrate=2265.7kbits/s speed=4.34x elapsed=0:00:11.94    
+[2026-02-20 08:21:48] [INFO] frame= 1629 fps=131 q=29.0 size=   14848KiB time=00:00:54.26 bitrate=2241.4kbits/s speed=4.36x elapsed=0:00:12.46    
+[2026-02-20 08:21:48] [INFO] frame= 1704 fps=131 q=29.0 size=   15616KiB time=00:00:56.53 bitrate=2262.9kbits/s speed=4.36x elapsed=0:00:12.97    
+[2026-02-20 08:21:49] [INFO] frame= 1787 fps=132 q=29.0 size=   16384KiB time=00:00:59.53 bitrate=2254.5kbits/s speed=4.41x elapsed=0:00:13.50    
+[2026-02-20 08:21:49] [INFO] frame= 1865 fps=133 q=29.0 size=   17152KiB time=00:01:02.13 bitrate=2261.4kbits/s speed=4.43x elapsed=0:00:14.02    
+[2026-02-20 08:21:50] [INFO] frame= 1914 fps=132 q=29.0 size=   17664KiB time=00:01:03.76 bitrate=2269.3kbits/s speed=4.39x elapsed=0:00:14.53    
+[2026-02-20 08:21:50] [INFO] frame= 1970 fps=131 q=29.0 size=   18432KiB time=00:01:05.63 bitrate=2300.6kbits/s speed=4.36x elapsed=0:00:15.05    
+[2026-02-20 08:21:51] [INFO] frame= 2043 fps=131 q=29.0 size=   19456KiB time=00:01:08.06 bitrate=2341.6kbits/s speed=4.37x elapsed=0:00:15.57    
+[2026-02-20 08:21:51] [INFO] frame= 2129 fps=132 q=29.0 size=   20224KiB time=00:01:10.93 bitrate=2335.6kbits/s speed=4.41x elapsed=0:00:16.09    
+[2026-02-20 08:21:52] [INFO] frame= 2203 fps=133 q=29.0 size=   20992KiB time=00:01:13.40 bitrate=2342.9kbits/s speed=4.42x elapsed=0:00:16.61    
+[2026-02-20 08:21:52] [INFO] frame= 2279 fps=133 q=29.0 size=   21760KiB time=00:01:15.83 bitrate=2350.7kbits/s speed=4.42x elapsed=0:00:17.14    
+[2026-02-20 08:21:53] [INFO] frame= 2360 fps=133 q=29.0 size=   22528KiB time=00:01:18.63 bitrate=2347.0kbits/s speed=4.45x elapsed=0:00:17.67    
+[2026-02-20 08:21:53] [INFO] frame= 2434 fps=134 q=29.0 size=   23040KiB time=00:01:21.06 bitrate=2328.3kbits/s speed=4.45x elapsed=0:00:18.20    
+[2026-02-20 08:21:54] [INFO] frame= 2500 fps=134 q=29.0 size=   23808KiB time=00:01:23.30 bitrate=2341.4kbits/s speed=4.45x elapsed=0:00:18.72    
+[2026-02-20 08:21:55] [INFO] frame= 2580 fps=134 q=29.0 size=   24576KiB time=00:01:26.16 bitrate=2336.5kbits/s speed=4.48x elapsed=0:00:19.24    
+[2026-02-20 08:21:55] [INFO] frame= 2660 fps=135 q=29.0 size=   25344KiB time=00:01:28.63 bitrate=2342.4kbits/s speed=4.49x elapsed=0:00:19.76    
+[2026-02-20 08:21:56] [INFO] frame= 2748 fps=135 q=29.0 size=   26112KiB time=00:01:31.56 bitrate=2336.1kbits/s speed=4.51x elapsed=0:00:20.28    
+[2026-02-20 08:21:56] [INFO] frame= 2822 fps=136 q=29.0 size=   26880KiB time=00:01:34.03 bitrate=2341.7kbits/s speed=4.52x elapsed=0:00:20.80    
+[2026-02-20 08:21:57] [INFO] frame= 2899 fps=136 q=29.0 size=   27648KiB time=00:01:36.60 bitrate=2344.6kbits/s speed=4.53x elapsed=0:00:21.32    
+[2026-02-20 08:21:57] [INFO] frame= 2979 fps=136 q=29.0 size=   28416KiB time=00:01:39.26 bitrate=2345.0kbits/s speed=4.55x elapsed=0:00:21.83    
+[2026-02-20 08:21:58] [INFO] frame= 3053 fps=137 q=29.0 size=   29184KiB time=00:01:41.70 bitrate=2350.8kbits/s speed=4.55x elapsed=0:00:22.35    
+[2026-02-20 08:21:58] [INFO] frame= 3130 fps=137 q=29.0 size=   29952KiB time=00:01:44.30 bitrate=2352.5kbits/s speed=4.56x elapsed=0:00:22.86    
+[2026-02-20 08:21:59] [INFO] frame= 3202 fps=137 q=29.0 size=   30720KiB time=00:01:46.70 bitrate=2358.6kbits/s speed=4.56x elapsed=0:00:23.38    
+[2026-02-20 08:21:59] [INFO] frame= 3277 fps=137 q=29.0 size=   31488KiB time=00:01:49.20 bitrate=2362.2kbits/s speed=4.57x elapsed=0:00:23.90    
+[2026-02-20 08:22:00] [INFO] frame= 3359 fps=137 q=29.0 size=   32256KiB time=00:01:51.93 bitrate=2360.7kbits/s speed=4.58x elapsed=0:00:24.46    
+[2026-02-20 08:22:00] [INFO] frame= 3431 fps=137 q=29.0 size=   33024KiB time=00:01:54.30 bitrate=2366.9kbits/s speed=4.57x elapsed=0:00:24.99    
+[2026-02-20 08:22:01] [INFO] frame= 3505 fps=137 q=29.0 size=   34048KiB time=00:01:56.80 bitrate=2388.0kbits/s speed=4.58x elapsed=0:00:25.51    
+[2026-02-20 08:22:01] [INFO] frame= 3579 fps=138 q=29.0 size=   34816KiB time=00:01:59.23 bitrate=2392.1kbits/s speed=4.58x elapsed=0:00:26.02    
+[2026-02-20 08:22:02] [INFO] frame= 3646 fps=137 q=29.0 size=   35584KiB time=00:02:01.50 bitrate=2399.2kbits/s speed=4.58x elapsed=0:00:26.54    
+[2026-02-20 08:22:02] [INFO] frame= 3698 fps=137 q=29.0 size=   36352KiB time=00:02:03.23 bitrate=2416.5kbits/s speed=4.56x elapsed=0:00:27.05    
+[2026-02-20 08:22:03] [INFO] frame= 3750 fps=136 q=29.0 size=   37376KiB time=00:02:04.96 bitrate=2450.1kbits/s speed=4.53x elapsed=0:00:27.56    
+[2026-02-20 08:22:03] [INFO] frame= 3793 fps=135 q=29.0 size=   38400KiB time=00:02:06.40 bitrate=2488.7kbits/s speed= 4.5x elapsed=0:00:28.08    
+[2026-02-20 08:22:04] [INFO] frame= 3851 fps=135 q=29.0 size=   39424KiB time=00:02:08.33 bitrate=2516.6kbits/s speed=4.49x elapsed=0:00:28.60    
+[2026-02-20 08:22:04] [INFO] frame= 3903 fps=134 q=29.0 size=   40192KiB time=00:02:10.06 bitrate=2531.4kbits/s speed=4.47x elapsed=0:00:29.11    
+[2026-02-20 08:22:05] [INFO] frame= 3972 fps=134 q=29.0 size=   41216KiB time=00:02:12.36 bitrate=2550.8kbits/s speed=4.47x elapsed=0:00:29.64    
+[2026-02-20 08:22:05] [INFO] frame= 4039 fps=134 q=29.0 size=   42240KiB time=00:02:14.60 bitrate=2570.8kbits/s speed=4.46x elapsed=0:00:30.16    
+[2026-02-20 08:22:06] [INFO] frame= 4109 fps=134 q=29.0 size=   43264KiB time=00:02:16.93 bitrate=2588.3kbits/s speed=4.46x elapsed=0:00:30.71    
+[2026-02-20 08:22:07] [INFO] frame= 4170 fps=133 q=29.0 size=   44288KiB time=00:02:18.96 bitrate=2610.8kbits/s speed=4.45x elapsed=0:00:31.24    
+[2026-02-20 08:22:07] [INFO] frame= 4240 fps=134 q=29.0 size=   45056KiB time=00:02:21.13 bitrate=2615.3kbits/s speed=4.44x elapsed=0:00:31.75    
+[2026-02-20 08:22:08] [INFO] frame= 4304 fps=133 q=29.0 size=   46080KiB time=00:02:23.43 bitrate=2631.8kbits/s speed=4.44x elapsed=0:00:32.29    
+[2026-02-20 08:22:08] [INFO] frame= 4368 fps=133 q=29.0 size=   46848KiB time=00:02:25.56 bitrate=2636.4kbits/s speed=4.44x elapsed=0:00:32.80    
+[2026-02-20 08:22:09] [INFO] frame= 4426 fps=133 q=29.0 size=   47616KiB time=00:02:27.50 bitrate=2644.5kbits/s speed=4.43x elapsed=0:00:33.32    
+[2026-02-20 08:22:09] [INFO] frame= 4493 fps=133 q=29.0 size=   48384KiB time=00:02:29.73 bitrate=2647.1kbits/s speed=4.43x elapsed=0:00:33.83    
+[2026-02-20 08:22:10] [INFO] frame= 4565 fps=133 q=29.0 size=   49408KiB time=00:02:32.13 bitrate=2660.5kbits/s speed=4.43x elapsed=0:00:34.35    
+[2026-02-20 08:22:10] [INFO] frame= 4633 fps=133 q=29.0 size=   49920KiB time=00:02:34.50 bitrate=2646.9kbits/s speed=4.43x elapsed=0:00:34.87    
+[2026-02-20 08:22:11] [INFO] [out#0/mp4 @ 000001c5d54fe380] video:48311KiB audio:2467KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.329762%
+[2026-02-20 08:22:11] [INFO] frame= 4709 fps=133 q=-1.0 Lsize=   50946KiB time=00:02:36.93 bitrate=2659.4kbits/s speed=4.44x elapsed=0:00:35.33    
+[2026-02-20 08:22:11] [INFO] [libx264 @ 000001c5d54c7000] frame I:19    Avg QP:18.02  size:258265
+[2026-02-20 08:22:11] [INFO] [libx264 @ 000001c5d54c7000] frame P:1415  Avg QP:22.35  size: 21879
+[2026-02-20 08:22:11] [INFO] [libx264 @ 000001c5d54c7000] frame B:3275  Avg QP:30.89  size:  4154
+[2026-02-20 08:22:11] [INFO] [libx264 @ 000001c5d54c7000] consecutive B-frames:  2.3%  6.7% 24.5% 66.5%
+[2026-02-20 08:22:11] [INFO] [libx264 @ 000001c5d54c7000] mb I  I16..4: 14.6% 24.3% 61.0%
+[2026-02-20 08:22:11] [INFO] [libx264 @ 000001c5d54c7000] mb P  I16..4:  1.4%  1.3%  2.1%  P16..4: 12.8%  5.1%  2.8%  0.0%  0.0%    skip:74.5%
+[2026-02-20 08:22:11] [INFO] [libx264 @ 000001c5d54c7000] mb B  I16..4:  0.2%  0.2%  0.3%  B16..8:  9.1%  1.8%  0.3%  direct: 0.7%  skip:87.5%  L0:40.4% L1:51.5% BI: 8.1%
+[2026-02-20 08:22:11] [INFO] [libx264 @ 000001c5d54c7000] 8x8 transform intra:26.4% inter:35.4%
+[2026-02-20 08:22:11] [INFO] [libx264 @ 000001c5d54c7000] coded y,uvDC,uvAC intra: 61.3% 51.5% 29.4% inter: 3.6% 2.3% 0.6%
+[2026-02-20 08:22:11] [INFO] [libx264 @ 000001c5d54c7000] i16 v,h,dc,p: 12% 71%  5% 12%
+[2026-02-20 08:22:11] [INFO] [libx264 @ 000001c5d54c7000] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 22% 29% 20%  4%  4%  4%  5%  4%  6%
+[2026-02-20 08:22:11] [INFO] [libx264 @ 000001c5d54c7000] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 21% 30% 13%  6%  7%  7%  6%  6%  6%
+[2026-02-20 08:22:11] [INFO] [libx264 @ 000001c5d54c7000] i8c dc,h,v,p: 44% 34% 16%  6%
+[2026-02-20 08:22:11] [INFO] [libx264 @ 000001c5d54c7000] Weighted P-Frames: Y:0.1% UV:0.1%
+[2026-02-20 08:22:11] [INFO] [libx264 @ 000001c5d54c7000] ref P L0: 72.0%  9.6% 13.5%  4.9%  0.0%
+[2026-02-20 08:22:11] [INFO] [libx264 @ 000001c5d54c7000] ref B L0: 88.3%  9.7%  2.0%
+[2026-02-20 08:22:11] [INFO] [libx264 @ 000001c5d54c7000] ref B L1: 96.0%  4.0%
+[2026-02-20 08:22:11] [INFO] [libx264 @ 000001c5d54c7000] kb/s:2521.28
+[2026-02-20 08:22:11] [INFO] [aac @ 000001c5d57e0d40] Qavg: 950.703

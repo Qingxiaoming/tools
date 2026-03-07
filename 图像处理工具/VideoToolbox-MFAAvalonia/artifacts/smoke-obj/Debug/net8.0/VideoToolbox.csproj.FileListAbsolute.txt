@@ -1,0 +1,8 @@
+D:\Users\Windows10\Desktop\零时有用\命令行小工具~\图像处理工具\VideoToolbox-MFAAvalonia\artifacts\smoke-obj\Debug\net8.0\VideoToolbox.csproj.AssemblyReference.cache
+D:\Users\Windows10\Desktop\零时有用\命令行小工具~\图像处理工具\VideoToolbox-MFAAvalonia\artifacts\smoke-obj\Debug\net8.0\Avalonia\Resources.Inputs.cache
+D:\Users\Windows10\Desktop\零时有用\命令行小工具~\图像处理工具\VideoToolbox-MFAAvalonia\artifacts\smoke-obj\Debug\net8.0\Avalonia\resources
+D:\Users\Windows10\Desktop\零时有用\命令行小工具~\图像处理工具\VideoToolbox-MFAAvalonia\artifacts\smoke-obj\Debug\net8.0\VideoToolbox.GeneratedMSBuildEditorConfig.editorconfig
+D:\Users\Windows10\Desktop\零时有用\命令行小工具~\图像处理工具\VideoToolbox-MFAAvalonia\artifacts\smoke-obj\Debug\net8.0\VideoToolbox.AssemblyInfoInputs.cache
+D:\Users\Windows10\Desktop\零时有用\命令行小工具~\图像处理工具\VideoToolbox-MFAAvalonia\artifacts\smoke-obj\Debug\net8.0\VideoToolbox.AssemblyInfo.cs
+D:\Users\Windows10\Desktop\零时有用\命令行小工具~\图像处理工具\VideoToolbox-MFAAvalonia\artifacts\smoke-obj\Debug\net8.0\VideoToolbox.csproj.CoreCompileInputs.cache
+D:\Users\Windows10\Desktop\零时有用\命令行小工具~\图像处理工具\VideoToolbox-MFAAvalonia\artifacts\smoke-obj\Debug\net8.0\VideoToolbox.sourcelink.json
