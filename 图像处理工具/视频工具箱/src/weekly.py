@@ -30,7 +30,7 @@ except ImportError:  # 兼容直接运行 src 下脚本的情况
 class WeeklyMixin:
     """录屏整理模块（按时间轴分段导出）。"""
 
-    SEGMENT_SECONDS: int = 24 * 3600
+    SEGMENT_SECONDS: int = 24 * 60 * 60  # 24小时的原始内容，60倍速后=24分钟输出
 
     def _create_weekly_widgets(self) -> None:
         """创建「录屏整理」页签 UI。"""
