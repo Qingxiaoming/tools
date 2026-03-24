@@ -316,6 +316,7 @@ class WeeklyMixin:
                             chunk_audio.unlink()
                         except Exception:
                             pass
+                    segment_end = local_start + local_dur
                     audio_cmd = [
                         "ffmpeg",
                         "-hide_banner",
@@ -326,8 +327,8 @@ class WeeklyMixin:
                         str(local_start),
                         "-i",
                         vpath,
-                        "-t",
-                        str(local_dur),
+                        "-to",
+                        str(segment_end),
                         "-vn",
                         "-c:a",
                         "aac",
@@ -391,6 +392,7 @@ class WeeklyMixin:
                             chunk_video.unlink()
                         except Exception:
                             pass
+                    segment_end = local_start + local_dur
                     video_cmd = [
                         "ffmpeg",
                         "-hide_banner",
@@ -401,8 +403,8 @@ class WeeklyMixin:
                         str(local_start),
                         "-i",
                         vpath,
-                        "-t",
-                        str(local_dur),
+                        "-to",
+                        str(segment_end),
                         "-an",
                         "-filter:v",
                         "setpts=PTS/60",

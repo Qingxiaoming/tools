@@ -1,0 +1,32 @@
+{
+  "env": {
+    "HTTPS_PROXY": "http://127.0.0.1:7897",
+    "ANTHROPIC_BASE_URL": "https://api.moonshot.cn/anthropic",
+    "ANTHROPIC_AUTH_TOKEN": "sk-FfPWyDnjmcnbs2uJAkQisxXkYjE2F7kEfMHnHZpk0m9KQsnG",
+    "ANTHROPIC_MODEL": "kimi-k2.5"
+  },
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Bash(start:*)",
+      "Bash(python:*)",
+      "Bash(pip install:*)",
+      "Bash(unzip -o gum.zip -d /tmp/gum)",
+      "Read(//tmp/**)",
+      "Bash(obsidian help:*)",
+      "Bash(powershell:*)",
+      "Bash(obsidian:*)",
+      "Bash(where python:*)",
+      "Bash(python3:*)",
+      "Bash(source:*)",
+      "Bash(.venv/Scripts/python.exe:*)",
+      "Bash(../../.venv/Scripts/python.exe:*)",
+      "Bash(rm:*)",
+      "Bash(d:/Users/Windows10/Desktop/零时有用/命令行小工具~/.venv/Scripts/python.exe:*)",
+      "Bash(npx skills:*)",
+      "Bash(find . -type f -name *.md -o -name *.txt -o -name *.json -o -name *.yaml -o -name *.yml -o -name Makefile -o -name *.toml -o -name *.cfg -o -name *.ini)"
+    ]
+  },
+  "outputStyle": "Learning",
+  "prefersReducedMotion": false
+}
