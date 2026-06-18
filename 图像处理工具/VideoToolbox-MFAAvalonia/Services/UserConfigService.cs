@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Text.Json;
 
 namespace VideoToolbox.Services;
@@ -12,7 +13,26 @@ public sealed class UserConfigService(ILogService log)
         WriteIndented = true
     };
 
-    public string ConfigPath => Path.Combine(AppContext.BaseDirectory, "config.json");
+    // 使用 Process 获取 exe 实际路径，兼容单文件发布模式
+    private static string GetExeDirectory()
+    {
+        try
+        {
+            var exePath = Process.GetCurrentProcess().MainModule?.FileName;
+            if (!string.IsNullOrEmpty(exePath))
+                return Path.GetDirectoryName(exePath)!;
+        }
+        catch { }
+
+        // 降级到 Assembly 位置
+        var asm = Assembly.GetEntryAssembly()?.Location;
+        if (!string.IsNullOrEmpty(asm))
+            return Path.GetDirectoryName(asm)!;
+
+        return AppContext.BaseDirectory;
+    }
+
+    public string ConfigPath => Path.Combine(GetExeDirectory(), "config.json");
 
     public UserConfig LoadOrCreate()
     {

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("VideoToolbox")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7e4fb4379b795fc5b440ce4b05d1d5dc3bddc1d6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c0cbc4669c2cde5e3aa5b2a05ec348263b502a9c")]
 [assembly: System.Reflection.AssemblyProductAttribute("VideoToolbox")]
 [assembly: System.Reflection.AssemblyTitleAttribute("VideoToolbox")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

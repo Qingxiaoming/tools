@@ -2,6 +2,8 @@
 chcp 65001 >nul
 REM Video Toolbox - build exe
 REM 双击运行此脚本即可，会自动切换到项目根目录
+REM 一律用 python -m pip / python -m PyInstaller，避免 pip.exe、pyinstaller.exe
+REM 启动器损坏时出现 "Fatal error in launcher: Unable to create process"
 
 set "SCRIPT_DIR=%~dp0"
 set "ROOT=%SCRIPT_DIR%.."
@@ -11,17 +13,29 @@ echo [1/3] Checking PyInstaller...
 python -c "import PyInstaller" 2>nul
 if errorlevel 1 (
     echo Installing PyInstaller...
-    pip install --default-timeout=300 -i https://pypi.tuna.tsinghua.edu.cn/simple pyinstaller
+    python -m pip install --default-timeout=300 -i https://pypi.tuna.tsinghua.edu.cn/simple pyinstaller
 ) else (
     echo PyInstaller OK.
 )
 
 echo [2/3] Installing dependencies...
-pip install --default-timeout=300 -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt -q
+python -m pip install --default-timeout=300 -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt -q
+if errorlevel 1 (
+    echo Tsinghua mirror failed or index issue, retrying with pypi.org ...
+    python -m pip install --default-timeout=300 -i https://pypi.org/simple -r requirements.txt -q
+)
+if errorlevel 1 (
+    echo.
+    echo ERROR: requirements not installed. tkinterdnd2 etc. are required for drag-drop and import.
+    echo Try: python -m pip install -U pip
+    echo Or use Python 3.10--3.13 if you are on a very new preview Python.
+    pause
+    exit /b 1
+)
 
 echo [3/3] Building exe...
 cd "%SCRIPT_DIR%"
-pyinstaller --noconfirm --clean video_tools.spec
+python -m PyInstaller --noconfirm --clean video_tools.spec
 
 if exist "dist\VideoTools.exe" (
     echo.

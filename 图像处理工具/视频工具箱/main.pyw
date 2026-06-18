@@ -1,5 +1,6 @@
 import sys
 import os
+import signal
 
 # 打包成 exe 后，需把运行目录加入 path，否则找不到同目录的 app、config 等模块
 if getattr(sys, "frozen", False):
@@ -9,10 +10,16 @@ else:
     sys.path.insert(0, root_dir)
     sys.path.insert(0, os.path.join(root_dir, "src"))
 
-from src.app import VideoTools
+from src.core.app import VideoTools
 
 
 def main() -> None:
+    # 启用 Ctrl+C 信号处理（Windows 上默认可忽略）
+    try:
+        signal.signal(signal.SIGINT, signal.SIG_DFL)
+    except (ValueError, AttributeError):
+        pass
+
     app = VideoTools()
     app.mainloop()
 

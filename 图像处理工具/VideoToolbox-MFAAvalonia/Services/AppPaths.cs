@@ -1,10 +1,31 @@
 using System;
+using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 
 namespace VideoToolbox.Services;
 
 public sealed class AppPaths
 {
+    // 获取 exe 实际所在目录，兼容单文件发布模式
+    private static string GetExeDirectory()
+    {
+        try
+        {
+            var exePath = Process.GetCurrentProcess().MainModule?.FileName;
+            if (!string.IsNullOrEmpty(exePath))
+                return Path.GetDirectoryName(exePath)!;
+        }
+        catch { }
+
+        var asm = Assembly.GetEntryAssembly()?.Location;
+        if (!string.IsNullOrEmpty(asm))
+            return Path.GetDirectoryName(asm)!;
+
+        return AppContext.BaseDirectory;
+    }
+
+    private static readonly string ExeDirectory = GetExeDirectory();
     public string RootOutput { get; } = GetEnvOrDefault("VTB_ROOT_OUTPUT", @"E:\toolbox输出");
     public string SegmentOutput => Path.Combine(RootOutput, "多段截取");
     public string CropOutput => Path.Combine(RootOutput, "画幅裁剪");
@@ -28,9 +49,9 @@ public sealed class AppPaths
         }
     }
 
-    public string LogsDir => Path.Combine(AppContext.BaseDirectory, "logs");
+    public string LogsDir => Path.Combine(ExeDirectory, "logs");
     public string AppLog => Path.Combine(LogsDir, "toolbox.log");
-    public string LayoutFile => Path.Combine(AppContext.BaseDirectory, "layout.json");
+    public string LayoutFile => Path.Combine(ExeDirectory, "layout.json");
 
     private static string GetEnvOrDefault(string key, string fallback)
     {

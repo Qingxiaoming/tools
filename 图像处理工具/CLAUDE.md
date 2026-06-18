@@ -38,14 +38,17 @@ pyinstaller --noconfirm --clean video_tools.spec
 ### 项目结构
 
 - `main.pyw` - 入口文件，处理路径并启动主窗体
-- `src/app.py` - 主窗体类 `VideoTools`，继承多个 Mixin
-- `src/config.py` - 全局配置（输出目录、路径模板等）
-- `src/segment.py` - 多段截取功能 (SegmentMixin)
-- `src/crop.py` - 画幅裁剪功能 (CropMixin)
-- `src/merge.py` - 视频合并功能 (MergeMixin)
-- `src/doc.py` - 文档生成功能 (DocMixin)
-- `src/weekly.py` - 录屏整理功能 (WeeklyMixin)
-- `src/roi_selector.py` - ROI 区域选择器（OpenCV）
+- `src/core/app.py` - 主窗体类 `VideoTools`，组合各 Mixin
+- `src/core/config.py` - 全局配置（输出目录、路径模板等）
+- `src/core/overlay.py` - 页签内容区内嵌覆盖层
+- `src/core/subprocess_util.py` - ffmpeg 子进程跟踪与退出清理
+- `src/services/repair.py` - 损坏流式录屏检测与修复 (RepairMixin)
+- `src/tabs/segment.py` - 多段截取 (SegmentMixin)
+- `src/tabs/crop.py` - 画幅裁剪 (CropMixin)
+- `src/tabs/merge.py` - 视频合并 (MergeMixin)
+- `src/tabs/doc.py` - 文档生成 (DocMixin)
+- `src/tabs/weekly.py` - 录屏整理 (WeeklyMixin)
+- `src/tabs/roi.py` - 画幅裁剪 ROI 框选（OpenCV）
 
 ### 关键配置
 
@@ -129,7 +132,7 @@ VideoToolbox-MFAAvalonia/
 
 | 功能 | Python 文件 | C# ViewModel 分部类 |
 |------|-------------|---------------------|
-| 多段截取 | `src/segment.py` | `MainWindowViewModel.Segment.cs` |
+| 多段截取 | `src/tabs/segment.py` | `MainWindowViewModel.Segment.cs` |
 | 画幅裁剪 | `src/crop.py` | `MainWindowViewModel.Crop.cs` |
 | 视频合并 | `src/merge.py` | `MainWindowViewModel.Merge.cs` |
 | 文档生成 | `src/doc.py` | `MainWindowViewModel.Doc.cs` |

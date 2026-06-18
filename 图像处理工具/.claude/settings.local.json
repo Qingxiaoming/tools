@@ -24,7 +24,9 @@
       "Bash(rm:*)",
       "Bash(d:/Users/Windows10/Desktop/零时有用/命令行小工具~/.venv/Scripts/python.exe:*)",
       "Bash(npx skills:*)",
-      "Bash(find . -type f -name *.md -o -name *.txt -o -name *.json -o -name *.yaml -o -name *.yml -o -name Makefile -o -name *.toml -o -name *.cfg -o -name *.ini)"
+      "Bash(find . -type f -name *.md -o -name *.txt -o -name *.json -o -name *.yaml -o -name *.yml -o -name Makefile -o -name *.toml -o -name *.cfg -o -name *.ini)",
+      "PowerShell(dotnet build -c Release 2>&1 | Select-String -Pattern \"\\(error|Error|成功|失败|error\\)\" | ForEach-Object { $_.Line })",
+      "PowerShell(cd VideoToolbox-MFAAvalonia; dotnet build -c Release 2>&1 | Select-String -Pattern \"\\(error|warning|成功|失败|error|Error\\)\" | ForEach-Object { $_.Line })"
     ]
   },
   "outputStyle": "Learning",

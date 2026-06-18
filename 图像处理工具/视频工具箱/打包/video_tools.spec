@@ -14,20 +14,33 @@ tkdnd_datas = collect_data_files('tkinterdnd2')
 spec_dir = os.path.dirname(os.path.abspath(SPEC))
 root_dir = os.path.abspath(os.path.join(spec_dir, '..'))
 
+# 收集数据文件：tkdnd 库 + 配置文件
+# 注意：data 目录不打包，用户可在 exe 旁自定义
+all_datas = tkdnd_datas + [
+    (os.path.join(root_dir, 'config.json'), '.'),  # 打包 config.json 到 exe 同级目录
+]
+
 a = Analysis(
     [os.path.join(root_dir, 'main.pyw')],
     pathex=[root_dir],
     binaries=[],
-    datas=tkdnd_datas,
+    datas=all_datas,
     hiddenimports=[
         'src',
-        'src.app',
-        'src.config',
-        'src.segment',
-        'src.crop',
-        'src.merge',
-        'src.doc',
-        'src.roi_selector',
+        'src.core',
+        'src.core.app',
+        'src.core.config',
+        'src.core.overlay',
+        'src.core.subprocess_util',
+        'src.services',
+        'src.services.repair',
+        'src.tabs',
+        'src.tabs.segment',
+        'src.tabs.crop',
+        'src.tabs.merge',
+        'src.tabs.doc',
+        'src.tabs.weekly',
+        'src.tabs.roi',
         'tkinterdnd2',
         'cv2',
         'PIL',
