@@ -96,9 +96,9 @@ def match(filename: str, video_path: str = "") -> bool:
         return False
     stage_part = base.split('_')[0]
     patterns = [
-        r'^\d+-\d+',
-        r'^[A-Z]+-\d+',
-        r'^H\d+-\d+',
+        r'^\d+-\d+',               # 1-7
+        r'^[a-z]+\d+-\d+',         # H12-4（字母+数字-数字）
+        r'^[a-z]+-[a-z]+-\d+',     # DT-EX-8（字母-字母-数字）
     ]
     return any(re.search(p, stage_part) for p in patterns)
 ```

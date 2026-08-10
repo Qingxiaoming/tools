@@ -1,10 +1,9 @@
 import os
 import subprocess
 import threading
-from typing import Callable, List, Optional, Tuple
+from typing import Callable, List, Optional
 
 import cv2
-import tkinter as tk
 from tkinter import scrolledtext, ttk
 
 from ..core.config import (

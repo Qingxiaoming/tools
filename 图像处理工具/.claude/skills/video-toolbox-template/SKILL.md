@@ -30,7 +30,7 @@ data/mdtemplate/<name>/
 
 ## 信息提取：默认不解析，模板用 extract.py 自定义
 
-默认情况下模板**不做任何文件名解析**，只有 `${filename}` 可用（`operators/nature/stage` 为空，渲染时回落为 `未知 / 普通 / 文件名`）。
+默认情况下模板**不做任何文件名解析**：未提供 `extract.py` 时不提取任何信息，只有渲染自带的 `${filename}` 可用（`operators/nature/stage` 为空，渲染时回落为 `未知 / 普通 / 文件名`）。
 
 需要解析文件名（如干员/关卡/性质）时，在模板目录提供可选 `extract.py`：
 
@@ -44,7 +44,7 @@ def extract(filename: str, video_path: str = "") -> dict:
     }
 ```
 
-返回的 dict 会作为模板变量：可覆盖 operators/nature/stage，额外的键用 `${键名}` 在 template.md 中引用。没有 extract.py 时回落中性默认（仅文件名）。参考实现：`data/mdtemplate/taera/extract.py`（按 `关卡_性质_干员+干员` 解析）。
+返回的 dict 会作为模板变量：可覆盖 operators/nature/stage，额外的键用 `${键名}` 在 template.md 中引用。没有 extract.py 时不提取任何信息。参考实现：`data/mdtemplate/taera/extract.py`（按 `关卡_性质_干员+干员` 解析）。
 
 ## 创建新模板
 

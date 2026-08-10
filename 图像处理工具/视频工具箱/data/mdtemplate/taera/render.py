@@ -7,15 +7,12 @@ from typing import List, Optional
 def render(
     content: str,
     filename: str,
-    operators: Optional[List[str]] = None,
-    nature: str = "普通",
-    stage: str = "",
     extra_vars: Optional[dict] = None,
     preserve_placeholders: bool = False,
 ) -> str:
     """渲染taera模板内容。
 
-    特殊处理：
+    特殊处理（operators/nature/stage 从 extra_vars 读取，由模板的 extract.py 提供）：
     - YAML frontmatter 中的 ${operators} 输出为列表格式
     - 其他位置（如标题）的 ${operators} 输出为 "人数-干员+干员" 格式
     - ${inject:xxx} 是可注入占位符，preserve_placeholders=True 时保留
@@ -27,7 +24,8 @@ def render(
     import uuid
 
     today = datetime.today()
-    ops = operators or ["未知"]
+    extra = dict(extra_vars or {})
+    ops = extra.get("operators") or ["未知"]
 
     # 处理 ${inject:xxx} 格式的可注入占位符
     placeholder_map = {}
@@ -45,8 +43,8 @@ def render(
     # 基础变量
     default_vars = {
         "filename": filename,
-        "nature": nature or "普通",
-        "stage": stage or filename,
+        "nature": extra.get("nature") or "普通",
+        "stage": extra.get("stage") or filename,
         "year": today.year,
         "month": today.month,
         "day": today.day,
@@ -54,9 +52,9 @@ def render(
         "datetime": today.strftime("%Y-%m-%d %H:%M:%S"),
     }
 
-    # 额外变量
-    if extra_vars:
-        default_vars.update(extra_vars)
+    # 额外变量（operators 由下方特殊逻辑处理，不进入通用替换）
+    if extra:
+        default_vars.update({k: v for k, v in extra.items() if k != "operators"})
 
     # 替换普通变量
     def replace_var(match):

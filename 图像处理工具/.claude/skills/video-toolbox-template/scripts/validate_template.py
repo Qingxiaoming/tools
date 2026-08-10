@@ -39,16 +39,11 @@ def render(template_dir: Path, name: str, filename: str, project_root: Path) -> 
     spec.loader.exec_module(module)
 
     tpl = module.MdTemplate(name=name, template_dir=template_dir)
-    extracted = tpl.extract(filename)
+    # 传入的文件名若为真实路径，同时作为 video_path，便于测试基于文件属性的提取
+    extracted = tpl.extract(filename, filename)
     return tpl.render(
         filename=filename,
-        operators=extracted.get("operators"),
-        nature=extracted.get("nature", "普通"),
-        stage=extracted.get("stage", ""),
-        extra_vars={
-            k: v for k, v in extracted.items()
-            if k not in ("operators", "nature", "stage")
-        },
+        extra_vars=extracted,
         preserve_placeholders=True,
     )
 

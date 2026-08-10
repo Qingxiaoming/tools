@@ -1,7 +1,7 @@
 import os
 import subprocess
 import threading
-from typing import Callable, List, Optional, Tuple
+from typing import Callable, List, Optional
 
 import tkinter as tk
 from tkinter import ttk

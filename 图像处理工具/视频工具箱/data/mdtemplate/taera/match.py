@@ -9,19 +9,21 @@ import re
 
 
 # 常见的明日方舟关卡前缀模式
-ARKNIGNTS_STAGE_PATTERNS = [
-    r'^\d+-\d+',              
-    r'^\d+-jt\d+',           
-    r'^\d+-ex\d+',         
-    r'^\d+-s\d+(?:-[ab])?', 
-    r'^[a-z]+-\d+',           
-    r'^[a-z]+-ex\d+',         
-    r'^[a-z]+-s\d+(?:-[ab])?', 
-    r'^[a-z]+-mo\d+',         
-    r'^[a-z]+-hx\d+',         
-    r'^[a-z]+-f\d+',          
-    r'^vecT\d-[cd]',          
-    r'^tnT\d-\d+',            
+ARKNIGHTS_STAGE_PATTERNS = [
+    r'^\d+-\d+',               # 1-7
+    r'^\d+-jt\d+',             # 1-JT1
+    r'^\d+-ex\d+',             # 1-EX2
+    r'^\d+-s\d+(?:-[ab])?',    # 2-S1 / 2-S1-a
+    r'^[a-z]+-\d+',            # DT-8
+    r'^[a-z]+-ex\d+',          # DT-EX8
+    r'^[a-z]+-s\d+(?:-[ab])?', # DT-S1
+    r'^[a-z]+-mo\d+',          # DT-MO1
+    r'^[a-z]+-hx\d+',          # 1-HX1
+    r'^[a-z]+-f\d+',           # DT-F1
+    r'^[a-z]+\d+-\d+',         # H12-4 字母+数字-数字
+    r'^[a-z]+-[a-z]+-\d+',     # DT-EX-8 字母-字母-数字
+    r'^vecT\d-[cd]',           # vecT1-c
+    r'^tnT\d-\d+',             # tnT1-3
 ]
 
 def match(filename: str, video_path: str = "") -> bool:
@@ -41,12 +43,12 @@ def match(filename: str, video_path: str = "") -> bool:
     stage_part = base.split('_')[0]
 
     # 检查是否符合任意一种关卡模式
-    for pattern in ARKNIGNTS_STAGE_PATTERNS:
+    for pattern in ARKNIGHTS_STAGE_PATTERNS:
         if re.search(pattern, stage_part, re.IGNORECASE):
             return True
 
     # 特殊标记：如果文件名中包含"突袭"、"剿灭"等关键词，也匹配
-    ark_keywords = ['突袭', '剿灭', '危机合约', '集成战略', '肉鸽', '保全派驻']
+    ark_keywords = ['突袭', '剿灭', '危机合约', '集成战略', '肉鸽', '保全派驻', '高难']
     for keyword in ark_keywords:
         if keyword in filename:
             return True

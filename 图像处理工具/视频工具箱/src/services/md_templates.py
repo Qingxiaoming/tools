@@ -1,20 +1,11 @@
 """MD模板管理服务：支持动态加载、文件名匹配和模板渲染。"""
 
-import os
 import re
 import sys
 import importlib.util
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Callable, List, Optional
-
-
-def default_extract(filename: str, video_path: str = "") -> dict:
-    """默认信息提取：不做任何文件名解析，仅提供文件名本身。
-
-    模板需要解析（如干员/关卡/性质）时，在模板目录提供 extract.py 自定义。
-    """
-    return {"filename": filename}
+from typing import List, Optional
 
 
 @dataclass
@@ -49,10 +40,10 @@ class MdTemplate:
         return ""
 
     def extract(self, filename: str, video_path: str = "") -> dict:
-        """按模板自定义规则从文件名提取变量；无 extract.py 时使用默认全局规则。
+        """按模板自定义规则从文件名提取变量；无 extract.py 时不提取任何信息。
 
         返回 dict 会作为模板变量使用（含 operators/nature/stage，可覆盖默认变量，
-        额外的键可作为 ${自定义变量} 在 template.md 中使用）。
+        额外的键可作为 ${自定义变量} 在 template.md 中使用；filename 由渲染参数直接提供）。
         """
         extract_path = self.get_extract_path()
         if extract_path.exists():
@@ -61,7 +52,7 @@ class MdTemplate:
                     f"extract_{self.name}", extract_path
                 )
                 if spec is None or spec.loader is None:
-                    return default_extract(filename, video_path)
+                    return {}
                 module = importlib.util.module_from_spec(spec)
                 sys.modules[spec.name] = module
                 spec.loader.exec_module(module)
@@ -72,7 +63,8 @@ class MdTemplate:
                     print(f"[模板提取警告] {self.name}: extract() 应返回 dict，已使用默认规则")
             except Exception as e:
                 print(f"[模板提取错误] {self.name}: {e}")
-        return default_extract(filename, video_path)
+        # 无 extract.py：不做任何提取（filename 由渲染参数直接提供，operators/nature/stage 由渲染默认值兜底）
+        return {}
 
     def can_handle(self, filename: str, video_path: str = "") -> bool:
         """检查此模板是否匹配给定的文件名。"""
@@ -103,9 +95,6 @@ class MdTemplate:
     def render(
         self,
         filename: str,
-        operators: Optional[List[str]] = None,
-        nature: str = "普通",
-        stage: str = "",
         extra_vars: Optional[dict] = None,
         preserve_placeholders: bool = False,
     ) -> str:
@@ -134,9 +123,6 @@ class MdTemplate:
                         return module.render(
                             content=content,
                             filename=filename,
-                            operators=operators,
-                            nature=nature,
-                            stage=stage,
                             extra_vars=extra_vars,
                             preserve_placeholders=preserve_placeholders,
                         )
@@ -147,9 +133,6 @@ class MdTemplate:
         today = __import__("datetime").datetime.today()
         default_vars = {
             "filename": filename,
-            "operators": operators or ["未知"],
-            "nature": nature or "普通",
-            "stage": stage or filename,
             "year": today.year,
             "month": today.month,
             "day": today.day,

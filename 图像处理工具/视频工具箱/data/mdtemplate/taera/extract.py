@@ -2,7 +2,7 @@
 
 import os
 
-NATURE_LIST = ["突袭", "无解", "待压", "剧情", "他人记录", "剿灭", "沙盘", "普通"]
+NATURE_LIST = ["突袭", "无解", "待压", "剧情", "他人记录", "剿灭", "沙盘", "高难", "普通"]
 
 
 def extract(filename: str, video_path: str = "") -> dict:

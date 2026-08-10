@@ -550,7 +550,6 @@ class RepairMixin(OverlayMixin):
         self._append_log_line("=== 开始修复未正常结束的录屏（后台） ===")
         self.status_label.config(text="正在后台修复录屏…", foreground="blue")
 
-        from functools import partial
         self._start_repair_worker(to_repair, mapping, original_paths, on_done)
 
     def _start_repair_worker(self, to_repair: List[str], mapping: dict, original_paths: List[str], on_done: ResolveDoneCallback) -> None:

@@ -26,7 +26,7 @@
 
 ## 信息提取（默认不解析，extract.py 自定义）
 
-默认提取（`md_templates.default_extract`）**不做任何文件名解析**，只返回 `{"filename": filename}`。通用模板（如 generic）直接用 `${filename}` 即可，不会产生 干员/关卡/性质 等变量（渲染时回落为 `未知 / 普通 / 文件名`）。
+模板未提供 `extract.py` 时**不提取任何信息**（返回空字典），只有渲染自带的 `${filename}` 可用。通用模板（如 generic）直接用 `${filename}` 即可，不会产生 干员/关卡/性质 等变量（渲染时回落为 `未知 / 普通 / 文件名`）。
 
 需要解析文件名时，模板提供可选 `extract.py` 完全接管提取，签名：
 
@@ -35,7 +35,7 @@ def extract(filename: str, video_path: str = "") -> dict:
     ...
 ```
 
-返回 dict 会作为模板变量：`operators/nature/stage` 覆盖默认位置参数，其他键经 `extra_vars` 合并进模板变量（可用 `${键名}` 引用）。`extract()` 返回非 dict 或抛异常时，应用打印警告并回落中性默认（仅文件名）。
+返回 dict 会作为模板变量：`operators/nature/stage` 覆盖默认位置参数，其他键经 `extra_vars` 合并进模板变量（可用 `${键名}` 引用）。`extract()` 返回非 dict 或抛异常时，应用打印警告并按"不提取"处理。
 
 渲染与输出文件名的 stage 都使用同一套提取结果（`_generate_content_for_video` 与 `_doc_generation_thread`）。
 
@@ -49,13 +49,12 @@ def extract(filename: str, video_path: str = "") -> dict:
 def render(
     content: str,
     filename: str,
-    operators: Optional[List[str]] = None,
-    nature: str = "普通",
-    stage: str = "",
     extra_vars: Optional[dict] = None,
     preserve_placeholders: bool = False,
 ) -> str:
 ```
+
+核心 render 只内置 `filename` 与日期变量，其余变量一律来自 `extra_vars`（即 extract.py 的返回）。`operators/nature/stage` 只是约定俗成的 extra_vars 键名，核心不做特殊处理；模板引用了未提供的变量时保留字面占位符（如 `${operators}`）。
 
 taera 的 render.py 实现了"同一变量不同位置不同格式"：YAML frontmatter 里的 `${operators}` 输出列表格式，正文里输出 `N-干员+干员` 紧凑格式。通用渲染器做不到这种区分，需要时用 render.py。
 

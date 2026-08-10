@@ -12,7 +12,6 @@ from ..core.config import (
     SEGMENT_NAME_MAPPINGS,
     SEGMENT_OUTPUT_DIR,
     MONO_FONT_FAMILY,
-    SUBPROCESS_CREATE_NO_WINDOW,
     notification,
 )
 from ..core.subprocess_util import tracked_popen

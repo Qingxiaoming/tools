@@ -2,9 +2,8 @@ import os
 import re
 import shutil
 import threading
-from datetime import datetime
 from pathlib import Path
-from typing import Callable, List, Optional, Tuple
+from typing import List, Optional, Tuple
 
 import tkinter as tk
 from tkinter import scrolledtext, ttk, messagebox
@@ -636,32 +635,10 @@ class DocMixin:
             text="列表已清空", foreground="blue"
         )
 
-    # 供主程序通过右箭头传递视频列表时调用
-    def _set_doc_videos_from_paths(
-        self,
-        files: List[str],
-        overwrite: bool = True,
-        on_done: Optional[Callable[[bool], None]] = None,
-    ) -> None:
-        """根据给定路径列表更新文档生成输入列表（含可选异步修复）。"""
-        if not files:
-            if on_done:
-                on_done(True)
-            return
-
-        def finish(resolved: List[str] | None, original_paths: List[str]) -> None:
-            ok = self._apply_doc_videos_resolved(
-                resolved, original_paths, overwrite=overwrite
-            )
-            if on_done:
-                on_done(ok)
-
-        self._resolve_paths_for_use_async(files, finish)
-
     # ------------------------- 文档生成 -------------------------
 
     def _get_template_for_video(self, video_name: str, video_path: str = "") -> MdTemplate:
-        """获取指定视频应该使用的模板（优先匹配，默认用 taera）。"""
+        """获取指定视频应该使用的模板（自动匹配；generic 恒匹配，作为兜底）。"""
         # 尝试自动匹配
         template = self._template_manager.match_template(video_name, video_path)
         if template is None:
@@ -684,22 +661,13 @@ class DocMixin:
         if template is None:
             template = self._get_template_for_video(video_name, video_path)
 
-        # 提取信息：优先使用模板自定义 extract.py，缺省用全局默认规则
+        # 提取信息：优先使用模板自定义 extract.py，缺省不提取（仅 filename）
         extracted = template.extract(video_name, video_path)
-        ops = extracted.get("operators") or ["未知"]
-        nature = extracted.get("nature", "普通")
-        stage = extracted.get("stage", "")
 
         # 渲染模板，保留注入占位符
         content = template.render(
             filename=video_name,
-            operators=ops,
-            nature=nature,
-            stage=stage,
-            extra_vars={
-                k: v for k, v in extracted.items()
-                if k not in ("operators", "nature", "stage")
-            },
+            extra_vars=extracted,
             preserve_placeholders=True,
         )
 
