@@ -42,6 +42,7 @@ pyinstaller --noconfirm --clean video_tools.spec
 - `src/core/config.py` - 全局配置（输出目录、路径模板等）
 - `src/core/overlay.py` - 页签内容区内嵌覆盖层
 - `src/core/subprocess_util.py` - ffmpeg 子进程跟踪与退出清理
+- `src/core/file_lock.py` - 跨平台文件独占锁（修复输出等共享写防多实例并发）
 - `src/core/common_mixins.py` - 共用 Mixin：列表刷新/增删/拖拽排序、拖入过滤、批量任务收尾
 - `src/services/repair.py` - 损坏流式录屏检测与修复 (RepairMixin)
 - `src/tabs/segment.py` - 多段截取 (SegmentMixin)
@@ -86,6 +87,9 @@ python3 -m venv .venv
 ### 已知注意事项
 
 - 录屏整理的片段提取使用 `-t <片段时长>`，不依赖输出时间戳是否保留绝对值（旧写法是 `-to <绝对结束时间戳>`）。若出现片段边界/时长异常，改回旧写法即可，见 `src/tabs/weekly.py` 内注释。
+- 批处理任务全局互斥：多段截取/画幅裁剪/视频合并/录屏整理/文档生成/文档转运同一时间只允许运行一个，避免底部日志互相覆盖；处理期间其他标签仍可拖入文件、调整输入（各线程启动时已快照输入）。
+- 损坏检测进入"修复"阶段后，期间的新拖入会直接加入列表（跳过新一轮损坏检测），避免修复弹窗重叠。
+- 支持同时打开多个实例：合并临时文件（`filelist_<pid>.txt`、`temp_merge_for_music_<pid>.mp4`）与录屏整理临时目录（`_tmp_weekly_<pid>`）按 PID 隔离；修复输出（`*_repaired.mp4`）用文件锁防并发写（见 `src/core/file_lock.py`）。
 
 ---
 

@@ -202,13 +202,31 @@ class MergeMixin:
         if hasattr(self, "_set_jump_enabled"):
             self._set_jump_enabled(False)  # type: ignore[call-arg]
         self._clear_log()
-        threading.Thread(target=self._merge_batch_thread, daemon=True).start()
+        # 快照输入（列表/输出名/倍速/音频模式/音频文件），运行期间改动不影响本次合并
+        threading.Thread(
+            target=self._merge_batch_thread,
+            args=(
+                list(self.merge_video_list),
+                self.merge_output_name.get(),
+                self.merge_speed.get(),
+                self.audio_mode_var.get(),
+                self.merge_audio_file,
+            ),
+            daemon=True,
+        ).start()
 
-    def _merge_batch_thread(self) -> None:
+    def _merge_batch_thread(
+        self,
+        video_list,
+        output_name: str,
+        speed_str: str,
+        audio_mode_text: str,
+        audio_file: str,
+    ) -> None:
         try:
             MERGE_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-            base_name = self.merge_output_name.get().strip()
+            base_name = output_name.strip()
             counter = 1
             while True:
                 output_path = MERGE_OUTPUT_DIR / (
@@ -218,24 +236,22 @@ class MergeMixin:
                     break
                 counter += 1
 
-            list_file = MERGE_OUTPUT_DIR / "filelist.txt"
+            list_file = MERGE_OUTPUT_DIR / f"filelist_{os.getpid()}.txt"
             with open(list_file, "w", encoding="utf-8") as f:
-                for path, _ in self.merge_video_list:
+                for path, _ in video_list:
                     f.write(f"file '{path.replace(os.sep, '/')}'\n")
 
-            speed_str = self.merge_speed.get().strip()
-            audio_mode_text = self.audio_mode_var.get()
             audio_mode_map = {"保持原音频": "none", "替换音频": "replace", "叠加音频": "mix"}
             audio_mode = audio_mode_map.get(audio_mode_text, "none")
 
             use_music_finish = (
                 speed_str == "到音乐放完"
                 and audio_mode in ("replace", "mix")
-                and self.merge_audio_file
+                and audio_file
             )
 
             if use_music_finish:
-                temp_merged = MERGE_OUTPUT_DIR / "temp_merge_for_music.mp4"
+                temp_merged = MERGE_OUTPUT_DIR / f"temp_merge_for_music_{os.getpid()}.mp4"
                 cmd_concat = [
                     "ffmpeg",
                     "-hide_banner",
@@ -276,7 +292,7 @@ class MergeMixin:
                     )
                     return
                 video_dur = get_media_duration(str(temp_merged))
-                audio_dur = get_media_duration(self.merge_audio_file)
+                audio_dur = get_media_duration(audio_file)
                 if video_dur is None or audio_dur is None or audio_dur <= 0:
                     speed = 1.0
                     self._append_log_line("无法获取合并视频或音频时长，按 1 倍速输出。")
@@ -300,7 +316,7 @@ class MergeMixin:
                         "-i",
                         str(temp_merged),
                         "-i",
-                        self.merge_audio_file,
+                        audio_file,
                         "-filter_complex",
                         f"[0:v]setpts={1/speed}*PTS[v];[1:a]anull[a]",
                         "-map",
@@ -330,7 +346,7 @@ class MergeMixin:
                         "-i",
                         str(temp_merged),
                         "-i",
-                        self.merge_audio_file,
+                        audio_file,
                         "-filter_complex",
                         f"[0:v]setpts={1/speed}*PTS[v];"
                         f"[0:a]atempo={speed}[a0];"

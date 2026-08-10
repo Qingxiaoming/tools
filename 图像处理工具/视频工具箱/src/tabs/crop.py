@@ -153,19 +153,24 @@ class CropMixin:
         if hasattr(self, "_set_jump_enabled"):
             self._set_jump_enabled(False)  # type: ignore[call-arg]
         self._clear_log()
-        threading.Thread(target=self._crop_batch_thread, daemon=True).start()
+        # 快照输入（视频列表 + ROI），运行期间改列表/ROI 不影响本次任务
+        threading.Thread(
+            target=self._crop_batch_thread,
+            args=(list(self.video_list), self.roi),
+            daemon=True,
+        ).start()
 
-    def _crop_batch_thread(self) -> None:
+    def _crop_batch_thread(self, video_list, roi) -> None:
         success: List[str] = []
         fail: List[str] = []
-        x, y, w, h = self.roi  # type: ignore[misc]
+        x, y, w, h = roi  # type: ignore[misc]
 
         CROP_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
         # 记录本次裁剪产生的输出文件路径，供跨页签传递使用
         produced_paths: List[str] = []
 
-        for vpath, vname in self.video_list:
+        for vpath, vname in video_list:
             base, ext = os.path.splitext(vname)
             out_path = CROP_OUTPUT_DIR / f"{base}{ext}"
 

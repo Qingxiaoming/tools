@@ -692,17 +692,20 @@ class DocMixin:
         # 文档生成期间禁用右箭头
         if hasattr(self, "_set_jump_enabled"):
             self._set_jump_enabled(False)
+        # 快照文档视频列表，运行期间改列表不影响本次生成
         threading.Thread(
-            target=self._doc_generation_thread, daemon=True
+            target=self._doc_generation_thread,
+            args=(list(self.doc_video_list),),
+            daemon=True,
         ).start()
 
-    def _doc_generation_thread(self) -> None:
+    def _doc_generation_thread(self, video_list) -> None:
         success: List[str] = []
         fail: List[str] = []
 
         DOC_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-        for video_path, video_name in self.doc_video_list:
+        for video_path, video_name in video_list:
             try:
                 # 输出文件名同样使用模板提取的 stage（缺省用文件名主体）
                 template_name = self._video_state.get(video_name, {}).get("template_name")

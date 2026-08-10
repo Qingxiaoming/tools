@@ -183,7 +183,8 @@ class WeeklyMixin:
         week = iso.week
         base_prefix = WEEKLY_PREFIX_TEMPLATE.format(year=year, week=week)
 
-        tmp_root = WEEKLY_OUTPUT_DIR / "_tmp_weekly"
+        # 临时目录带 PID，支持多实例同时运行互不干扰
+        tmp_root = WEEKLY_OUTPUT_DIR / f"_tmp_weekly_{os.getpid()}"
         tmp_root.mkdir(parents=True, exist_ok=True)
 
         try:

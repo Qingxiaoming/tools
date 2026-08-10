@@ -194,8 +194,11 @@ class SegmentMixin:
         if hasattr(self, "_set_jump_enabled"):
             self._set_jump_enabled(False)  # type: ignore[call-arg]
         self._clear_log()
+        # 快照输入（视频路径 + 精确裁剪开关），运行期间改输入不影响本次任务
         threading.Thread(
-            target=self._segment_batch_thread, args=(tasks,), daemon=True
+            target=self._segment_batch_thread,
+            args=(tasks, path, self.precise_crop_var.get()),
+            daemon=True,
         ).start()
 
     def _parse_segment_line(self, line: str):
@@ -263,7 +266,12 @@ class SegmentMixin:
 
         return True, (start, end, name)
 
-    def _segment_batch_thread(self, tasks: List[Tuple[str, str, str]]) -> None:
+    def _segment_batch_thread(
+        self,
+        tasks: List[Tuple[str, str, str]],
+        video_path: str,
+        precise_crop: bool,
+    ) -> None:
         success: List[str] = []
         fail: List[str] = []
 
@@ -286,7 +294,7 @@ class SegmentMixin:
             # FFmpeg 只接受 ASCII 冒号，需将全角冒号（：）转为半角（:）
             start_normalized = start.replace("\uFF1A", ":")
 
-            if self.precise_crop_var.get():
+            if precise_crop:
                 cmd = [
                     "ffmpeg",
                     "-hide_banner",
@@ -296,7 +304,7 @@ class SegmentMixin:
                     "-ss",
                     start_normalized,
                     "-i",
-                    self.video_path,
+                    video_path,
                     "-t",
                     str(duration_sec),
                     "-c:v",
@@ -322,7 +330,7 @@ class SegmentMixin:
                     "-ss",
                     start_normalized,
                     "-i",
-                    self.video_path,
+                    video_path,
                     "-ss",
                     "0",
                     "-t",

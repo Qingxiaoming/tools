@@ -10,6 +10,7 @@ from tkinter import ttk
 
 from ..core.common_mixins import VIDEO_EXTENSIONS
 from ..core.config import SUBPROCESS_CREATE_NO_WINDOW, UI_FONT_FAMILY
+from ..core.file_lock import exclusive_file_lock
 from ..core.overlay import OverlayMixin
 from ..core.subprocess_util import get_media_duration, tracked_popen
 
@@ -68,49 +69,57 @@ def repair_streaming_video(
 ) -> Optional[str]:
     """重封装修复；成功返回输出路径，失败返回 None。可在后台线程调用。"""
     dst = repaired_output_path(src)
-    if os.path.isfile(dst) and get_media_duration(dst) is not None:
-        if log_fn:
-            log_fn(f"已存在可用修复文件，跳过转码: {dst}")
-        return dst
-
-    cmd = [
-        "ffmpeg",
-        "-hide_banner",
-        "-loglevel",
-        "info",
-        "-stats",
-        "-err_detect",
-        "ignore_err",
-        "-i",
-        src,
-        "-map",
-        "0",
-        "-c",
-        "copy",
-        "-y",
-        dst,
-    ]
+    lock_path = dst + ".lock"
     try:
-        proc = tracked_popen(
-            cmd,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT,
-            bufsize=0,
-            universal_newlines=True,
-            encoding="utf-8",
-            errors="replace",
-        )
-        assert proc.stdout is not None
-        for line in iter(proc.stdout.readline, ""):
-            if log_fn:
-                log_fn(line.rstrip())
-        rc = proc.wait()
-        if rc != 0:
-            return None
-        if get_media_duration(dst) is None:
-            return None
-        return dst
-    except Exception:
+        with exclusive_file_lock(lock_path):
+            # 等锁期间另一个实例可能已完成修复，重新检查
+            if os.path.isfile(dst) and get_media_duration(dst) is not None:
+                if log_fn:
+                    log_fn(f"已存在可用修复文件，跳过转码: {dst}")
+                return dst
+
+            cmd = [
+                "ffmpeg",
+                "-hide_banner",
+                "-loglevel",
+                "info",
+                "-stats",
+                "-err_detect",
+                "ignore_err",
+                "-i",
+                src,
+                "-map",
+                "0",
+                "-c",
+                "copy",
+                "-y",
+                dst,
+            ]
+            try:
+                proc = tracked_popen(
+                    cmd,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.STDOUT,
+                    bufsize=0,
+                    universal_newlines=True,
+                    encoding="utf-8",
+                    errors="replace",
+                )
+                assert proc.stdout is not None
+                for line in iter(proc.stdout.readline, ""):
+                    if log_fn:
+                        log_fn(line.rstrip())
+                rc = proc.wait()
+                if rc != 0:
+                    return None
+                if get_media_duration(dst) is None:
+                    return None
+                return dst
+            except Exception:
+                return None
+    except TimeoutError:
+        if log_fn:
+            log_fn(f"修复被其他实例占用，本次跳过: {dst}")
         return None
 
 
@@ -383,9 +392,12 @@ class RepairMixin(OverlayMixin):
         original_paths = list(paths)
 
         if self._repair_in_progress:
+            # 修复进行中：允许拖入/传递，直接加入列表并跳过新一轮损坏检测，
+            # 避免修复弹窗与正在进行的修复任务重叠
             self.status_label.config(
-                text="已有录屏修复任务进行中，请稍候", foreground="red"
+                text="修复进行中，文件将直接加入（跳过损坏检测）", foreground="blue"
             )
+            on_done(list(paths), original_paths)
             return
 
         if not paths:
