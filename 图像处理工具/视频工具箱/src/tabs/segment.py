@@ -133,6 +133,9 @@ class SegmentMixin:
 
     def run_segment_batch(self) -> None:
         """解析输入文本并批量截取视频。"""
+        if self._batch_in_progress or self._repair_in_progress:
+            self.status_label.config(text="已有任务在处理中，请等待完成", foreground="red")
+            return
         if not self.video_path:
             self.status_label.config(text="请先拖入视频文件", foreground="red")
             return
@@ -160,6 +163,7 @@ class SegmentMixin:
         if not tasks:
             return
 
+        self._batch_in_progress = True
         original_paths = [self.video_path]
         self._resolve_paths_for_use_async(
             original_paths,
@@ -175,9 +179,11 @@ class SegmentMixin:
         tasks: List[Tuple[str, str, str]],
     ) -> None:
         if resolved is None or not original_paths:
+            self._batch_in_progress = False
             return
         path = self._pick_usable_path(original_paths[0], resolved[0])
         if not path:
+            self._batch_in_progress = False
             return
         self.video_path = path
         self.segment_video_label.config(

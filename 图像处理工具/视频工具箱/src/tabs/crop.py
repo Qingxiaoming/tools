@@ -126,6 +126,9 @@ class CropMixin:
 
     def run_crop_batch(self) -> None:
         """按选定的 ROI 批量裁剪画幅。"""
+        if self._batch_in_progress or self._repair_in_progress:
+            self.status_label.config(text="已有任务在处理中，请等待完成", foreground="red")
+            return
         if not self.video_list:
             self.status_label.config(text="视频列表为空！", foreground="red")
             return
@@ -134,6 +137,7 @@ class CropMixin:
                 text="请先点击'选定画幅'选择保留区域！", foreground="red"
             )
             return
+        self._batch_in_progress = True
         original_paths = [p for p, _ in self.video_list]
         self._resolve_paths_for_use_async(original_paths, self._start_crop_batch)
 
@@ -143,6 +147,7 @@ class CropMixin:
         if not self._apply_crop_videos_resolved(
             resolved, original_paths, overwrite=True
         ):
+            self._batch_in_progress = False
             return
         self.crop_run_btn.config(state="disabled", text="处理中")
         if hasattr(self, "_set_jump_enabled"):

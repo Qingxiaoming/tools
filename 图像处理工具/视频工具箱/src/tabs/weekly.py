@@ -107,9 +107,13 @@ class WeeklyMixin:
     # ------------------------- 运行入口 -------------------------
     def run_weekly_process(self) -> None:
         """入口：检查参数后启动后台线程。"""
+        if self._batch_in_progress or self._repair_in_progress:
+            self.status_label.config(text="已有任务在处理中，请等待完成", foreground="red")
+            return
         if not self.weekly_video_list:
             self.status_label.config(text="视频列表为空！", foreground="red")
             return
+        self._batch_in_progress = True
         original_paths = [p for p, _ in self.weekly_video_list]
         self._resolve_paths_for_use_async(original_paths, self._start_weekly_process)
 
@@ -119,6 +123,7 @@ class WeeklyMixin:
         if not self._apply_ordered_paths_to_video_list(
             self.weekly_video_list, original_paths, resolved, overwrite=True
         ):
+            self._batch_in_progress = False
             return
         self._update_weekly_listbox()
 

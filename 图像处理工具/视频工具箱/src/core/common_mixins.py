@@ -112,6 +112,7 @@ class DropMixin:
         log_fail: bool = False,
     ) -> None:
         """批量任务收尾：恢复按钮、状态栏、系统通知、失败列表日志。"""
+        self._batch_in_progress = False
         run_btn.config(state="normal", text=btn_text)
         self.status_label.config(text="待机中", foreground="blue")
         if hasattr(self, "_set_jump_enabled"):

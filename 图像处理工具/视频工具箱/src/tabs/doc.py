@@ -663,10 +663,14 @@ class DocMixin:
                 self._video_state[video_name] = {"content": content, "template_name": template.name}
 
     def run_doc_generation(self) -> None:
+        if self._batch_in_progress or self._repair_in_progress:
+            self.status_label.config(text="已有任务在处理中，请等待完成", foreground="red")
+            return
         if not self.doc_video_list:
             self.status_label.config(text="视频列表为空！", foreground="red")
             return
 
+        self._batch_in_progress = True
         original_paths = [p for p, _ in self.doc_video_list]
         self._resolve_paths_for_use_async(
             original_paths, self._start_doc_generation
@@ -678,6 +682,7 @@ class DocMixin:
         if not self._apply_doc_videos_resolved(
             resolved, original_paths, overwrite=True
         ):
+            self._batch_in_progress = False
             return
 
         self.doc_run_btn.config(state="disabled", text="生成中")
@@ -749,6 +754,9 @@ class DocMixin:
 
     def run_doc_transfer(self) -> None:
         """将 DOC_OUTPUT_DIR 中的文档及其引用的视频剪切到 config 指定目录。"""
+        if self._batch_in_progress or self._repair_in_progress:
+            self.status_label.config(text="已有任务在处理中，请等待完成", foreground="red")
+            return
         md_files = list(Path(DOC_OUTPUT_DIR).glob("*.md"))
         # 只允许转运"本次文档生成"产生的文档，避免误操作历史文件
         generated_names = getattr(self, "doc_generated_md_names", set())
@@ -774,6 +782,7 @@ class DocMixin:
             )
             return
 
+        self._batch_in_progress = True
         # 转运期间禁用右箭头
         if hasattr(self, "_set_jump_enabled"):
             self._set_jump_enabled(False)
@@ -904,6 +913,7 @@ class DocMixin:
     def _on_doc_transfer_done(
         self, moved_docs: int, moved_videos: int, skipped: int
     ) -> None:
+        self._batch_in_progress = False
         self.status_label.config(text="待机中", foreground="blue")
         # 转运结束后恢复右箭头
         if hasattr(self, "_set_jump_enabled"):

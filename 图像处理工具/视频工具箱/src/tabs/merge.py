@@ -151,6 +151,9 @@ class MergeMixin:
         self._listbox_move(self.merge_listbox, self.merge_video_list, 1)
 
     def run_merge_batch(self) -> None:
+        if self._batch_in_progress or self._repair_in_progress:
+            self.status_label.config(text="已有任务在处理中，请等待完成", foreground="red")
+            return
         if not self.merge_video_list:
             self.status_label.config(text="视频列表为空！", foreground="red")
             return
@@ -183,6 +186,7 @@ class MergeMixin:
                 )
                 return
 
+        self._batch_in_progress = True
         original_paths = [p for p, _ in self.merge_video_list]
         self._resolve_paths_for_use_async(original_paths, self._start_merge_batch)
 
@@ -192,6 +196,7 @@ class MergeMixin:
         if not self._apply_merge_videos_resolved(
             resolved, original_paths, overwrite=True
         ):
+            self._batch_in_progress = False
             return
         self.merge_run_btn.config(state="disabled", text="合并中")
         if hasattr(self, "_set_jump_enabled"):
@@ -555,6 +560,7 @@ class MergeMixin:
             self.after(0, self._on_merge_batch_done, False, str(e))
 
     def _on_merge_batch_done(self, success: bool, result: str) -> None:
+        self._batch_in_progress = False
         self.merge_run_btn.config(state="normal", text="开始合并")
         self.status_label.config(text="待机中", foreground="blue")
         # 恢复右箭头

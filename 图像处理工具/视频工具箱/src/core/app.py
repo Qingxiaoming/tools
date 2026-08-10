@@ -90,6 +90,8 @@ class VideoTools(
         self.weekly_video_list: list[tuple[str, str]] = []
 
         self._repair_in_progress = False
+        # 全局批处理锁：同一时间只允许一个批处理任务运行，避免底部日志互相覆盖
+        self._batch_in_progress = False
 
         init_process_job()
         self.protocol("WM_DELETE_WINDOW", self._on_app_close)
