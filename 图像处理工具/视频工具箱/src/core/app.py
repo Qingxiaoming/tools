@@ -22,6 +22,7 @@ from .config import (
 )
 from .subprocess_util import init_process_job, terminate_all_tracked_processes
 from ..services.repair import RepairMixin
+from .common_mixins import DropMixin, ListboxMixin
 from ..tabs.crop import CropMixin
 from ..tabs.doc import DocMixin
 from ..tabs.merge import MergeMixin
@@ -32,6 +33,8 @@ from ..tabs.weekly import WeeklyMixin
 class VideoTools(
     tkdnd.Tk,
     RepairMixin,
+    ListboxMixin,
+    DropMixin,
     SegmentMixin,
     CropMixin,
     MergeMixin,

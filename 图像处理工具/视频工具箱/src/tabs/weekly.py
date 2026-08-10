@@ -10,14 +10,11 @@ import tkinter as tk
 from tkinter import ttk
 
 from ..core.config import (
-    ENABLE_NOTIFICATION,
     MONO_FONT_FAMILY,
-    SUBPROCESS_CREATE_NO_WINDOW,
     WEEKLY_OUTPUT_DIR,
     WEEKLY_PREFIX_TEMPLATE,
-    notification,
 )
-from ..core.subprocess_util import tracked_popen
+from ..core.subprocess_util import get_media_duration, tracked_popen
 
 
 class WeeklyMixin:
@@ -51,9 +48,7 @@ class WeeklyMixin:
         self.weekly_listbox.pack(side="left", fill="both", expand=True)
         scrollbar.pack(side="right", fill="y")
 
-        self.weekly_listbox.bind("<Button-1>", self._on_weekly_listbox_click)
-        self.weekly_listbox.bind("<B1-Motion>", self._on_weekly_listbox_drag)
-        self.weekly_listbox.bind("<ButtonRelease-1>", self._on_weekly_listbox_release)
+        self._listbox_bind_drag(self.weekly_listbox, self.weekly_video_list)
 
         btn_frame = ttk.Frame(main_frame)
         btn_frame.pack(side="right", padx=(10, 0), fill="y")
@@ -76,22 +71,11 @@ class WeeklyMixin:
         )
         self.weekly_run_btn.pack(fill="x", pady=(8, 0))
 
-        self.weekly_drag_start: int | None = None
-
     # ------------------------- 拖拽与列表操作 -------------------------
     def _handle_drop_weekly(self, files: List[str]) -> None:
         """在「录屏整理」页签上拖入视频文件。"""
-        candidates = [
-            f
-            for f in files
-            if os.path.isfile(f)
-            and os.path.splitext(f)[-1].lower()
-            in (".mp4", ".mkv", ".mov", ".avi", ".flv", ".ts")
-        ]
-        if not candidates:
-            return
-        self._resolve_paths_for_use_async(
-            candidates, self._apply_weekly_drop_resolved
+        self._handle_drop_video_files(
+            files, self._apply_weekly_drop_resolved
         )
 
     def _apply_weekly_drop_resolved(
@@ -108,83 +92,23 @@ class WeeklyMixin:
             )
 
     def _update_weekly_listbox(self) -> None:
-        self.weekly_listbox.delete(0, tk.END)
-        for i, (_, name) in enumerate(self.weekly_video_list):
-            self.weekly_listbox.insert(tk.END, f"{i + 1}. {name}")
+        self._listbox_update(self.weekly_listbox, self.weekly_video_list)
 
     def clear_weekly_list(self) -> None:
-        self.weekly_video_list.clear()
-        self._update_weekly_listbox()
-        self.weekly_video_label.config(text="请拖入一个或多个视频文件", foreground="grey")
+        self._listbox_clear(
+            self.weekly_listbox, self.weekly_video_list, "请拖入一个或多个视频文件", self.weekly_video_label
+        )
 
     def remove_selected_weekly(self) -> None:
-        selection = self.weekly_listbox.curselection()
-        if not selection:
-            self.status_label.config(text="请先选择要删除的视频", foreground="red")
-            return
-        index = selection[0]
-        if 0 <= index < len(self.weekly_video_list):
-            del self.weekly_video_list[index]
-            self._update_weekly_listbox()
-            self.weekly_video_label.config(
-                text=f"已载入 {len(self.weekly_video_list)} 个视频文件", foreground="black"
-            )
+        self._listbox_remove_selected(
+            self.weekly_listbox, self.weekly_video_list, self.weekly_video_label
+        )
 
     def move_up_weekly(self) -> None:
-        selection = self.weekly_listbox.curselection()
-        if not selection or selection[0] == 0:
-            return
-        index = selection[0]
-        if index > 0:
-            self.weekly_video_list[index], self.weekly_video_list[index - 1] = (
-                self.weekly_video_list[index - 1],
-                self.weekly_video_list[index],
-            )
-            self._update_weekly_listbox()
-            self.weekly_listbox.selection_set(index - 1)
+        self._listbox_move(self.weekly_listbox, self.weekly_video_list, -1)
 
     def move_down_weekly(self) -> None:
-        selection = self.weekly_listbox.curselection()
-        if not selection or selection[0] == len(self.weekly_video_list) - 1:
-            return
-        index = selection[0]
-        if index < len(self.weekly_video_list) - 1:
-            self.weekly_video_list[index], self.weekly_video_list[index + 1] = (
-                self.weekly_video_list[index + 1],
-                self.weekly_video_list[index],
-            )
-            self._update_weekly_listbox()
-            self.weekly_listbox.selection_set(index + 1)
-
-    def _on_weekly_listbox_click(self, event) -> None:
-        self.weekly_drag_start = event.y
-
-    def _on_weekly_listbox_drag(self, event) -> None:
-        if self.weekly_drag_start is None:
-            return
-        current_index = self.weekly_listbox.nearest(event.y)
-        if current_index != -1:
-            self.weekly_listbox.selection_clear(0, tk.END)
-            self.weekly_listbox.selection_set(current_index)
-
-    def _on_weekly_listbox_release(self, event) -> None:
-        if self.weekly_drag_start is None:
-            return
-
-        start_index = self.weekly_listbox.nearest(self.weekly_drag_start)
-        end_index = self.weekly_listbox.nearest(event.y)
-
-        if (
-            start_index != end_index
-            and 0 <= start_index < len(self.weekly_video_list)
-            and 0 <= end_index < len(self.weekly_video_list)
-        ):
-            item = self.weekly_video_list.pop(start_index)
-            self.weekly_video_list.insert(end_index, item)
-            self._update_weekly_listbox()
-            self.weekly_listbox.selection_set(end_index)
-
-        self.weekly_drag_start = None
+        self._listbox_move(self.weekly_listbox, self.weekly_video_list, 1)
 
     # ------------------------- 运行入口 -------------------------
     def run_weekly_process(self) -> None:
@@ -219,28 +143,6 @@ class WeeklyMixin:
         thread.start()
 
     # ------------------------- 具体处理逻辑 -------------------------
-    def _get_media_duration(self, path: str) -> float | None:
-        """使用 ffprobe 获取媒体时长（秒）。"""
-        try:
-            proc = subprocess.run(
-                [
-                    "ffprobe",
-                    "-v",
-                    "error",
-                    "-show_entries",
-                    "format=duration",
-                    "-of",
-                    "default=noprint_wrappers=1:nokey=1",
-                    path,
-                ],
-                capture_output=True,
-                text=True,
-                creationflags=SUBPROCESS_CREATE_NO_WINDOW,
-            )
-            return float(proc.stdout.strip())
-        except Exception:
-            return None
-
     def _make_unique_path(self, directory: Path, filename: str) -> Path:
         """在目录下生成不重名的文件路径，规则与其它模块保持一致。"""
         base, ext = os.path.splitext(filename)
@@ -260,7 +162,7 @@ class WeeklyMixin:
         timeline: List[Tuple[str, str, float, float]] = []  # (path, name, start, end)
         current_start = 0.0
         for vpath, vname in video_list:
-            duration = self._get_media_duration(vpath)
+            duration = get_media_duration(vpath)
             if duration is None or duration <= 0:
                 fail.append(f"{vname}  (无法获取时长)")
                 continue
@@ -520,31 +422,15 @@ class WeeklyMixin:
             return False
 
     def _on_weekly_done(self, success: List[str], fail: List[str]) -> None:
-        self.weekly_run_btn.config(state="normal", text="开始整理")
-        self.status_label.config(text="待机中", foreground="blue")
-        # 录屏整理结束后恢复右箭头
-        if hasattr(self, "_set_jump_enabled"):
-            self._set_jump_enabled(True)  # type: ignore[call-arg]
-
-        msg = f"已完成：成功 {len(success)} 段，失败 {len(fail)} 段"
-        if ENABLE_NOTIFICATION and notification:
-            try:
-                notification.notify(
-                    title="录屏整理",
-                    message=msg,
-                    timeout=4,
-                    app_name="VideoTools",
-                )
-            except Exception:
-                # 通知失败时不影响主流程
-                self.status_label.config(text=msg)
-        else:
-            self.status_label.config(text=msg)
-
-        if fail:
-            self._append_log_line("失败列表：")
-            for item in fail:
-                self._append_log_line("  " + item)
+        self._on_batch_done(
+            self.weekly_run_btn,
+            "开始整理",
+            "录屏整理",
+            success,
+            fail,
+            msg_format="已完成：成功 {ok} 段，失败 {bad} 段",
+            log_fail=True,
+        )
 
 
 __all__ = ["WeeklyMixin"]

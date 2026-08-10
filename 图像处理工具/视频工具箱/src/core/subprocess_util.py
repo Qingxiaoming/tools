@@ -148,10 +148,34 @@ def terminate_all_tracked_processes() -> None:
     _active_procs.clear()
 
 
+def get_media_duration(path: str) -> float | None:
+    """用 ffprobe 获取视频时长（秒），失败返回 None。"""
+    proc = subprocess.run(
+        [
+            "ffprobe",
+            "-v",
+            "error",
+            "-show_entries",
+            "format=duration",
+            "-of",
+            "default=noprint_wrappers=1:nokey=1",
+            path,
+        ],
+        capture_output=True,
+        text=True,
+        creationflags=SUBPROCESS_CREATE_NO_WINDOW,
+    )
+    try:
+        return float(proc.stdout.strip())
+    except Exception:
+        return None
+
+
 atexit.register(terminate_all_tracked_processes)
 
 __all__ = [
     "init_process_job",
     "tracked_popen",
     "terminate_all_tracked_processes",
+    "get_media_duration",
 ]

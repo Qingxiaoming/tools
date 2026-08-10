@@ -59,8 +59,12 @@ class DocMixin:
 
         # 创建右键菜单
         self._context_menu = tk.Menu(self, tearoff=0)
-        self._context_menu.add_command(label="✏️ 编辑", command=self._on_context_edit)
-        self._context_menu.add_command(label="🗑️ 删除", command=self._on_context_delete)
+        self._context_menu.add_command(
+            label="✏️ 编辑", command=lambda: self._on_context_action("edit")
+        )
+        self._context_menu.add_command(
+            label="🗑️ 删除", command=lambda: self._on_context_action("delete")
+        )
 
         # 绑定右键事件
         self.doc_tree.bind("<Button-3>", self._on_tree_right_click)
@@ -160,14 +164,13 @@ class DocMixin:
         # 显示右键菜单
         self._context_menu.post(event.x_root, event.y_root)
 
-    def _on_context_edit(self) -> None:
-        """右键菜单 - 编辑。"""
-        if hasattr(self, "_context_menu_index"):
+    def _on_context_action(self, action: str) -> None:
+        """右键菜单动作：edit=打开编辑，delete=删除。"""
+        if not hasattr(self, "_context_menu_index"):
+            return
+        if action == "edit":
             self._open_content_editor(self._context_menu_index)
-
-    def _on_context_delete(self) -> None:
-        """右键菜单 - 删除。"""
-        if hasattr(self, "_context_menu_index"):
+        elif action == "delete":
             self._delete_video_item(self._context_menu_index)
 
     def _extract_template_placeholders(self, content: str) -> list[str]:
@@ -586,29 +589,12 @@ class DocMixin:
     # ------------------------- 文件拖入处理 -------------------------
 
     def _handle_drop_doc(self, files: List[str]) -> None:
-        candidates = [
-            f
-            for f in files
-            if os.path.isfile(f)
-            and os.path.splitext(f)[-1].lower()
-            in (".mp4", ".mkv", ".mov", ".avi", ".flv", ".ts")
-        ]
-        if not candidates:
-            return
-        self._resolve_paths_for_use_async(
-            candidates, self._apply_doc_drop_resolved
+        self._handle_drop_video_files(
+            files,
+            lambda resolved, originals: self._apply_doc_videos_resolved(
+                resolved, originals, overwrite=False
+            ),
         )
-
-    def _apply_doc_drop_resolved(
-        self, resolved: List[str] | None, original_paths: List[str]
-    ) -> None:
-        if not self._apply_ordered_paths_to_video_list(
-            self.doc_video_list, original_paths, resolved, overwrite=False
-        ):
-            return
-        # 自动生成预览内容
-        self._refresh_all_previews()
-        self._refresh_tree()
 
     def _apply_doc_videos_resolved(
         self,
@@ -756,27 +742,15 @@ class DocMixin:
         self.after(0, self._on_doc_generation_done, success, fail)
 
     def _on_doc_generation_done(self, success: List[str], fail: List[str]) -> None:
-        self.doc_run_btn.config(state="normal", text="生成文档")
-        self.status_label.config(text="待机中", foreground="blue")
-        # 文档生成结束后恢复右箭头
-        if hasattr(self, "_set_jump_enabled"):
-            self._set_jump_enabled(True)
-
-        msg = f"成功生成 {len(success)} 个文档，失败 {len(fail)} 个"
-        if ENABLE_NOTIFICATION and notification:
-            notification.notify(
-                title="文档生成",
-                message=msg,
-                timeout=4,
-                app_name="VideoTools",
-            )
-        else:
-            self.status_label.config(text=msg)
-
-        if fail:
-            self._append_log_line("失败列表：")
-            for f in fail:
-                self._append_log_line("  " + f)
+        self._on_batch_done(
+            self.doc_run_btn,
+            "生成文档",
+            "文档生成",
+            success,
+            fail,
+            msg_format="成功生成 {ok} 个文档，失败 {bad} 个",
+            log_fail=True,
+        )
 
     # ------------------------- 文档与视频转运 -------------------------
 

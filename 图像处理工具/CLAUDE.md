@@ -42,6 +42,7 @@ pyinstaller --noconfirm --clean video_tools.spec
 - `src/core/config.py` - 全局配置（输出目录、路径模板等）
 - `src/core/overlay.py` - 页签内容区内嵌覆盖层
 - `src/core/subprocess_util.py` - ffmpeg 子进程跟踪与退出清理
+- `src/core/common_mixins.py` - 共用 Mixin：列表刷新/增删/拖拽排序、拖入过滤、批量任务收尾
 - `src/services/repair.py` - 损坏流式录屏检测与修复 (RepairMixin)
 - `src/tabs/segment.py` - 多段截取 (SegmentMixin)
 - `src/tabs/crop.py` - 画幅裁剪 (CropMixin)

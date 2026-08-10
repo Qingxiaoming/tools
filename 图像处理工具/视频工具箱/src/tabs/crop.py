@@ -9,8 +9,6 @@ from tkinter import scrolledtext, ttk
 from ..core.config import (
     CROP_OUTPUT_DIR,
     MONO_FONT_FAMILY,
-    ENABLE_NOTIFICATION,
-    notification,
     SUBPROCESS_CREATE_NO_WINDOW,
 )
 from ..core.subprocess_util import tracked_popen
@@ -47,17 +45,11 @@ class CropMixin:
         self.crop_run_btn.pack(side="right", padx=4)
 
     def _handle_drop_crop(self, files: List[str]) -> None:
-        candidates = [
-            f
-            for f in files
-            if os.path.isfile(f)
-            and os.path.splitext(f)[-1].lower()
-            in (".mp4", ".mkv", ".mov", ".avi", ".flv", ".ts")
-        ]
-        if not candidates:
-            return
-        self._resolve_paths_for_use_async(
-            candidates, self._apply_crop_drop_resolved
+        self._handle_drop_video_files(
+            files,
+            lambda resolved, originals: self._apply_crop_videos_resolved(
+                resolved, originals, overwrite=False
+            ),
         )
 
     def _rebuild_crop_list_ui(self) -> None:
@@ -70,15 +62,6 @@ class CropMixin:
             self.crop_video_label.config(
                 text=f"已载入 {len(self.video_list)} 个视频文件", foreground="black"
             )
-
-    def _apply_crop_drop_resolved(
-        self, resolved: List[str] | None, original_paths: List[str]
-    ) -> None:
-        if not self._apply_ordered_paths_to_video_list(
-            self.video_list, original_paths, resolved, overwrite=False
-        ):
-            return
-        self._rebuild_crop_list_ui()
 
     def _apply_crop_videos_resolved(
         self,
@@ -282,25 +265,15 @@ class CropMixin:
         self.after(0, self._on_crop_batch_done, success, fail)
 
     def _on_crop_batch_done(self, success: List[str], fail: List[str]) -> None:
-        self.crop_run_btn.config(state="normal", text="开始裁剪")
-        self.status_label.config(text="待机中", foreground="blue")
-        # 恢复右箭头
-        if hasattr(self, "_set_jump_enabled"):
-            self._set_jump_enabled(True)  # type: ignore[call-arg]
-        msg = f"成功 {len(success)} 个，失败 {len(fail)} 个"
-        if ENABLE_NOTIFICATION and notification:
-            notification.notify(
-                title="视频批量裁剪",
-                message=msg,
-                timeout=4,
-                app_name="VideoTools",
-            )
-        else:
-            self.status_label.config(text=msg)
-        if fail:
-            self._append_log_line("失败列表：")
-            for f in fail:
-                self._append_log_line("  " + f)
+        self._on_batch_done(
+            self.crop_run_btn,
+            "开始裁剪",
+            "视频批量裁剪",
+            success,
+            fail,
+            msg_format="成功 {ok} 个，失败 {bad} 个",
+            log_fail=True,
+        )
 
 
 __all__ = ["CropMixin"]

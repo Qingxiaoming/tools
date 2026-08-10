@@ -1,7 +1,7 @@
 import os
 import subprocess
 import threading
-from typing import Callable, List, Optional
+from typing import List
 
 import tkinter as tk
 from tkinter import ttk
@@ -10,10 +10,9 @@ from ..core.config import (
     ENABLE_NOTIFICATION,
     MERGE_OUTPUT_DIR,
     MONO_FONT_FAMILY,
-    SUBPROCESS_CREATE_NO_WINDOW,
     notification,
 )
-from ..core.subprocess_util import tracked_popen
+from ..core.subprocess_util import get_media_duration, tracked_popen
 
 
 class MergeMixin:
@@ -42,9 +41,7 @@ class MergeMixin:
         self.merge_listbox.pack(side="left", fill="both", expand=True)
         scrollbar.pack(side="right", fill="y")
 
-        self.merge_listbox.bind("<Button-1>", self._on_merge_listbox_click)
-        self.merge_listbox.bind("<B1-Motion>", self._on_merge_listbox_drag)
-        self.merge_listbox.bind("<ButtonRelease-1>", self._on_merge_listbox_release)
+        self._listbox_bind_drag(self.merge_listbox, self.merge_video_list)
 
         btn_frame = ttk.Frame(main_frame)
         btn_frame.pack(side="right", padx=(10, 0), fill="y")
@@ -99,29 +96,14 @@ class MergeMixin:
         speed_combo["values"] = ("1.0", "0.5", "0.25", "2.0", "到音乐放完")
         speed_combo.pack(side="left", padx=5)
 
-        self.merge_drag_start: int | None = None
 
     def _handle_drop_merge_videos(self, files: List[str]) -> None:
-        candidates = [
-            f
-            for f in files
-            if os.path.isfile(f)
-            and os.path.splitext(f)[-1].lower()
-            in (".mp4", ".mkv", ".mov", ".avi", ".flv", ".ts")
-        ]
-        if not candidates:
-            return
-        self._resolve_paths_for_use_async(
-            candidates, self._apply_merge_drop_resolved
+        self._handle_drop_video_files(
+            files,
+            lambda resolved, originals: self._apply_merge_videos_resolved(
+                resolved, originals, overwrite=False
+            ),
         )
-
-    def _apply_merge_drop_resolved(
-        self, resolved: List[str] | None, original_paths: List[str]
-    ) -> None:
-        if not self._apply_merge_videos_resolved(
-            resolved, original_paths, overwrite=False
-        ):
-            return
 
     def _apply_merge_videos_resolved(
         self,
@@ -158,105 +140,23 @@ class MergeMixin:
         )
 
     def _update_merge_listbox(self) -> None:
-        self.merge_listbox.delete(0, tk.END)
-        for i, (_, name) in enumerate(self.merge_video_list):
-            self.merge_listbox.insert(tk.END, f"{i + 1}. {name}")
+        self._listbox_update(self.merge_listbox, self.merge_video_list)
 
     def clear_merge_list(self) -> None:
-        self.merge_video_list.clear()
-        self._update_merge_listbox()
-        self.merge_video_label.config(text="请拖入多个视频文件", foreground="grey")
-
-    # 供主程序通过右箭头传递视频列表时调用
-    def _set_merge_videos_from_paths(
-        self,
-        files: List[str],
-        overwrite: bool = True,
-        on_done: Optional[Callable[[bool], None]] = None,
-    ) -> None:
-        """根据给定路径列表更新合并输入列表（含可选异步修复）。"""
-        if not files:
-            if on_done:
-                on_done(True)
-            return
-
-        def finish(resolved: List[str] | None, original_paths: List[str]) -> None:
-            ok = self._apply_merge_videos_resolved(
-                resolved, original_paths, overwrite=overwrite
-            )
-            if on_done:
-                on_done(ok)
-
-        self._resolve_paths_for_use_async(files, finish)
+        self._listbox_clear(
+            self.merge_listbox, self.merge_video_list, "请拖入多个视频文件", self.merge_video_label
+        )
 
     def remove_selected_merge(self) -> None:
-        selection = self.merge_listbox.curselection()
-        if not selection:
-            self.status_label.config(text="请先选择要删除的视频", foreground="red")
-            return
-        index = selection[0]
-        if 0 <= index < len(self.merge_video_list):
-            del self.merge_video_list[index]
-            self._update_merge_listbox()
-            self.merge_video_label.config(
-                text=f"已载入 {len(self.merge_video_list)} 个视频文件", foreground="black"
-            )
+        self._listbox_remove_selected(
+            self.merge_listbox, self.merge_video_list, self.merge_video_label
+        )
 
     def move_up_merge(self) -> None:
-        selection = self.merge_listbox.curselection()
-        if not selection or selection[0] == 0:
-            return
-        index = selection[0]
-        if index > 0:
-            self.merge_video_list[index], self.merge_video_list[index - 1] = (
-                self.merge_video_list[index - 1],
-                self.merge_video_list[index],
-            )
-            self._update_merge_listbox()
-            self.merge_listbox.selection_set(index - 1)
+        self._listbox_move(self.merge_listbox, self.merge_video_list, -1)
 
     def move_down_merge(self) -> None:
-        selection = self.merge_listbox.curselection()
-        if not selection or selection[0] == len(self.merge_video_list) - 1:
-            return
-        index = selection[0]
-        if index < len(self.merge_video_list) - 1:
-            self.merge_video_list[index], self.merge_video_list[index + 1] = (
-                self.merge_video_list[index + 1],
-                self.merge_video_list[index],
-            )
-            self._update_merge_listbox()
-            self.merge_listbox.selection_set(index + 1)
-
-    def _on_merge_listbox_click(self, event) -> None:
-        self.merge_drag_start = event.y
-
-    def _on_merge_listbox_drag(self, event) -> None:
-        if self.merge_drag_start is None:
-            return
-        current_index = self.merge_listbox.nearest(event.y)
-        if current_index != -1:
-            self.merge_listbox.selection_clear(0, tk.END)
-            self.merge_listbox.selection_set(current_index)
-
-    def _on_merge_listbox_release(self, event) -> None:
-        if self.merge_drag_start is None:
-            return
-
-        start_index = self.merge_listbox.nearest(self.merge_drag_start)
-        end_index = self.merge_listbox.nearest(event.y)
-
-        if (
-            start_index != end_index
-            and 0 <= start_index < len(self.merge_video_list)
-            and 0 <= end_index < len(self.merge_video_list)
-        ):
-            item = self.merge_video_list.pop(start_index)
-            self.merge_video_list.insert(end_index, item)
-            self._update_merge_listbox()
-            self.merge_listbox.selection_set(end_index)
-
-        self.merge_drag_start = None
+        self._listbox_move(self.merge_listbox, self.merge_video_list, 1)
 
     def run_merge_batch(self) -> None:
         if not self.merge_video_list:
@@ -306,27 +206,6 @@ class MergeMixin:
             self._set_jump_enabled(False)  # type: ignore[call-arg]
         self._clear_log()
         threading.Thread(target=self._merge_batch_thread, daemon=True).start()
-
-    def _get_media_duration(self, path: str) -> float | None:
-        proc = subprocess.run(
-            [
-                "ffprobe",
-                "-v",
-                "error",
-                "-show_entries",
-                "format=duration",
-                "-of",
-                "default=noprint_wrappers=1:nokey=1",
-                path,
-            ],
-            capture_output=True,
-            text=True,
-            creationflags=SUBPROCESS_CREATE_NO_WINDOW,
-        )
-        try:
-            return float(proc.stdout.strip())
-        except Exception:
-            return None
 
     def _merge_batch_thread(self) -> None:
         try:
@@ -399,8 +278,8 @@ class MergeMixin:
                         0, self._on_merge_batch_done, False, "合并临时视频失败"
                     )
                     return
-                video_dur = self._get_media_duration(str(temp_merged))
-                audio_dur = self._get_media_duration(self.merge_audio_file)
+                video_dur = get_media_duration(str(temp_merged))
+                audio_dur = get_media_duration(self.merge_audio_file)
                 if video_dur is None or audio_dur is None or audio_dur <= 0:
                     speed = 1.0
                     self._append_log_line("无法获取合并视频或音频时长，按 1 倍速输出。")

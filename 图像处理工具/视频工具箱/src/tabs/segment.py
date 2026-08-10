@@ -8,11 +8,9 @@ from tkinter import scrolledtext, ttk
 import tkinter as tk
 
 from ..core.config import (
-    ENABLE_NOTIFICATION,
     SEGMENT_NAME_MAPPINGS,
     SEGMENT_OUTPUT_DIR,
     MONO_FONT_FAMILY,
-    notification,
 )
 from ..core.subprocess_util import tracked_popen
 
@@ -362,21 +360,14 @@ class SegmentMixin:
         self.after(0, self._on_segment_batch_done, success, fail)
 
     def _on_segment_batch_done(self, success: List[str], fail: List[str]) -> None:
-        self.segment_run_btn.config(state="normal", text="开始截取")
-        self.status_label.config(text="待机中", foreground="blue")
-        # 处理结束后恢复右箭头
-        if hasattr(self, "_set_jump_enabled"):
-            self._set_jump_enabled(True)  # type: ignore[call-arg]
-        msg = f"成功 {len(success)} 段，失败 {len(fail)} 段"
-        if ENABLE_NOTIFICATION and notification:
-            notification.notify(
-                title="视频批量截取",
-                message=msg,
-                timeout=4,
-                app_name="VideoTools",
-            )
-        else:
-            self.status_label.config(text=msg)
+        self._on_batch_done(
+            self.segment_run_btn,
+            "开始截取",
+            "视频批量截取",
+            success,
+            fail,
+            msg_format="成功 {ok} 段，失败 {bad} 段",
+        )
 
 
 __all__ = ["SegmentMixin"]
