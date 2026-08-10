@@ -8,7 +8,7 @@ from typing import Callable, List, Optional, Tuple
 import tkinter as tk
 from tkinter import ttk
 
-from ..core.config import SUBPROCESS_CREATE_NO_WINDOW
+from ..core.config import SUBPROCESS_CREATE_NO_WINDOW, UI_FONT_FAMILY
 from ..core.overlay import OverlayMixin
 from ..core.subprocess_util import tracked_popen
 
@@ -262,7 +262,7 @@ class RepairMixin(OverlayMixin):
         ttk.Label(
             header,
             text="检测到未正常结束的录屏",
-            font=("Microsoft YaHei UI", 10, "bold"),
+            font=(UI_FONT_FAMILY, 10, "bold"),
         ).pack(anchor="w")
 
         ttk.Label(

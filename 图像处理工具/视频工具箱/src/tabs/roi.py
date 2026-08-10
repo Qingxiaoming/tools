@@ -9,6 +9,8 @@ import tkinter as tk
 from PIL import Image, ImageTk
 from tkinter import ttk
 
+from ..core.config import UI_FONT_FAMILY
+
 if TYPE_CHECKING:
     from ..core.app import VideoTools
 
@@ -74,7 +76,7 @@ class ROISelector:
         ttk.Label(
             header,
             text="选定画幅",
-            font=("Microsoft YaHei UI", 10, "bold"),
+            font=(UI_FONT_FAMILY, 10, "bold"),
         ).pack(anchor="w")
         ttk.Label(
             header,

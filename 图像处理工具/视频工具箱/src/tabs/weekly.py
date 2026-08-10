@@ -11,6 +11,7 @@ from tkinter import ttk
 
 from ..core.config import (
     ENABLE_NOTIFICATION,
+    MONO_FONT_FAMILY,
     SUBPROCESS_CREATE_NO_WINDOW,
     WEEKLY_OUTPUT_DIR,
     WEEKLY_PREFIX_TEMPLATE,
@@ -41,7 +42,7 @@ class WeeklyMixin:
         list_frame = ttk.Frame(main_frame)
         list_frame.pack(side="left", fill="x", expand=True)
 
-        self.weekly_listbox = tk.Listbox(list_frame, height=8, font=("Consolas", 9))
+        self.weekly_listbox = tk.Listbox(list_frame, height=8, font=(MONO_FONT_FAMILY, 9))
         scrollbar = ttk.Scrollbar(
             list_frame, orient="vertical", command=self.weekly_listbox.yview
         )
@@ -547,4 +548,3 @@ class WeeklyMixin:
 
 
 __all__ = ["WeeklyMixin"]
-

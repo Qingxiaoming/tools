@@ -9,6 +9,7 @@ from tkinter import ttk
 from ..core.config import (
     ENABLE_NOTIFICATION,
     MERGE_OUTPUT_DIR,
+    MONO_FONT_FAMILY,
     SUBPROCESS_CREATE_NO_WINDOW,
     notification,
 )
@@ -32,7 +33,7 @@ class MergeMixin:
         list_frame = ttk.Frame(main_frame)
         list_frame.pack(side="left", fill="x", expand=True)
 
-        self.merge_listbox = tk.Listbox(list_frame, height=8, font=("Consolas", 9))
+        self.merge_listbox = tk.Listbox(list_frame, height=8, font=(MONO_FONT_FAMILY, 9))
         scrollbar = ttk.Scrollbar(
             list_frame, orient="vertical", command=self.merge_listbox.yview
         )

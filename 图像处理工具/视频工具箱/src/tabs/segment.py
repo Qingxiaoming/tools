@@ -11,6 +11,7 @@ from ..core.config import (
     ENABLE_NOTIFICATION,
     SEGMENT_NAME_MAPPINGS,
     SEGMENT_OUTPUT_DIR,
+    MONO_FONT_FAMILY,
     SUBPROCESS_CREATE_NO_WINDOW,
     notification,
 )
@@ -84,7 +85,7 @@ class SegmentMixin:
 
         ttk.Label(self.segment_frame, text="批量截取:").pack(anchor="w", padx=10)
         self.segment_text = scrolledtext.ScrolledText(
-            self.segment_frame, width=60, height=8, font=("Consolas", 9)
+            self.segment_frame, width=60, height=8, font=(MONO_FONT_FAMILY, 9)
         )
         self.segment_text.pack(padx=10, pady=2)
         self.segment_text.insert(

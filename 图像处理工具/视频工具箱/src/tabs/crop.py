@@ -9,6 +9,7 @@ from tkinter import scrolledtext, ttk
 
 from ..core.config import (
     CROP_OUTPUT_DIR,
+    MONO_FONT_FAMILY,
     ENABLE_NOTIFICATION,
     notification,
     SUBPROCESS_CREATE_NO_WINDOW,
@@ -28,7 +29,7 @@ class CropMixin:
 
         ttk.Label(self.crop_frame, text="视频文件列表:").pack(anchor="w", padx=10)
         self.crop_text = scrolledtext.ScrolledText(
-            self.crop_frame, width=60, height=8, font=("Consolas", 9)
+            self.crop_frame, width=60, height=8, font=(MONO_FONT_FAMILY, 9)
         )
         self.crop_text.pack(padx=10, pady=2)
         self.crop_text.config(state="disabled")

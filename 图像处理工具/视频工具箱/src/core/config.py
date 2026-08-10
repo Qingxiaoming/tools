@@ -67,7 +67,16 @@ MERGE_OUTPUT_DIR: Path = TOOLBOX_OUTPUT_ROOT / _MERGE_SUBDIR if not Path(_MERGE_
 DOC_OUTPUT_DIR: Path = TOOLBOX_OUTPUT_ROOT / _DOC_SUBDIR if not Path(_DOC_SUBDIR).is_absolute() else Path(_DOC_SUBDIR)
 
 # 主窗口几何参数：宽x高+左上角X+左上角Y
-MAIN_WINDOW_GEOMETRY: str = _get_config('window.geometry', "420x460+3132+920")
+# Windows 保持原双屏坐标；其他平台给一个屏幕内默认值，避免窗口出屏
+_DEFAULT_WINDOW_GEOMETRY = "420x460+3132+920" if sys.platform == "win32" else "420x460+100+100"
+MAIN_WINDOW_GEOMETRY: str = _get_config('window.geometry', _DEFAULT_WINDOW_GEOMETRY)
+
+# 字体族：Windows 保持原字体；其他平台改用系统可用字体，避免回退默认字体显示难看
+def _platform_font(windows_family: str, other_family: str) -> str:
+    return windows_family if sys.platform == "win32" else other_family
+
+UI_FONT_FAMILY: str = _platform_font("Microsoft YaHei UI", "LXGW WenKai")
+MONO_FONT_FAMILY: str = _platform_font("Consolas", "DejaVu Sans Mono")
 
 # 文档转运目标路径
 _DOC_TRANSFER_DOC_STR: str = _get_config(

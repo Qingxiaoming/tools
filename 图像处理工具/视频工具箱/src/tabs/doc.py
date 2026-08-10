@@ -15,6 +15,8 @@ from ..core.config import (
     DOC_TRANSFER_MEDIA_DIR,
     ENABLE_NOTIFICATION,
     VIDEO_NATURE_LIST,
+    UI_FONT_FAMILY,
+    MONO_FONT_FAMILY,
     notification,
 )
 from ..services.md_templates import get_template_manager, MdTemplate
@@ -257,7 +259,7 @@ class DocMixin:
         ttk.Label(
             dialog,
             text="填写元数据值（留空表示不注入该字段）：",
-            font=("Microsoft YaHei UI", 9),
+            font=(UI_FONT_FAMILY, 9),
         ).pack(anchor="w", padx=10, pady=(10, 5))
 
         # 表格区域：变量名 → 值
@@ -474,7 +476,7 @@ class DocMixin:
         content_frame.pack(fill="both", expand=True, padx=10, pady=5)
 
         self._editor_text = scrolledtext.ScrolledText(
-            content_frame, width=70, height=15, font=("Consolas", 9), wrap=tk.NONE
+            content_frame, width=70, height=15, font=(MONO_FONT_FAMILY, 9), wrap=tk.NONE
         )
         self._editor_text.pack(fill="both", expand=True)
 

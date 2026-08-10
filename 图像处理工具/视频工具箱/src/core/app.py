@@ -3,6 +3,7 @@ import sys
 import subprocess
 
 import tkinter as tk
+import tkinter.font as tkfont
 import tkinterdnd2 as tkdnd
 from tkinter import scrolledtext, ttk
 
@@ -15,6 +16,8 @@ from .config import (
     WEEKLY_OUTPUT_DIR,
     CROSS_TAB_TRANSFER_MODE,
     MAIN_WINDOW_GEOMETRY,
+    MONO_FONT_FAMILY,
+    UI_FONT_FAMILY,
 )
 from .subprocess_util import init_process_job, terminate_all_tracked_processes
 from ..services.repair import RepairMixin
@@ -40,6 +43,17 @@ class VideoTools(
         super().__init__()
         self.title("视频工具箱")
         self.geometry(MAIN_WINDOW_GEOMETRY)
+
+        if sys.platform != "win32":
+            # 非 Windows 平台全局切换默认字体（标签/按钮/菜单等全部生效），Windows 保持原样
+            for _font_name in (
+                "TkDefaultFont", "TkTextFont", "TkMenuFont",
+                "TkHeadingFont", "TkCaptionFont", "TkIconFont", "TkTooltipFont",
+            ):
+                try:
+                    tkfont.nametofont(_font_name).configure(family=UI_FONT_FAMILY)
+                except Exception:
+                    pass
 
         ensure_dirs_exist()
 
@@ -156,7 +170,7 @@ class VideoTools(
         open_btn.pack(side="right")
 
         self.log = scrolledtext.ScrolledText(
-            self, width=80, height=6, state="disabled", font=("Consolas", 8)
+            self, width=80, height=6, state="disabled", font=(MONO_FONT_FAMILY, 8)
         )
         self.log.pack(padx=10, pady=(0, 10), fill="both", expand=True)
 
