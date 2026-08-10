@@ -52,10 +52,35 @@ pyinstaller --noconfirm --clean video_tools.spec
 
 ### 关键配置
 
-`src/config.py` 中定义了多个输出目录：
+`src/core/config.py` 中定义了多个输出目录：
 - `TOOLBOX_OUTPUT_ROOT` - 基础输出目录（默认 `E:\toolbox输出`）
 - `DOC_TRANSFER_DOC_DIR` / `DOC_TRANSFER_MEDIA_DIR` - 文档转运目标路径
 - `WEEKLY_OUTPUT_ROOT` - 录屏整理根目录（默认 `I:\录屏`）
+
+### Linux 运行说明
+
+Linux 下不要用 conda 自带的 Tk（官方构建未启用 Xft，中文字体会回退成丑陋的位图字体），推荐用系统 Python + venv：
+
+```bash
+# 前置：系统包（Ubuntu/Debian 一次性）
+sudo apt-get install -y python3-tk python3-venv
+
+# 建环境 + 装依赖（一次性）
+cd "视频工具箱"
+python3 -m venv .venv
+.venv/bin/pip install -r requirements.txt
+
+# 运行
+.venv/bin/python main.pyw
+```
+
+其他要点：
+
+- 系统需安装 `ffmpeg`（含 libx264，重编码/1080p 扩展依赖）与 CJK 字体（如 `fonts-noto-cjk`；若已装霞鹜文楷会自动使用）。
+- 本机个性化配置在 `config.json`（输出目录、窗口位置、文档转运路径）。该文件已被 `.gitignore` 忽略、不进版本库，各机器各自维护，互不影响。
+- 字体自动适配：Windows 用微软雅黑/Consolas，其他平台用霞鹜文楷/DejaVu Sans Mono（见 `src/core/config.py` 的 `UI_FONT_FAMILY` / `MONO_FONT_FAMILY`）。
+- 窗口默认几何：Windows 保持原坐标，其他平台默认 `420x460+100+100`，实际位置可在 `config.json` 的 `window.geometry` 覆盖。
+- 打包：`打包/` 下的 `build.bat` / `video_tools.spec` 是 Windows 专用；Linux 直接以 `.venv` 运行即可，暂不打包。
 
 ---
 
@@ -133,10 +158,10 @@ VideoToolbox-MFAAvalonia/
 | 功能 | Python 文件 | C# ViewModel 分部类 |
 |------|-------------|---------------------|
 | 多段截取 | `src/tabs/segment.py` | `MainWindowViewModel.Segment.cs` |
-| 画幅裁剪 | `src/crop.py` | `MainWindowViewModel.Crop.cs` |
-| 视频合并 | `src/merge.py` | `MainWindowViewModel.Merge.cs` |
-| 文档生成 | `src/doc.py` | `MainWindowViewModel.Doc.cs` |
-| 录屏整理 | `src/weekly.py` | `MainWindowViewModel.Weekly.cs` |
+| 画幅裁剪 | `src/tabs/crop.py` | `MainWindowViewModel.Crop.cs` |
+| 视频合并 | `src/tabs/merge.py` | `MainWindowViewModel.Merge.cs` |
+| 文档生成 | `src/tabs/doc.py` | `MainWindowViewModel.Doc.cs` |
+| 录屏整理 | `src/tabs/weekly.py` | `MainWindowViewModel.Weekly.cs` |
 
 ### 行为一致性要点
 
@@ -158,7 +183,7 @@ VideoToolbox-MFAAvalonia/
 
 ## 关键文件
 
-- `视频工具箱/打包说明.md` - Python 版本打包说明
+- `视频工具箱/打包/打包说明.md` - Python 版本打包说明
 - `VideoToolbox-MFAAvalonia/NEXT_AI_HANDOFF.md` - 最新 AI 交接文档
 - `VideoToolbox-MFAAvalonia/UI_TODO.md` - UI 同款化任务列表
 - `VideoToolbox-MFAAvalonia/UI_REFACTOR_LOG.md` - UI 重构变更日志
