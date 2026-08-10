@@ -253,7 +253,7 @@ class DocMixin:
         dialog.title(f"批量注入元数据 ({len(uninjected_videos)}个新视频)")
         dialog.geometry("450x350")
         dialog.transient(self)
-        dialog.grab_set()
+        self._safe_grab_set(dialog)
 
         # 标题
         ttk.Label(
@@ -421,6 +421,17 @@ class DocMixin:
 
     # ------------------------- 内容编辑弹窗 -------------------------
 
+    def _safe_grab_set(self, win: tk.Toplevel) -> None:
+        """安全抢焦点：X11 上窗口尚未映射时 grab_set 会抛 TclError，等可见后再试。"""
+        try:
+            win.grab_set()
+        except tk.TclError:
+            try:
+                win.wait_visibility()
+                win.grab_set()
+            except tk.TclError:
+                pass
+
     def _open_content_editor(self, index: int) -> None:
         """打开内容编辑弹窗。"""
         if not self.doc_video_list or index < 0 or index >= len(self.doc_video_list):
@@ -439,7 +450,7 @@ class DocMixin:
         editor.title(f"编辑 - {video_name}")
         editor.geometry("550x600")
         editor.transient(self)
-        editor.grab_set()
+        self._safe_grab_set(editor)
 
         # 获取当前视频使用的模板名（从状态或重新匹配）
         state = self._video_state.get(video_name, {})
