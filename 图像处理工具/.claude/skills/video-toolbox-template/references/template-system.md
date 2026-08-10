@@ -24,6 +24,23 @@
 - `priority.txt` 内容为纯数字，解析失败默认 0。
 - 应用侧兜底：`_get_template_for_video()` 在 `match_template` 返回 None 时取 taera，再取第一个模板——实际正常流程中 generic（恒 True）总会命中，兜底分支很少触发。
 
+## 信息提取（默认不解析，extract.py 自定义）
+
+默认提取（`md_templates.default_extract`）**不做任何文件名解析**，只返回 `{"filename": filename}`。通用模板（如 generic）直接用 `${filename}` 即可，不会产生 干员/关卡/性质 等变量（渲染时回落为 `未知 / 普通 / 文件名`）。
+
+需要解析文件名时，模板提供可选 `extract.py` 完全接管提取，签名：
+
+```python
+def extract(filename: str, video_path: str = "") -> dict:
+    ...
+```
+
+返回 dict 会作为模板变量：`operators/nature/stage` 覆盖默认位置参数，其他键经 `extra_vars` 合并进模板变量（可用 `${键名}` 引用）。`extract()` 返回非 dict 或抛异常时，应用打印警告并回落中性默认（仅文件名）。
+
+渲染与输出文件名的 stage 都使用同一套提取结果（`_generate_content_for_video` 与 `_doc_generation_thread`）。
+
+参考实现：`data/mdtemplate/taera/extract.py`，按 `关卡_性质_干员+干员` 解析（operators 取最后 `_` 后按 `+` 拆分；nature 取性质关键词；stage 取最前段并去掉性质词）。
+
 ## render.py 高级用法（taera 参考实现）
 
 `render.py` 可选，存在时接管整个渲染流程，签名固定：
@@ -46,11 +63,11 @@ taera 的 render.py 实现了"同一变量不同位置不同格式"：YAML front
 
 | 模板 | 优先级 | 匹配方式 | 特殊文件 |
 |------|--------|----------|----------|
-| `generic` | 0 | `match()` 恒 True（兜底） | 无 |
-| `taera` | 10 | 明日方舟关卡正则（`1-7`、`H12-4`、`DT-EX-8` 等）+ 关键词 | `render.py` |
+| `generic` | 0 | `match()` 恒 True（兜底） | 无（不解析文件名） |
+| `taera` | 10 | 明日方舟关卡正则（`1-7`、`DT-EX-8` 等）+ 关键词 | `render.py`、`extract.py` |
 
 ## 排错
 
 - 模板不生效：确认文件夹位于 `data/mdtemplate/`、`match.py` 存在且无语法错误、优先级没有压过其他模板、应用已重启（无刷新按钮）。
-- 提取不对：`operators/nature/stage` 是全局规则，与模板无关；检查文件名是否符合 `关卡_干员+干员` 格式。
+- 提取不对：默认不做解析，需要解析就在模板里加 `extract.py` 自定义（参考 taera）。
 - 打包版与源码模板不一致：发布包用的是 `打包/dist/data/mdtemplate/` 副本。

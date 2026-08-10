@@ -14,7 +14,6 @@ from ..core.config import (
     DOC_TRANSFER_DOC_DIR,
     DOC_TRANSFER_MEDIA_DIR,
     ENABLE_NOTIFICATION,
-    VIDEO_NATURE_LIST,
     UI_FONT_FAMILY,
     MONO_FONT_FAMILY,
     notification,
@@ -661,28 +660,6 @@ class DocMixin:
 
     # ------------------------- 文档生成 -------------------------
 
-    def _extract_operator_list(self, filename: str) -> List[str]:
-        base = os.path.splitext(filename)[0]
-        if "_" not in base:
-            return ["未知"]
-        op_field = base.split("_")[-1]
-        return [op.strip() for op in op_field.split("+") if op.strip()]
-
-    def _extract_nature(self, filename: str) -> str:
-        for n in VIDEO_NATURE_LIST:
-            if n in filename:
-                return n
-        return "普通"
-
-    def _extract_stage_name(self, filename: str) -> str:
-        base, _ = os.path.splitext(filename)
-        part = base.split("_")[0] if "_" in base else base
-        raw = part
-        for n in VIDEO_NATURE_LIST:
-            part = part.replace(n, "")
-        part = part.strip("_- ")
-        return part if part else raw
-
     def _get_template_for_video(self, video_name: str, video_path: str = "") -> MdTemplate:
         """获取指定视频应该使用的模板（优先匹配，默认用 taera）。"""
         # 尝试自动匹配
@@ -707,10 +684,11 @@ class DocMixin:
         if template is None:
             template = self._get_template_for_video(video_name, video_path)
 
-        # 提取信息
-        ops = self._extract_operator_list(video_name)
-        nature = self._extract_nature(video_name)
-        stage = self._extract_stage_name(video_name)
+        # 提取信息：优先使用模板自定义 extract.py，缺省用全局默认规则
+        extracted = template.extract(video_name, video_path)
+        ops = extracted.get("operators") or ["未知"]
+        nature = extracted.get("nature", "普通")
+        stage = extracted.get("stage", "")
 
         # 渲染模板，保留注入占位符
         content = template.render(
@@ -718,6 +696,10 @@ class DocMixin:
             operators=ops,
             nature=nature,
             stage=stage,
+            extra_vars={
+                k: v for k, v in extracted.items()
+                if k not in ("operators", "nature", "stage")
+            },
             preserve_placeholders=True,
         )
 
@@ -770,7 +752,16 @@ class DocMixin:
 
         for video_path, video_name in self.doc_video_list:
             try:
-                stage = self._extract_stage_name(video_name)
+                # 输出文件名同样使用模板提取的 stage（缺省用文件名主体）
+                template_name = self._video_state.get(video_name, {}).get("template_name")
+                template = (
+                    self._template_manager.get_template(template_name)
+                    if template_name else None
+                )
+                if template is None:
+                    template = self._get_template_for_video(video_name, video_path)
+                extracted = template.extract(video_name, video_path)
+                stage = extracted.get("stage") or os.path.splitext(video_name)[0]
                 md_path = DOC_OUTPUT_DIR / f"{stage}.md"
 
                 # 使用缓存的内容（可能经过编辑）

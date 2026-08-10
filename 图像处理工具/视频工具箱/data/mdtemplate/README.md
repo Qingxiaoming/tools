@@ -11,14 +11,17 @@ data/mdtemplate/
 ├── generic/              # 默认通用模板（优先级最低）
 │   ├── template.md       # 模板内容文件
 │   ├── match.py          # 匹配规则脚本
+│   ├── extract.py        # 信息提取脚本（可选）
 │   └── priority.txt      # 优先级数字（可选）
 ├── taera/                # 示例：明日方舟专用模板
 │   ├── template.md
 │   ├── match.py
+│   ├── extract.py        # 信息提取（taera 自带：按 关卡_干员+干员 解析）
 │   └── priority.txt
 └── your_template/        # 你的自定义模板
     ├── template.md
     ├── match.py
+    ├── extract.py        # 信息提取脚本（可选）
     └── priority.txt
 ```
 
@@ -107,6 +110,22 @@ def match(filename: str, video_path: str = "") -> bool:
 - `generic` 模板建议优先级：`0`
 - 专用模板建议优先级：`10` 或更高
 
+### 4. extract.py - 信息提取（可选）
+
+定义 `extract(filename: str, video_path: str = "") -> dict`，返回的字典会成为模板变量：
+
+```python
+def extract(filename: str, video_path: str = "") -> dict:
+    return {
+        "operators": ["能天使", "塞雷娅"],
+        "nature": "突袭",
+        "stage": "1-7",
+        "活动": "感谢庆典",   # 自定义变量，模板里用 ${活动} 引用
+    }
+```
+
+**不提供 extract.py 时不做任何文件名解析**，只有 `${filename}` 可用（`operators/nature/stage` 为空，渲染时回落为 `未知 / 普通 / 文件名`）。需要从文件名解析信息（如干员/关卡/性质）时，用 extract.py 自定义，参考 `taera/extract.py`。
+
 ## 界面功能说明
 
 ### 文档生成页签
@@ -117,7 +136,7 @@ def match(filename: str, video_path: str = "") -> bool:
    - 下拉框选择指定模板
    - 选择「自动匹配」让系统根据文件名自动选择
    - 点击「🔄 自动匹配」按钮强制重新匹配所有视频
-   - 点击「刷新模板」重新扫描模板目录
+   - 修改模板目录后重启应用重新扫描模板
 
 3. **批量注入元数据**：
    - 点击「📋 批量注入元数据」按钮
@@ -148,11 +167,12 @@ def match(filename: str, video_path: str = "") -> bool:
 2. 创建 `template.md`，使用变量设计模板格式
 3. 创建 `match.py`，编写匹配逻辑
 4. 创建 `priority.txt`，设置优先级数字
-5. 在工具箱中点击「刷新模板」即可看到新模板
+5. （可选）需要从文件名解析信息时，创建 `extract.py`（参考 `taera/extract.py`）；不需要解析的模板跳过此步
+6. 重启应用即可看到并使用新模板
 
 ## 注意事项
 
-- 模板修改后点击「刷新模板」即可生效，无需重启程序
+- 模板修改后需重启应用生效（界面暂无"刷新模板"按钮）
 - 内容编辑区的修改仅保存在内存中，不影响源模板文件
 - 重启程序后需要重新进行内容微调
 - 模板文件夹名即为模板显示名称

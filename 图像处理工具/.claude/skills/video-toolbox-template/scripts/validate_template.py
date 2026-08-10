@@ -14,8 +14,6 @@ import os
 import sys
 from pathlib import Path
 
-DEFAULT_NATURE_LIST = ["突袭", "无解", "待压", "剧情", "他人记录", "剿灭", "沙盘", "普通"]
-
 
 def _load_match(template_dir: Path, name: str):
     match_path = template_dir / "match.py"
@@ -30,31 +28,6 @@ def _load_match(template_dir: Path, name: str):
     return getattr(module, "match", None)
 
 
-def extract_operators(filename: str) -> list[str]:
-    base = os.path.splitext(filename)[0]
-    if "_" not in base:
-        return ["未知"]
-    op_field = base.split("_")[-1]
-    return [op.strip() for op in op_field.split("+") if op.strip()]
-
-
-def extract_nature(filename: str) -> str:
-    for n in DEFAULT_NATURE_LIST:
-        if n in filename:
-            return n
-    return "普通"
-
-
-def extract_stage_name(filename: str) -> str:
-    base, _ = os.path.splitext(filename)
-    part = base.split("_")[0] if "_" in base else base
-    raw = part
-    for n in DEFAULT_NATURE_LIST:
-        part = part.replace(n, "")
-    part = part.strip("_- ")
-    return part if part else raw
-
-
 def render(template_dir: Path, name: str, filename: str, project_root: Path) -> str:
     """复用项目 md_templates.MdTemplate.render（按文件路径加载，避免触发应用级依赖）。"""
     md_path = project_root / "src" / "services" / "md_templates.py"
@@ -66,11 +39,16 @@ def render(template_dir: Path, name: str, filename: str, project_root: Path) -> 
     spec.loader.exec_module(module)
 
     tpl = module.MdTemplate(name=name, template_dir=template_dir)
+    extracted = tpl.extract(filename)
     return tpl.render(
         filename=filename,
-        operators=extract_operators(filename),
-        nature=extract_nature(filename),
-        stage=extract_stage_name(filename),
+        operators=extracted.get("operators"),
+        nature=extracted.get("nature", "普通"),
+        stage=extracted.get("stage", ""),
+        extra_vars={
+            k: v for k, v in extracted.items()
+            if k not in ("operators", "nature", "stage")
+        },
         preserve_placeholders=True,
     )
 

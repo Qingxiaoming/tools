@@ -3,9 +3,18 @@
 import os
 import re
 import sys
+import importlib.util
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable, List, Optional
+
+
+def default_extract(filename: str, video_path: str = "") -> dict:
+    """默认信息提取：不做任何文件名解析，仅提供文件名本身。
+
+    模板需要解析（如干员/关卡/性质）时，在模板目录提供 extract.py 自定义。
+    """
+    return {"filename": filename}
 
 
 @dataclass
@@ -28,12 +37,42 @@ class MdTemplate:
         """获取渲染脚本路径（可选）。"""
         return self.template_dir / "render.py"
 
+    def get_extract_path(self) -> Path:
+        """获取信息提取脚本路径（可选）。"""
+        return self.template_dir / "extract.py"
+
     def load_content(self) -> str:
         """加载模板内容。"""
         template_path = self.get_template_path()
         if template_path.exists():
             return template_path.read_text(encoding="utf-8")
         return ""
+
+    def extract(self, filename: str, video_path: str = "") -> dict:
+        """按模板自定义规则从文件名提取变量；无 extract.py 时使用默认全局规则。
+
+        返回 dict 会作为模板变量使用（含 operators/nature/stage，可覆盖默认变量，
+        额外的键可作为 ${自定义变量} 在 template.md 中使用）。
+        """
+        extract_path = self.get_extract_path()
+        if extract_path.exists():
+            try:
+                spec = importlib.util.spec_from_file_location(
+                    f"extract_{self.name}", extract_path
+                )
+                if spec is None or spec.loader is None:
+                    return default_extract(filename, video_path)
+                module = importlib.util.module_from_spec(spec)
+                sys.modules[spec.name] = module
+                spec.loader.exec_module(module)
+                if hasattr(module, "extract"):
+                    result = module.extract(filename, video_path)
+                    if isinstance(result, dict):
+                        return result
+                    print(f"[模板提取警告] {self.name}: extract() 应返回 dict，已使用默认规则")
+            except Exception as e:
+                print(f"[模板提取错误] {self.name}: {e}")
+        return default_extract(filename, video_path)
 
     def can_handle(self, filename: str, video_path: str = "") -> bool:
         """检查此模板是否匹配给定的文件名。"""
@@ -43,7 +82,7 @@ class MdTemplate:
 
         try:
             # 动态导入匹配模块
-            spec = __import__("importlib.util").util.spec_from_file_location(
+            spec = importlib.util.spec_from_file_location(
                 f"match_{self.name}", match_path
             )
             if spec is None or spec.loader is None:
@@ -84,7 +123,7 @@ class MdTemplate:
         render_path = self.get_render_path()
         if render_path.exists():
             try:
-                spec = __import__("importlib.util").util.spec_from_file_location(
+                spec = importlib.util.spec_from_file_location(
                     f"render_{self.name}", render_path
                 )
                 if spec and spec.loader:
@@ -247,35 +286,6 @@ class MdTemplateManager:
     def reload(self) -> None:
         """重新扫描模板目录。"""
         self._scan_templates()
-
-    def extract_operators(self, filename: str) -> List[str]:
-        """从文件名中提取操作员列表。"""
-        base = os.path.splitext(filename)[0]
-        if "_" not in base:
-            return ["未知"]
-        op_field = base.split("_")[-1]
-        return [op.strip() for op in op_field.split("+") if op.strip()]
-
-    def extract_nature(self, filename: str, nature_list: Optional[List[str]] = None) -> str:
-        """从文件名中提取性质/难度。"""
-        if nature_list is None:
-            nature_list = ["突袭", "无解", "待压", "剧情", "他人记录", "剿灭", "沙盘", "普通"]
-        for n in nature_list:
-            if n in filename:
-                return n
-        return "普通"
-
-    def extract_stage_name(self, filename: str, nature_list: Optional[List[str]] = None) -> str:
-        """从文件名中提取关卡/阶段名称。"""
-        if nature_list is None:
-            nature_list = ["突袭", "无解", "待压", "剧情", "他人记录", "剿灭", "沙盘", "普通"]
-        base, _ = os.path.splitext(filename)
-        part = base.split("_")[0] if "_" in base else base
-        raw = part
-        for n in nature_list:
-            part = part.replace(n, "")
-        part = part.strip("_- ")
-        return part if part else raw
 
 
 # 全局模板管理器实例

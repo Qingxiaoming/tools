@@ -17,6 +17,7 @@ description: Create, modify, or debug MD templates for the 视频工具箱 (Vide
 data/mdtemplate/<name>/
 ├── template.md     # 必需：模板内容，支持 ${var} / {{var}} / ${inject:xxx}
 ├── match.py        # 必需：匹配函数 match(filename, video_path) -> bool
+├── extract.py      # 可选：自定义信息提取（operators/nature/stage 及任意变量）
 ├── priority.txt    # 可选：优先级数字，越大越优先，默认 0
 └── render.py       # 可选：自定义渲染脚本（taera 有参考实现）
 ```
@@ -27,23 +28,32 @@ data/mdtemplate/<name>/
 - 没有任何模板匹配时落到 generic（`match()` 恒 True，优先级 0）——generic 是兜底模板，不要删除。
 - `match()` 只决定"用哪个模板"，**不决定信息提取**。
 
-## 关键约束：信息提取是全局写死的
+## 信息提取：默认不解析，模板用 extract.py 自定义
 
-`operators / nature / stage` 的提取规则在 `src/services/md_templates.py` 中全局实现，**按 `关卡_干员+干员` 的文件名格式解析**：
+默认情况下模板**不做任何文件名解析**，只有 `${filename}` 可用（`operators/nature/stage` 为空，渲染时回落为 `未知 / 普通 / 文件名`）。
 
-- operators：`_` 后最后一段，按 `+` 拆分；
-- nature：文件名中出现的性质关键词（默认列表：突袭/无解/待压/剧情/他人记录/剿灭/沙盘/普通）；
-- stage：`_` 前第一段，去掉性质关键词。
+需要解析文件名（如干员/关卡/性质）时，在模板目录提供可选 `extract.py`：
 
-模板可用的 `${stage}`、`${operators}` 等变量来自这套全局解析。**若新模板的文件名格式与"关卡_干员+干员"不符，提取结果会不正确**——先与用户确认文件名格式；需要改提取逻辑时，先获得用户授权再动 `src/services/md_templates.py`。
+```python
+def extract(filename: str, video_path: str = "") -> dict:
+    return {
+        "operators": [...],
+        "nature": "...",
+        "stage": "...",
+        "自定义变量": "...",
+    }
+```
+
+返回的 dict 会作为模板变量：可覆盖 operators/nature/stage，额外的键用 `${键名}` 在 template.md 中引用。没有 extract.py 时回落中性默认（仅文件名）。参考实现：`data/mdtemplate/taera/extract.py`（按 `关卡_性质_干员+干员` 解析）。
 
 ## 创建新模板
 
 1. 复制骨架 `assets/template-skeleton/` 到 `data/mdtemplate/<新名字>/`（模板文件夹名即显示名）。
 2. 编辑 `template.md`：用变量占位（变量表见 references/template-system.md），`${inject:xxx}` 标记需要用户批量填写的字段。
 3. 实现 `match.py`：定义 `match(filename, video_path="") -> bool`。参考 taera（正则匹配）或 generic（恒 True）。
-4. 设置 `priority.txt`：专用模板建议 10，通用模板 0。
-5. 验证：运行 `scripts/validate_template.py <模板目录> <示例文件名>... --render` 确认匹配与渲染；再按项目说明启动应用在"文档生成"页签实测。模板没有"刷新"按钮，**修改后重启应用生效**。
+4. 需要从文件名解析信息（干员/关卡/性质等）时，写 `extract.py`（见上节）；不需要解析的模板（如 generic）跳过此步。
+5. 设置 `priority.txt`：专用模板建议 10，通用模板 0。
+6. 验证：运行 `scripts/validate_template.py <模板目录> <示例文件名>... --render` 确认匹配与渲染；再按项目说明启动应用在"文档生成"页签实测。模板没有"刷新"按钮，**修改后重启应用生效**。
 
 ## 修改现有模板
 
