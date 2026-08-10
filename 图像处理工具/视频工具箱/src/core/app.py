@@ -1,6 +1,7 @@
 import os
 import sys
 import subprocess
+from pathlib import Path
 
 import tkinter as tk
 import tkinter.font as tkfont
@@ -43,6 +44,16 @@ class VideoTools(
         super().__init__()
         self.title("视频工具箱")
         self.geometry(MAIN_WINDOW_GEOMETRY)
+
+        if sys.platform != "win32":
+            # 非 Windows 平台设置任务栏/窗口图标（Windows 保持 exe 图标与默认行为）
+            _icon_file = Path(__file__).resolve().parents[2] / "assets" / "icon.png"
+            if _icon_file.exists():
+                try:
+                    self._window_icon = tk.PhotoImage(file=str(_icon_file))
+                    self.iconphoto(True, self._window_icon)
+                except Exception:
+                    pass
 
         if sys.platform != "win32":
             # 非 Windows 平台全局切换默认字体（标签/按钮/菜单等全部生效），Windows 保持原样
