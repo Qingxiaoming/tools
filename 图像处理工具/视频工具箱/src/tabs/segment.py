@@ -343,7 +343,7 @@ class SegmentMixin:
                     str(out_path),
                 ]
 
-            self.status_label.config(text=f"正在处理：{out_name}")
+            self._post_ui(lambda n=out_name: self.status_label.config(text=f"正在处理：{n}"))
             try:
                 proc = tracked_popen(
                     cmd,
@@ -355,7 +355,7 @@ class SegmentMixin:
                     errors="replace",
                 )
                 for line in iter(proc.stdout.readline, ""):
-                    self._append_log_line(line.rstrip("\n"))
+                    self._post_ui(lambda m=line.rstrip("\n"): self._append_log_line(m))
                 proc.wait()
                 if proc.returncode == 0:
                     success.append(out_name)
@@ -371,7 +371,7 @@ class SegmentMixin:
         except Exception:
             pass
 
-        self.after(0, self._on_segment_batch_done, success, fail)
+        self._post_ui(lambda: self._on_segment_batch_done(success, fail))
 
     def _on_segment_batch_done(self, success: List[str], fail: List[str]) -> None:
         self._on_batch_done(

@@ -269,7 +269,7 @@ class MergeMixin:
                     "-y",
                     str(temp_merged),
                 ]
-                self.status_label.config(text="正在合并视频（第一步）...", foreground="blue")
+                self._post_ui(lambda: self.status_label.config(text="正在合并视频（第一步）...", foreground="blue"))
                 proc = tracked_popen(
                     cmd_concat,
                     stdout=subprocess.PIPE,
@@ -280,30 +280,32 @@ class MergeMixin:
                     errors="replace",
                 )
                 for line in iter(proc.stdout.readline, ""):
-                    self._append_log_line(line.rstrip())
+                    self._post_ui(lambda m=line.rstrip(): self._append_log_line(m))
                 rc = proc.wait()
                 try:
                     list_file.unlink(missing_ok=True)
                 except Exception:
                     pass
                 if rc != 0:
-                    self.after(
-                        0, self._on_merge_batch_done, False, "合并临时视频失败"
-                    )
+                    self._post_ui(lambda: self._on_merge_batch_done(False, "合并临时视频失败"))
                     return
                 video_dur = get_media_duration(str(temp_merged))
                 audio_dur = get_media_duration(audio_file)
                 if video_dur is None or audio_dur is None or audio_dur <= 0:
                     speed = 1.0
-                    self._append_log_line("无法获取合并视频或音频时长，按 1 倍速输出。")
+                    self._post_ui(lambda: self._append_log_line("无法获取合并视频或音频时长，按 1 倍速输出。"))
                 else:
                     speed = video_dur / audio_dur
                     if speed > 5 or speed < 1:
-                        self._append_log_line(
-                            f"警告：到音乐放完倍速为 {speed:.2f}，超出建议范围 [1, 5]，仍继续处理。"
+                        self._post_ui(
+                            lambda s=speed: self._append_log_line(
+                                f"警告：到音乐放完倍速为 {s:.2f}，超出建议范围 [1, 5]，仍继续处理。"
+                            )
                         )
-                self.status_label.config(
-                    text="正在合并视频（第二步，到音乐放完）...", foreground="blue"
+                self._post_ui(
+                    lambda: self.status_label.config(
+                        text="正在合并视频（第二步，到音乐放完）...", foreground="blue"
+                    )
                 )
                 if audio_mode == "replace":
                     # 视频加速以适配音乐时长，音乐保持原速
@@ -376,20 +378,17 @@ class MergeMixin:
                     errors="replace",
                 )
                 for line in iter(proc.stdout.readline, ""):
-                    self._append_log_line(line.rstrip())
+                    self._post_ui(lambda m=line.rstrip(): self._append_log_line(m))
                 rc = proc.wait()
                 try:
                     temp_merged.unlink(missing_ok=True)
                 except Exception:
                     pass
                 if rc == 0:
-                    self.after(0, self._on_merge_batch_done, True, str(output_path))
+                    self._post_ui(lambda: self._on_merge_batch_done(True, str(output_path)))
                 else:
-                    self.after(
-                        0,
-                        self._on_merge_batch_done,
-                        False,
-                        f"合并失败 (返回码 {rc})",
+                    self._post_ui(
+                        lambda r=rc: self._on_merge_batch_done(False, f"合并失败 (返回码 {r})")
                     )
                 return
 
@@ -543,7 +542,7 @@ class MergeMixin:
                         ]
                     )
 
-            self.status_label.config(text="正在合并视频...", foreground="blue")
+            self._post_ui(lambda: self.status_label.config(text="正在合并视频...", foreground="blue"))
             proc = tracked_popen(
                 cmd,
                 stdout=subprocess.PIPE,
@@ -554,7 +553,7 @@ class MergeMixin:
                 errors="replace",
             )
             for line in iter(proc.stdout.readline, ""):
-                self._append_log_line(line.rstrip())
+                self._post_ui(lambda m=line.rstrip(): self._append_log_line(m))
             rc = proc.wait()
 
             try:
@@ -563,17 +562,14 @@ class MergeMixin:
                 pass
 
             if rc == 0:
-                self.after(0, self._on_merge_batch_done, True, str(output_path))
+                self._post_ui(lambda: self._on_merge_batch_done(True, str(output_path)))
             else:
-                self.after(
-                    0,
-                    self._on_merge_batch_done,
-                    False,
-                    f"合并失败 (返回码 {rc})",
+                self._post_ui(
+                    lambda r=rc: self._on_merge_batch_done(False, f"合并失败 (返回码 {r})")
                 )
 
         except Exception as e:
-            self.after(0, self._on_merge_batch_done, False, str(e))
+            self._post_ui(lambda err=e: self._on_merge_batch_done(False, str(err)))
 
     def _on_merge_batch_done(self, success: bool, result: str) -> None:
         self._batch_in_progress = False

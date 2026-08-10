@@ -22,7 +22,7 @@ from .config import (
 )
 from .subprocess_util import init_process_job, terminate_all_tracked_processes
 from ..services.repair import RepairMixin
-from .common_mixins import DropMixin, ListboxMixin
+from .common_mixins import DropMixin, ListboxMixin, UiThreadMixin
 from ..tabs.crop import CropMixin
 from ..tabs.doc import DocMixin
 from ..tabs.merge import MergeMixin
@@ -33,6 +33,7 @@ from ..tabs.weekly import WeeklyMixin
 class VideoTools(
     tkdnd.Tk,
     RepairMixin,
+    UiThreadMixin,
     ListboxMixin,
     DropMixin,
     SegmentMixin,
@@ -92,6 +93,8 @@ class VideoTools(
         self._repair_in_progress = False
         # 全局批处理锁：同一时间只允许一个批处理任务运行，避免底部日志互相覆盖
         self._batch_in_progress = False
+        self._init_ui_queue()
+        self.after(50, self._poll_ui_queue)
 
         init_process_job()
         self.protocol("WM_DELETE_WINDOW", self._on_app_close)

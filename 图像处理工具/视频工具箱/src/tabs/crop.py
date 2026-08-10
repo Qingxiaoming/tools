@@ -238,7 +238,7 @@ class CropMixin:
                 str(out_path),
             ]
 
-            self.status_label.config(text=f"正在处理：{vname}", foreground="blue")
+            self._post_ui(lambda n=vname: self.status_label.config(text=f"正在处理：{n}", foreground="blue"))
             try:
                 proc = tracked_popen(
                     cmd,
@@ -250,7 +250,7 @@ class CropMixin:
                     errors="replace",
                 )
                 for line in iter(proc.stdout.readline, ""):
-                    self._append_log_line(line.rstrip())
+                    self._post_ui(lambda m=line.rstrip(): self._append_log_line(m))
                 rc = proc.wait()
                 if rc == 0:
                     success.append(vname)
@@ -266,7 +266,7 @@ class CropMixin:
         except Exception:
             pass
 
-        self.after(0, self._on_crop_batch_done, success, fail)
+        self._post_ui(lambda: self._on_crop_batch_done(success, fail))
 
     def _on_crop_batch_done(self, success: List[str], fail: List[str]) -> None:
         self._on_batch_done(

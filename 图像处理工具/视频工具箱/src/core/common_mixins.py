@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+import queue
 from typing import List, Tuple
 
 import tkinter as tk
@@ -10,6 +11,33 @@ import tkinter as tk
 from .config import ENABLE_NOTIFICATION, notification
 
 VIDEO_EXTENSIONS = (".mp4", ".mkv", ".mov", ".avi", ".flv", ".ts")
+
+
+class UiThreadMixin:
+    """线程安全的 UI 更新：工作线程把回调投进队列，主线程轮询执行。"""
+
+    def _init_ui_queue(self) -> None:
+        self._ui_queue: "queue.Queue" = queue.Queue()
+
+    def _post_ui(self, fn) -> None:
+        """供工作线程调用：把 UI 更新投递到主线程执行（线程安全）。"""
+        try:
+            self._ui_queue.put(fn)
+        except Exception:
+            pass
+
+    def _poll_ui_queue(self) -> None:
+        """主线程定时执行队列中的 UI 更新。"""
+        try:
+            while True:
+                fn = self._ui_queue.get_nowait()
+                try:
+                    fn()
+                except Exception:
+                    pass
+        except Exception:
+            pass
+        self.after(50, self._poll_ui_queue)
 
 
 class ListboxMixin:

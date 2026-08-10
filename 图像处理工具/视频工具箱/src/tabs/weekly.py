@@ -171,7 +171,7 @@ class WeeklyMixin:
             current_start = end
 
         if not timeline:
-            self.after(0, self._on_weekly_done, success, fail)
+            self._post_ui(lambda: self._on_weekly_done(success, fail))
             return
 
         total_duration = timeline[-1][3]
@@ -219,9 +219,10 @@ class WeeklyMixin:
                 for seg_idx, (vpath, vname, local_start, local_dur) in enumerate(
                     segments, start=1
                 ):
-                    self.status_label.config(
-                        text=f"提取音频：{base_prefix} {part_tag} - {vname}",
-                        foreground="blue",
+                    self._post_ui(
+                        lambda bp=base_prefix, pt=part_tag, vn=vname: self.status_label.config(
+                            text=f"提取音频：{bp} {pt} - {vn}", foreground="blue"
+                        )
                     )
                     chunk_audio = part_tmp_dir / f"{base_prefix}_{part_tag}_a_{seg_idx:02d}.m4a"
                     if chunk_audio.exists():
@@ -267,8 +268,10 @@ class WeeklyMixin:
                 audio_final_name = f"{base_prefix}_{part_tag}_audio.m4a"
                 audio_out_path = self._make_unique_path(WEEKLY_OUTPUT_DIR, audio_final_name)
 
-                self.status_label.config(
-                    text=f"合并音频：{base_prefix} {part_tag}", foreground="blue"
+                self._post_ui(
+                    lambda bp=base_prefix, pt=part_tag: self.status_label.config(
+                        text=f"合并音频：{bp} {pt}", foreground="blue"
+                    )
                 )
                 audio_concat_cmd = [
                     "ffmpeg",
@@ -297,9 +300,10 @@ class WeeklyMixin:
                 for seg_idx, (vpath, vname, local_start, local_dur) in enumerate(
                     segments, start=1
                 ):
-                    self.status_label.config(
-                        text=f"处理视频：{base_prefix} {part_tag} - {vname}（60 倍速）",
-                        foreground="blue",
+                    self._post_ui(
+                        lambda bp=base_prefix, pt=part_tag, vn=vname: self.status_label.config(
+                            text=f"处理视频：{bp} {pt} - {vn}（60 倍速）", foreground="blue"
+                        )
                     )
                     chunk_video = part_tmp_dir / f"{base_prefix}_{part_tag}_v_{seg_idx:02d}.mp4"
                     if chunk_video.exists():
@@ -348,8 +352,10 @@ class WeeklyMixin:
                 video_final_name = f"{base_prefix}_{part_tag}_x60.mp4"
                 video_out_path = self._make_unique_path(WEEKLY_OUTPUT_DIR, video_final_name)
 
-                self.status_label.config(
-                    text=f"合并视频：{base_prefix} {part_tag}", foreground="blue"
+                self._post_ui(
+                    lambda bp=base_prefix, pt=part_tag: self.status_label.config(
+                        text=f"合并视频：{bp} {pt}", foreground="blue"
+                    )
                 )
                 video_concat_cmd = [
                     "ffmpeg",
@@ -401,7 +407,7 @@ class WeeklyMixin:
             except Exception:
                 pass
 
-        self.after(0, self._on_weekly_done, success, fail)
+        self._post_ui(lambda: self._on_weekly_done(success, fail))
 
     def _run_ffmpeg_with_log(self, cmd: List[str]) -> bool:
         """运行 ffmpeg 命令，并实时刷新日志窗口。返回是否成功。"""
@@ -416,11 +422,11 @@ class WeeklyMixin:
                 errors="replace",
             )
             for line in iter(proc.stdout.readline, ""):
-                self._append_log_line(line.rstrip("\n"))
+                self._post_ui(lambda m=line.rstrip("\n"): self._append_log_line(m))
             rc = proc.wait()
             return rc == 0
         except Exception as e:
-            self._append_log_line(f"命令执行出错: {e}")
+            self._post_ui(lambda err=e: self._append_log_line(f"命令执行出错: {err}"))
             return False
 
     def _on_weekly_done(self, success: List[str], fail: List[str]) -> None:

@@ -735,12 +735,12 @@ class DocMixin:
                     pass
 
                 success.append(f"{video_name} -> {stage}.md")
-                self._append_log_line(f"已生成: {stage}.md")
+                self._post_ui(lambda s=stage: self._append_log_line(f"已生成: {s}.md"))
 
             except Exception as e:
                 fail.append(f"{video_name} ({str(e)})")
 
-        self.after(0, self._on_doc_generation_done, success, fail)
+        self._post_ui(lambda: self._on_doc_generation_done(success, fail))
 
     def _on_doc_generation_done(self, success: List[str], fail: List[str]) -> None:
         self._on_batch_done(
@@ -812,7 +812,9 @@ class DocMixin:
                 text = md_path.read_text(encoding="utf-8")
             except Exception as e:
                 skipped += 1
-                self._append_log_line(f"{md_path.name}  (读取失败: {e})")
+                self._post_ui(
+                    lambda n=md_path.name, err=e: self._append_log_line(f"{n}  (读取失败: {err})")
+                )
                 continue
 
             # 提取所有 ![[...]] 引用，允许多个
@@ -823,8 +825,10 @@ class DocMixin:
             # 若目标文档目录已存在同名 md，则整组跳过
             if doc_target.exists():
                 skipped += 1
-                self._append_log_line(
-                    f"{md_path.name}  (目标文档目录已存在同名文件，已跳过文档及其视频)"
+                self._post_ui(
+                    lambda n=md_path.name: self._append_log_line(
+                        f"{n}  (目标文档目录已存在同名文件，已跳过文档及其视频)"
+                    )
                 )
                 continue
 
@@ -833,10 +837,12 @@ class DocMixin:
                 try:
                     shutil.move(str(md_path), str(doc_target))
                     moved_docs += 1
-                    self._append_log_line(f"已转运文档: {md_path.name}")
+                    self._post_ui(lambda n=md_path.name: self._append_log_line(f"已转运文档: {n}"))
                 except Exception as e:
                     skipped += 1
-                    self._append_log_line(f"{md_path.name}  (转运文档失败: {e})")
+                    self._post_ui(
+                        lambda n=md_path.name, err=e: self._append_log_line(f"{n}  (转运文档失败: {err})")
+                    )
                 continue
 
             missing_refs: List[str] = []
@@ -860,12 +866,16 @@ class DocMixin:
             if missing_refs or conflict_refs:
                 skipped += 1
                 if missing_refs:
-                    self._append_log_line(
-                        f"{md_path.name}  (引用视频缺失: {', '.join(missing_refs)})"
+                    self._post_ui(
+                        lambda n=md_path.name, refs=list(missing_refs): self._append_log_line(
+                            f"{n}  (引用视频缺失: {', '.join(refs)})"
+                        )
                     )
                 if conflict_refs:
-                    self._append_log_line(
-                        f"{md_path.name}  (目标视频目录已存在同名文件: {', '.join(conflict_refs)})"
+                    self._post_ui(
+                        lambda n=md_path.name, refs=list(conflict_refs): self._append_log_line(
+                            f"{n}  (目标视频目录已存在同名文件: {', '.join(refs)})"
+                        )
                     )
                 continue
 
@@ -877,10 +887,12 @@ class DocMixin:
             try:
                 shutil.move(str(md_path), str(doc_target))
                 moves_done.append((doc_target, md_path))
-                self._append_log_line(f"已转运文档: {md_path.name}")
+                self._post_ui(lambda n=md_path.name: self._append_log_line(f"已转运文档: {n}"))
             except Exception as e:
                 skipped += 1
-                self._append_log_line(f"{md_path.name}  (转运文档失败: {e})")
+                self._post_ui(
+                    lambda n=md_path.name, err=e: self._append_log_line(f"{n}  (转运文档失败: {err})")
+                )
                 group_failed = True
 
             # 再移动所有引用的视频
@@ -890,9 +902,11 @@ class DocMixin:
                     try:
                         shutil.move(str(src), str(target))
                         moves_done.append((target, src))
-                        self._append_log_line(f"已转运视频: {ref}")
+                        self._post_ui(lambda r=ref: self._append_log_line(f"已转运视频: {r}"))
                     except Exception as e:
-                        self._append_log_line(f"{ref}  (转运视频失败: {e})")
+                        self._post_ui(
+                            lambda r=ref, err=e: self._append_log_line(f"{r}  (转运视频失败: {err})")
+                        )
                         group_failed = True
                         break
 
@@ -903,15 +917,19 @@ class DocMixin:
                         if current.exists():
                             shutil.move(str(current), str(original))
                     except Exception as e:
-                        self._append_log_line(
-                            f"{current.name}  (回滚失败，请手动检查位置: {e})"
+                        self._post_ui(
+                            lambda n=current.name, err=e: self._append_log_line(
+                                f"{n}  (回滚失败，请手动检查位置: {err})"
+                            )
                         )
                 skipped += 1
             else:
                 moved_docs += 1
                 moved_videos += len(ref_src_list)
 
-        self.after(0, self._on_doc_transfer_done, moved_docs, moved_videos, skipped)
+        self._post_ui(
+            lambda: self._on_doc_transfer_done(moved_docs, moved_videos, skipped)
+        )
 
     def _on_doc_transfer_done(
         self, moved_docs: int, moved_videos: int, skipped: int

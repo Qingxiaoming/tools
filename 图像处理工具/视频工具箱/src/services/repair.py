@@ -183,22 +183,11 @@ class RepairMixin(OverlayMixin):
 
     def _append_log_line_ui(self, msg: str) -> None:
         """线程安全：将一行日志投递到主线程底部输出区。"""
-        try:
-            # 使用 winfo_toplevel().after 确保线程安全
-            self.winfo_toplevel().after(0, lambda m=msg: self._append_log_line(m))
-        except Exception:
-            pass
+        self._post_ui(lambda m=msg: self._append_log_line(m))
 
     def _set_status_ui(self, text: str, foreground: str = "blue") -> None:
         """线程安全：设置状态栏文本。"""
-        try:
-            # 使用 winfo_toplevel().after 确保线程安全
-            self.winfo_toplevel().after(
-                0,
-                lambda: self.status_label.config(text=text, foreground=foreground),
-            )
-        except Exception:
-            pass
+        self._post_ui(lambda: self.status_label.config(text=text, foreground=foreground))
 
     def _init_repair_overlay_shell(self) -> None:
         """在主窗口上半区创建修复多选覆盖层（首次调用）。"""
@@ -420,25 +409,21 @@ class RepairMixin(OverlayMixin):
 
                 name = os.path.basename(path)
 
-                # 使用 winfo_toplevel().after 确保线程安全
-                try:
-                    self.winfo_toplevel().after(0, lambda idx=i, fname=name: self._append_log_line(f"[{idx}/{total}] 检测: {fname}"))
-                except Exception:
-                    return  # 窗口已关闭
+                self._post_ui(
+                    lambda idx=i, fname=name: self._append_log_line(f"[{idx}/{total}] 检测: {fname}")
+                )
 
                 try:
                     if is_corrupted_streaming_video(path):
                         corrupted.append(path)
-                        try:
-                            self.winfo_toplevel().after(0, lambda fname=name: self._append_log_line(f"  ⚠️ 检测到损坏: {fname}"))
-                        except Exception:
-                            pass
+                        self._post_ui(
+                            lambda fname=name: self._append_log_line(f"  ⚠️ 检测到损坏: {fname}")
+                        )
                 except Exception as e:
                     failed.append((path, str(e)))
-                    try:
-                        self.winfo_toplevel().after(0, lambda fname=name, err=str(e): self._append_log_line(f"  ❌ 检测失败: {fname} ({err})"))
-                    except Exception:
-                        pass
+                    self._post_ui(
+                        lambda fname=name, err=str(e): self._append_log_line(f"  ❌ 检测失败: {fname} ({err})")
+                    )
 
             # 检查是否需要关闭
             if getattr(self, "_repair_shutdown", False):
@@ -453,11 +438,8 @@ class RepairMixin(OverlayMixin):
                     self._append_log_line(f"[ERROR] 检测完成处理失败: {e}")
                     self._append_log_line(traceback.format_exc())
 
-            # 使用 winfo_toplevel().after 确保线程安全
-            try:
-                self.winfo_toplevel().after(0, schedule_done)
-            except Exception:
-                pass
+            # 投递到主线程执行
+            self._post_ui(schedule_done)
 
         threading.Thread(target=detect_worker, daemon=True).start()
 
@@ -507,11 +489,8 @@ class RepairMixin(OverlayMixin):
                 self._repair_paths_worker(to_repair, mapping)
             finally:
                 result = [mapping.get(p, p) for p in original_paths]
-                # 使用线程安全的方式调度到主线程
-                try:
-                    self.winfo_toplevel().after(0, lambda: self._on_repair_finish(result, original_paths, on_done))
-                except Exception:
-                    pass
+                # 投递到主线程执行
+                self._post_ui(lambda: self._on_repair_finish(result, original_paths, on_done))
 
         threading.Thread(target=repair_worker, daemon=True).start()
 
