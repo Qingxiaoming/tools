@@ -1,5 +1,4 @@
 import json
-import re
 import subprocess
 import sys
 from pathlib import Path
@@ -68,10 +67,8 @@ CROP_OUTPUT_DIR: Path = TOOLBOX_OUTPUT_ROOT / _CROP_SUBDIR if not Path(_CROP_SUB
 MERGE_OUTPUT_DIR: Path = TOOLBOX_OUTPUT_ROOT / _MERGE_SUBDIR if not Path(_MERGE_SUBDIR).is_absolute() else Path(_MERGE_SUBDIR)
 DOC_OUTPUT_DIR: Path = TOOLBOX_OUTPUT_ROOT / _DOC_SUBDIR if not Path(_DOC_SUBDIR).is_absolute() else Path(_DOC_SUBDIR)
 
-# 主窗口几何参数：宽x高+左上角X+左上角Y
-# Windows 保持原双屏坐标；其他平台给一个屏幕内默认值，避免窗口出屏
-_DEFAULT_WINDOW_GEOMETRY = "420x460+3132+920" if sys.platform == "win32" else "420x460+100+100"
-MAIN_WINDOW_GEOMETRY: str = _get_config('window.geometry', _DEFAULT_WINDOW_GEOMETRY)
+# 主窗口几何参数：宽x高+左上角X+左上角Y（默认屏幕内位置，本机可用 config.json 覆盖）
+MAIN_WINDOW_GEOMETRY: str = _get_config('window.geometry', "420x460+100+100")
 
 # 字体族：Windows 保持原字体；其他平台改用系统可用字体，避免回退默认字体显示难看
 def _platform_font(windows_family: str, other_family: str) -> str:
@@ -103,7 +100,6 @@ WEEKLY_SUBDIR_NAME: str = f"{WEEKLY_YEAR}_{WEEKLY_WEEK:02d}"
 WEEKLY_OUTPUT_DIR: Path = WEEKLY_OUTPUT_ROOT / WEEKLY_SUBDIR_NAME
 
 
-STANDARD_VIDEO_PATTERN = re.compile(r'^[^\\/:*?"<>|\s]+\.mp4$')
 VIDEO_NATURE_LIST: list[str] = _get_config(
     'video_nature_list',
     ['突袭', '无解', '待压', '剧情', '他人记录', '剿灭', '沙盘', '普通']

@@ -83,6 +83,10 @@ python3 -m venv .venv
 - 窗口默认几何：Windows 保持原坐标，其他平台默认 `420x460+100+100`，实际位置可在 `config.json` 的 `window.geometry` 覆盖。
 - 打包：`打包/` 下的 `build.bat` / `video_tools.spec` 是 Windows 专用；Linux 直接以 `.venv` 运行即可，暂不打包。
 
+### 已知注意事项
+
+- 录屏整理的片段提取使用 `-t <片段时长>`，不依赖输出时间戳是否保留绝对值（旧写法是 `-to <绝对结束时间戳>`）。若出现片段边界/时长异常，改回旧写法即可，见 `src/tabs/weekly.py` 内注释。
+
 ---
 
 ## C# Avalonia 版本

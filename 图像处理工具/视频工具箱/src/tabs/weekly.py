@@ -72,12 +72,6 @@ class WeeklyMixin:
         self.weekly_run_btn.pack(fill="x", pady=(8, 0))
 
     # ------------------------- 拖拽与列表操作 -------------------------
-    def _handle_drop_weekly(self, files: List[str]) -> None:
-        """在「录屏整理」页签上拖入视频文件。"""
-        self._handle_drop_video_files(
-            files, self._apply_weekly_drop_resolved
-        )
-
     def _apply_weekly_drop_resolved(
         self, resolved: List[str] | None, original_paths: List[str]
     ) -> None:
@@ -229,7 +223,9 @@ class WeeklyMixin:
                             chunk_audio.unlink()
                         except Exception:
                             pass
-                    segment_end = local_start + local_dur
+                    # 片段时长用 -t 明确指定，不依赖输出时间戳是否保留绝对值；
+                    # 若出现片段边界/时长异常，可改回旧写法：
+                    # "-to", str(local_start + local_dur)
                     audio_cmd = [
                         "ffmpeg",
                         "-hide_banner",
@@ -240,8 +236,8 @@ class WeeklyMixin:
                         str(local_start),
                         "-i",
                         vpath,
-                        "-to",
-                        str(segment_end),
+                        "-t",
+                        str(local_dur),
                         "-vn",
                         "-c:a",
                         "aac",
@@ -305,7 +301,7 @@ class WeeklyMixin:
                             chunk_video.unlink()
                         except Exception:
                             pass
-                    segment_end = local_start + local_dur
+                    # 与音频片段同理，用 -t <时长> 而非 -to <绝对结束时间戳>
                     video_cmd = [
                         "ffmpeg",
                         "-hide_banner",
@@ -316,8 +312,8 @@ class WeeklyMixin:
                         str(local_start),
                         "-i",
                         vpath,
-                        "-to",
-                        str(segment_end),
+                        "-t",
+                        str(local_dur),
                         "-an",
                         "-filter:v",
                         "setpts=PTS/60",

@@ -175,7 +175,6 @@ class DocMixin:
 
     def _extract_template_placeholders(self, content: str) -> list[str]:
         """从模板内容中提取所有可注入的 ${inject:xxx} 占位符变量名。"""
-        import re
         # 只匹配 ${inject:var} 格式的可注入占位符
         pattern = r"\$\{inject:(\w+)\}"
         matches = re.findall(pattern, content)
@@ -216,15 +215,17 @@ class DocMixin:
         for video_path, video_name in self.doc_video_list:
             # 使用用户实际选择的模板重新生成内容（而不是使用可能过期的缓存）
             template_name = self._video_state.get(video_name, {}).get("template_name")
-            if template_name:
-                template = self._template_manager.get_template(template_name)
-            else:
-                template = None
-
-            content, _ = self._generate_content_for_video(
+            template = (
+                self._template_manager.get_template(template_name)
+                if template_name else None
+            )
+            content, used_template = self._generate_content_for_video(
                 video_path, video_name, template=template
             )
-            self._video_state[video_name] = {"content": content, "template_name": template.name if template else "default"}
+            self._video_state[video_name] = {
+                "content": content,
+                "template_name": used_template.name,
+            }
 
             # 提取占位符
             placeholders = set(self._extract_template_placeholders(content))
@@ -588,14 +589,6 @@ class DocMixin:
 
     # ------------------------- 文件拖入处理 -------------------------
 
-    def _handle_drop_doc(self, files: List[str]) -> None:
-        self._handle_drop_video_files(
-            files,
-            lambda resolved, originals: self._apply_doc_videos_resolved(
-                resolved, originals, overwrite=False
-            ),
-        )
-
     def _apply_doc_videos_resolved(
         self,
         resolved: List[str] | None,
@@ -759,18 +752,22 @@ class DocMixin:
         md_files = list(Path(DOC_OUTPUT_DIR).glob("*.md"))
         # 只允许转运"本次文档生成"产生的文档，避免误操作历史文件
         generated_names = getattr(self, "doc_generated_md_names", set())
-        if generated_names:
-            md_files = [p for p in md_files if p.name in generated_names]
-            # 若记录的文档与实际文件不一致，则报错并终止本次转运
-            missing_docs = [
-                name for name in generated_names if not (DOC_OUTPUT_DIR / name).is_file()
-            ]
-            if missing_docs:
-                self.status_label.config(
-                    text=f"本轮生成的文档缺失，无法转运: {', '.join(missing_docs)}",
-                    foreground="red",
-                )
-                return
+        if not generated_names:
+            self.status_label.config(
+                text="本轮没有生成过文档，无法转运", foreground="red"
+            )
+            return
+        md_files = [p for p in md_files if p.name in generated_names]
+        # 若记录的文档与实际文件不一致，则报错并终止本次转运
+        missing_docs = [
+            name for name in generated_names if not (DOC_OUTPUT_DIR / name).is_file()
+        ]
+        if missing_docs:
+            self.status_label.config(
+                text=f"本轮生成的文档缺失，无法转运: {', '.join(missing_docs)}",
+                foreground="red",
+            )
+            return
         if not md_files:
             self.status_label.config(
                 text="当前没有本次生成的可转运文档", foreground="red"

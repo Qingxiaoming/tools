@@ -18,7 +18,8 @@ JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE = 0x00002000
 JobObjectExtendedLimitInformation = 9
 
 
-def _init_windows_job() -> None:
+def init_process_job() -> None:
+    """初始化子进程 Job；应用启动时调用一次（仅 Windows 生效）。"""
     global _job_handle, _job_initialized
     if _job_initialized or sys.platform != "win32":
         _job_initialized = True
@@ -93,11 +94,6 @@ def _assign_to_job(proc: subprocess.Popen) -> None:
         pass
 
 
-def init_process_job() -> None:
-    """应用启动时调用一次。"""
-    _init_windows_job()
-
-
 def tracked_popen(*args: Any, **kwargs: Any) -> subprocess.Popen:
     """创建受跟踪的子进程；关闭工具箱时会终止仍在运行的进程。"""
     flags = kwargs.pop("creationflags", 0)
@@ -148,25 +144,32 @@ def terminate_all_tracked_processes() -> None:
     _active_procs.clear()
 
 
-def get_media_duration(path: str) -> float | None:
-    """用 ffprobe 获取视频时长（秒），失败返回 None。"""
-    proc = subprocess.run(
-        [
-            "ffprobe",
-            "-v",
-            "error",
-            "-show_entries",
-            "format=duration",
-            "-of",
-            "default=noprint_wrappers=1:nokey=1",
-            path,
-        ],
-        capture_output=True,
-        text=True,
-        creationflags=SUBPROCESS_CREATE_NO_WINDOW,
-    )
+def get_media_duration(path: str, timeout: int = 30) -> float | None:
+    """用 ffprobe 获取视频时长（秒）；无法获取/时长为 N/A 或 <=0 时返回 None。"""
     try:
-        return float(proc.stdout.strip())
+        proc = subprocess.run(
+            [
+                "ffprobe",
+                "-v",
+                "error",
+                "-show_entries",
+                "format=duration",
+                "-of",
+                "default=noprint_wrappers=1:nokey=1",
+                path,
+            ],
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="ignore",
+            creationflags=SUBPROCESS_CREATE_NO_WINDOW,
+            timeout=timeout,
+        )
+        text = (proc.stdout or "").strip()
+        if not text or text.upper() == "N/A":
+            return None
+        value = float(text)
+        return value if value > 0 else None
     except Exception:
         return None
 

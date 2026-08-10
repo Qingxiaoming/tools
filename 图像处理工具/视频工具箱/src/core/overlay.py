@@ -38,15 +38,19 @@ class OverlayMixin:
 
         return overlay
 
-    def _layout_upper_overlay(self, overlay: tk.Frame) -> None:
-        if not overlay.winfo_ismapped():
-            return
+    def _overlay_geometry(self) -> tuple:
+        """计算覆盖层位置与尺寸（位于页签栏下方）。"""
         self.upper_shell.update_idletasks()
         tab_h = self._notebook_tab_bar_height()
         w = max(self.upper_shell.winfo_width(), 200)
-        h = max(self.upper_shell.winfo_height(), 200)  # 增加最小高度确保内容可见
-        inner_h = max(h - tab_h, 150)  # 增加最小内部高度，确保按钮不被截断
-        overlay.place(x=0, y=tab_h, width=w, height=inner_h)
+        h = max(self.upper_shell.winfo_height(), 200)
+        return (0, tab_h, w, max(h - tab_h, 150))
+
+    def _layout_upper_overlay(self, overlay: tk.Frame) -> None:
+        if not overlay.winfo_ismapped():
+            return
+        x, y, w, h = self._overlay_geometry()
+        overlay.place(x=x, y=y, width=w, height=h)
         overlay.lift()
 
     def _on_upper_shell_configure(self, _event=None) -> None:
@@ -58,12 +62,8 @@ class OverlayMixin:
     def _show_upper_overlay(self, overlay: tk.Frame) -> None:
         # 如果 overlay 还没被 place，先进行初始布局
         if not overlay.winfo_ismapped():
-            self.upper_shell.update_idletasks()
-            tab_h = self._notebook_tab_bar_height()
-            w = max(self.upper_shell.winfo_width(), 200)
-            h = max(self.upper_shell.winfo_height(), 200)  # 增加最小高度
-            inner_h = max(h - tab_h, 150)  # 增加最小内部高度
-            overlay.place(x=0, y=tab_h, width=w, height=inner_h)
+            x, y, w, h = self._overlay_geometry()
+            overlay.place(x=x, y=y, width=w, height=h)
         self._layout_upper_overlay(overlay)
         overlay.lift()
 

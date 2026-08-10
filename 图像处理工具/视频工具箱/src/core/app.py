@@ -86,7 +86,7 @@ class VideoTools(
         # 文档生成相关
         self.doc_video_list: list[tuple[str, str]] = []
 
-        # 录屏整理相关 (path, basename) 与 weekly.py 中 _handle_drop_weekly 一致
+        # 录屏整理相关 (path, basename)
         self.weekly_video_list: list[tuple[str, str]] = []
 
         self._repair_in_progress = False
@@ -440,7 +440,12 @@ class VideoTools(
         if current_tab == 0:
             self._handle_drop_segment(files[0])
         elif current_tab == 1:
-            self._handle_drop_crop(files)
+            self._handle_drop_video_files(
+                files,
+                lambda resolved, originals: self._apply_crop_videos_resolved(
+                    resolved, originals, overwrite=False
+                ),
+            )
         elif current_tab == 2:
             # 若拖入的是单个音频文件则走音频逻辑
             if len(files) == 1:
@@ -448,11 +453,21 @@ class VideoTools(
                 if ext in (".mp3", ".wav", ".aac", ".flac", ".m4a", ".ogg"):
                     self._handle_drop_merge_audio(files[0])
                     return
-            self._handle_drop_merge_videos(files)
+            self._handle_drop_video_files(
+                files,
+                lambda resolved, originals: self._apply_merge_videos_resolved(
+                    resolved, originals, overwrite=False
+                ),
+            )
         elif current_tab == 3:
-            self._handle_drop_doc(files)
+            self._handle_drop_video_files(
+                files,
+                lambda resolved, originals: self._apply_doc_videos_resolved(
+                    resolved, originals, overwrite=False
+                ),
+            )
         elif current_tab == 4:
-            self._handle_drop_weekly(files)
+            self._handle_drop_video_files(files, self._apply_weekly_drop_resolved)
 
 
 __all__ = ["VideoTools"]

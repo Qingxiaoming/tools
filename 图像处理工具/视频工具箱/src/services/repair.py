@@ -8,54 +8,10 @@ from typing import Callable, List, Optional, Tuple
 import tkinter as tk
 from tkinter import ttk
 
+from ..core.common_mixins import VIDEO_EXTENSIONS
 from ..core.config import SUBPROCESS_CREATE_NO_WINDOW, UI_FONT_FAMILY
 from ..core.overlay import OverlayMixin
-from ..core.subprocess_util import tracked_popen
-
-VIDEO_EXTENSIONS = (".mp4", ".mkv", ".mov", ".avi", ".flv", ".ts")
-
-_CORRUPT_HINTS = (
-    "invalid",
-    "truncated",
-    "premature",
-    "ebml",
-    "incomplete",
-    "corrupt",
-    "end of file",
-    "missing",
-    "failed",
-)
-
-
-def probe_duration_seconds(path: str) -> Optional[float]:
-    """返回媒体时长（秒）；无法获取时返回 None。"""
-    try:
-        proc = subprocess.run(
-            [
-                "ffprobe",
-                "-v",
-                "error",
-                "-show_entries",
-                "format=duration",
-                "-of",
-                "default=noprint_wrappers=1:nokey=1",
-                path,
-            ],
-            capture_output=True,
-            text=True,
-            encoding="utf-8",
-            errors="ignore",
-            creationflags=SUBPROCESS_CREATE_NO_WINDOW,
-            timeout=30,
-        )
-        text = (proc.stdout or "").strip()
-        if not text or text.upper() == "N/A":
-            return None
-        value = float(text)
-        return value if value > 0 else None
-    except Exception:
-        return None
-
+from ..core.subprocess_util import get_media_duration, tracked_popen
 
 def has_video_stream(path: str) -> bool:
     try:
@@ -91,25 +47,11 @@ def is_corrupted_streaming_video(path: str) -> bool:
     ext = os.path.splitext(path)[1].lower()
     if ext not in VIDEO_EXTENSIONS:
         return False
-    if probe_duration_seconds(path) is not None:
+    if get_media_duration(path) is not None:
         return False
     if not has_video_stream(path):
         return False
-    try:
-        proc = subprocess.run(
-            ["ffprobe", "-v", "warning", "-show_format", path],
-            capture_output=True,
-            text=True,
-            encoding="utf-8",
-            errors="ignore",
-            creationflags=SUBPROCESS_CREATE_NO_WINDOW,
-            timeout=30,
-        )
-        err = ((proc.stderr or "") + (proc.stdout or "")).lower()
-        if proc.returncode != 0 or any(h in err for h in _CORRUPT_HINTS):
-            return True
-    except Exception:
-        return True
+    # 有视频流但拿不到时长 → 判定为疑似未封尾（无需再解析 ffprobe 错误文本）
     return True
 
 
@@ -126,7 +68,7 @@ def repair_streaming_video(
 ) -> Optional[str]:
     """重封装修复；成功返回输出路径，失败返回 None。可在后台线程调用。"""
     dst = repaired_output_path(src)
-    if os.path.isfile(dst) and probe_duration_seconds(dst) is not None:
+    if os.path.isfile(dst) and get_media_duration(dst) is not None:
         if log_fn:
             log_fn(f"已存在可用修复文件，跳过转码: {dst}")
         return dst
@@ -165,7 +107,7 @@ def repair_streaming_video(
         rc = proc.wait()
         if rc != 0:
             return None
-        if probe_duration_seconds(dst) is None:
+        if get_media_duration(dst) is None:
             return None
         return dst
     except Exception:
@@ -502,10 +444,8 @@ class RepairMixin(OverlayMixin):
             # 使用 winfo_toplevel().after 确保线程安全
             try:
                 self.winfo_toplevel().after(0, schedule_done)
-            except Exception as e:
-                import traceback
-                print(f"[DEBUG] after failed: {e}")
-                print(traceback.format_exc())
+            except Exception:
+                pass
 
         threading.Thread(target=detect_worker, daemon=True).start()
 
@@ -524,10 +464,6 @@ class RepairMixin(OverlayMixin):
             return
 
         if not corrupted:
-            self._append_log_line(f"=== 检测完成，全部 {total} 个文件正常 ===")
-            self.status_label.config(text="待机中", foreground="blue")
-            on_done(list(original_paths), original_paths)
-            return
             self._append_log_line(f"=== 检测完成，全部 {total} 个文件正常 ===")
             self.status_label.config(text="待机中", foreground="blue")
             on_done(list(original_paths), original_paths)
@@ -562,10 +498,8 @@ class RepairMixin(OverlayMixin):
                 # 使用线程安全的方式调度到主线程
                 try:
                     self.winfo_toplevel().after(0, lambda: self._on_repair_finish(result, original_paths, on_done))
-                except Exception as e:
-                    import traceback
-                    print(f"[DEBUG] repair_worker after failed: {e}")
-                    print(traceback.format_exc())
+                except Exception:
+                    pass
 
         threading.Thread(target=repair_worker, daemon=True).start()
 
@@ -582,10 +516,8 @@ class RepairMixin(OverlayMixin):
 
 
 __all__ = [
-    "VIDEO_EXTENSIONS",
     "RepairMixin",
     "is_corrupted_streaming_video",
-    "probe_duration_seconds",
     "repair_streaming_video",
     "repaired_output_path",
 ]

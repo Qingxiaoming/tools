@@ -266,11 +266,6 @@ class MdTemplateManager:
                 return template
         return None
 
-    def reload(self) -> None:
-        """重新扫描模板目录。"""
-        self._scan_templates()
-
-
 # 全局模板管理器实例
 _template_manager: Optional[MdTemplateManager] = None
 
@@ -283,10 +278,4 @@ def get_template_manager() -> MdTemplateManager:
     return _template_manager
 
 
-def reload_templates() -> None:
-    """重新加载所有模板。"""
-    manager = get_template_manager()
-    manager.reload()
-
-
-__all__ = ["MdTemplate", "MdTemplateManager", "get_template_manager", "reload_templates"]
+__all__ = ["MdTemplate", "MdTemplateManager", "get_template_manager"]

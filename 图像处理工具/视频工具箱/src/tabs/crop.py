@@ -44,14 +44,6 @@ class CropMixin:
         )
         self.crop_run_btn.pack(side="right", padx=4)
 
-    def _handle_drop_crop(self, files: List[str]) -> None:
-        self._handle_drop_video_files(
-            files,
-            lambda resolved, originals: self._apply_crop_videos_resolved(
-                resolved, originals, overwrite=False
-            ),
-        )
-
     def _rebuild_crop_list_ui(self) -> None:
         self.crop_text.config(state="normal")
         self.crop_text.delete("1.0", "end")
@@ -195,6 +187,8 @@ class CropMixin:
                 fail.append(f"{vname}  (无法获取分辨率)")
                 continue
 
+            # 若 ROI 高度与原视频高度不一致：按"优先原高度"策略，先等比缩放裁剪结果，
+            # 再用 pad 补回原分辨率；宽度超出时改按宽度缩放、上下补边。
             if h != orig_h:
                 new_h = orig_h
                 new_w = int(round(w * orig_h / h))

@@ -97,14 +97,6 @@ class MergeMixin:
         speed_combo.pack(side="left", padx=5)
 
 
-    def _handle_drop_merge_videos(self, files: List[str]) -> None:
-        self._handle_drop_video_files(
-            files,
-            lambda resolved, originals: self._apply_merge_videos_resolved(
-                resolved, originals, overwrite=False
-            ),
-        )
-
     def _apply_merge_videos_resolved(
         self,
         resolved: List[str] | None,
