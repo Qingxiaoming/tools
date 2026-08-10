@@ -38,10 +38,8 @@ cd "%SCRIPT_DIR%"
 python -m PyInstaller --noconfirm --clean video_tools.spec
 
 if exist "dist\VideoTools.exe" (
-    copy /Y "%ROOT%\config.json" "%SCRIPT_DIR%dist\config.json" >nul
     echo.
     echo Done. Output: 打包\dist\VideoTools.exe
-    echo Config synced: config.json -> dist\config.json
     echo You can rename it to any name you like.
 ) else (
     echo.

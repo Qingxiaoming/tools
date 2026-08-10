@@ -52,10 +52,10 @@ pyinstaller --noconfirm --clean video_tools.spec
 
 ### 关键配置
 
-`src/core/config.py` 中定义了多个输出目录：
-- `TOOLBOX_OUTPUT_ROOT` - 基础输出目录（默认 `E:\toolbox输出`）
-- `DOC_TRANSFER_DOC_DIR` / `DOC_TRANSFER_MEDIA_DIR` - 文档转运目标路径
-- `WEEKLY_OUTPUT_ROOT` - 录屏整理根目录（默认 `I:\录屏`）
+`src/core/config.py` 中定义了多个输出目录（无 `config.json` 时使用这些中性默认值，不写死开发者路径）：
+- `TOOLBOX_OUTPUT_ROOT` - 基础输出目录（默认：用户主目录 `Videos/toolbox输出`）
+- `DOC_TRANSFER_DOC_DIR` / `DOC_TRANSFER_MEDIA_DIR` - 文档转运目标路径（默认：用户主目录 `Documents/VideoToolbox/文库`）
+- `WEEKLY_OUTPUT_ROOT` - 录屏整理根目录（默认：用户主目录 `Videos/toolbox录屏`）
 
 ### Linux 运行说明
 

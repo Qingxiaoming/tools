@@ -14,11 +14,10 @@ tkdnd_datas = collect_data_files('tkinterdnd2')
 spec_dir = os.path.dirname(os.path.abspath(SPEC))
 root_dir = os.path.abspath(os.path.join(spec_dir, '..'))
 
-# 收集数据文件：tkdnd 库 + 配置文件
-# 注意：data 目录不打包，用户可在 exe 旁自定义
-all_datas = tkdnd_datas + [
-    (os.path.join(root_dir, 'config.json'), '.'),  # 打包 config.json 到 exe 同级目录
-]
+# 收集数据文件：仅 tkdnd 拖拽库
+# 注意：config.json 与 data/ 均不打包——对外发布版本不带开发者个人配置，
+# 用户可在 exe 旁自行放置 config.json（缺省时使用代码内默认值）
+all_datas = tkdnd_datas
 
 a = Analysis(
     [os.path.join(root_dir, 'main.pyw')],

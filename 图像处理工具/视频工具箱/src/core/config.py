@@ -51,7 +51,9 @@ def _get_config(path: str, default):
 
 
 # 基础输出目录（按需自行修改）
-_TOOLBOX_OUTPUT_ROOT_STR: str = _get_config('output_directories.root', r"E:\toolbox输出")
+# 对外发布时不再写死开发者路径：无 config.json 时默认输出到用户主目录的 Videos/toolbox输出
+_DEFAULT_OUTPUT_ROOT = Path.home() / "Videos" / "toolbox输出"
+_TOOLBOX_OUTPUT_ROOT_STR: str = _get_config('output_directories.root', str(_DEFAULT_OUTPUT_ROOT))
 TOOLBOX_OUTPUT_ROOT: Path = Path(_TOOLBOX_OUTPUT_ROOT_STR)
 
 # 各功能输出子目录（相对于 root 或绝对路径）
@@ -78,20 +80,16 @@ def _platform_font(windows_family: str, other_family: str) -> str:
 UI_FONT_FAMILY: str = _platform_font("Microsoft YaHei UI", "LXGW WenKai")
 MONO_FONT_FAMILY: str = _platform_font("Consolas", "DejaVu Sans Mono")
 
-# 文档转运目标路径
-_DOC_TRANSFER_DOC_STR: str = _get_config(
-    'doc_transfer.doc_dir',
-    r"D:\Users\Windows10\Desktop\0V0燕小重的文库\姑且算作我的\打穿泰拉~"
-)
-_DOC_TRANSFER_MEDIA_STR: str = _get_config(
-    'doc_transfer.media_dir',
-    r"D:\Users\Windows10\Desktop\0V0燕小重的文库\姑且算作我的\打穿泰拉~\附件"
-)
+# 文档转运目标路径（默认在用户主目录 Documents/VideoToolbox 下）
+_DEFAULT_DOC_TRANSFER_DIR = Path.home() / "Documents" / "VideoToolbox" / "文库"
+_DOC_TRANSFER_DOC_STR: str = _get_config('doc_transfer.doc_dir', str(_DEFAULT_DOC_TRANSFER_DIR))
+_DOC_TRANSFER_MEDIA_STR: str = _get_config('doc_transfer.media_dir', str(_DEFAULT_DOC_TRANSFER_DIR / "附件"))
 DOC_TRANSFER_DOC_DIR: Path = Path(_DOC_TRANSFER_DOC_STR)
 DOC_TRANSFER_MEDIA_DIR: Path = Path(_DOC_TRANSFER_MEDIA_STR)
 
-# 录屏整理根目录（每周一个子文件夹）
-_WEEKLY_ROOT_STR: str = _get_config('weekly.root', r"I:\录屏")
+# 录屏整理根目录（每周一个子文件夹；默认在用户主目录 Videos/toolbox录屏 下）
+_DEFAULT_WEEKLY_ROOT = Path.home() / "Videos" / "toolbox录屏"
+_WEEKLY_ROOT_STR: str = _get_config('weekly.root', str(_DEFAULT_WEEKLY_ROOT))
 WEEKLY_OUTPUT_ROOT: Path = Path(_WEEKLY_ROOT_STR)
 
 # 录屏整理前缀模板，支持 {year} / {week}
