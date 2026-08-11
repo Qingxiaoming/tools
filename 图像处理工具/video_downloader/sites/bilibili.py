@@ -42,6 +42,8 @@ def _parse_video(segments: list[str]) -> tuple[str, str]:
 def _parse_bangumi(segments: list[str]) -> tuple[str, str]:
     if len(segments) >= 3 and segments[1] == "play":
         return "bangumi", segments[2]  # ep123456 / ss12345
+    if len(segments) >= 3 and segments[1] == "media":
+        return "bangumi", segments[2]  # md12345 作品页
     return "unknown", ""
 
 
@@ -51,6 +53,14 @@ def _parse_list(segments: list[str]) -> tuple[str, str]:
 
 def _parse_medialist(segments: list[str]) -> tuple[str, str]:
     return "favorite", segments[2] if len(segments) > 2 else (segments[1] if len(segments) > 1 else "")
+
+
+def _parse_space(segments: list[str]) -> tuple[str, str]:
+    """space.bilibili.com/<mid>/lists/<id> 系列/合集；其余空间页归为 space。"""
+    if "lists" in segments:
+        index = segments.index("lists")
+        return "collection", segments[index + 1] if len(segments) > index + 1 else ""
+    return "space", ""
 
 
 # URL 类型分发表：新增类型 = 写一个解析函数 + 在这里注册
@@ -67,6 +77,9 @@ def _classify(parsed) -> tuple[str, str]:
     segments = [seg for seg in parsed.path.split("/") if seg]
     if not segments:
         return "unknown", ""
+    host = (parsed.netloc or "").lower()
+    if host.startswith("space.bilibili.com"):
+        return _parse_space(segments)
     parser = _PATH_PARSERS.get(segments[0])
     if parser:
         return parser(segments)

@@ -54,6 +54,39 @@ def save_dir_to_config(path: Path) -> None:
     CONFIG_FILE.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
+def normalize_cookie(raw: str) -> str:
+    """把粘贴的 SESSDATA 规范成 "SESSDATA=..."；空串返回空。"""
+    raw = (raw or "").strip()
+    if not raw:
+        return ""
+    if "SESSDATA=" not in raw:
+        raw = "SESSDATA=" + raw
+    return raw.split(";")[0].strip()
+
+
+def load_cookie() -> str:
+    try:
+        data = json.loads(CONFIG_FILE.read_text(encoding="utf-8"))
+        return data.get("cookie", "")
+    except Exception:
+        return ""
+
+
+def save_cookie(cookie: str) -> None:
+    cookie = normalize_cookie(cookie)
+    CONFIG_FILE.parent.mkdir(parents=True, exist_ok=True)
+    data = {}
+    try:
+        data = json.loads(CONFIG_FILE.read_text(encoding="utf-8"))
+    except Exception:
+        pass
+    if cookie:
+        data["cookie"] = cookie
+    else:
+        data.pop("cookie", None)
+    CONFIG_FILE.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
 def find_tool(name: str) -> Path | None:
     found = shutil.which(name)
     return Path(found) if found else None

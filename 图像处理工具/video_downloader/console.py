@@ -1,6 +1,11 @@
-"""终端交互辅助：颜色、提示、菜单（Windows/Linux 通用）。"""
+"""终端交互辅助：颜色、提示、菜单（Windows/Linux 通用）。
+
+输出走可注入的 sink：Textual 界面 set_sink(...) 后，引擎/CLI 的
+console.* 输出全部改道进界面日志；未注入时保持原有终端打印。
+"""
 
 import sys
+from typing import Callable
 
 try:
     _USE_COLOR = sys.stdout.isatty()
@@ -35,32 +40,57 @@ class _Color:
     GRAY = "\033[90m"
 
 
+Sink = Callable[[str, str], None]  # (level, text)
+_sink: Sink | None = None
+_COLOR_BY_LEVEL = {
+    "banner": _Color.PURPLE,
+    "info": _Color.BLUE,
+    "ok": _Color.GREEN,
+    "warn": _Color.YELLOW,
+    "error": _Color.RED,
+    "dim": _Color.GRAY,
+}
+
+
+def set_sink(sink: Sink | None) -> None:
+    """注入/移除输出汇；sink 签名 (level, text)。"""
+    global _sink
+    _sink = sink
+
+
+def _emit(level: str, text: str) -> None:
+    if _sink is not None:
+        _sink(level, text)
+        return
+    print(paint(text, _COLOR_BY_LEVEL.get(level, _Color.RESET)))
+
+
 def paint(text: str, color: str) -> str:
     return f"{color}{text}{_Color.RESET}" if _USE_COLOR else text
 
 
 def banner(text: str) -> None:
-    print(paint(f"== {text} ==", _Color.PURPLE))
+    _emit("banner", f"== {text} ==")
 
 
 def info(text: str) -> None:
-    print(paint(text, _Color.BLUE))
+    _emit("info", text)
 
 
 def ok(text: str) -> None:
-    print(paint(text, _Color.GREEN))
+    _emit("ok", text)
 
 
 def warn(text: str) -> None:
-    print(paint(text, _Color.YELLOW))
+    _emit("warn", text)
 
 
 def error(text: str) -> None:
-    print(paint(text, _Color.RED))
+    _emit("error", text)
 
 
 def dim(text: str) -> None:
-    print(paint(text, _Color.GRAY))
+    _emit("dim", text)
 
 
 def prompt(text: str) -> str:
