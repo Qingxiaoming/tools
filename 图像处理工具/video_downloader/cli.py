@@ -33,7 +33,16 @@ def run_download(url: str, audio_only: bool = False, save_dir: str | None = None
 
     dest = Path(save_dir).expanduser() if save_dir else load_save_dir()
     site = detect_site(url)
-    info(f"识别站点: {site['display']}")
+    entity = site["parse"](url)
+    info(f"识别站点: {entity.display}")
+    if entity.type != "unknown":
+        detail = entity.type + (f" ({entity.id})" if entity.id else "")
+        info(f"内容类型: {detail}")
+    if entity.p:
+        info(f"分P: {entity.p}")
+    if entity.note:
+        dim(entity.note)
+    download_url = entity.clean_url or url
 
     try:
         dest.mkdir(parents=True, exist_ok=True)
@@ -51,7 +60,7 @@ def run_download(url: str, audio_only: bool = False, save_dir: str | None = None
         return False
 
     try:
-        result = engine.download(url, dest, audio_only=audio_only)
+        result = engine.download(download_url, dest, audio_only=audio_only)
     except EngineUnavailableError as e:
         error(str(e))
         return False
@@ -104,9 +113,10 @@ def show_help() -> None:
   快捷键        settings=设置  status=状态  help=帮助  quit=退出
 
 站点支持
-  B 站          优先 BBDown（多P/合集，可 BBDown login 扫码登录高画质），失败回退 yt-dlp
+  B 站          解析层自动清洗追踪参数、识别 BV/av/分P/番剧/合集、展开 b23.tv 短链；
+                优先 BBDown（多P/合集，可 BBDown login 扫码登录高画质），失败回退 yt-dlp
   其他网站      yt-dlp（YouTube 等 1000+ 站点）
-  新增站点      在 video_downloader/sites/ 加模块并注册，无需改 UI
+  新增站点      在 video_downloader/sites/ 加模块（match/parse/engines）并注册，无需改 UI
 
 工具依赖
   yt-dlp       通用引擎: pip install -U yt-dlp
